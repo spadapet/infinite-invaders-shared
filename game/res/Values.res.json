@@ -1,0 +1,52 @@
+{
+  "Values":
+  {
+    "global":
+    {
+      "IDS_POWERUP_MULTI_SHOT": "Multi",
+      "IDS_POWERUP_AMMO": "Ammo",
+      "IDS_POWERUP_HOMING_SHOT": "Homing",
+      "IDS_POWERUP_SHIELD": "Shield",
+      "IDS_POWERUP_SPEED_BOOST": "Speed",
+      "IDS_SHOW_SCORE_INTRO": "Highest Scores Ever",
+      "IDS_SHOW_SCORE_1P": "1p",
+      "IDS_SHOW_SCORE_COOP": "co-op",
+      "IDS_TITLE_FULLSCREENON": "full screen:on",
+      "IDS_TITLE_FULLSCREENOFF": "full screen:off",
+      "IDS_TITLE_EASY": "level:eAsy",
+      "IDS_SHOW_SCORE_EASY": "eAsy",
+      "IDS_TITLE_CONTINUE": "continue",
+      "IDS_TITLE_EXIT": "exit",
+      "IDS_POWERUP_SPREAD_SHOT": "Spread",
+      "IDS_POWERUP_PUSH_SHOT": "Push",
+      "IDS_TITLE_MORE": "...",
+      "IDS_TITLE_HELP": "help",
+      "IDS_TITLE_QUIT": "quit",
+      "IDS_TITLE_1P_METRO": "single plAyer",
+      "IDS_TITLE_2P_METRO": "two plAyers, tAke turns",
+      "IDS_TITLE_COOP_METRO": "two plAyers, locAl co-op",
+      "IDS_TITLE_EASY_METRO": "eAsy difficulty",
+      "IDS_TITLE_NORMAL_METRO": "normAl difficulty",
+      "IDS_TITLE_HARD_METRO": "hArd difficulty",
+      "IDS_TITLE_REPLAY": "restArt",
+      "IDS_TITLE_HOME": "home",
+      "IDS_TITLE_BABY_METRO": "bAby difficulty",
+      "IDS_SHOW_SCORE_HARD": "hArd",
+      "IDS_SHOW_SCORE_NORMAL": "normAl",
+      "IDS_ADD_SCORE_INTRO": "you got high score #%lu!",
+      "IDS_ADD_SCORE_INTRO2": "enter your name:",
+      "IDS_TITLE_PLAY": "plAy",
+      "IDS_TITLE_OPTIONS": "options",
+      "IDS_TITLE_SCORES": "scores",
+      "IDS_TITLE_1P": "1 plAyer",
+      "IDS_TITLE_2P": "tAke turns",
+      "IDS_TITLE_COOP": "co-op",
+      "IDS_TITLE_FXON": "sound:on",
+      "IDS_TITLE_FXOFF": "sound:off",
+      "IDS_TITLE_NORMAL": "level:normAl",
+      "IDS_TITLE_HARD": "level:hArd",
+      "IDS_TITLE_VSYNCON": "v-sync:on",
+      "IDS_TITLE_VSYNCOFF": "v-sync:off"
+    }
+  }
+}

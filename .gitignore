@@ -1,0 +1,20 @@
+# root dirs
+/nuget/
+/out/
+/personal/
+/src/
+/tools/
+
+# sub dirs
+.vs/
+bin/
+obj/
+
+# files
+*.ipch
+*.log
+*.opensdf
+*.sdf
+*.suo
+*.user
+*.vspscc

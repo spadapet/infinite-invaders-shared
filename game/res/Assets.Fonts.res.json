@@ -1,0 +1,25 @@
+{
+  "Classic":
+  {
+    "res:type": "font",
+    "data":
+    {
+      "res:transform": "font",
+      "file": "fonts\\pressstart2p.ttf",
+      "font": "Press Start 2P",
+      "size": 32
+    }
+  },
+
+  "Space":
+  {
+    "res:type": "font",
+    "data":
+    {
+      "res:transform": "font",
+      "file": "fonts\\nasal.ttf",
+      "font": "Nasalization Rg",
+      "size": 100
+    }
+  }
+}

@@ -1,0 +1,73 @@
+﻿<Page
+    x:Class="Invader.FailurePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{StaticResource AppBarBackgroundBrush}">
+        <Border
+            BorderThickness="10"
+            BorderBrush="{StaticResource AppBarBorderBrush}"
+            Padding="20"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+
+            <StackPanel Orientation="Horizontal">
+                <Image
+                    Width="50"
+                    Height="50"
+                    VerticalAlignment="Top"
+                    Source="ms-appx:///Assets/StoreLogo.png" />
+
+                <StackPanel Margin="20,0,0,0">
+                    <RichTextBlock
+                        Width="550"
+                        Style="{StaticResource BasicWrapRichTextStyle}"
+                        IsTextSelectionEnabled="False">
+                        <Paragraph>
+                            <Run FontWeight="Bold">Application failure</Run>
+                            <LineBreak />
+                            <LineBreak />
+                            <Run>The application failed to initailize.</Run>
+                            <LineBreak />
+                            <Run>The most likely cause is that Direct3D couldn't be initialized for your graphics card.
+                                Your graphics card must support at least Direct3D feature level 9_1.</Run>
+                            <LineBreak />
+                            <LineBreak />
+                            <Run>Support is provided at:</Run>
+                            <LineBreak />
+                            <InlineUIContainer>
+                                <HyperlinkButton NavigateUri="http://ferretfacegames.com/invader/support">ferretfacegames.com/invader/support</HyperlinkButton>
+                            </InlineUIContainer>
+                            <LineBreak />
+                            <Run>The following text came from the initialization log. The fatal error will be at the end of the text.</Run>
+                        </Paragraph>
+                    </RichTextBlock>
+
+                    <ScrollViewer
+                        BorderThickness="2"
+                        BorderBrush="{StaticResource AppBarBorderBrush}"
+                        Margin="0,20,0,0"
+                        Width="550"
+                        Height="250"
+                        HorizontalScrollBarVisibility="Auto">
+                        <RichTextBlock
+                            Padding="10,10,20,20"
+                            IsTextSelectionEnabled="True"
+                            TextWrapping="NoWrap"
+                            Foreground="LightGray"
+                            Style="{StaticResource BasicRichTextStyle}">
+                            <Paragraph>
+                                <Run x:Name="ErrorRun" />
+                            </Paragraph>
+                        </RichTextBlock>
+                    </ScrollViewer>
+                </StackPanel>
+            </StackPanel>
+
+        </Border>
+    </Grid>
+
+</Page>

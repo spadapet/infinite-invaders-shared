@@ -1,0 +1,876 @@
+{
+  "Title Sprites":
+  {
+    "res:type": "sprites",
+
+    "data":
+    {
+      "res:transform": "sprites",
+      "format": "rgba32",
+      "mips": 3,
+
+      "sprites":
+      {
+        "Button Play Blank":
+        {
+          "file": "title\\button-play.png"
+        },
+        "Button Options Blank":
+        {
+          "file": "title\\button-options.png"
+        },
+        "Button Scores Blank":
+        {
+          "file": "title\\button-scores.png"
+        },
+        "Button Help Blank":
+        {
+          "file": "title\\button-help.png"
+        },
+
+        "Outline Play":
+        {
+          "file": "title\\outline-play.png"
+        },
+        "Outline Options":
+        {
+          "file": "title\\outline-options.png"
+        },
+        "Outline Options Child":
+        {
+          "file": "title\\outline-options-child.png"
+        },
+        "Outline Scores":
+        {
+          "file": "title\\outline-scores.png"
+        },
+        "Outline Help":
+        {
+          "file": "title\\outline-help.png"
+        },
+
+        "Stripe Blue":
+        {
+          "file": "title\\stripe-blue.png"
+        },
+        "Stripe Red":
+        {
+          "file": "title\\stripe-red.png"
+        },
+
+        "Title Text":
+        {
+          "file": "title\\title-text.png"
+        },
+        "Title Text Blur":
+        {
+          "file": "title\\title-text-blur.png"
+        },
+
+        "Logo":
+        {
+          "file": "title\\logo.png"
+        },
+        "Company Name":
+        {
+          "file": "title\\company-name.png"
+        },
+
+        "Controls COOP":
+        {
+          "file": "title\\controls-coop.png"
+        },
+        "Controls P2":
+        {
+          "file": "title\\controls-p2.png"
+        },
+        "Controls P1":
+        {
+          "file": "title\\controls-p1.png"
+        }
+      }
+    }
+  },
+
+  "Outline Play":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 2,
+    "fps": 1,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Title Sprites.Outline Play"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0.75
+              ]
+            ],
+            "offset":
+            [
+              -24,
+              -24
+            ]
+          },
+
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Title Sprites.Outline Play"
+            ],
+            "color":
+            [
+              [
+                1,
+                0,
+                0,
+                0
+              ]
+            ]
+          },
+
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Title Sprites.Outline Play"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0.75
+              ]
+            ],
+            "offset":
+            [
+              -24,
+              -24
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Outline Options":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 2,
+    "fps": 1,
+
+    "parts":
+    [
+      {
+
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Title Sprites.Outline Options"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0.75
+              ]
+            ],
+            "offset":
+            [
+              -24,
+              -24
+            ]
+          },
+
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Title Sprites.Outline Options"
+            ],
+            "color":
+            [
+              [
+                1,
+                0,
+                0,
+                0
+              ]
+            ]
+          },
+
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Title Sprites.Outline Options"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0.75
+              ]
+            ],
+            "offset":
+            [
+              -24,
+              -24
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Outline Options Child":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 2,
+    "fps": 1,
+
+    "parts":
+    [
+      {
+
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Title Sprites.Outline Options Child"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0.75
+              ]
+            ],
+            "offset":
+            [
+              -66,
+              -24
+            ]
+          },
+
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Title Sprites.Outline Options Child"
+            ],
+            "color":
+            [
+              [
+                1,
+                0,
+                0,
+                0
+              ]
+            ]
+          },
+
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Title Sprites.Outline Options Child"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0.75
+              ]
+            ],
+            "offset":
+            [
+              -66,
+              -24
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Outline Scores":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 2,
+    "fps": 1,
+
+    "parts":
+    [
+      {
+
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Title Sprites.Outline Scores"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0.75
+              ]
+            ],
+            "offset":
+            [
+              -24,
+              -24
+            ]
+          },
+
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Title Sprites.Outline Scores"
+            ],
+            "color":
+            [
+              [
+                1,
+                0,
+                0,
+                0
+              ]
+            ]
+          },
+
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Title Sprites.Outline Scores"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0.75
+              ]
+            ],
+            "offset":
+            [
+              -24,
+              -24
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Outline Help":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 2,
+    "fps": 1,
+
+    "parts":
+    [
+      {
+
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Title Sprites.Outline Help"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0.75
+              ]
+            ],
+            "offset":
+            [
+              -24,
+              -24
+            ]
+          },
+
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Title Sprites.Outline Help"
+            ],
+            "color":
+            [
+              [
+                1,
+                0,
+                0,
+                0
+              ]
+            ]
+          },
+
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Title Sprites.Outline Help"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0.75
+              ]
+            ],
+            "offset":
+            [
+              -24,
+              -24
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Title Text":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 2,
+    "fps": 1,
+
+    "parts":
+    [
+      {
+
+        "keys":
+        [
+          {
+            "frame": 0,
+            "offset":
+            [
+              290,
+              150
+            ],
+
+            "sprite":
+            [
+              "ref:Title Sprites.Title Text Blur",
+              "ref:Title Sprites.Title Text"
+            ],
+
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ],
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+
+          {
+            "frame": 2,
+            "offset":
+            [
+              290,
+              150
+            ],
+
+            "sprite":
+            [
+              "ref:Title Sprites.Title Text Blur",
+              "ref:Title Sprites.Title Text"
+            ],
+
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0.5
+              ],
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Title Stripes":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+    "fps": 1,
+
+    "parts":
+    [
+      {
+
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Title Sprites.Stripe Blue"
+            ]
+          },
+
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Title Sprites.Stripe Blue"
+            ]
+          }
+        ]
+      },
+      {
+
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Title Sprites.Stripe Red"
+            ],
+            "offset":
+            [
+              1072,
+              0
+            ]
+          },
+
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Title Sprites.Stripe Red"
+            ],
+            "offset":
+            [
+              1072,
+              0
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Logo":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+    "fps": 1,
+
+    "parts":
+    [
+      {
+
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Title Sprites.Logo"
+            ],
+            "offset":
+            [
+              1810,
+              1140
+            ]
+          },
+
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Title Sprites.Logo"
+            ],
+            "offset":
+            [
+              1810,
+              1140
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Company Name":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+    "fps": 1,
+
+    "parts":
+    [
+      {
+
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Title Sprites.Company Name"
+            ],
+            "offset":
+            [
+              1485,
+              1142
+            ]
+          },
+
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Title Sprites.Company Name"
+            ],
+            "offset":
+            [
+              1485,
+              1142
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Controls COOP":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+    "fps": 1,
+
+    "parts":
+    [
+      {
+
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Title Sprites.Controls COOP"
+            ],
+            "offset":
+            [
+              775,
+              550
+            ]
+          },
+
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Title Sprites.Controls COOP"
+            ],
+            "offset":
+            [
+              775,
+              550
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Controls P2":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+    "fps": 1,
+
+    "parts":
+    [
+      {
+
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Title Sprites.Controls P2"
+            ],
+            "offset":
+            [
+              775,
+              450
+            ]
+          },
+
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Title Sprites.Controls P2"
+            ],
+            "offset":
+            [
+              775,
+              450
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Controls P1":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+    "fps": 1,
+
+    "parts":
+    [
+      {
+
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Title Sprites.Controls P1"
+            ],
+            "offset":
+            [
+              775,
+              650
+            ]
+          },
+
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Title Sprites.Controls P1"
+            ],
+            "offset":
+            [
+              775,
+              650
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "wave-Menu Execute":
+  {
+    "res:type": "wave",
+    "data":
+    {
+      "res:transform": "wave",
+      "file": "audio\\menu-execute.wav"
+    }
+  },
+  "wave-Menu Main":
+  {
+    "res:type": "wave",
+    "data":
+    {
+      "res:transform": "wave",
+      "file": "audio\\menu-main.wav"
+    }
+  },
+  "wave-Menu Sub":
+  {
+    "res:type": "wave",
+    "data":
+    {
+      "res:transform": "wave",
+      "file": "audio\\menu-sub.wav"
+    }
+  },
+
+  "Menu Execute":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Menu Execute",
+    "volume": 1.5
+  },
+  "Menu Main":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Menu Sub",
+    "volume": 1.5
+  },
+  "Menu Sub":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Menu Sub",
+    "volume": 1.5
+  }
+}

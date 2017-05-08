@@ -1,0 +1,323 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2f5b3bed-1a6c-48e6-ba91-42f56b49ca67}</ProjectGuid>
+    <AppType>Metro</AppType>
+    <ConfigurationType>Application</ConfigurationType>
+    <ProjectName>Invader</ProjectName>
+    <RootNamespace>Invader</RootNamespace>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
+    <PackageCertificateThumbprint>9ADF3AEED171E3AA5882273F89DAAE92FB73AF67</PackageCertificateThumbprint>
+    <PackageCertificateKeyFile>Invader_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
+    <AppxBundle>Always</AppxBundle>
+  </PropertyGroup>
+  <Import Project="..\msbuild\cpp.props" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\core\util</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Image Include="Assets\AboutFace.png" />
+    <Image Include="Assets\BadgeLogo.scale-100.png" />
+    <Image Include="Assets\BadgeLogo.scale-125.png" />
+    <Image Include="Assets\BadgeLogo.scale-150.png" />
+    <Image Include="Assets\BadgeLogo.scale-200.png" />
+    <Image Include="Assets\BadgeLogo.scale-400.png" />
+    <Image Include="Assets\LargeLogo.source.png">
+      <DeploymentContent>false</DeploymentContent>
+    </Image>
+    <Image Include="Assets\Logo.source.png">
+      <DeploymentContent>false</DeploymentContent>
+    </Image>
+    <Image Include="Assets\settings-controls1.png" />
+    <Image Include="Assets\settings-controls2.png" />
+    <Image Include="Assets\settings-controls3.png" />
+    <Image Include="Assets\SplashScreen.scale-100.png" />
+    <Image Include="Assets\SplashScreen.scale-125.png" />
+    <Image Include="Assets\SplashScreen.scale-150.png" />
+    <Image Include="Assets\SplashScreen.scale-200.png" />
+    <Image Include="Assets\SplashScreen.scale-400.png" />
+    <Image Include="Assets\Square150x150Logo.scale-100.png" />
+    <Image Include="Assets\Square150x150Logo.scale-125.png" />
+    <Image Include="Assets\Square150x150Logo.scale-150.png" />
+    <Image Include="Assets\Square150x150Logo.scale-200.png" />
+    <Image Include="Assets\Square150x150Logo.scale-400.png" />
+    <Image Include="Assets\Square310x310Logo.scale-100.png" />
+    <Image Include="Assets\Square310x310Logo.scale-125.png" />
+    <Image Include="Assets\Square310x310Logo.scale-150.png" />
+    <Image Include="Assets\Square310x310Logo.scale-200.png" />
+    <Image Include="Assets\Square44x44Logo.scale-100.png" />
+    <Image Include="Assets\Square44x44Logo.scale-125.png" />
+    <Image Include="Assets\Square44x44Logo.scale-150.png" />
+    <Image Include="Assets\Square44x44Logo.scale-200.png" />
+    <Image Include="Assets\Square44x44Logo.scale-400.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-16.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-16_altform-unplated.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-20.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-20_altform-unplated.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-24.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-256.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-256_altform-unplated.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-30.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-30_altform-unplated.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-32.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-32_altform-unplated.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-36.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-36_altform-unplated.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-40.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-40_altform-unplated.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-48.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-48_altform-unplated.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-60.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-60_altform-unplated.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-64.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-64_altform-unplated.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-72.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-72_altform-unplated.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-80.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-80_altform-unplated.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-96.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-96_altform-unplated.png" />
+    <Image Include="Assets\Square71x71Logo.scale-100.png" />
+    <Image Include="Assets\Square71x71Logo.scale-125.png" />
+    <Image Include="Assets\Square71x71Logo.scale-150.png" />
+    <Image Include="Assets\Square71x71Logo.scale-200.png" />
+    <Image Include="Assets\Square71x71Logo.scale-400.png" />
+    <Image Include="Assets\StoreLogo.scale-100.png" />
+    <Image Include="Assets\StoreLogo.scale-125.png" />
+    <Image Include="Assets\StoreLogo.scale-150.png" />
+    <Image Include="Assets\StoreLogo.scale-200.png" />
+    <Image Include="Assets\StoreLogo.scale-400.png" />
+    <Image Include="Assets\Wide310x150Logo.scale-100.png" />
+    <Image Include="Assets\Wide310x150Logo.scale-125.png" />
+    <Image Include="Assets\Wide310x150Logo.scale-150.png" />
+    <Image Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Image Include="Assets\Wide310x150Logo.scale-400.png" />
+    <Image Include="Assets\WideLogo.source.png">
+      <DeploymentContent>false</DeploymentContent>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="components\audio\AudioEffectComponent.h" />
+    <ClInclude Include="components\bullet\BulletAdvance.h" />
+    <ClInclude Include="components\bullet\BulletComponent.h" />
+    <ClInclude Include="components\core\CollisionAdvanceRender.h" />
+    <ClInclude Include="components\core\LoadingComponent.h" />
+    <ClInclude Include="components\core\PathComponent.h" />
+    <ClInclude Include="components\core\PositionComponent.h" />
+    <ClInclude Include="components\core\StateComponent.h" />
+    <ClInclude Include="components\graph\MultiSpriteRender.h" />
+    <ClInclude Include="components\graph\SpriteAnimationAdvance.h" />
+    <ClInclude Include="components\graph\SpriteAnimationRender.h" />
+    <ClInclude Include="components\graph\SpriteRender.h" />
+    <ClInclude Include="components\invader\InvaderAdvanceRender.h" />
+    <ClInclude Include="components\invader\InvaderComponent.h" />
+    <ClInclude Include="components\invader\InvaderTitleAdvanceRender.h" />
+    <ClInclude Include="components\level\LevelAdvanceRender.h" />
+    <ClInclude Include="components\level\PauseAdvanceRender.h" />
+    <ClInclude Include="components\level\ScoreAdvanceRender.h" />
+    <ClInclude Include="components\player\PlayerAdvanceRender.h" />
+    <ClInclude Include="components\player\PlayerComponent.h" />
+    <ClInclude Include="components\player\TouchAdvanceRender.h" />
+    <ClInclude Include="components\powerup\PowerupAdvance.h" />
+    <ClInclude Include="components\powerup\PowerupComponent.h" />
+    <ClInclude Include="components\saucer\SaucerAdvance.h" />
+    <ClInclude Include="components\saucer\SaucerComponent.h" />
+    <ClInclude Include="components\shield\ShieldAdvance.h" />
+    <ClInclude Include="components\shield\ShieldComponent.h" />
+    <ClInclude Include="coreEntity\component\ComponentListener.h" />
+    <ClInclude Include="coreEntity\component\ComponentListener2.h" />
+    <ClInclude Include="coreEntity\component\ComponentManager.h" />
+    <ClInclude Include="coreEntity\component\standard\AdvanceComponent.h" />
+    <ClInclude Include="coreEntity\component\standard\EntityEventListenersComponent.h" />
+    <ClInclude Include="coreEntity\component\standard\LayerGroupComponent.h" />
+    <ClInclude Include="coreEntity\component\standard\MouseLayer.h" />
+    <ClInclude Include="coreEntity\component\standard\RenderComponent.h" />
+    <ClInclude Include="coreEntity\domain\EntityDomain.h" />
+    <ClInclude Include="coreEntity\domain\EntityDomainProvider.h" />
+    <ClInclude Include="coreEntity\entity\Entity.h" />
+    <ClInclude Include="coreEntity\entity\EntityComponent.h" />
+    <ClInclude Include="coreEntity\entity\EntityEvents.h" />
+    <ClInclude Include="coreEntity\entity\EntityListener.h" />
+    <ClInclude Include="coreEntity\entity\EntityManager.h" />
+    <ClInclude Include="coreEntity\system\System.h" />
+    <ClInclude Include="coreEntity\system\SystemManager.h" />
+    <ClInclude Include="entities\Entity2dRenderComp.h" />
+    <ClInclude Include="entities\EntityAdvanceComp.h" />
+    <ClInclude Include="entities\EntityEvents.h" />
+    <ClInclude Include="entities\EntityPosComp.h" />
+    <ClInclude Include="Globals.h" />
+    <ClInclude Include="InputEvents.h" />
+    <ClInclude Include="App.xaml.h">
+      <DependentUpon>App.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="metro\AboutSettings.xaml.h">
+      <DependentUpon>metro\AboutSettings.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="metro\ControlSettings.xaml.h">
+      <DependentUpon>metro\ControlSettings.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="metro\FailurePage.xaml.h">
+      <DependentUpon>metro\FailurePage.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="metro\GameSettings.xaml.h">
+      <DependentUpon>metro\GameSettings.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="metro\MainPage.xaml.h">
+      <DependentUpon>metro\MainPage.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Scores.h" />
+    <ClInclude Include="services\EntityFactoryService.h" />
+    <ClInclude Include="services\GameBeatService.h" />
+    <ClInclude Include="services\GlobalPlayerService.h" />
+    <ClInclude Include="services\InvaderService.h" />
+    <ClInclude Include="services\PlayerService.h" />
+    <ClInclude Include="services\SaucerService.h" />
+    <ClInclude Include="states\AddScoreState.h" />
+    <ClInclude Include="states\InitState.h" />
+    <ClInclude Include="states\PlayGameState.h" />
+    <ClInclude Include="states\PlayLevelState.h" />
+    <ClInclude Include="states\ShowScoresState.h" />
+    <ClInclude Include="states\TitleState.h" />
+    <ClInclude Include="states\TransitionState.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="systems\AdvanceSystem.h" />
+    <ClInclude Include="systems\AudioSystem.h" />
+    <ClInclude Include="systems\LevelSystem.h" />
+    <ClInclude Include="systems\RenderSystem.h" />
+    <ClInclude Include="ThisApplication.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="components\audio\AudioEffectComponent.cpp" />
+    <ClCompile Include="components\bullet\BulletAdvance.cpp" />
+    <ClCompile Include="components\bullet\BulletComponent.cpp" />
+    <ClCompile Include="components\core\CollisionAdvanceRender.cpp" />
+    <ClCompile Include="components\core\LoadingComponent.cpp" />
+    <ClCompile Include="components\core\PathComponent.cpp" />
+    <ClCompile Include="components\core\PositionComponent.cpp" />
+    <ClCompile Include="components\core\StateComponent.cpp" />
+    <ClCompile Include="components\graph\MultiSpriteRender.cpp" />
+    <ClCompile Include="components\graph\SpriteAnimationAdvance.cpp" />
+    <ClCompile Include="components\graph\SpriteAnimationRender.cpp" />
+    <ClCompile Include="components\graph\SpriteRender.cpp" />
+    <ClCompile Include="components\invader\InvaderAdvanceRender.cpp" />
+    <ClCompile Include="components\invader\InvaderComponent.cpp" />
+    <ClCompile Include="components\invader\InvaderTitleAdvanceRender.cpp" />
+    <ClCompile Include="components\level\LevelAdvanceRender.cpp" />
+    <ClCompile Include="components\level\PauseAdvanceRender.cpp" />
+    <ClCompile Include="components\level\ScoreAdvanceRender.cpp" />
+    <ClCompile Include="components\player\PlayerAdvanceRender.cpp" />
+    <ClCompile Include="components\player\PlayerComponent.cpp" />
+    <ClCompile Include="components\player\TouchAdvanceRender.cpp" />
+    <ClCompile Include="components\powerup\PowerupAdvance.cpp" />
+    <ClCompile Include="components\powerup\PowerupComponent.cpp" />
+    <ClCompile Include="components\saucer\SaucerAdvance.cpp" />
+    <ClCompile Include="components\saucer\SaucerComponent.cpp" />
+    <ClCompile Include="components\shield\ShieldAdvance.cpp" />
+    <ClCompile Include="components\shield\ShieldComponent.cpp" />
+    <ClCompile Include="coreEntity\component\ComponentListener.cpp" />
+    <ClCompile Include="coreEntity\component\ComponentManager.cpp" />
+    <ClCompile Include="coreEntity\component\standard\EntityEventListenersComponent.cpp" />
+    <ClCompile Include="coreEntity\component\standard\LayerGroupComponent.cpp" />
+    <ClCompile Include="coreEntity\component\standard\MouseLayer.cpp" />
+    <ClCompile Include="coreEntity\domain\EntityDomain.cpp" />
+    <ClCompile Include="coreEntity\entity\Entity.cpp" />
+    <ClCompile Include="coreEntity\entity\EntityListener.cpp" />
+    <ClCompile Include="coreEntity\entity\EntityManager.cpp" />
+    <ClCompile Include="coreEntity\system\System.cpp" />
+    <ClCompile Include="coreEntity\system\SystemManager.cpp" />
+    <ClCompile Include="entities\Entity2dRenderComp.cpp" />
+    <ClCompile Include="entities\EntityAdvanceComp.cpp" />
+    <ClCompile Include="entities\EntityEvents.cpp" />
+    <ClCompile Include="Globals.cpp" />
+    <ClCompile Include="InputEvents.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="App.xaml.cpp">
+      <DependentUpon>App.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="metro\AboutSettings.xaml.cpp">
+      <DependentUpon>metro\AboutSettings.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="metro\ControlSettings.xaml.cpp">
+      <DependentUpon>metro\ControlSettings.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="metro\FailurePage.xaml.cpp">
+      <DependentUpon>metro\FailurePage.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="metro\GameSettings.xaml.cpp">
+      <DependentUpon>metro\GameSettings.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="metro\MainPage.xaml.cpp">
+      <DependentUpon>metro\MainPage.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scores.cpp" />
+    <ClCompile Include="services\EntityFactoryService.cpp" />
+    <ClCompile Include="services\GlobalPlayerService.cpp" />
+    <ClCompile Include="states\AddScoreState.cpp" />
+    <ClCompile Include="states\InitState.cpp" />
+    <ClCompile Include="states\PlayGameState.cpp" />
+    <ClCompile Include="states\PlayLevelState.cpp" />
+    <ClCompile Include="states\ShowScoresState.cpp" />
+    <ClCompile Include="states\TitleState.cpp" />
+    <ClCompile Include="states\TransitionState.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="systems\AdvanceSystem.cpp" />
+    <ClCompile Include="systems\AudioSystem.cpp" />
+    <ClCompile Include="systems\LevelSystem.cpp" />
+    <ClCompile Include="systems\RenderSystem.cpp" />
+    <ClCompile Include="ThisApplication.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="metro\AboutSettings.xaml" />
+    <Page Include="metro\ControlSettings.xaml" />
+    <Page Include="metro\FailurePage.xaml" />
+    <Page Include="metro\GameSettings.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="metro\MainPage.xaml" />
+    <Page Include="metro\Styles.xaml">
+      <DeploymentContent>true</DeploymentContent>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Invader_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\core\util\util-metro.vcxproj">
+      <Project>{eff8144d-f91e-4bbd-b09b-d6db6b3a5512}</Project>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="res\fonts\nasal.ttf" />
+    <Font Include="res\fonts\pressstart2p.ttf" />
+    <ResJson Include="res\Assets.Audio.res.json" />
+    <ResJson Include="res\Assets.Fonts.res.json" />
+    <ResJson Include="res\Assets.Graph.res.json" />
+    <ResJson Include="res\Assets.Space.res.json" />
+    <ResJson Include="res\Assets.Title.res.json" />
+    <ResJson Include="res\Values.res.json" />
+    <None Include="res\Assets.Audio.res.json" />
+    <None Include="res\Assets.Fonts.res.json" />
+    <None Include="res\Assets.Graph.res.json" />
+    <None Include="res\Assets.Space.res.json" />
+    <None Include="res\Assets.Title.res.json" />
+    <None Include="res\Values.res.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="metro\Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+  </ItemGroup>
+  <Import Project="$(DevRoot)\msbuild\cpp.targets" />
+</Project>

@@ -1,0 +1,6443 @@
+{
+  "Shield Sprites":
+  {
+    "res:type": "sprites",
+    "data":
+    {
+      "res:transform": "sprites",
+      "format": "rgba32",
+      "mips": 1,
+
+      "sprites":
+      {
+        "Shield Normal":
+        {
+          "file": "level\\shield.png",
+          "pos":
+          [
+            0,
+            0,
+            200,
+            100
+          ],
+          "repeat": 5
+        },
+        "Shield Hard":
+        {
+          "file": "level\\shield.png",
+          "pos":
+          [
+            0,
+            100,
+            200,
+            200
+          ],
+          "repeat": 5
+        }
+      }
+    }
+  },
+
+  "Sprites":
+  {
+    "res:type": "sprites",
+    "data":
+    {
+      "res:transform": "sprites",
+      "format": "bc2",
+      "mips": 3,
+
+      "sprites":
+      {
+        "Player Turret Standing":
+        {
+          "file": "player\\player standing.png",
+          "pos":
+          [
+            0,
+            0,
+            100,
+            100
+          ],
+          "repeat": 1,
+          "handle":
+          [
+            50,
+            100
+          ]
+        },
+        "Player Body Standing":
+        {
+          "file": "player\\player standing.png",
+          "pos":
+          [
+            0,
+            100,
+            100,
+            200
+          ],
+          "repeat": 1,
+          "handle":
+          [
+            50,
+            100
+          ]
+        },
+        "Player Wheels Standing":
+        {
+          "file": "player\\player standing.png",
+          "pos":
+          [
+            0,
+            200,
+            100,
+            300
+          ],
+          "repeat": 1,
+          "handle":
+          [
+            50,
+            100
+          ]
+        },
+
+        "Player Turret Moving":
+        {
+          "file": "player\\player moving.png",
+          "pos":
+          [
+            0,
+            0,
+            100,
+            100
+          ],
+          "repeat": 7,
+          "handle":
+          [
+            50,
+            100
+          ]
+        },
+        "Player Body Moving":
+        {
+          "file": "player\\player moving.png",
+          "pos":
+          [
+            0,
+            100,
+            100,
+            200
+          ],
+          "repeat": 7,
+          "handle":
+          [
+            50,
+            100
+          ]
+        },
+        "Player Wheels Moving":
+        {
+          "file": "player\\player moving.png",
+          "pos":
+          [
+            0,
+            200,
+            100,
+            300
+          ],
+          "repeat": 7,
+          "handle":
+          [
+            50,
+            100
+          ]
+        },
+
+        "Player Turret Shooting":
+        {
+          "file": "player\\player shooting.png",
+          "pos":
+          [
+            0,
+            0,
+            100,
+            100
+          ],
+          "repeat": 6,
+          "handle":
+          [
+            50,
+            100
+          ]
+        },
+        "Player Body Shooting":
+        {
+          "file": "player\\player shooting.png",
+          "pos":
+          [
+            0,
+            100,
+            100,
+            200
+          ],
+          "repeat": 6,
+          "handle":
+          [
+            50,
+            100
+          ]
+        },
+        "Player Wheels Shooting":
+        {
+          "file": "player\\player shooting.png",
+          "pos":
+          [
+            0,
+            200,
+            100,
+            300
+          ],
+          "repeat": 6,
+          "handle":
+          [
+            50,
+            100
+          ]
+        },
+
+        "Player Dust 0":
+        {
+          "file": "player\\Dust 0.png",
+          "pos":
+          [
+            0,
+            0,
+            16,
+            16
+          ],
+          "repeat": 8,
+          "handle":
+          [
+            8,
+            8
+          ]
+        },
+        "Player Dust 1":
+        {
+          "file": "player\\Dust 1.png",
+          "pos":
+          [
+            0,
+            0,
+            16,
+            16
+          ],
+          "repeat": 8,
+          "handle":
+          [
+            8,
+            8
+          ]
+        },
+
+        "Player Shield":
+        {
+          "file": "player\\player shield.png",
+          "pos":
+          [
+            0,
+            0,
+            200,
+            150
+          ],
+          "repeat": 4,
+          "handle":
+          [
+            100,
+            150
+          ]
+        },
+        "Player Hit":
+        {
+          "file": "player\\player hit.png",
+          "pos":
+          [
+            0,
+            0,
+            128,
+            70
+          ],
+          "repeat": 3,
+          "handle":
+          [
+            64,
+            64
+          ]
+        },
+        "Player Orb":
+        {
+          "file": "player\\player orb.png",
+          "pos":
+          [
+            0,
+            0,
+            150,
+            150
+          ],
+          "handle":
+          [
+            75,
+            75
+          ]
+        },
+
+        "Ground":
+        {
+          "file": "level\\ground 1.png"
+        },
+        "Bonus Saucer Ground":
+        {
+          "file": "level\\ground 2.png"
+        },
+        "Bonus Invader Ground":
+        {
+          "file": "level\\ground 3.png"
+        },
+        "Powerup":
+        {
+          "file": "level\\powerups.png",
+          "pos":
+          [
+            0,
+            0,
+            50,
+            50
+          ],
+          "repeat": 8,
+          "handle":
+          [
+            25,
+            25
+          ]
+        },
+        "Touch Left":
+        {
+          "file": "level\\touch-left.png"
+        },
+        "Touch Right":
+        {
+          "file": "level\\touch-right.png"
+        },
+        "Touch Shoot":
+        {
+          "file": "level\\touch-shoot.png"
+        },
+        "Touch Left Pressed":
+        {
+          "file": "level\\touch-left-pressed.png"
+        },
+        "Touch Right Pressed":
+        {
+          "file": "level\\touch-right-pressed.png"
+        },
+        "Touch Shoot Pressed":
+        {
+          "file": "level\\touch-shoot-pressed.png"
+        },
+        "Touch Pause":
+        {
+          "file": "level\\touch-pause.png"
+        },
+        "Touch Pause Pressed":
+        {
+          "file": "level\\touch-pause-pressed.png"
+        },
+
+        "Saucer":
+        {
+          "file": "level\\saucer.png",
+          "pos":
+          [
+            0,
+            0,
+            150,
+            60
+          ],
+          "handle":
+          [
+            75,
+            40
+          ]
+        },
+        "Saucer Glass":
+        {
+          "file": "level\\saucer.png",
+          "pos":
+          [
+            150,
+            0,
+            300,
+            60
+          ],
+          "handle":
+          [
+            75,
+            40
+          ]
+        },
+        "Saucer Lights":
+        {
+          "file": "level\\saucer-lights.png",
+          "pos":
+          [
+            0,
+            0,
+            150,
+            60
+          ],
+          "handle":
+          [
+            75,
+            40
+          ],
+          "repeat": 10
+        },
+
+        "Shield Explosion 0":
+        {
+          "file": "level\\se-0.png",
+          "pos":
+          [
+            0,
+            0,
+            58,
+            58
+          ],
+          "repeat": 5,
+          "handle":
+          [
+            29,
+            29
+          ]
+        },
+
+        "Invader 0":
+        {
+          "file": "invaders\\i-0.png",
+          "pos":
+          [
+            0,
+            0,
+            64,
+            68
+          ],
+          "repeat": 3,
+          "handle":
+          [
+            32,
+            32
+          ]
+        },
+        "Invader 1":
+        {
+          "file": "invaders\\i-1.png",
+          "pos":
+          [
+            0,
+            0,
+            64,
+            64
+          ],
+          "repeat": 3,
+          "handle":
+          [
+            32,
+            32
+          ]
+        },
+        "Invader 2":
+        {
+          "file": "invaders\\i-2.png",
+          "pos":
+          [
+            0,
+            0,
+            64,
+            64
+          ],
+          "repeat": 3,
+          "handle":
+          [
+            32,
+            32
+          ]
+        },
+        "Invader 3":
+        {
+          "file": "invaders\\i-3.png",
+          "pos":
+          [
+            0,
+            0,
+            64,
+            80
+          ],
+          "repeat": 4,
+          "handle":
+          [
+            32,
+            32
+          ]
+        },
+        "Invader 4":
+        {
+          "file": "invaders\\i-4.png",
+          "pos":
+          [
+            0,
+            0,
+            64,
+            68
+          ],
+          "repeat": 5,
+          "handle":
+          [
+            32,
+            32
+          ]
+        },
+        "Invader 5":
+        {
+          "file": "invaders\\i-5.png",
+          "pos":
+          [
+            0,
+            0,
+            64,
+            64
+          ],
+          "repeat": 3,
+          "handle":
+          [
+            32,
+            32
+          ]
+        },
+        "Invader 6":
+        {
+          "file": "invaders\\i-6.png",
+          "pos":
+          [
+            0,
+            0,
+            64,
+            64
+          ],
+          "repeat": 5,
+          "handle":
+          [
+            32,
+            32
+          ]
+        },
+        "Invader 7":
+        {
+          "file": "invaders\\i-7.png",
+          "pos":
+          [
+            0,
+            0,
+            80,
+            64
+          ],
+          "repeat": 5,
+          "handle":
+          [
+            40,
+            32
+          ]
+        },
+
+        "Invader Bonus 0":
+        {
+          "file": "invaders\\i-b0.png",
+          "pos":
+          [
+            0,
+            0,
+            64,
+            68
+          ],
+          "repeat": 3,
+          "handle":
+          [
+            32,
+            32
+          ]
+        },
+        "Invader Bonus 1":
+        {
+          "file": "invaders\\i-b1.png",
+          "pos":
+          [
+            0,
+            0,
+            64,
+            64
+          ],
+          "repeat": 3,
+          "handle":
+          [
+            32,
+            32
+          ]
+        },
+        "Invader Bonus 2":
+        {
+          "file": "invaders\\i-b2.png",
+          "pos":
+          [
+            0,
+            0,
+            64,
+            64
+          ],
+          "repeat": 3,
+          "handle":
+          [
+            32,
+            32
+          ]
+        },
+
+        "Invader Hit 0":
+        {
+          "file": "invaders\\i-0.png",
+          "pos":
+          [
+            192,
+            0,
+            256,
+            68
+          ],
+          "handle":
+          [
+            32,
+            32
+          ]
+        },
+        "Invader Hit 1":
+        {
+          "file": "invaders\\i-1.png",
+          "pos":
+          [
+            192,
+            0,
+            256,
+            64
+          ],
+          "handle":
+          [
+            32,
+            32
+          ]
+        },
+        "Invader Hit 2":
+        {
+          "file": "invaders\\i-2.png",
+          "pos":
+          [
+            192,
+            0,
+            256,
+            64
+          ],
+          "handle":
+          [
+            32,
+            32
+          ]
+        },
+        "Invader Hit 3":
+        {
+          "file": "invaders\\i-3.png",
+          "pos":
+          [
+            256,
+            0,
+            320,
+            80
+          ],
+          "handle":
+          [
+            32,
+            32
+          ]
+        },
+        "Invader Hit 4":
+        {
+          "file": "invaders\\i-4.png",
+          "pos":
+          [
+            320,
+            0,
+            384,
+            68
+          ],
+          "handle":
+          [
+            32,
+            32
+          ]
+        },
+        "Invader Hit 5":
+        {
+          "file": "invaders\\i-5.png",
+          "pos":
+          [
+            192,
+            0,
+            256,
+            64
+          ],
+          "handle":
+          [
+            32,
+            32
+          ]
+        },
+        "Invader Hit 6":
+        {
+          "file": "invaders\\i-6.png",
+          "pos":
+          [
+            320,
+            0,
+            384,
+            64
+          ],
+          "handle":
+          [
+            32,
+            32
+          ]
+        },
+        "Invader Hit 7":
+        {
+          "file": "invaders\\i-7.png",
+          "pos":
+          [
+            400,
+            0,
+            480,
+            64
+          ],
+          "handle":
+          [
+            40,
+            32
+          ]
+        },
+
+        "Invader Hit Bonus 0":
+        {
+          "file": "invaders\\i-b0.png",
+          "pos":
+          [
+            192,
+            0,
+            256,
+            68
+          ],
+          "handle":
+          [
+            32,
+            32
+          ]
+        },
+        "Invader Hit Bonus 1":
+        {
+          "file": "invaders\\i-b1.png",
+          "pos":
+          [
+            192,
+            0,
+            256,
+            64
+          ],
+          "handle":
+          [
+            32,
+            32
+          ]
+        },
+        "Invader Hit Bonus 2":
+        {
+          "file": "invaders\\i-b2.png",
+          "pos":
+          [
+            192,
+            0,
+            256,
+            64
+          ],
+          "handle":
+          [
+            32,
+            32
+          ]
+        },
+
+        "Invader Explosion 0":
+        {
+          "file": "invaders\\ie-0.png",
+          "pos":
+          [
+            0,
+            0,
+            82,
+            84
+          ],
+          "repeat": 4,
+          "handle":
+          [
+            38,
+            38
+          ]
+        },
+        "Invader Explosion 1":
+        {
+          "file": "invaders\\ie-1.png",
+          "pos":
+          [
+            0,
+            0,
+            82,
+            84
+          ],
+          "repeat": 4,
+          "handle":
+          [
+            38,
+            46
+          ]
+        },
+        "Invader Explosion 2":
+        {
+          "file": "invaders\\ie-2.png",
+          "pos":
+          [
+            0,
+            0,
+            82,
+            84
+          ],
+          "repeat": 4,
+          "handle":
+          [
+            38,
+            38
+          ]
+        },
+        "Invader Explosion 3":
+        {
+          "file": "invaders\\ie-3.png",
+          "pos":
+          [
+            0,
+            0,
+            82,
+            84
+          ],
+          "repeat": 4,
+          "handle":
+          [
+            38,
+            46
+          ]
+        },
+        "Invader Explosion 4":
+        {
+          "file": "invaders\\ie-4.png",
+          "pos":
+          [
+            0,
+            0,
+            82,
+            84
+          ],
+          "repeat": 4,
+          "handle":
+          [
+            38,
+            38
+          ]
+        },
+        "Invader Explosion 5":
+        {
+          "file": "invaders\\ie-5.png",
+          "pos":
+          [
+            0,
+            0,
+            82,
+            84
+          ],
+          "repeat": 4,
+          "handle":
+          [
+            44,
+            38
+          ]
+        },
+        "Invader Explosion 6":
+        {
+          "file": "invaders\\ie-6.png",
+          "pos":
+          [
+            0,
+            0,
+            82,
+            84
+          ],
+          "repeat": 4,
+          "handle":
+          [
+            38,
+            38
+          ]
+        },
+        "Invader Explosion 7":
+        {
+          "file": "invaders\\ie-7.png",
+          "pos":
+          [
+            0,
+            0,
+            82,
+            84
+          ],
+          "repeat": 4,
+          "handle":
+          [
+            38,
+            46
+          ]
+        },
+
+        "Invader Explosion Bonus 0":
+        {
+          "file": "invaders\\ie-b0.png",
+          "pos":
+          [
+            0,
+            0,
+            82,
+            84
+          ],
+          "repeat": 4,
+          "handle":
+          [
+            38,
+            38
+          ]
+        },
+        "Invader Explosion Bonus 1":
+        {
+          "file": "invaders\\ie-b0.png",
+          "pos":
+          [
+            0,
+            0,
+            82,
+            84
+          ],
+          "repeat": 4,
+          "handle":
+          [
+            38,
+            38
+          ]
+        },
+        "Invader Explosion Bonus 2":
+        {
+          "file": "invaders\\ie-b0.png",
+          "pos":
+          [
+            0,
+            0,
+            82,
+            84
+          ],
+          "repeat": 4,
+          "handle":
+          [
+            38,
+            38
+          ]
+        },
+
+        "Player Bullet 0":
+        {
+          "file": "player\\pb-0.png",
+          "pos":
+          [
+            0,
+            0,
+            36,
+            14
+          ],
+          "handle":
+          [
+            36,
+            7
+          ]
+        },
+        "Invader Bullet 0":
+        {
+          "file": "invaders\\ib-0.png",
+          "pos":
+          [
+            0,
+            0,
+            50,
+            28
+          ],
+          "handle":
+          [
+            50,
+            14
+          ]
+        },
+        "Invader Bullet 1":
+        {
+          "file": "invaders\\ib-1.png",
+          "pos":
+          [
+            0,
+            0,
+            42,
+            14
+          ],
+          "handle":
+          [
+            42,
+            7
+          ]
+        },
+
+        "Player Bullet Mask 0":
+        {
+          "file": "player\\pb-0.png",
+          "pos":
+          [
+            0,
+            18,
+            64,
+            40
+          ],
+          "handle":
+          [
+            36,
+            11
+          ]
+        },
+        "Invader Bullet Mask 0":
+        {
+          "file": "invaders\\ib-0.png",
+          "pos":
+          [
+            0,
+            28,
+            90,
+            120
+          ],
+          "handle":
+          [
+            50,
+            40
+          ]
+        },
+        "Invader Bullet Mask 1":
+        {
+          "file": "invaders\\ib-1.png",
+          "pos":
+          [
+            0,
+            14,
+            64,
+            50
+          ],
+          "handle":
+          [
+            42,
+            18
+          ]
+        },
+
+        "Bullet Smoke 0":
+        {
+          "file": "bullets\\bs-0.png",
+          "pos":
+          [
+            0,
+            0,
+            12,
+            10
+          ],
+          "repeat": 6,
+          "handle":
+          [
+            5,
+            5
+          ]
+        },
+        "Bullet Smoke 1":
+        {
+          "file": "bullets\\bs-1.png",
+          "pos":
+          [
+            0,
+            0,
+            11,
+            13
+          ],
+          "repeat": 6,
+          "handle":
+          [
+            6,
+            5
+          ]
+        },
+        "Bullet Explosion 0":
+        {
+          "file": "bullets\\be-0.png",
+          "pos":
+          [
+            0,
+            0,
+            82,
+            84
+          ],
+          "repeat": 4,
+          "handle":
+          [
+            38,
+            38
+          ]
+        }
+      }
+    }
+  },
+
+  "Player Standing":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+    "fps": 1,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Player Body Standing",
+              "ref:Sprites.Player Turret Standing"
+            ],
+
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ],
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Player Body Standing",
+              "ref:Sprites.Player Turret Standing"
+            ],
+
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ],
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Player Moving":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 7,
+    "fps": 24,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Player Wheels Moving 0"
+            ],
+
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Player Wheels Moving 1"
+            ]
+          },
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Sprites.Player Wheels Moving 2"
+            ]
+          },
+          {
+            "frame": 3,
+            "sprite":
+            [
+              "ref:Sprites.Player Wheels Moving 3"
+            ]
+          },
+          {
+            "frame": 4,
+            "sprite":
+            [
+              "ref:Sprites.Player Wheels Moving 4"
+            ]
+          },
+          {
+            "frame": 5,
+            "sprite":
+            [
+              "ref:Sprites.Player Wheels Moving 5"
+            ]
+          },
+          {
+            "frame": 6,
+            "sprite":
+            [
+              "ref:Sprites.Player Wheels Moving 6"
+            ]
+          },
+          {
+            "frame": 7,
+            "sprite":
+            [
+              "ref:Sprites.Player Wheels Moving 0"
+            ],
+
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Player Shooting":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 6,
+    "fps": 12,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Player Body Shooting 0",
+              "ref:Sprites.Player Turret Shooting 0"
+            ],
+
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ],
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Player Body Shooting 1",
+              "ref:Sprites.Player Turret Shooting 1"
+            ]
+          },
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Sprites.Player Body Shooting 2",
+              "ref:Sprites.Player Turret Shooting 2"
+            ]
+          },
+          {
+            "frame": 3,
+            "sprite":
+            [
+              "ref:Sprites.Player Body Shooting 3",
+              "ref:Sprites.Player Turret Shooting 3"
+            ]
+          },
+          {
+            "frame": 4,
+            "sprite":
+            [
+              "ref:Sprites.Player Body Shooting 4",
+              "ref:Sprites.Player Turret Shooting 4"
+            ]
+          },
+          {
+            "frame": 5,
+            "sprite":
+            [
+              "ref:Sprites.Player Body Shooting 5",
+              "ref:Sprites.Player Turret Shooting 5"
+            ]
+          },
+          {
+            "frame": 6,
+            "sprite":
+            [
+              "ref:Sprites.Player Body Shooting 0",
+              "ref:Sprites.Player Turret Shooting 0"
+            ],
+
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ],
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Invader 0":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Invader 0 0"
+            ]
+          },
+          {
+            "frame": 0.25,
+            "sprite":
+            [
+              "ref:Sprites.Invader 0 1"
+            ]
+          },
+          {
+            "frame": 0.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader 0 2"
+            ]
+          },
+          {
+            "frame": 0.75,
+            "sprite":
+            [
+              "ref:Sprites.Invader 0 1"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Invader 1":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Invader 1 0"
+            ]
+          },
+          {
+            "frame": 0.25,
+            "sprite":
+            [
+              "ref:Sprites.Invader 1 1"
+            ]
+          },
+          {
+            "frame": 0.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader 1 2"
+            ]
+          },
+          {
+            "frame": 0.75,
+            "sprite":
+            [
+              "ref:Sprites.Invader 1 1"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Invader 2":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Invader 2 0"
+            ]
+          },
+          {
+            "frame": 0.25,
+            "sprite":
+            [
+              "ref:Sprites.Invader 2 1"
+            ]
+          },
+          {
+            "frame": 0.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader 2 2"
+            ]
+          },
+          {
+            "frame": 0.75,
+            "sprite":
+            [
+              "ref:Sprites.Invader 2 1"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Invader 3":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Invader 3 0"
+            ]
+          },
+          {
+            "frame": 0.25,
+            "sprite":
+            [
+              "ref:Sprites.Invader 3 1"
+            ]
+          },
+          {
+            "frame": 0.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader 3 2"
+            ]
+          },
+          {
+            "frame": 0.75,
+            "sprite":
+            [
+              "ref:Sprites.Invader 3 3"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Invader 4":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1.25,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Invader 4 0"
+            ],
+            "hitbox":
+            [
+              -16,
+              -16,
+              16,
+              18
+            ]
+          },
+          {
+            "frame": 0.25,
+            "sprite":
+            [
+              "ref:Sprites.Invader 4 1"
+            ],
+            "hitbox":
+            [
+              -16,
+              -16,
+              16,
+              18
+            ]
+          },
+          {
+            "frame": 0.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader 4 2"
+            ],
+            "hitbox":
+            [
+              -30,
+              -20,
+              30,
+              24
+            ]
+          },
+          {
+            "frame": 0.75,
+            "sprite":
+            [
+              "ref:Sprites.Invader 4 3"
+            ],
+            "hitbox":
+            [
+              -32,
+              -16,
+              32,
+              18
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Invader 4 4"
+            ],
+            "hitbox":
+            [
+              -28,
+              -22,
+              28,
+              26
+            ]
+          },
+          {
+            "frame": 1.25,
+            "sprite":
+            [
+              "ref:Sprites.Invader 4 0"
+            ],
+            "hitbox":
+            [
+              -16,
+              -16,
+              16,
+              18
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Invader 5":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Invader 5 0"
+            ]
+          },
+          {
+            "frame": 0.25,
+            "sprite":
+            [
+              "ref:Sprites.Invader 5 1"
+            ]
+          },
+          {
+            "frame": 0.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader 5 2"
+            ]
+          },
+          {
+            "frame": 0.75,
+            "sprite":
+            [
+              "ref:Sprites.Invader 5 1"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Invader 6":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 2,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Invader 6 0"
+            ],
+            "hitbox":
+            [
+              -12,
+              0,
+              12,
+              22
+            ]
+          },
+          {
+            "frame": 0.25,
+            "sprite":
+            [
+              "ref:Sprites.Invader 6 1"
+            ],
+            "hitbox":
+            [
+              -14,
+              -6,
+              14,
+              22
+            ]
+          },
+          {
+            "frame": 0.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader 6 2"
+            ],
+            "hitbox":
+            [
+              -18,
+              -12,
+              18,
+              24
+            ]
+          },
+          {
+            "frame": 0.75,
+            "sprite":
+            [
+              "ref:Sprites.Invader 6 3"
+            ],
+            "hitbox":
+            [
+              -22,
+              -16,
+              22,
+              24
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Invader 6 4"
+            ],
+            "hitbox":
+            [
+              -26,
+              -20,
+              26,
+              26
+            ]
+          },
+          {
+            "frame": 1.25,
+            "sprite":
+            [
+              "ref:Sprites.Invader 6 3"
+            ],
+            "hitbox":
+            [
+              -22,
+              -16,
+              22,
+              24
+            ]
+          },
+          {
+            "frame": 1.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader 6 2"
+            ],
+            "hitbox":
+            [
+              -18,
+              -12,
+              18,
+              24
+            ]
+          },
+          {
+            "frame": 1.75,
+            "sprite":
+            [
+              "ref:Sprites.Invader 6 1"
+            ],
+            "hitbox":
+            [
+              -14,
+              -6,
+              14,
+              22
+            ]
+          },
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Sprites.Invader 6 0"
+            ],
+            "hitbox":
+            [
+              -12,
+              0,
+              12,
+              22
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Invader 7":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 2,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Invader 7 0"
+            ]
+          },
+          {
+            "frame": 0.25,
+            "sprite":
+            [
+              "ref:Sprites.Invader 7 1"
+            ]
+          },
+          {
+            "frame": 0.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader 7 2"
+            ]
+          },
+          {
+            "frame": 0.75,
+            "sprite":
+            [
+              "ref:Sprites.Invader 7 3"
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Invader 7 4"
+            ]
+          },
+          {
+            "frame": 1.25,
+            "sprite":
+            [
+              "ref:Sprites.Invader 7 3"
+            ]
+          },
+          {
+            "frame": 1.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader 7 2"
+            ]
+          },
+          {
+            "frame": 1.75,
+            "sprite":
+            [
+              "ref:Sprites.Invader 7 1"
+            ]
+          },
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Sprites.Invader 7 0"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Invader Bonus 0":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Invader Bonus 0 0"
+            ]
+          },
+          {
+            "frame": 0.25,
+            "sprite":
+            [
+              "ref:Sprites.Invader Bonus 0 1"
+            ]
+          },
+          {
+            "frame": 0.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader Bonus 0 2"
+            ]
+          },
+          {
+            "frame": 0.75,
+            "sprite":
+            [
+              "ref:Sprites.Invader Bonus 0 1"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Invader Bonus 1":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Invader Bonus 1 0"
+            ]
+          },
+          {
+            "frame": 0.25,
+            "sprite":
+            [
+              "ref:Sprites.Invader Bonus 1 1"
+            ]
+          },
+          {
+            "frame": 0.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader Bonus 1 2"
+            ]
+          },
+          {
+            "frame": 0.75,
+            "sprite":
+            [
+              "ref:Sprites.Invader Bonus 1 1"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Invader Bonus 2":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Invader Bonus 2 0"
+            ]
+          },
+          {
+            "frame": 0.25,
+            "sprite":
+            [
+              "ref:Sprites.Invader Bonus 2 1"
+            ]
+          },
+          {
+            "frame": 0.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader Bonus 2 2"
+            ]
+          },
+          {
+            "frame": 0.75,
+            "sprite":
+            [
+              "ref:Sprites.Invader Bonus 2 1"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Invader Hit 0":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 3,
+    "fps": 8,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Invader Hit 0"
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Invader Hit 0"
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 1.0625,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          },
+          {
+            "frame": 3,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "keys":
+        [
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 0 0"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ]
+          },
+          {
+            "frame": 1.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 0 1"
+            ]
+          },
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 0 2"
+            ]
+          },
+          {
+            "frame": 2.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 0 3"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 3,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 0 3"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Invader Hit 1":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 3,
+    "fps": 8,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Invader Hit 1"
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Invader Hit 1"
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 1.0625,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          },
+          {
+            "frame": 3,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "keys":
+        [
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 1 0"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ]
+          },
+          {
+            "frame": 1.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 1 1"
+            ]
+          },
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 1 2"
+            ]
+          },
+          {
+            "frame": 2.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 1 3"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 3,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 1 3"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Invader Hit 2":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 3,
+    "fps": 8,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Invader Hit 2"
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Invader Hit 2"
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 1.0625,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          },
+          {
+            "frame": 3,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "keys":
+        [
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 2 0"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ]
+          },
+          {
+            "frame": 1.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 2 1"
+            ]
+          },
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 2 2"
+            ]
+          },
+          {
+            "frame": 2.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 2 3"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 3,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 2 3"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Invader Hit 3":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 3,
+    "fps": 8,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Invader Hit 3"
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Invader Hit 3"
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 1.0625,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          },
+          {
+            "frame": 3,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "keys":
+        [
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 3 0"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ]
+          },
+          {
+            "frame": 1.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 3 1"
+            ]
+          },
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 3 2"
+            ]
+          },
+          {
+            "frame": 2.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 3 3"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 3,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 3 3"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Invader Hit 4":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 3,
+    "fps": 8,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Invader Hit 4"
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Invader Hit 4"
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 1.0625,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          },
+          {
+            "frame": 3,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "keys":
+        [
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 4 0"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ]
+          },
+          {
+            "frame": 1.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 4 1"
+            ]
+          },
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 4 2"
+            ]
+          },
+          {
+            "frame": 2.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 4 3"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 3,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 4 3"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Invader Hit 5":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 3,
+    "fps": 8,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Invader Hit 5"
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Invader Hit 5"
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 1.0625,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          },
+          {
+            "frame": 3,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "keys":
+        [
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 5 0"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ]
+          },
+          {
+            "frame": 1.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 5 1"
+            ]
+          },
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 5 2"
+            ]
+          },
+          {
+            "frame": 2.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 5 3"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 3,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 5 3"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Invader Hit 6":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 3,
+    "fps": 8,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Invader Hit 6"
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Invader Hit 6"
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 1.0625,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          },
+          {
+            "frame": 3,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "keys":
+        [
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 6 0"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ]
+          },
+          {
+            "frame": 1.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 6 1"
+            ]
+          },
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 6 2"
+            ]
+          },
+          {
+            "frame": 2.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 6 3"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 3,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 6 3"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Invader Hit 7":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 3,
+    "fps": 8,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Invader Hit 7"
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Invader Hit 7"
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 1.0625,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          },
+          {
+            "frame": 3,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "keys":
+        [
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 7 0"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ]
+          },
+          {
+            "frame": 1.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 7 1"
+            ]
+          },
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 7 2"
+            ]
+          },
+          {
+            "frame": 2.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 7 3"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 3,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion 7 3"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Invader Hit Bonus 0":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 3,
+    "fps": 8,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Invader Hit Bonus 0"
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Invader Hit Bonus 0"
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 1.0625,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          },
+          {
+            "frame": 3,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "keys":
+        [
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion Bonus 0 0"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ]
+          },
+          {
+            "frame": 1.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion Bonus 0 1"
+            ]
+          },
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion Bonus 0 2"
+            ]
+          },
+          {
+            "frame": 2.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion Bonus 0 3"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 3,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion Bonus 0 3"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Invader Hit Bonus 1":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 3,
+    "fps": 8,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Invader Hit Bonus 1"
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Invader Hit Bonus 1"
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 1.0625,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          },
+          {
+            "frame": 3,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "keys":
+        [
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion Bonus 1 0"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ]
+          },
+          {
+            "frame": 1.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion Bonus 1 1"
+            ]
+          },
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion Bonus 1 2"
+            ]
+          },
+          {
+            "frame": 2.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion Bonus 1 3"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 3,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion Bonus 1 3"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Invader Hit Bonus 2":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 3,
+    "fps": 8,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Invader Hit Bonus 2"
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Invader Hit Bonus 2"
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 1.0625,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          },
+          {
+            "frame": 3,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "keys":
+        [
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion Bonus 2 0"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ]
+          },
+          {
+            "frame": 1.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion Bonus 2 1"
+            ]
+          },
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion Bonus 2 2"
+            ]
+          },
+          {
+            "frame": 2.5,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion Bonus 2 3"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 3,
+            "sprite":
+            [
+              "ref:Sprites.Invader Explosion Bonus 2 3"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ],
+            "offset":
+            [
+              0,
+              -8
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Player Bullet 0":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+    "fps": 1,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Player Bullet 0"
+            ],
+            "scale":
+            [
+              1,
+              1.5
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Player Bullet 0"
+            ],
+            "scale":
+            [
+              1,
+              1.5
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Bullet Smoke 0":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 6,
+    "fps": 6,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Bullet Smoke 0 0"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0.75
+              ]
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Bullet Smoke 0 1"
+            ]
+          },
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Sprites.Bullet Smoke 0 2"
+            ]
+          },
+          {
+            "frame": 3,
+            "sprite":
+            [
+              "ref:Sprites.Bullet Smoke 0 3"
+            ]
+          },
+          {
+            "frame": 4,
+            "sprite":
+            [
+              "ref:Sprites.Bullet Smoke 0 4"
+            ]
+          },
+          {
+            "frame": 5,
+            "sprite":
+            [
+              "ref:Sprites.Bullet Smoke 0 5"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0.125
+              ]
+            ]
+          },
+          {
+            "frame": 6,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Bullet Smoke 1":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 6,
+    "fps": 6,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Bullet Smoke 1 0"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0.75
+              ]
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Bullet Smoke 1 1"
+            ]
+          },
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Sprites.Bullet Smoke 1 2"
+            ]
+          },
+          {
+            "frame": 3,
+            "sprite":
+            [
+              "ref:Sprites.Bullet Smoke 1 3"
+            ]
+          },
+          {
+            "frame": 4,
+            "sprite":
+            [
+              "ref:Sprites.Bullet Smoke 1 4"
+            ]
+          },
+          {
+            "frame": 5,
+            "sprite":
+            [
+              "ref:Sprites.Bullet Smoke 1 5"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0.125
+              ]
+            ]
+          },
+          {
+            "frame": 6,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Invader Bullet 0":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+    "fps": 1,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Invader Bullet 0"
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Invader Bullet 0"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Invader Bullet 1":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+    "fps": 1,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Invader Bullet 1"
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Invader Bullet 1"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Bullet Explosion 0":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 2,
+    "fps": 4,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Bullet Explosion 0 0"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 0.5,
+            "sprite":
+            [
+              "ref:Sprites.Bullet Explosion 0 1"
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Bullet Explosion 0 2"
+            ]
+          },
+          {
+            "frame": 1.5,
+            "sprite":
+            [
+              "ref:Sprites.Bullet Explosion 0 3"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Sprites.Bullet Explosion 0 3"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Player Dust 0":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 8,
+    "fps": 8,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Player Dust 0 0"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0.75
+              ]
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Player Dust 0 1"
+            ]
+          },
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Sprites.Player Dust 0 2"
+            ]
+          },
+          {
+            "frame": 3,
+            "sprite":
+            [
+              "ref:Sprites.Player Dust 0 3"
+            ]
+          },
+          {
+            "frame": 4,
+            "sprite":
+            [
+              "ref:Sprites.Player Dust 0 4"
+            ]
+          },
+          {
+            "frame": 5,
+            "sprite":
+            [
+              "ref:Sprites.Player Dust 0 5"
+            ]
+          },
+          {
+            "frame": 6,
+            "sprite":
+            [
+              "ref:Sprites.Player Dust 0 6"
+            ]
+          },
+          {
+            "frame": 7,
+            "sprite":
+            [
+              "ref:Sprites.Player Dust 0 7"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          },
+          {
+            "frame": 8,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Player Dust 1":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 8,
+    "fps": 8,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Player Dust 1 0"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0.75
+              ]
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Player Dust 1 1"
+            ]
+          },
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Sprites.Player Dust 1 2"
+            ]
+          },
+          {
+            "frame": 3,
+            "sprite":
+            [
+              "ref:Sprites.Player Dust 1 3"
+            ]
+          },
+          {
+            "frame": 4,
+            "sprite":
+            [
+              "ref:Sprites.Player Dust 1 4"
+            ]
+          },
+          {
+            "frame": 5,
+            "sprite":
+            [
+              "ref:Sprites.Player Dust 1 5"
+            ]
+          },
+          {
+            "frame": 6,
+            "sprite":
+            [
+              "ref:Sprites.Player Dust 1 6"
+            ]
+          },
+          {
+            "frame": 7,
+            "sprite":
+            [
+              "ref:Sprites.Player Dust 1 7"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          },
+          {
+            "frame": 8,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Shield Explosion 0":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 5,
+    "fps": 12,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Shield Explosion 0 0"
+            ],
+            "color":
+            [
+              [
+                1,
+                0.75,
+                1,
+                0.75
+              ]
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Shield Explosion 0 1"
+            ]
+          },
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Sprites.Shield Explosion 0 2"
+            ]
+          },
+          {
+            "frame": 3,
+            "sprite":
+            [
+              "ref:Sprites.Shield Explosion 0 3"
+            ]
+          },
+          {
+            "frame": 4,
+            "sprite":
+            [
+              "ref:Sprites.Shield Explosion 0 4"
+            ],
+            "color":
+            [
+              [
+                1,
+                0.75,
+                1,
+                0.75
+              ]
+            ]
+          },
+          {
+            "frame": 5,
+            "sprite":
+            [
+              "ref:Sprites.Shield Explosion 0 4"
+            ],
+            "color":
+            [
+              [
+                1,
+                0.75,
+                1,
+                0
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Shield Explosion 0 0"
+            ],
+            "color":
+            [
+              [
+                1,
+                0.5,
+                0.5,
+                0.25
+              ]
+            ],
+            "scale":
+            [
+              1.5,
+              1
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Shield Explosion 0 1"
+            ]
+          },
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Sprites.Shield Explosion 0 2"
+            ]
+          },
+          {
+            "frame": 3,
+            "sprite":
+            [
+              "ref:Sprites.Shield Explosion 0 3"
+            ]
+          },
+          {
+            "frame": 4,
+            "sprite":
+            [
+              "ref:Sprites.Shield Explosion 0 4"
+            ],
+            "color":
+            [
+              [
+                1,
+                0.5,
+                0.5,
+                0.25
+              ]
+            ]
+          },
+          {
+            "frame": 5,
+            "sprite":
+            [
+              "ref:Sprites.Shield Explosion 0 4"
+            ],
+            "color":
+            [
+              [
+                1,
+                0.5,
+                0.5,
+                0
+              ]
+            ],
+            "scale":
+            [
+              1.5,
+              1
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Shield Explosion 1":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 5,
+    "fps": 6,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Shield Explosion 0 0"
+            ],
+            "color":
+            [
+              [
+                1,
+                0.75,
+                1,
+                0.75
+              ]
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Shield Explosion 0 1"
+            ]
+          },
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Sprites.Shield Explosion 0 2"
+            ]
+          },
+          {
+            "frame": 3,
+            "sprite":
+            [
+              "ref:Sprites.Shield Explosion 0 3"
+            ]
+          },
+          {
+            "frame": 4,
+            "sprite":
+            [
+              "ref:Sprites.Shield Explosion 0 4"
+            ],
+            "color":
+            [
+              [
+                1,
+                0.75,
+                1,
+                0.75
+              ]
+            ]
+          },
+          {
+            "frame": 5,
+            "sprite":
+            [
+              "ref:Sprites.Shield Explosion 0 4"
+            ],
+            "color":
+            [
+              [
+                1,
+                0.75,
+                1,
+                0
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Shield Explosion 0 0"
+            ],
+            "color":
+            [
+              [
+                1,
+                0.5,
+                0.5,
+                0.75
+              ]
+            ],
+            "scale":
+            [
+              2,
+              2
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Shield Explosion 0 1"
+            ]
+          },
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Sprites.Shield Explosion 0 2"
+            ]
+          },
+          {
+            "frame": 3,
+            "sprite":
+            [
+              "ref:Sprites.Shield Explosion 0 3"
+            ]
+          },
+          {
+            "frame": 4,
+            "sprite":
+            [
+              "ref:Sprites.Shield Explosion 0 4"
+            ],
+            "color":
+            [
+              [
+                1,
+                0.5,
+                0.5,
+                0.75
+              ]
+            ]
+          },
+          {
+            "frame": 5,
+            "sprite":
+            [
+              "ref:Sprites.Shield Explosion 0 4"
+            ],
+            "color":
+            [
+              [
+                1,
+                0.5,
+                0.5,
+                0
+              ]
+            ],
+            "scale":
+            [
+              2,
+              2
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Saucer Lights":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 10,
+    "fps": 60,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Lights 0"
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Lights 1"
+            ]
+          },
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Lights 2"
+            ]
+          },
+          {
+            "frame": 3,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Lights 3"
+            ]
+          },
+          {
+            "frame": 4,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Lights 4"
+            ]
+          },
+          {
+            "frame": 5,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Lights 5"
+            ]
+          },
+          {
+            "frame": 6,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Lights 6"
+            ]
+          },
+          {
+            "frame": 7,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Lights 7"
+            ]
+          },
+          {
+            "frame": 8,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Lights 8"
+            ]
+          },
+          {
+            "frame": 9,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Lights 9"
+            ]
+          },
+          {
+            "frame": 10,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Lights 9"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Saucer 0":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 30,
+    "fps": 60,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Glass"
+            ]
+          },
+          {
+            "frame": 30,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Glass"
+            ]
+          }
+        ]
+      },
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Saucer"
+            ],
+            "color":
+            [
+              [
+                0,
+                0,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 15,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 30,
+            "sprite":
+            [
+              "ref:Sprites.Saucer"
+            ],
+            "color":
+            [
+              [
+                0,
+                0,
+                1,
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Saucer 1":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 30,
+    "fps": 60,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Glass"
+            ]
+          },
+          {
+            "frame": 30,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Glass"
+            ]
+          }
+        ]
+      },
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Saucer"
+            ],
+            "color":
+            [
+              [
+                1,
+                0,
+                0,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 15,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 30,
+            "sprite":
+            [
+              "ref:Sprites.Saucer"
+            ],
+            "color":
+            [
+              [
+                1,
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Saucer 2":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 30,
+    "fps": 60,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Glass"
+            ]
+          },
+          {
+            "frame": 30,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Glass"
+            ]
+          }
+        ]
+      },
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Saucer"
+            ],
+            "color":
+            [
+              [
+                0,
+                1,
+                0,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 15,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 30,
+            "sprite":
+            [
+              "ref:Sprites.Saucer"
+            ],
+            "color":
+            [
+              [
+                0,
+                1,
+                0,
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Saucer 3":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 30,
+    "fps": 60,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Glass"
+            ]
+          },
+          {
+            "frame": 30,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Glass"
+            ]
+          }
+        ]
+      },
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Saucer"
+            ],
+            "color":
+            [
+              [
+                0,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 15,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 30,
+            "sprite":
+            [
+              "ref:Sprites.Saucer"
+            ],
+            "color":
+            [
+              [
+                0,
+                1,
+                1,
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Saucer 4":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 30,
+    "fps": 60,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Glass"
+            ]
+          },
+          {
+            "frame": 30,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Glass"
+            ]
+          }
+        ]
+      },
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Saucer"
+            ],
+            "color":
+            [
+              [
+                0.5,
+                0,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 15,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 30,
+            "sprite":
+            [
+              "ref:Sprites.Saucer"
+            ],
+            "color":
+            [
+              [
+                0.5,
+                0,
+                1,
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Saucer 5":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 30,
+    "fps": 60,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Glass"
+            ]
+          },
+          {
+            "frame": 30,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Glass"
+            ]
+          }
+        ]
+      },
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Saucer"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                0,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 15,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 30,
+            "sprite":
+            [
+              "ref:Sprites.Saucer"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                0,
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Saucer 6":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 30,
+    "fps": 60,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Glass"
+            ]
+          },
+          {
+            "frame": 30,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Glass"
+            ]
+          }
+        ]
+      },
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Saucer"
+            ],
+            "color":
+            [
+              [
+                1,
+                0.5,
+                0,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 15,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 30,
+            "sprite":
+            [
+              "ref:Sprites.Saucer"
+            ],
+            "color":
+            [
+              [
+                1,
+                0.5,
+                0,
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Saucer 7":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 30,
+    "fps": 60,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Glass"
+            ]
+          },
+          {
+            "frame": 30,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Glass"
+            ]
+          }
+        ]
+      },
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Saucer"
+            ],
+            "color":
+            [
+              [
+                1,
+                0,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 15,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 30,
+            "sprite":
+            [
+              "ref:Sprites.Saucer"
+            ],
+            "color":
+            [
+              [
+                1,
+                0,
+                1,
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Saucer None":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 30,
+    "fps": 60,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Glass"
+            ]
+          },
+          {
+            "frame": 30,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Glass"
+            ]
+          }
+        ]
+      },
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Saucer"
+            ],
+            "color":
+            [
+              [
+                0.5,
+                0.5,
+                0.5,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 15,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 30,
+            "sprite":
+            [
+              "ref:Sprites.Saucer"
+            ],
+            "color":
+            [
+              [
+                0.5,
+                0.5,
+                0.5,
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Bonus Saucer":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 90,
+    "fps": 60,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Glass"
+            ]
+          },
+          {
+            "frame": 90,
+            "sprite":
+            [
+              "ref:Sprites.Saucer Glass"
+            ]
+          }
+        ]
+      },
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Saucer"
+            ],
+            "color":
+            [
+              [
+                1,
+                0,
+                0,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 15,
+            "color":
+            [
+              [
+                1,
+                1,
+                0,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 30,
+            "color":
+            [
+              [
+                0,
+                1,
+                0,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 45,
+            "color":
+            [
+              [
+                0,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 60,
+            "color":
+            [
+              [
+                0,
+                0,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 75,
+            "color":
+            [
+              [
+                1,
+                0,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 90,
+            "sprite":
+            [
+              "ref:Sprites.Saucer"
+            ],
+            "color":
+            [
+              [
+                1,
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Powerup 0":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+    "fps": 1,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Powerup 0"
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Powerup 0"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Powerup 1":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+    "fps": 1,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Powerup 1"
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Powerup 1"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Powerup 2":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+    "fps": 1,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Powerup 2"
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Powerup 2"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Powerup 3":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+    "fps": 1,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Powerup 3"
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Powerup 3"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Powerup 4":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+    "fps": 1,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Powerup 4"
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Powerup 4"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Powerup 5":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+    "fps": 1,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Powerup 5"
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Powerup 5"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Powerup 6":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+    "fps": 1,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Powerup 6"
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Powerup 6"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Powerup 7":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+    "fps": 1,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Powerup 7"
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Powerup 7"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Player Shield":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 4,
+    "fps": 12,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Player Shield 0"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0.5
+              ]
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Player Shield 1"
+            ]
+          },
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Sprites.Player Shield 2"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 3,
+            "sprite":
+            [
+              "ref:Sprites.Player Shield 3"
+            ]
+          },
+          {
+            "frame": 4,
+            "sprite":
+            [
+              "ref:Sprites.Player Shield 3"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0.5
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Player Hit Left":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Player Hit 1"
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Player Hit 1"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Player Hit Right":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Player Hit 0"
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Player Hit 0"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Player Hit Middle":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Player Hit 2"
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Sprites.Player Hit 2"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Player Orb":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 2,
+    "fps": 1,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Sprites.Player Orb"
+            ],
+            "scale":
+            [
+              1,
+              1
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:Sprites.Player Orb"
+            ],
+            "scale":
+            [
+              0.5,
+              0.5
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Bonus":
+  {
+    "res:type": "sprites",
+    "data":
+    {
+      "res:transform": "sprites",
+      "format": "bc1",
+      "mips": 3,
+
+      "sprites":
+      {
+        "BG 0":
+        {
+          "file": "level\\bonus-bg-0.png"
+        },
+        "BG 1":
+        {
+          "file": "level\\bonus-bg-1.png"
+        }
+      }
+    }
+  },
+
+  "Bonus Saucer BG":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Bonus.BG 0"
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Bonus.BG 0"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Bonus Invaders BG":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 1,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:Bonus.BG 1"
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:Bonus.BG 1"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "sprites-High Score BG":
+  {
+    "res:type": "sprites",
+    "data":
+    {
+      "res:transform": "sprites",
+      "format": "bc2",
+      "mips": 3,
+
+      "sprites":
+      {
+        "BG":
+        {
+          "file": "title\\high-score-bg.png",
+          "pos":
+          [
+            0,
+            0,
+            1900,
+            1200
+          ]
+        }
+      }
+    }
+  },
+
+  "High Score":
+  {
+    "res:type": "sprites",
+    "data":
+    {
+      "res:transform": "sprites",
+      "format": "rgba32",
+      "mips": 3,
+
+      "sprites":
+      {
+        "Left Arrow":
+        {
+          "file": "title\\arrow-left.png",
+          "pos":
+          [
+            0,
+            0,
+            25,
+            35
+          ]
+        },
+        "Right Arrow":
+        {
+          "file": "title\\arrow-right.png",
+          "pos":
+          [
+            0,
+            0,
+            25,
+            35
+          ]
+        },
+        "Up Arrow":
+        {
+          "file": "title\\arrow-up.png",
+          "pos":
+          [
+            0,
+            0,
+            35,
+            25
+          ]
+        },
+        "Down Arrow":
+        {
+          "file": "title\\arrow-down.png",
+          "pos":
+          [
+            0,
+            0,
+            35,
+            25
+          ]
+        },
+        "Invader":
+        {
+          "file": "title\\score-invader.png",
+          "pos":
+          [
+            0,
+            0,
+            196,
+            199
+          ]
+        },
+        "Letter Orb":
+        {
+          "file": "title\\letter-orb.png",
+          "pos":
+          [
+            0,
+            0,
+            150,
+            150
+          ],
+          "handle":
+          [
+            75,
+            75
+          ]
+        }
+      }
+    }
+  },
+
+  "High Score BG":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 4,
+    "fps": 2,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:sprites-High Score BG.BG"
+            ]
+          },
+          {
+            "frame": 4,
+            "sprite":
+            [
+              "ref:sprites-High Score BG.BG"
+            ]
+          }
+        ]
+      },
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:High Score.Invader"
+            ],
+            "offset":
+            [
+              1200,
+              650
+            ]
+          },
+          {
+            "frame": 4,
+            "sprite":
+            [
+              "ref:High Score.Invader"
+            ],
+            "offset":
+            [
+              1200,
+              650
+            ]
+          }
+        ]
+      },
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:High Score.Left Arrow"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ],
+            "offset":
+            [
+              450,
+              300
+            ]
+          },
+          {
+            "frame": 1,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 2,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 4,
+            "sprite":
+            [
+              "ref:High Score.Left Arrow"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ],
+            "offset":
+            [
+              450,
+              300
+            ]
+          }
+        ]
+      },
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:High Score.Right Arrow"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ],
+            "offset":
+            [
+              925,
+              300
+            ]
+          },
+          {
+            "frame": 1,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 2,
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 4,
+            "sprite":
+            [
+              "ref:High Score.Right Arrow"
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0
+              ]
+            ],
+            "offset":
+            [
+              925,
+              300
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Add Score BG":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 4,
+    "fps": 2,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:sprites-High Score BG.BG"
+            ]
+          },
+          {
+            "frame": 4,
+            "sprite":
+            [
+              "ref:sprites-High Score BG.BG"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Letter Orb":
+  {
+    "res:type": "spriteanim",
+    "lastFrame": 2,
+    "fps": 2,
+
+    "parts":
+    [
+      {
+        "keys":
+        [
+          {
+            "frame": 0,
+            "sprite":
+            [
+              "ref:High Score.Letter Orb"
+            ],
+            "scale":
+            [
+              0.25,
+              0.25
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0.5
+              ]
+            ]
+          },
+          {
+            "frame": 1,
+            "sprite":
+            [
+              "ref:High Score.Letter Orb"
+            ],
+            "scale":
+            [
+              0.625,
+              0.625
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 2,
+            "sprite":
+            [
+              "ref:High Score.Letter Orb"
+            ],
+            "scale":
+            [
+              0.25,
+              0.25
+            ],
+            "color":
+            [
+              [
+                1,
+                1,
+                1,
+                0.5
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  }
+
+}

@@ -1,0 +1,385 @@
+{
+  "wave-Born Saucer 0":
+  {
+    "res:type": "wave",
+    "data":
+    {
+      "res:transform": "wave",
+      "file": "audio\\born-saucer-0.wav"
+    }
+  },
+  "wave-Born Saucer 1":
+  {
+    "res:type": "wave",
+    "data":
+    {
+      "res:transform": "wave",
+      "file": "audio\\born-saucer-1.wav"
+    }
+  },
+  "wave-Free Life 0":
+  {
+    "res:type": "wave",
+    "data":
+    {
+      "res:transform": "wave",
+      "file": "audio\\free-life-0.wav"
+    }
+  },
+  "wave-Hit Bullet 0":
+  {
+    "res:type": "wave",
+    "data":
+    {
+      "res:transform": "wave",
+      "file": "audio\\hit-bullet-0.wav"
+    }
+  },
+  "wave-Hit Invader 0":
+  {
+    "res:type": "wave",
+    "data":
+    {
+      "res:transform": "wave",
+      "file": "audio\\hit-invader-0.wav"
+    }
+  },
+  "wave-Hit Invader 1":
+  {
+    "res:type": "wave",
+    "data":
+    {
+      "res:transform": "wave",
+      "file": "audio\\hit-invader-1.wav"
+    }
+  },
+  "wave-Hit Invader 2":
+  {
+    "res:type": "wave",
+    "data":
+    {
+      "res:transform": "wave",
+      "file": "audio\\hit-invader-2.wav"
+    }
+  },
+  "wave-Hit Invader 3":
+  {
+    "res:type": "wave",
+    "data":
+    {
+      "res:transform": "wave",
+      "file": "audio\\hit-invader-3.wav"
+    }
+  },
+  "wave-Hit Invader 4":
+  {
+    "res:type": "wave",
+    "data":
+    {
+      "res:transform": "wave",
+      "file": "audio\\hit-invader-4.wav"
+    }
+  },
+  "wave-Hit Invader 5":
+  {
+    "res:type": "wave",
+    "data":
+    {
+      "res:transform": "wave",
+      "file": "audio\\hit-invader-5.wav"
+    }
+  },
+  "wave-Hit Invader 6":
+  {
+    "res:type": "wave",
+    "data":
+    {
+      "res:transform": "wave",
+      "file": "audio\\hit-invader-6.wav"
+    }
+  },
+  "wave-Hit Invader 7":
+  {
+    "res:type": "wave",
+    "data":
+    {
+      "res:transform": "wave",
+      "file": "audio\\hit-invader-7.wav"
+    }
+  },
+  "wave-Hit Player 0":
+  {
+    "res:type": "wave",
+    "data":
+    {
+      "res:transform": "wave",
+      "file": "audio\\hit-player-0.wav"
+    }
+  },
+  "wave-Hit Saucer 0":
+  {
+    "res:type": "wave",
+    "data":
+    {
+      "res:transform": "wave",
+      "file": "audio\\hit-saucer-0.wav"
+    }
+  },
+  "wave-Hit Shield 0":
+  {
+    "res:type": "wave",
+    "data":
+    {
+      "res:transform": "wave",
+      "file": "audio\\hit-shield-0.wav"
+    }
+  },
+  "wave-Level Start 0":
+  {
+    "res:type": "wave",
+    "data":
+    {
+      "res:transform": "wave",
+      "file": "audio\\level-start-0.wav"
+    }
+  },
+  "wave-Level Win 0":
+  {
+    "res:type": "wave",
+    "data":
+    {
+      "res:transform": "wave",
+      "file": "audio\\level-win-0.wav"
+    }
+  },
+  "wave-Move Invader 0":
+  {
+    "res:type": "wave",
+    "data":
+    {
+      "res:transform": "wave",
+      "file": "audio\\move-invader-0.wav"
+    }
+  },
+  "wave-Move Invader 1":
+  {
+    "res:type": "wave",
+    "data":
+    {
+      "res:transform": "wave",
+      "file": "audio\\move-invader-1.wav"
+    }
+  },
+  "wave-Drum Beat 0":
+  {
+    "res:type": "wave",
+    "data":
+    {
+      "res:transform": "wave",
+      "file": "audio\\drum-beat-0.wav"
+    }
+  },
+  "wave-Drum Beat 1":
+  {
+    "res:type": "wave",
+    "data":
+    {
+      "res:transform": "wave",
+      "file": "audio\\drum-beat-1.wav"
+    }
+  },
+  "wave-Drum Beat 2":
+  {
+    "res:type": "wave",
+    "data":
+    {
+      "res:transform": "wave",
+      "file": "audio\\drum-beat-2.wav"
+    }
+  },
+  "wave-Drum Beat 3":
+  {
+    "res:type": "wave",
+    "data":
+    {
+      "res:transform": "wave",
+      "file": "audio\\drum-beat-3.wav"
+    }
+  },
+  "wave-Powerup 0":
+  {
+    "res:type": "wave",
+    "data":
+    {
+      "res:transform": "wave",
+      "file": "audio\\powerup-0.wav"
+    }
+  },
+  "wave-Shot Invader 0":
+  {
+    "res:type": "wave",
+    "data":
+    {
+      "res:transform": "wave",
+      "file": "audio\\shot-invader-0.wav"
+    }
+  },
+  "wave-Shot Player 0":
+  {
+    "res:type": "wave",
+    "data":
+    {
+      "res:transform": "wave",
+      "file": "audio\\shot-player-0.wav"
+    }
+  },
+
+  "Born Saucer 0":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Born Saucer 0",
+    "volume": 1.5
+  },
+  "Bonus Saucer":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Born Saucer 1",
+    "volume": 1.25
+  },
+  "Bonus Saucer Fast":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Born Saucer 1",
+    "volume": 1,
+    "freq": 1.25
+  },
+  "Free Life 0":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Free Life 0",
+    "volume": 2
+  },
+  "Hit Bullet 0":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Hit Bullet 0"
+  },
+  "Hit Invader 0":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Hit Invader 0"
+  },
+  "Hit Invader 1":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Hit Invader 1"
+  },
+  "Hit Invader 2":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Hit Invader 2"
+  },
+  "Hit Invader 3":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Hit Invader 3"
+  },
+  "Hit Invader 4":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Hit Invader 4",
+    "volume": 0.875
+  },
+  "Hit Invader 5":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Hit Invader 5"
+  },
+  "Hit Invader 6":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Hit Invader 6",
+    "volume": 1.5
+  },
+  "Hit Invader 7":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Hit Invader 7",
+    "volume": 1.5
+  },
+  "Hit Player 0":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Hit Player 0"
+  },
+  "Hit Saucer 0":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Hit Saucer 0"
+  },
+  "Hit Shield 0":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Hit Shield 0"
+  },
+  "Level Start 0":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Level Start 0"
+  },
+  "Level Win 0":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Level Win 0"
+  },
+  "Move Invader 0":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Move Invader 0"
+  },
+  "Move Invader 1":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Move Invader 1"
+  },
+  "Drum Beat 0":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Drum Beat 0",
+    "volume": 1.5
+  },
+  "Drum Beat 1":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Drum Beat 1",
+    "volume": 1.5
+  },
+  "Drum Beat 2":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Drum Beat 2",
+    "volume": 1.5
+  },
+  "Drum Beat 3":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Drum Beat 3",
+    "volume": 1.5
+  },
+  "Powerup 0":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Powerup 0"
+  },
+  "Shot Invader 0":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Shot Invader 0",
+    "volume": 0.5
+  },
+  "Shot Player 0":
+  {
+    "res:type": "effect",
+    "wave": "ref:wave-Shot Player 0"
+  }
+}

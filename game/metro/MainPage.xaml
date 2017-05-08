@@ -1,0 +1,56 @@
+﻿<Page
+    x:Class="Invader.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <SwapChainPanel x:Name="SwapChainPanel">
+
+        <Grid x:Name="FullScreenHolder">
+        </Grid>
+
+        <Popup
+            x:Name="SettingsPopup"
+            Opened="OnSettingsPopupOpened"
+            Closed="OnSettingsPopupClosed"
+            IsLightDismissEnabled="True"
+            HorizontalAlignment="Right">
+            <Popup.ChildTransitions>
+                <TransitionCollection>
+                    <PaneThemeTransition x:Name="SettingsPopupTransition" Edge="Right" />
+                </TransitionCollection>
+            </Popup.ChildTransitions>
+        </Popup>
+
+        <ProgressRing
+            x:Name="WaitingProgressRing"
+            Width="100"
+            Height="100"
+            Foreground="{StaticResource AppBarBorderBrush}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Margin="0,0,0,100"
+            IsActive="False"
+            Visibility="Collapsed" />
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="WaitingGroup">
+                <VisualState x:Name="WaitingState">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WaitingProgressRing" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WaitingProgressRing" Storyboard.TargetProperty="IsActive">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="True" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="NotWaitingState" />
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+    </SwapChainPanel>
+
+</Page>

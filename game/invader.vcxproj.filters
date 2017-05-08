@@ -1,0 +1,753 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Assets">
+      <UniqueIdentifier>$guid2$</UniqueIdentifier>
+    </Filter>
+    <Filter Include="components">
+      <UniqueIdentifier>{199d68f1-ead1-409d-9c68-eb51890ea40d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="components\audio">
+      <UniqueIdentifier>{7c6333e5-48a5-48c7-a7dc-c133a37cde31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="components\bullet">
+      <UniqueIdentifier>{a9065fb4-1f8f-468e-ad67-f04db1ab2fe2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="components\core">
+      <UniqueIdentifier>{b79ba687-3655-4d73-a78d-c54434b783bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="components\graph">
+      <UniqueIdentifier>{bf8adb7c-0bbe-4151-96f7-f2c223bb236a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="components\invader">
+      <UniqueIdentifier>{37a9b7a1-6538-4200-b8f7-bdcb474532fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="components\level">
+      <UniqueIdentifier>{a2e9a03d-d837-4159-8720-83981f8d3634}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="components\player">
+      <UniqueIdentifier>{1e1334be-5062-459e-9f7d-33e90d925652}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="components\powerup">
+      <UniqueIdentifier>{ed57cb72-ede8-4f34-bcfd-b84a79d74d43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="components\saucer">
+      <UniqueIdentifier>{74913772-af3a-4e9d-bb8b-9dc551f8e602}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="components\shield">
+      <UniqueIdentifier>{67d8b523-5b81-49d5-8230-f61987cd052a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="entities">
+      <UniqueIdentifier>{373dc05a-95bb-4fa4-8d24-b415883de04f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="services">
+      <UniqueIdentifier>{49f07afc-3c23-429b-8caf-e4151b8c2aef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="states">
+      <UniqueIdentifier>{37543005-4f69-4b8c-998c-5ffdd3ffc95f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="systems">
+      <UniqueIdentifier>{7b2d916b-fa74-4a8b-8f34-635fbd897ceb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="metro">
+      <UniqueIdentifier>{23b87e09-9d33-410f-8f5c-98bc0a5bb4b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Logo">
+      <UniqueIdentifier>{a0a00991-a463-4803-bae0-a2e8e469d770}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Fonts">
+      <UniqueIdentifier>{554e46a2-f11d-43e6-ba02-1c7074e63230}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Controls">
+      <UniqueIdentifier>{161c90a7-7cca-43d9-b2cf-0195362654f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Json">
+      <UniqueIdentifier>{62b89972-f643-4792-9a54-bee60cd3e132}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="coreEntity">
+      <UniqueIdentifier>{64e4f434-49bb-4e6b-8dc7-501e78d804b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="coreEntity\entity">
+      <UniqueIdentifier>{0a5a5782-f758-425a-9b73-042c868b492c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="coreEntity\domain">
+      <UniqueIdentifier>{594cf061-e69f-45cc-95b7-c96f8b5365a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="coreEntity\component">
+      <UniqueIdentifier>{2f3387b7-f627-49da-b414-948737edeb87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="coreEntity\system">
+      <UniqueIdentifier>{542ca9d7-530a-425e-a788-54fd2fbc0af1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="coreEntity\component\standard">
+      <UniqueIdentifier>{071206fd-d706-4e80-a953-d8691b76ae09}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="components\audio\AudioEffectComponent.cpp">
+      <Filter>components\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="components\bullet\BulletAdvance.cpp">
+      <Filter>components\bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="components\bullet\BulletComponent.cpp">
+      <Filter>components\bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="components\core\CollisionAdvanceRender.cpp">
+      <Filter>components\core</Filter>
+    </ClCompile>
+    <ClCompile Include="components\core\LoadingComponent.cpp">
+      <Filter>components\core</Filter>
+    </ClCompile>
+    <ClCompile Include="components\core\PathComponent.cpp">
+      <Filter>components\core</Filter>
+    </ClCompile>
+    <ClCompile Include="components\core\PositionComponent.cpp">
+      <Filter>components\core</Filter>
+    </ClCompile>
+    <ClCompile Include="components\core\StateComponent.cpp">
+      <Filter>components\core</Filter>
+    </ClCompile>
+    <ClCompile Include="components\graph\MultiSpriteRender.cpp">
+      <Filter>components\graph</Filter>
+    </ClCompile>
+    <ClCompile Include="components\graph\SpriteAnimationAdvance.cpp">
+      <Filter>components\graph</Filter>
+    </ClCompile>
+    <ClCompile Include="components\graph\SpriteAnimationRender.cpp">
+      <Filter>components\graph</Filter>
+    </ClCompile>
+    <ClCompile Include="components\graph\SpriteRender.cpp">
+      <Filter>components\graph</Filter>
+    </ClCompile>
+    <ClCompile Include="components\invader\InvaderAdvanceRender.cpp">
+      <Filter>components\invader</Filter>
+    </ClCompile>
+    <ClCompile Include="components\invader\InvaderComponent.cpp">
+      <Filter>components\invader</Filter>
+    </ClCompile>
+    <ClCompile Include="components\invader\InvaderTitleAdvanceRender.cpp">
+      <Filter>components\invader</Filter>
+    </ClCompile>
+    <ClCompile Include="components\level\LevelAdvanceRender.cpp">
+      <Filter>components\level</Filter>
+    </ClCompile>
+    <ClCompile Include="components\level\ScoreAdvanceRender.cpp">
+      <Filter>components\level</Filter>
+    </ClCompile>
+    <ClCompile Include="components\shield\ShieldAdvance.cpp">
+      <Filter>components\shield</Filter>
+    </ClCompile>
+    <ClCompile Include="components\shield\ShieldComponent.cpp">
+      <Filter>components\shield</Filter>
+    </ClCompile>
+    <ClCompile Include="components\powerup\PowerupAdvance.cpp">
+      <Filter>components\powerup</Filter>
+    </ClCompile>
+    <ClCompile Include="components\powerup\PowerupComponent.cpp">
+      <Filter>components\powerup</Filter>
+    </ClCompile>
+    <ClCompile Include="components\saucer\SaucerAdvance.cpp">
+      <Filter>components\saucer</Filter>
+    </ClCompile>
+    <ClCompile Include="components\saucer\SaucerComponent.cpp">
+      <Filter>components\saucer</Filter>
+    </ClCompile>
+    <ClCompile Include="components\player\PlayerAdvanceRender.cpp">
+      <Filter>components\player</Filter>
+    </ClCompile>
+    <ClCompile Include="components\player\PlayerComponent.cpp">
+      <Filter>components\player</Filter>
+    </ClCompile>
+    <ClCompile Include="entities\Entity2dRenderComp.cpp">
+      <Filter>entities</Filter>
+    </ClCompile>
+    <ClCompile Include="entities\EntityAdvanceComp.cpp">
+      <Filter>entities</Filter>
+    </ClCompile>
+    <ClCompile Include="entities\EntityEvents.cpp">
+      <Filter>entities</Filter>
+    </ClCompile>
+    <ClCompile Include="services\EntityFactoryService.cpp">
+      <Filter>services</Filter>
+    </ClCompile>
+    <ClCompile Include="services\GlobalPlayerService.cpp">
+      <Filter>services</Filter>
+    </ClCompile>
+    <ClCompile Include="systems\AdvanceSystem.cpp">
+      <Filter>systems</Filter>
+    </ClCompile>
+    <ClCompile Include="systems\AudioSystem.cpp">
+      <Filter>systems</Filter>
+    </ClCompile>
+    <ClCompile Include="systems\LevelSystem.cpp">
+      <Filter>systems</Filter>
+    </ClCompile>
+    <ClCompile Include="systems\RenderSystem.cpp">
+      <Filter>systems</Filter>
+    </ClCompile>
+    <ClCompile Include="states\AddScoreState.cpp">
+      <Filter>states</Filter>
+    </ClCompile>
+    <ClCompile Include="states\InitState.cpp">
+      <Filter>states</Filter>
+    </ClCompile>
+    <ClCompile Include="states\PlayGameState.cpp">
+      <Filter>states</Filter>
+    </ClCompile>
+    <ClCompile Include="states\PlayLevelState.cpp">
+      <Filter>states</Filter>
+    </ClCompile>
+    <ClCompile Include="states\ShowScoresState.cpp">
+      <Filter>states</Filter>
+    </ClCompile>
+    <ClCompile Include="states\TitleState.cpp">
+      <Filter>states</Filter>
+    </ClCompile>
+    <ClCompile Include="states\TransitionState.cpp">
+      <Filter>states</Filter>
+    </ClCompile>
+    <ClCompile Include="Globals.cpp" />
+    <ClCompile Include="InputEvents.cpp" />
+    <ClCompile Include="Scores.cpp" />
+    <ClCompile Include="ThisApplication.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="metro\MainPage.xaml.cpp" />
+    <ClCompile Include="App.xaml.cpp" />
+    <ClCompile Include="metro\GameSettings.xaml.cpp" />
+    <ClCompile Include="metro\AboutSettings.xaml.cpp" />
+    <ClCompile Include="metro\ControlSettings.xaml.cpp" />
+    <ClCompile Include="components\level\PauseAdvanceRender.cpp">
+      <Filter>components\level</Filter>
+    </ClCompile>
+    <ClCompile Include="components\player\TouchAdvanceRender.cpp">
+      <Filter>components\player</Filter>
+    </ClCompile>
+    <ClCompile Include="metro\FailurePage.xaml.cpp" />
+    <ClCompile Include="coreEntity\entity\Entity.cpp">
+      <Filter>coreEntity\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="coreEntity\entity\EntityListener.cpp">
+      <Filter>coreEntity\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="coreEntity\entity\EntityManager.cpp">
+      <Filter>coreEntity\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="coreEntity\domain\EntityDomain.cpp">
+      <Filter>coreEntity\domain</Filter>
+    </ClCompile>
+    <ClCompile Include="coreEntity\component\ComponentListener.cpp">
+      <Filter>coreEntity\component</Filter>
+    </ClCompile>
+    <ClCompile Include="coreEntity\component\ComponentManager.cpp">
+      <Filter>coreEntity\component</Filter>
+    </ClCompile>
+    <ClCompile Include="coreEntity\system\System.cpp">
+      <Filter>coreEntity\system</Filter>
+    </ClCompile>
+    <ClCompile Include="coreEntity\system\SystemManager.cpp">
+      <Filter>coreEntity\system</Filter>
+    </ClCompile>
+    <ClCompile Include="coreEntity\component\standard\EntityEventListenersComponent.cpp">
+      <Filter>coreEntity\component\standard</Filter>
+    </ClCompile>
+    <ClCompile Include="coreEntity\component\standard\LayerGroupComponent.cpp">
+      <Filter>coreEntity\component\standard</Filter>
+    </ClCompile>
+    <ClCompile Include="coreEntity\component\standard\MouseLayer.cpp">
+      <Filter>coreEntity\component\standard</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="components\audio\AudioEffectComponent.h">
+      <Filter>components\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="components\bullet\BulletAdvance.h">
+      <Filter>components\bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="components\bullet\BulletComponent.h">
+      <Filter>components\bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="components\core\CollisionAdvanceRender.h">
+      <Filter>components\core</Filter>
+    </ClInclude>
+    <ClInclude Include="components\core\LoadingComponent.h">
+      <Filter>components\core</Filter>
+    </ClInclude>
+    <ClInclude Include="components\core\PathComponent.h">
+      <Filter>components\core</Filter>
+    </ClInclude>
+    <ClInclude Include="components\core\PositionComponent.h">
+      <Filter>components\core</Filter>
+    </ClInclude>
+    <ClInclude Include="components\core\StateComponent.h">
+      <Filter>components\core</Filter>
+    </ClInclude>
+    <ClInclude Include="components\graph\MultiSpriteRender.h">
+      <Filter>components\graph</Filter>
+    </ClInclude>
+    <ClInclude Include="components\graph\SpriteAnimationAdvance.h">
+      <Filter>components\graph</Filter>
+    </ClInclude>
+    <ClInclude Include="components\graph\SpriteAnimationRender.h">
+      <Filter>components\graph</Filter>
+    </ClInclude>
+    <ClInclude Include="components\graph\SpriteRender.h">
+      <Filter>components\graph</Filter>
+    </ClInclude>
+    <ClInclude Include="components\invader\InvaderAdvanceRender.h">
+      <Filter>components\invader</Filter>
+    </ClInclude>
+    <ClInclude Include="components\invader\InvaderComponent.h">
+      <Filter>components\invader</Filter>
+    </ClInclude>
+    <ClInclude Include="components\invader\InvaderTitleAdvanceRender.h">
+      <Filter>components\invader</Filter>
+    </ClInclude>
+    <ClInclude Include="components\level\LevelAdvanceRender.h">
+      <Filter>components\level</Filter>
+    </ClInclude>
+    <ClInclude Include="components\level\ScoreAdvanceRender.h">
+      <Filter>components\level</Filter>
+    </ClInclude>
+    <ClInclude Include="components\shield\ShieldAdvance.h">
+      <Filter>components\shield</Filter>
+    </ClInclude>
+    <ClInclude Include="components\shield\ShieldComponent.h">
+      <Filter>components\shield</Filter>
+    </ClInclude>
+    <ClInclude Include="components\powerup\PowerupAdvance.h">
+      <Filter>components\powerup</Filter>
+    </ClInclude>
+    <ClInclude Include="components\powerup\PowerupComponent.h">
+      <Filter>components\powerup</Filter>
+    </ClInclude>
+    <ClInclude Include="components\saucer\SaucerAdvance.h">
+      <Filter>components\saucer</Filter>
+    </ClInclude>
+    <ClInclude Include="components\saucer\SaucerComponent.h">
+      <Filter>components\saucer</Filter>
+    </ClInclude>
+    <ClInclude Include="components\player\PlayerAdvanceRender.h">
+      <Filter>components\player</Filter>
+    </ClInclude>
+    <ClInclude Include="components\player\PlayerComponent.h">
+      <Filter>components\player</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\Entity2dRenderComp.h">
+      <Filter>entities</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\EntityAdvanceComp.h">
+      <Filter>entities</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\EntityEvents.h">
+      <Filter>entities</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\EntityPosComp.h">
+      <Filter>entities</Filter>
+    </ClInclude>
+    <ClInclude Include="services\EntityFactoryService.h">
+      <Filter>services</Filter>
+    </ClInclude>
+    <ClInclude Include="services\GameBeatService.h">
+      <Filter>services</Filter>
+    </ClInclude>
+    <ClInclude Include="services\GlobalPlayerService.h">
+      <Filter>services</Filter>
+    </ClInclude>
+    <ClInclude Include="services\InvaderService.h">
+      <Filter>services</Filter>
+    </ClInclude>
+    <ClInclude Include="services\PlayerService.h">
+      <Filter>services</Filter>
+    </ClInclude>
+    <ClInclude Include="services\SaucerService.h">
+      <Filter>services</Filter>
+    </ClInclude>
+    <ClInclude Include="systems\AdvanceSystem.h">
+      <Filter>systems</Filter>
+    </ClInclude>
+    <ClInclude Include="systems\AudioSystem.h">
+      <Filter>systems</Filter>
+    </ClInclude>
+    <ClInclude Include="systems\LevelSystem.h">
+      <Filter>systems</Filter>
+    </ClInclude>
+    <ClInclude Include="systems\RenderSystem.h">
+      <Filter>systems</Filter>
+    </ClInclude>
+    <ClInclude Include="states\AddScoreState.h">
+      <Filter>states</Filter>
+    </ClInclude>
+    <ClInclude Include="states\InitState.h">
+      <Filter>states</Filter>
+    </ClInclude>
+    <ClInclude Include="states\PlayGameState.h">
+      <Filter>states</Filter>
+    </ClInclude>
+    <ClInclude Include="states\PlayLevelState.h">
+      <Filter>states</Filter>
+    </ClInclude>
+    <ClInclude Include="states\ShowScoresState.h">
+      <Filter>states</Filter>
+    </ClInclude>
+    <ClInclude Include="states\TitleState.h">
+      <Filter>states</Filter>
+    </ClInclude>
+    <ClInclude Include="states\TransitionState.h">
+      <Filter>states</Filter>
+    </ClInclude>
+    <ClInclude Include="Globals.h" />
+    <ClInclude Include="InputEvents.h" />
+    <ClInclude Include="Scores.h" />
+    <ClInclude Include="ThisApplication.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="metro\MainPage.xaml.h" />
+    <ClInclude Include="App.xaml.h" />
+    <ClInclude Include="metro\GameSettings.xaml.h" />
+    <ClInclude Include="metro\AboutSettings.xaml.h" />
+    <ClInclude Include="metro\ControlSettings.xaml.h" />
+    <ClInclude Include="components\level\PauseAdvanceRender.h">
+      <Filter>components\level</Filter>
+    </ClInclude>
+    <ClInclude Include="components\player\TouchAdvanceRender.h">
+      <Filter>components\player</Filter>
+    </ClInclude>
+    <ClInclude Include="metro\FailurePage.xaml.h" />
+    <ClInclude Include="coreEntity\entity\Entity.h">
+      <Filter>coreEntity\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="coreEntity\entity\EntityComponent.h">
+      <Filter>coreEntity\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="coreEntity\entity\EntityEvents.h">
+      <Filter>coreEntity\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="coreEntity\entity\EntityListener.h">
+      <Filter>coreEntity\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="coreEntity\entity\EntityManager.h">
+      <Filter>coreEntity\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="coreEntity\domain\EntityDomain.h">
+      <Filter>coreEntity\domain</Filter>
+    </ClInclude>
+    <ClInclude Include="coreEntity\domain\EntityDomainProvider.h">
+      <Filter>coreEntity\domain</Filter>
+    </ClInclude>
+    <ClInclude Include="coreEntity\component\ComponentListener.h">
+      <Filter>coreEntity\component</Filter>
+    </ClInclude>
+    <ClInclude Include="coreEntity\component\ComponentManager.h">
+      <Filter>coreEntity\component</Filter>
+    </ClInclude>
+    <ClInclude Include="coreEntity\system\System.h">
+      <Filter>coreEntity\system</Filter>
+    </ClInclude>
+    <ClInclude Include="coreEntity\system\SystemManager.h">
+      <Filter>coreEntity\system</Filter>
+    </ClInclude>
+    <ClInclude Include="coreEntity\component\standard\AdvanceComponent.h">
+      <Filter>coreEntity\component\standard</Filter>
+    </ClInclude>
+    <ClInclude Include="coreEntity\component\standard\EntityEventListenersComponent.h">
+      <Filter>coreEntity\component\standard</Filter>
+    </ClInclude>
+    <ClInclude Include="coreEntity\component\standard\LayerGroupComponent.h">
+      <Filter>coreEntity\component\standard</Filter>
+    </ClInclude>
+    <ClInclude Include="coreEntity\component\standard\MouseLayer.h">
+      <Filter>coreEntity\component\standard</Filter>
+    </ClInclude>
+    <ClInclude Include="coreEntity\component\standard\RenderComponent.h">
+      <Filter>coreEntity\component\standard</Filter>
+    </ClInclude>
+    <ClInclude Include="coreEntity\component\ComponentListener2.h">
+      <Filter>coreEntity\component</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Invader_TemporaryKey.pfx">
+      <Filter>metro</Filter>
+    </None>
+    <None Include="res\Assets.Audio.res.json">
+      <Filter>Assets\Json</Filter>
+    </None>
+    <None Include="res\Assets.Fonts.res.json">
+      <Filter>Assets\Json</Filter>
+    </None>
+    <None Include="res\Assets.Graph.res.json">
+      <Filter>Assets\Json</Filter>
+    </None>
+    <None Include="res\Assets.Space.res.json">
+      <Filter>Assets\Json</Filter>
+    </None>
+    <None Include="res\Assets.Title.res.json">
+      <Filter>Assets\Json</Filter>
+    </None>
+    <None Include="res\Values.res.json">
+      <Filter>Assets\Json</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="metro\MainPage.xaml">
+      <Filter>metro</Filter>
+    </Page>
+    <Page Include="metro\Styles.xaml">
+      <Filter>metro</Filter>
+    </Page>
+    <Page Include="metro\GameSettings.xaml">
+      <Filter>metro</Filter>
+    </Page>
+    <Page Include="metro\AboutSettings.xaml">
+      <Filter>metro</Filter>
+    </Page>
+    <Page Include="metro\ControlSettings.xaml">
+      <Filter>metro</Filter>
+    </Page>
+    <Page Include="metro\FailurePage.xaml">
+      <Filter>metro</Filter>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\settings-controls1.png">
+      <Filter>Assets\Controls</Filter>
+    </Image>
+    <Image Include="Assets\settings-controls2.png">
+      <Filter>Assets\Controls</Filter>
+    </Image>
+    <Image Include="Assets\settings-controls3.png">
+      <Filter>Assets\Controls</Filter>
+    </Image>
+    <Image Include="Assets\AboutFace.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\WideLogo.source.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\LargeLogo.source.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Logo.source.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square310x310Logo.scale-200.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square310x310Logo.scale-150.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square310x310Logo.scale-125.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square310x310Logo.scale-100.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square71x71Logo.scale-400.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square71x71Logo.scale-200.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square71x71Logo.scale-150.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square71x71Logo.scale-125.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square71x71Logo.scale-100.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square150x150Logo.scale-400.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square150x150Logo.scale-200.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square150x150Logo.scale-150.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square150x150Logo.scale-125.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square150x150Logo.scale-100.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.scale-400.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.scale-200.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.scale-150.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.scale-125.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.scale-100.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-256.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-96.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-80.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-72.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-64.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-60.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-48.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-40.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-36.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-32.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-30.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-24.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-20.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-16.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-256_altform-unplated.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-96_altform-unplated.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-80_altform-unplated.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-72_altform-unplated.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-64_altform-unplated.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-60_altform-unplated.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-48_altform-unplated.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-40_altform-unplated.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-36_altform-unplated.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-32_altform-unplated.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-30_altform-unplated.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-20_altform-unplated.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-16_altform-unplated.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\StoreLogo.scale-400.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\StoreLogo.scale-200.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\StoreLogo.scale-150.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\StoreLogo.scale-125.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\StoreLogo.scale-100.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\BadgeLogo.scale-400.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\BadgeLogo.scale-200.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\BadgeLogo.scale-150.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\BadgeLogo.scale-125.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\BadgeLogo.scale-100.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Wide310x150Logo.scale-400.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Wide310x150Logo.scale-200.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Wide310x150Logo.scale-150.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Wide310x150Logo.scale-125.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\Wide310x150Logo.scale-100.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\SplashScreen.scale-400.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\SplashScreen.scale-200.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\SplashScreen.scale-150.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\SplashScreen.scale-125.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+    <Image Include="Assets\SplashScreen.scale-100.png">
+      <Filter>Assets\Logo</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="res\fonts\nasal.ttf">
+      <Filter>Assets\Fonts</Filter>
+    </Font>
+    <Font Include="res\fonts\pressstart2p.ttf">
+      <Filter>Assets\Fonts</Filter>
+    </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="metro\Package.appxmanifest">
+      <Filter>metro</Filter>
+    </AppxManifest>
+  </ItemGroup>
+</Project>

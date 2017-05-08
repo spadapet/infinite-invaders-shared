@@ -1,0 +1,259 @@
+{
+  "res:values":
+  {
+    "SpaceSprite":
+    {
+      "res:type": "sprites",
+      "data":
+      {
+        "res:transform": "sprites",
+        "format": "bc1",
+        "mips": 3,
+        "sprites":
+        {
+          "Space":
+          {
+            "file": "res:file"
+          }
+        }
+      }
+    },
+
+    "SpaceAnim":
+    {
+      "res:type": "spriteanim",
+      "lastFrame": 1,
+      "parts":
+      [
+        {
+          "keys":
+          [
+            {
+              "frame": 0,
+              "sprite":
+              [
+                "res:sprite"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+
+  "sprites-Space 0":
+  {
+    "res:template": "SpaceSprite",
+    "res:values":
+    {
+      "file": "level\\space 0.png"
+    }
+  },
+
+  "Space 0":
+  {
+    "res:template": "SpaceAnim",
+    "res:values":
+    {
+      "sprite": "ref:sprites-Space 0.Space"
+    }
+  },
+
+  "sprites-Space 1":
+  {
+    "res:template": "SpaceSprite",
+    "res:values":
+    {
+      "file": "level\\space 1.png"
+    }
+  },
+
+  "Space 1":
+  {
+    "res:template": "SpaceAnim",
+    "res:values":
+    {
+      "sprite": "ref:sprites-Space 1.Space"
+    }
+  },
+
+  "sprites-Space 2":
+  {
+    "res:template": "SpaceSprite",
+    "res:values":
+    {
+      "file": "level\\space 2.png"
+    }
+  },
+
+  "Space 2":
+  {
+    "res:template": "SpaceAnim",
+    "res:values":
+    {
+      "sprite": "ref:sprites-Space 2.Space"
+    }
+  },
+
+  "sprites-Space 3":
+  {
+    "res:template": "SpaceSprite",
+    "res:values":
+    {
+      "file": "level\\space 3.png"
+    }
+  },
+
+  "Space 3":
+  {
+    "res:template": "SpaceAnim",
+    "res:values":
+    {
+      "sprite": "ref:sprites-Space 3.Space"
+    }
+  },
+
+  "sprites-Space 4":
+  {
+    "res:template": "SpaceSprite",
+    "res:values":
+    {
+      "file": "level\\space 4.png"
+    }
+  },
+
+  "Space 4":
+  {
+    "res:template": "SpaceAnim",
+    "res:values":
+    {
+      "sprite": "ref:sprites-Space 4.Space"
+    }
+  },
+
+  "sprites-Space 5":
+  {
+    "res:template": "SpaceSprite",
+    "res:values":
+    {
+      "file": "level\\space 5.png"
+    }
+  },
+
+  "Space 5":
+  {
+    "res:template": "SpaceAnim",
+    "res:values":
+    {
+      "sprite": "ref:sprites-Space 5.Space"
+    }
+  },
+
+  "sprites-Space 6":
+  {
+    "res:template": "SpaceSprite",
+    "res:values":
+    {
+      "file": "level\\space 6.png"
+    }
+  },
+
+  "Space 6":
+  {
+    "res:template": "SpaceAnim",
+    "res:values":
+    {
+      "sprite": "ref:sprites-Space 6.Space"
+    }
+  },
+
+  "sprites-Space 7":
+  {
+    "res:template": "SpaceSprite",
+    "res:values":
+    {
+      "file": "level\\space 7.png"
+    }
+  },
+
+  "Space 7":
+  {
+    "res:template": "SpaceAnim",
+    "res:values":
+    {
+      "sprite": "ref:sprites-Space 7.Space"
+    }
+  },
+
+  "sprites-Space 8":
+  {
+    "res:template": "SpaceSprite",
+    "res:values":
+    {
+      "file": "level\\space 8.png"
+    }
+  },
+
+  "Space 8":
+  {
+    "res:template": "SpaceAnim",
+    "res:values":
+    {
+      "sprite": "ref:sprites-Space 8.Space"
+    }
+  },
+
+  "sprites-Space 9":
+  {
+    "res:template": "SpaceSprite",
+    "res:values":
+    {
+      "file": "level\\space 9.png"
+    }
+  },
+
+  "Space 9":
+  {
+    "res:template": "SpaceAnim",
+    "res:values":
+    {
+      "sprite": "ref:sprites-Space 9.Space"
+    }
+  },
+
+  "sprites-Space 10":
+  {
+    "res:template": "SpaceSprite",
+    "res:values":
+    {
+      "file": "level\\space 10.png"
+    }
+  },
+
+  "Space 10":
+  {
+    "res:template": "SpaceAnim",
+    "res:values":
+    {
+      "sprite": "ref:sprites-Space 10.Space"
+    }
+  },
+
+  "sprites-Space 11":
+  {
+    "res:template": "SpaceSprite",
+    "res:values":
+    {
+      "file": "level\\space 11.png"
+    }
+  },
+
+  "Space 11":
+  {
+    "res:template": "SpaceAnim",
+    "res:values":
+    {
+      "sprite": "ref:sprites-Space 11.Space"
+    }
+  }
+}

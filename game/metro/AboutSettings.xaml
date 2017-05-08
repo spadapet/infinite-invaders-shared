@@ -1,0 +1,69 @@
+﻿<Page
+    x:Class="Invader.AboutSettings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignWidth="346"
+    d:DesignHeight="768"
+    Loaded="OnLoaded">
+
+    <Border Style="{StaticResource SettingsBorder}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Background="{StaticResource AppBarBorderBrush}">
+                <StackPanel Orientation="Horizontal">
+                    <Button Style="{StaticResource SettingsBackButton}" Click="OnBackClicked" />
+                    <TextBlock VerticalAlignment="Center" Style="{StaticResource PageHeaderTextStyle}">About</TextBlock>
+                </StackPanel>
+            </Grid>
+
+            <ScrollViewer Grid.Row="1" Style="{StaticResource SettingsScrollViewer}">
+                <StackPanel Margin="25,25,5,25" VerticalAlignment="Top">
+                    <StackPanel>
+                        <TextBlock x:Name="GameNameText" Style="{StaticResource BasicTextStyle}">Name</TextBlock>
+                        <TextBlock x:Name="GameByText" Style="{StaticResource BasicTextStyle}">By</TextBlock>
+                        <TextBlock x:Name="GameVersionText" Style="{StaticResource BasicTextStyle}">Version</TextBlock>
+                    </StackPanel>
+
+                    <StackPanel Margin="0,25,0,0">
+                        <TextBlock Style="{StaticResource BasicTextStyle}">Web site</TextBlock>
+                        <HyperlinkButton Name="FirstLink" NavigateUri="http://ferretfacegames.com/invader">ferretfacegames.com/invader</HyperlinkButton>
+                        <TextBlock Style="{StaticResource BasicTextStyle}">Support</TextBlock>
+                        <HyperlinkButton NavigateUri="http://ferretfacegames.com/invader/support">ferretfacegames.com/invader/support</HyperlinkButton>
+                        <HyperlinkButton NavigateUri="https://www.facebook.com/ferretfacegames">facebook.com/ferretfacegames</HyperlinkButton>
+                        <TextBlock Style="{StaticResource BasicTextStyle}">Privacy policy</TextBlock>
+                        <HyperlinkButton NavigateUri="http://ferretfacegames.com/invader/privacy">ferretfacegames.com/invader/privacy</HyperlinkButton>
+                    </StackPanel>
+
+                    <StackPanel Margin="-20,25,0,0">
+                        <Image Width="200" Height="105" Opacity="0.5" HorizontalAlignment="Center" Source="/Assets/AboutFace.png" />
+                    </StackPanel>
+
+                    <StackPanel Margin="0,25,0,0">
+                        <TextBlock Style="{StaticResource HeaderTextStyle}">Credits</TextBlock>
+                    </StackPanel>
+
+                    <StackPanel Margin="0,5,0,0">
+                        <TextBlock Style="{StaticResource BasicTextStyle}">Made by Peter Spada</TextBlock>
+                    </StackPanel>
+
+                    <StackPanel Margin="0,25,0,0">
+                        <TextBlock Style="{StaticResource BasicTextStyle}">Inspired by</TextBlock>
+                        <HyperlinkButton NavigateUri="http://en.wikipedia.org/wiki/TI_Invaders">TI Invaders</HyperlinkButton>
+                        <TextBlock Style="{StaticResource BasicTextStyle}">Libraries and fonts</TextBlock>
+                        <HyperlinkButton NavigateUri="http://zlib.net">zlib.net</HyperlinkButton>
+                        <HyperlinkButton NavigateUri="http://directxtex.codeplex.com">directxtex.codeplex.com</HyperlinkButton>
+                        <HyperlinkButton NavigateUri="http://www.zone38.net/font">www.zone38.net/font</HyperlinkButton>
+                    </StackPanel>
+
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Border>
+</Page>

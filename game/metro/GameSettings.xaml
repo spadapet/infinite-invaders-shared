@@ -1,0 +1,87 @@
+﻿<Page
+    x:Class="Invader.GameSettings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Invader"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignWidth="346"
+    d:DesignHeight="768"
+    Loaded="OnLoaded">
+
+    <Border Style="{StaticResource SettingsBorder}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Background="{StaticResource AppBarBorderBrush}">
+                <StackPanel Orientation="Horizontal">
+                    <Button Style="{StaticResource SettingsBackButton}" Click="OnBackClicked" />
+                    <TextBlock VerticalAlignment="Center" Style="{StaticResource PageHeaderTextStyle}">gAme options</TextBlock>
+                </StackPanel>
+            </Grid>
+
+            <ScrollViewer Grid.Row="1" Style="{StaticResource SettingsScrollViewer}">
+                <StackPanel Margin="40,40,40,40" VerticalAlignment="Top">
+                    <StackPanel x:Name="DisabledHeaderPanel" Visibility="Collapsed" Margin="0,0,0,20">
+                        <TextBlock Style="{StaticResource BasicWrapTextStyle}">
+                            <Run>Some options cannot be changed while a game is in progress.</Run>
+                        </TextBlock>
+                    </StackPanel>
+
+                    <StackPanel>
+                        <TextBlock x:Name="GameModeHeader" Style="{StaticResource BasicTextStyle}">Players</TextBlock>
+                        <ComboBox x:Name="GameModeCombo" Style="{StaticResource SettingsComboBox}" SelectedIndex="0" SelectionChanged="OnGameModeChanged">
+                            <ComboBoxItem>Single player</ComboBoxItem>
+                            <ComboBoxItem>Two players, take turns</ComboBoxItem>
+                            <ComboBoxItem>Two players, local CO-OP</ComboBoxItem>
+                        </ComboBox>
+                        <TextBlock
+                            x:Name="GameModeText"
+                            Style="{StaticResource BasicTextStyle}"
+                            Text="{Binding ElementName=GameModeCombo, Path=SelectedValue.Content}"
+                            Margin="15,10,0,15"
+                            Opacity="0.5"
+                            Visibility="Collapsed" />
+                        
+                        <TextBlock x:Name="DifficultyHeader" Style="{StaticResource BasicTextStyle}">Difficulty</TextBlock>
+                        <ComboBox x:Name="DifficultyCombo" Style="{StaticResource SettingsComboBox}" SelectedIndex="1" SelectionChanged="OnDifficultyChanged">
+                            <!--<ComboBoxItem>Baby</ComboBoxItem>-->
+                            <ComboBoxItem>Easy</ComboBoxItem>
+                            <ComboBoxItem>Normal</ComboBoxItem>
+                            <ComboBoxItem>Hard</ComboBoxItem>
+                        </ComboBox>
+                        <TextBlock
+                            x:Name="DifficultyText"
+                            Style="{StaticResource BasicTextStyle}"
+                            Text="{Binding ElementName=DifficultyCombo, Path=SelectedValue.Content}"
+                            Margin="15,10,0,15"
+                            Opacity="0.5"
+                            Visibility="Collapsed" />
+                        
+                        <TextBlock Style="{StaticResource BasicTextStyle}">Controls</TextBlock>
+                        <HyperlinkButton x:Name="ControlsLink" Click="OnControlsClick">Show the controls</HyperlinkButton>
+                        <Line Style="{StaticResource SettingsDivider}" />
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource BasicTextStyle}">Full Screen</TextBlock>
+                        <ToggleSwitch x:Name="FullScreenToggle" Toggled="OnFullScreenToggled" />
+                        <TextBlock Style="{StaticResource BasicTextStyle}">Sound</TextBlock>
+                        <ToggleSwitch x:Name="SoundEffectToggle" Toggled="OnSoundEffectToggled" />
+                        <TextBlock x:Name="VolumeHeader" Style="{StaticResource BasicTextStyle}">Volume</TextBlock>
+                        <Slider Padding="10,0,0,-10" x:Name="VolumeSlider" Minimum="0" Maximum="100" ValueChanged="OnVolumeChanged" />
+                        <Line Style="{StaticResource SettingsDivider}" />
+                    </StackPanel>
+                    <StackPanel>
+                        <HyperlinkButton x:Name="AboutLink" Click="OnAboutClick">About Infinite Invaders</HyperlinkButton>
+                        <!--<TextBlock Style="{StaticResource BasicTextStyle}">Show FPS during game</TextBlock>
+                        <ToggleSwitch x:Name="FpsToggle" Toggled="OnFpsToggled" />-->
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Border>
+</Page>
