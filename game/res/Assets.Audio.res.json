@@ -240,7 +240,7 @@
     "wave": "ref:wave-Born Saucer 0",
     "volume": 1.5
   },
-  "Bonus Saucer":
+  "Bonus Saucer Effect":
   {
     "res:type": "effect",
     "wave": "ref:wave-Born Saucer 1",
@@ -366,7 +366,7 @@
     "wave": "ref:wave-Drum Beat 3",
     "volume": 1.5
   },
-  "Powerup 0":
+  "Powerup 0 Effect":
   {
     "res:type": "effect",
     "wave": "ref:wave-Powerup 0"

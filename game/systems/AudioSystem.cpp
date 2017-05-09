@@ -91,7 +91,7 @@ HRESULT AudioSystem::_Construct(IUnknown *unkOuter)
 	}
 	effects[] =
 	{
-		{ EFFECT_BONUS_SAUCER, L"Bonus Saucer", EFFECT_PRI_BACKGROUND_HIGH, true },
+		{ EFFECT_BONUS_SAUCER, L"Bonus Saucer Effect", EFFECT_PRI_BACKGROUND_HIGH, true },
 		{ EFFECT_BONUS_SAUCER_FAST, L"Bonus Saucer Fast", EFFECT_PRI_BACKGROUND_HIGH, true },
 		{ EFFECT_BORN_SAUCER_0, L"Born Saucer 0", EFFECT_PRI_BACKGROUND_HIGH, true },
 		{ EFFECT_FREE_LIFE_0, L"Free Life 0", EFFECT_PRI_NORMAL_HIGH, true },
@@ -115,7 +115,7 @@ HRESULT AudioSystem::_Construct(IUnknown *unkOuter)
 		{ EFFECT_DRUM_BEAT_1, L"Drum Beat 1", EFFECT_PRI_BACKGROUND_LOW, true },
 		{ EFFECT_DRUM_BEAT_2, L"Drum Beat 2", EFFECT_PRI_BACKGROUND_LOW, true },
 		{ EFFECT_DRUM_BEAT_3, L"Drum Beat 3", EFFECT_PRI_BACKGROUND_LOW, true },
-		{ EFFECT_POWERUP_0, L"Powerup 0", EFFECT_PRI_NORMAL_LOW, true },
+		{ EFFECT_POWERUP_0, L"Powerup 0 Effect", EFFECT_PRI_NORMAL_LOW, true },
 		{ EFFECT_SHOT_INVADER_0, L"Shot Invader 0", EFFECT_PRI_NORMAL_LOW, true },
 		{ EFFECT_SHOT_PLAYER_0, L"Shot Player 0", EFFECT_PRI_NORMAL_LOW, true },
 	};
@@ -265,7 +265,7 @@ void AudioSystem::PlayEffect(EAudioEffect effect, float freqRatio, IEntity *enti
 		_playingLevel &&
 		effect >= 0 &&
 		effect < EFFECT_COUNT &&
-		_effects[effect]._effect.GetObject() &&
+		_effects[effect]._effect.Flush() &&
 		_effects[effect]._volume > 0)
 	{
 		EAudioPriority stopPriority = EFFECT_PRI_NONE;
