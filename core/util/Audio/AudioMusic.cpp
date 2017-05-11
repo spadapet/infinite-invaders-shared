@@ -1,5 +1,4 @@
 #include "pch.h"
-#include "App/Timer.h"
 #include "Audio/AudioDevice.h"
 #include "Audio/AudioMusic.h"
 #include "Audio/AudioPlaying.h"
@@ -17,6 +16,7 @@
 #include "Thread/ThreadDispatch.h"
 #include "Thread/ThreadPool.h"
 #include "Thread/ThreadUtil.h"
+#include "Types/Timer.h"
 #include "Windows/Handles.h"
 
 #define DEBUG_THIS_FILE 0 // DEBUG
@@ -264,11 +264,17 @@ ff::AudioMusic::~AudioMusic()
 	{
 		play->SetParent(nullptr);
 	}
+
+	if (_device)
+	{
+		_device->RemoveChild(this);
+	}
 }
 
 HRESULT ff::AudioMusic::_Construct(IUnknown *unkOuter)
 {
 	assertRetVal(_device.QueryFrom(unkOuter), E_INVALIDARG);
+	_device->AddChild(this);
 
 	return __super::_Construct(unkOuter);
 }
@@ -383,11 +389,19 @@ ff::AudioMusicPlaying::AudioMusicPlaying()
 
 ff::AudioMusicPlaying::~AudioMusicPlaying()
 {
+	if (_device)
+	{
+		_device->RemovePlaying(this);
+		_device->RemoveChild(this);
+	}
 }
 
 HRESULT ff::AudioMusicPlaying::_Construct(IUnknown *unkOuter)
 {
 	assertRetVal(_device.QueryFrom(unkOuter), E_INVALIDARG);
+	_device->AddChild(this);
+	_device->AddPlaying(this);
+
 	return __super::_Construct(unkOuter);
 }
 
@@ -410,7 +424,7 @@ ff::AudioMusicPlaying::State ff::AudioMusicPlaying::GetState() const
 
 bool ff::AudioMusicPlaying::Init(AudioMusic *parent, IAudioStream *stream, bool startPlaying, float volume, float freqRatio, bool loop)
 {
-	assert(GetDevice()->GetThreadDispatch()->IsCurrentThread());
+	assert(ff::GetGameThreadDispatch()->IsCurrentThread());
 	assertRetVal(_state == State::MUSIC_INVALID, false);
 	assertRetVal(stream && _device && _device->GetAudio(), false);
 
@@ -430,7 +444,7 @@ bool ff::AudioMusicPlaying::Init(AudioMusic *parent, IAudioStream *stream, bool 
 // background thread init
 void ff::AudioMusicPlaying::RunAsyncWork()
 {
-	assert(!GetDevice()->GetThreadDispatch()->IsCurrentThread() && !ff::IsEventSet(_asyncEvent));
+	assert(!ff::GetGameThreadDispatch()->IsCurrentThread() && !ff::IsEventSet(_asyncEvent));
 
 	if (!_source && !IsEventSet(_stopEvent))
 	{
@@ -533,7 +547,7 @@ bool ff::AudioMusicPlaying::AsyncInit()
 
 void ff::AudioMusicPlaying::SetParent(AudioMusic *parent)
 {
-	assert(GetDevice()->GetThreadDispatch()->IsCurrentThread());
+	assert(ff::GetGameThreadDispatch()->IsCurrentThread());
 
 	LockMutex crit(_cs);
 	_parent = parent;
@@ -541,7 +555,7 @@ void ff::AudioMusicPlaying::SetParent(AudioMusic *parent)
 
 bool ff::AudioMusicPlaying::IsPlaying() const
 {
-	assert(GetDevice()->GetThreadDispatch()->IsCurrentThread());
+	assert(ff::GetGameThreadDispatch()->IsCurrentThread());
 
 	LockMutex crit(_cs);
 	return _state == State::MUSIC_PLAYING || (_state == State::MUSIC_INIT && _startPlaying);
@@ -549,7 +563,7 @@ bool ff::AudioMusicPlaying::IsPlaying() const
 
 bool ff::AudioMusicPlaying::IsPaused() const
 {
-	assert(GetDevice()->GetThreadDispatch()->IsCurrentThread());
+	assert(ff::GetGameThreadDispatch()->IsCurrentThread());
 
 	LockMutex crit(_cs);
 	return _state == AudioMusicPlaying::State::MUSIC_PAUSED || (_state == State::MUSIC_INIT && !_startPlaying);
@@ -557,7 +571,7 @@ bool ff::AudioMusicPlaying::IsPaused() const
 
 bool ff::AudioMusicPlaying::IsStopped() const
 {
-	assert(GetDevice()->GetThreadDispatch()->IsCurrentThread());
+	assert(ff::GetGameThreadDispatch()->IsCurrentThread());
 
 	LockMutex crit(_cs);
 	return _state == State::MUSIC_DONE;
@@ -565,7 +579,7 @@ bool ff::AudioMusicPlaying::IsStopped() const
 
 void ff::AudioMusicPlaying::Advance()
 {
-	assert(GetDevice()->GetThreadDispatch()->IsCurrentThread());
+	assert(ff::GetGameThreadDispatch()->IsCurrentThread());
 
 	if (_state == State::MUSIC_PLAYING && _source && _fadeScale != 0)
 	{
@@ -610,7 +624,7 @@ void ff::AudioMusicPlaying::Advance()
 
 void ff::AudioMusicPlaying::Stop()
 {
-	assert(GetDevice()->GetThreadDispatch()->IsCurrentThread());
+	assert(ff::GetGameThreadDispatch()->IsCurrentThread());
 
 	LockMutex crit(_cs);
 
@@ -627,7 +641,7 @@ void ff::AudioMusicPlaying::Stop()
 
 void ff::AudioMusicPlaying::Pause()
 {
-	assert(GetDevice()->GetThreadDispatch()->IsCurrentThread());
+	assert(ff::GetGameThreadDispatch()->IsCurrentThread());
 
 	LockMutex crit(_cs);
 
@@ -645,7 +659,7 @@ void ff::AudioMusicPlaying::Pause()
 
 void ff::AudioMusicPlaying::Resume()
 {
-	assert(GetDevice()->GetThreadDispatch()->IsCurrentThread());
+	assert(ff::GetGameThreadDispatch()->IsCurrentThread());
 
 	LockMutex crit(_cs);
 
@@ -779,7 +793,7 @@ ff::IAudioDevice *ff::AudioMusicPlaying::GetDevice() const
 
 bool ff::AudioMusicPlaying::Reset()
 {
-	assert(GetDevice()->GetThreadDispatch()->IsCurrentThread());
+	assert(ff::GetGameThreadDispatch()->IsCurrentThread());
 
 	CancelAsync();
 
@@ -798,17 +812,17 @@ bool ff::AudioMusicPlaying::Reset()
 
 void ff::AudioMusicPlaying::OnVoiceProcessingPassStart(UINT32 BytesRequired)
 {
-	assert(!GetDevice()->GetThreadDispatch()->IsCurrentThread());
+	assert(!ff::GetGameThreadDispatch()->IsCurrentThread());
 }
 
 void ff::AudioMusicPlaying::OnVoiceProcessingPassEnd()
 {
-	assert(!GetDevice()->GetThreadDispatch()->IsCurrentThread());
+	assert(!ff::GetGameThreadDispatch()->IsCurrentThread());
 }
 
 void ff::AudioMusicPlaying::OnStreamEnd()
 {
-	assert(!GetDevice()->GetThreadDispatch()->IsCurrentThread());
+	assert(!ff::GetGameThreadDispatch()->IsCurrentThread());
 
 	LockMutex crit(_cs);
 	_state = State::MUSIC_DONE;
@@ -818,7 +832,7 @@ void ff::AudioMusicPlaying::OnStreamEnd()
 
 void ff::AudioMusicPlaying::OnBufferStart(void *pBufferContext)
 {
-	assert(!GetDevice()->GetThreadDispatch()->IsCurrentThread());
+	assert(!ff::GetGameThreadDispatch()->IsCurrentThread());
 
 	LockMutex crit(_cs);
 
@@ -844,17 +858,17 @@ void ff::AudioMusicPlaying::OnBufferStart(void *pBufferContext)
 
 void ff::AudioMusicPlaying::OnBufferEnd(void *pBufferContext)
 {
-	assert(!GetDevice()->GetThreadDispatch()->IsCurrentThread());
+	assert(!ff::GetGameThreadDispatch()->IsCurrentThread());
 }
 
 void ff::AudioMusicPlaying::OnLoopEnd(void *pBufferContext)
 {
-	assert(!GetDevice()->GetThreadDispatch()->IsCurrentThread());
+	assert(!ff::GetGameThreadDispatch()->IsCurrentThread());
 }
 
 void ff::AudioMusicPlaying::OnVoiceError(void *pBufferContext, HRESULT error)
 {
-	assert(!GetDevice()->GetThreadDispatch()->IsCurrentThread());
+	assert(!ff::GetGameThreadDispatch()->IsCurrentThread());
 
 	assertSz(false, L"XAudio2 voice error");
 }
@@ -866,7 +880,7 @@ HRESULT ff::AudioMusicPlaying::OnReadSample(
 	LONGLONG llTimestamp,
 	IMFSample *pSample)
 {
-	assert(!GetDevice()->GetThreadDispatch()->IsCurrentThread());
+	assert(!ff::GetGameThreadDispatch()->IsCurrentThread());
 
 	LockMutex crit(_cs);
 
@@ -949,7 +963,7 @@ HRESULT ff::AudioMusicPlaying::OnReadSample(
 
 HRESULT ff::AudioMusicPlaying::OnFlush(DWORD dwStreamIndex)
 {
-	assert(!GetDevice()->GetThreadDispatch()->IsCurrentThread());
+	assert(!ff::GetGameThreadDispatch()->IsCurrentThread());
 
 	LockMutex crit(_cs);
 
@@ -987,14 +1001,14 @@ HRESULT ff::AudioMusicPlaying::OnFlush(DWORD dwStreamIndex)
 
 HRESULT ff::AudioMusicPlaying::OnEvent(DWORD dwStreamIndex, IMFMediaEvent *pEvent)
 {
-	assert(!GetDevice()->GetThreadDispatch()->IsCurrentThread());
+	assert(!ff::GetGameThreadDispatch()->IsCurrentThread());
 
 	return S_OK;
 }
 
 void ff::AudioMusicPlaying::StartAsyncWork()
 {
-	assert(GetDevice()->GetThreadDispatch()->IsCurrentThread());
+	assert(ff::GetGameThreadDispatch()->IsCurrentThread());
 
 	::ResetEvent(_asyncEvent);
 	ff::ComPtr<ff::AudioMusicPlaying, ff::IAudioPlaying> keepAlive = this;
@@ -1006,7 +1020,7 @@ void ff::AudioMusicPlaying::StartAsyncWork()
 
 void ff::AudioMusicPlaying::CancelAsync()
 {
-	assert(GetDevice()->GetThreadDispatch()->IsCurrentThread());
+	assert(ff::GetGameThreadDispatch()->IsCurrentThread());
 
 	::SetEvent(_stopEvent);
 	ff::WaitForHandle(_asyncEvent);
@@ -1015,7 +1029,7 @@ void ff::AudioMusicPlaying::CancelAsync()
 
 void ff::AudioMusicPlaying::StartReadSample()
 {
-	assert(!GetDevice()->GetThreadDispatch()->IsCurrentThread());
+	assert(!ff::GetGameThreadDispatch()->IsCurrentThread());
 
 	LockMutex crit(_cs);
 	HRESULT hr = E_FAIL;
@@ -1038,7 +1052,7 @@ void ff::AudioMusicPlaying::StartReadSample()
 
 void ff::AudioMusicPlaying::OnMusicDone()
 {
-	assert(GetDevice()->GetThreadDispatch()->IsCurrentThread());
+	assert(ff::GetGameThreadDispatch()->IsCurrentThread());
 
 	ComPtr<IAudioPlaying> keepAlive = this;
 	LockMutex crit(_cs);
@@ -1058,7 +1072,7 @@ void ff::AudioMusicPlaying::OnMusicDone()
 
 void ff::AudioMusicPlaying::UpdateSourceVolume(IXAudio2SourceVoice *source)
 {
-	assert(source == _source || !GetDevice()->GetThreadDispatch()->IsCurrentThread());
+	assert(source == _source || !ff::GetGameThreadDispatch()->IsCurrentThread());
 
 	if (source)
 	{

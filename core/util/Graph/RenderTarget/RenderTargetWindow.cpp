@@ -209,12 +209,18 @@ ff::RenderTargetWindow::~RenderTargetWindow()
 	{
 		s_allRenderWindows.Reduce();
 	}
+
+	if (_device)
+	{
+		_device->RemoveChild(this);
+	}
 }
 
 HRESULT ff::RenderTargetWindow::_Construct(IUnknown *unkOuter)
 {
 	assertRetVal(_device.QueryFrom(unkOuter), E_FAIL);
-	
+	_device->AddChild(this);
+
 	return __super::_Construct(unkOuter);
 }
 

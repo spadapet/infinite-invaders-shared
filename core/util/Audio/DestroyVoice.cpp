@@ -91,11 +91,17 @@ DestroyVoiceWorkItem::DestroyVoiceWorkItem()
 DestroyVoiceWorkItem::~DestroyVoiceWorkItem()
 {
 	Reset();
+
+	if (_device)
+	{
+		_device->RemoveChild(this);
+	}
 }
 
 HRESULT DestroyVoiceWorkItem::_Construct(IUnknown *unkOuter)
 {
 	assertRetVal(_device.QueryFrom(unkOuter), E_INVALIDARG);
+	_device->AddChild(this);
 
 	return __super::_Construct(unkOuter);
 }

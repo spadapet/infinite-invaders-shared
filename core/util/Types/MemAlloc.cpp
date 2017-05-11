@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "App/Log.h"
+#include "Globals/Log.h"
 
 #include <crtdbg.h>
 

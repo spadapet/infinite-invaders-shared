@@ -434,11 +434,16 @@ ff::GraphTexture::GraphTexture()
 
 ff::GraphTexture::~GraphTexture()
 {
+	if (_device)
+	{
+		_device->RemoveChild(this);
+	}
 }
 
 HRESULT ff::GraphTexture::_Construct(IUnknown *unkOuter)
 {
 	assertRetVal(_device.QueryFrom(unkOuter), E_INVALIDARG);
+	_device->AddChild(this);
 
 	return __super::_Construct(unkOuter);
 }

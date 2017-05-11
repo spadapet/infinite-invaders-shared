@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "COM/ComAlloc.h"
-#include "COM/ComListener.h"
 #include "Globals/ProcessGlobals.h"
 #include "Graph/BufferCache.h"
 #include "Graph/Data/GraphCategory.h"
@@ -10,24 +9,17 @@
 #include "Graph/State/GraphStateCache.h"
 #include "Graph/RenderTarget/RenderTarget.h"
 #include "Module/Module.h"
-#include "Thread/ThreadDispatch.h"
 
 namespace ff
 {
 	class __declspec(uuid("dce9ac0d-79da-4456-b441-7bde392df877"))
-		GraphDevice
-			: public ComBase
-			, public IGraphDevice
-			, public IComListener
+		GraphDevice : public ComBase, public IGraphDevice
 	{
 	public:
 		DECLARE_HEADER(GraphDevice);
 
+		virtual HRESULT _Construct(IUnknown *unkOuter) override;
 		bool Init(IDXGIAdapterX *pCard, bool bSoftware);
-
-		// IComListener functions
-		virtual void OnConstruct(IUnknown *unkOuter, REFGUID catid, REFGUID clsid, IUnknown *pObj) override;
-		virtual void OnDestruct(REFGUID catid, REFGUID clsid, IUnknown *pObj) override;
 
 		// IGraphDevice functions
 		virtual bool Reset() override;
@@ -44,18 +36,18 @@ namespace ff
 		virtual BufferCache &GetVertexBuffers() override;
 		virtual BufferCache &GetIndexBuffers() override;
 		virtual GraphStateCache &GetStateCache() override;
-		virtual IThreadDispatch *GetThreadDispatch() const override;
-		virtual void UpdateThreadDispatch() override;
+
+		virtual void AddChild(IGraphDeviceChild *child) override;
+		virtual void RemoveChild(IGraphDeviceChild *child) override;
 
 	private:
+		ComPtr<IGraphicFactory> _factory;
 		ComPtr<ID3D11DeviceX> _device;
 		ComPtr<ID2D1DeviceX> _device2d;
-		ComPtr<ID3D11DeviceContextX> _context;
-		ComPtr<IDXGIAdapterX> _adapter;
-		ComPtr<IDXGIFactoryX> _factory;
+		ComPtr<ID3D11DeviceContextX> _deviceContext;
+		ComPtr<IDXGIAdapterX> _dxgiAdapter;
+		ComPtr<IDXGIFactoryX> _dxgiFactory;
 		ComPtr<IDXGIDeviceX> _dxgiDevice;
-		ComPtr<IProxyComListener> _listener;
-		ComPtr<IThreadDispatch> _dispatch;
 		Vector<IGraphDeviceChild *> _children;
 		BufferCache _vertexCache;
 		BufferCache _indexCache;
@@ -64,12 +56,12 @@ namespace ff
 		bool _softwareDevice;
 	};
 
-	bool CreateHardwareGraphDevice(IGraphDevice **device)
+	bool CreateHardwareGraphDevice(IGraphicFactory *factory, IGraphDevice **device)
 	{
 		assertRetVal(device, false);
 
 		ComPtr<GraphDevice, IGraphDevice> pDevice;
-		assertHrRetVal(ComAllocator<GraphDevice>::CreateInstance(&pDevice), false);
+		assertHrRetVal(ComAllocator<GraphDevice>::CreateInstance(factory, &pDevice), false);
 
 		assertRetVal(pDevice->Init(nullptr, false), false);
 		*device = pDevice.Detach();
@@ -77,12 +69,12 @@ namespace ff
 		return true;
 	}
 
-	bool CreateSoftwareGraphDevice(IGraphDevice **device)
+	bool CreateSoftwareGraphDevice(IGraphicFactory *factory, IGraphDevice **device)
 	{
 		assertRetVal(device, false);
 
 		ComPtr<GraphDevice, IGraphDevice> pDevice;
-		assertHrRetVal(ComAllocator<GraphDevice>::CreateInstance(&pDevice), false);
+		assertHrRetVal(ComAllocator<GraphDevice>::CreateInstance(factory, &pDevice), false);
 
 		assertRetVal(pDevice->Init(nullptr, true), false);
 		*device = pDevice.Detach();
@@ -90,12 +82,12 @@ namespace ff
 		return true;
 	}
 
-	bool CreateGraphDevice(IDXGIAdapterX *pCard, IGraphDevice **device)
+	bool CreateGraphDevice(IGraphicFactory *factory, IDXGIAdapterX *pCard, IGraphDevice **device)
 	{
 		assertRetVal(pCard && device, false);
 
 		ComPtr<GraphDevice, IGraphDevice> pDevice;
-		assertHrRetVal(ComAllocator<GraphDevice>::CreateInstance(&pDevice), false);
+		assertHrRetVal(ComAllocator<GraphDevice>::CreateInstance(factory, &pDevice), false);
 
 		assertRetVal(pDevice->Init(pCard, false), false);
 		*device = pDevice.Detach();
@@ -106,7 +98,6 @@ namespace ff
 
 BEGIN_INTERFACES(ff::GraphDevice)
 	HAS_INTERFACE(ff::IGraphDevice)
-	HAS_INTERFACE(ff::IComListener)
 END_INTERFACES()
 
 ff::GraphDevice::GraphDevice()
@@ -118,26 +109,25 @@ ff::GraphDevice::GraphDevice()
 	_vertexCache.SetDevice(this);
 	_indexCache.SetDevice(this);
 	_stateCache.SetDevice(this);
-
-	verify(CreateProxyComListener(this, &_listener));
-	verify(AddComListener(GetCategoryGraphicsObject(), _listener));
 }
 
 ff::GraphDevice::~GraphDevice()
 {
 	assert(!_children.Size());
 
-	if (_context)
+	if (_deviceContext)
 	{
-		_context->ClearState();
+		_deviceContext->ClearState();
 	}
 
 	_vertexCache.SetDevice(nullptr);
 	_indexCache.SetDevice(nullptr);
 	_stateCache.SetDevice(nullptr);
 
-	verify(RemoveComListener(GetCategoryGraphicsObject(), _listener));
-	_listener->SetOwner(nullptr);
+	if (_factory)
+	{
+		_factory->RemoveChild(this);
+	}
 }
 
 static bool InternalCreateDevice(
@@ -186,18 +176,25 @@ static bool InternalCreateDevice(
 	return true;
 }
 
+HRESULT ff::GraphDevice::_Construct(IUnknown *unkOuter)
+{
+	assertRetVal(_factory.QueryFrom(unkOuter), E_INVALIDARG);
+	_factory->AddChild(this);
+
+	return __super::_Construct(unkOuter);
+}
+
 bool ff::GraphDevice::Init(IDXGIAdapterX *pCard, bool bSoftware)
 {
 	assertRetVal(!bSoftware || !pCard, false);
-	assertRetVal(!_device && !_context, false);
-	assertRetVal(ff::CreateCurrentThreadDispatch(&_dispatch), false);
+	assertRetVal(!_device && !_deviceContext, false);
 
 	_featureLevel = (D3D_FEATURE_LEVEL)0;
 	_softwareDevice = bSoftware;
 
-	assertRetVal(InternalCreateDevice(pCard, bSoftware, &_device, &_context, &_featureLevel), false);
-	assertRetVal(GetParentDXGI(_device, __uuidof(IDXGIAdapterX), (void**)&_adapter), false);
-	assertRetVal(GetParentDXGI(_adapter, __uuidof(IDXGIFactoryX), (void**)&_factory), false);
+	assertRetVal(InternalCreateDevice(pCard, bSoftware, &_device, &_deviceContext, &_featureLevel), false);
+	assertRetVal(GetParentDXGI(_device, __uuidof(IDXGIAdapterX), (void**)&_dxgiAdapter), false);
+	assertRetVal(GetParentDXGI(_dxgiAdapter, __uuidof(IDXGIFactoryX), (void**)&_dxgiFactory), false);
 	assertRetVal(_dxgiDevice.QueryFrom(_device), false);
 
 #if METRO_APP
@@ -224,66 +221,41 @@ ff::GraphStateCache &ff::GraphDevice::GetStateCache()
 	return _stateCache;
 }
 
-ff::IThreadDispatch *ff::GraphDevice::GetThreadDispatch() const
+void ff::GraphDevice::AddChild(IGraphDeviceChild *child)
 {
-	return _dispatch;
+	assert(child && _children.Find(child) == ff::INVALID_SIZE);
+	_children.Push(child);
 }
 
-void ff::GraphDevice::UpdateThreadDispatch()
+void ff::GraphDevice::RemoveChild(IGraphDeviceChild *child)
 {
-	_dispatch = nullptr;
-	ff::CreateCurrentThreadDispatch(&_dispatch);
-}
-
-void ff::GraphDevice::OnConstruct(IUnknown *unkOuter, REFGUID catid, REFGUID clsid, IUnknown *pObj)
-{
-	ComPtr<IGraphDeviceChild> pChild;
-	ComPtr<IRenderTarget>     pRenderer;
-
-	if (pChild.QueryFrom(pObj) && pChild->GetDevice() == this)
-	{
-		_children.Push(pChild);
-	}
-}
-
-void ff::GraphDevice::OnDestruct(REFGUID catid, REFGUID clsid, IUnknown *pObj)
-{
-	ComPtr<IGraphDeviceChild> pChild;
-	ComPtr<IRenderTarget>  pRenderer;
-
-	if (pChild.QueryFrom(pObj) && pChild->GetDevice() == this)
-	{
-		size_t i = _children.Find(pChild);
-		assertRet(i != INVALID_SIZE);
-		_children.Delete(i);
-	}
+	verify(_children.DeleteItem(child));
 }
 
 bool ff::GraphDevice::Reset()
 {
 	ComPtr<IDXGIAdapterX> adapter;
-	if (_factory->IsCurrent())
+	if (_dxgiFactory->IsCurrent())
 	{
-		adapter = _adapter;
+		adapter = _dxgiAdapter;
 	}
 
 	_vertexCache.Reset();
 	_indexCache.Reset();
 	_stateCache.Reset();
 
-	if (_context)
+	if (_deviceContext)
 	{
-		_context->ClearState();
-		_context->Flush();
-		_context = nullptr;
+		_deviceContext->ClearState();
+		_deviceContext->Flush();
+		_deviceContext = nullptr;
 	}
 
 	_device = nullptr;
 	_device2d = nullptr;
-	_adapter = nullptr;
-	_factory = nullptr;
+	_dxgiAdapter = nullptr;
+	_dxgiFactory = nullptr;
 	_dxgiDevice = nullptr;
-	_dispatch = nullptr;
 
 	assertRetVal(Init(adapter, _softwareDevice), false);
 
@@ -301,13 +273,13 @@ bool ff::GraphDevice::Reset()
 
 bool ff::GraphDevice::ResetIfNeeded()
 {
-	if (_factory->IsCurrent())
+	if (_dxgiFactory->IsCurrent())
 	{
 		return true;
 	}
 
 	ComPtr<IDXGIAdapter1> previousDefaultAdapter;
-	assertHrRetVal(_factory->EnumAdapters1(0, &previousDefaultAdapter), false);
+	assertHrRetVal(_dxgiFactory->EnumAdapters1(0, &previousDefaultAdapter), false);
 
 	DXGI_ADAPTER_DESC1 previousDesc;
 	assertHrRetVal(previousDefaultAdapter->GetDesc1(&previousDesc), false);
@@ -358,12 +330,12 @@ IDXGIDeviceX *ff::GraphDevice::GetDXGI()
 
 ID3D11DeviceContextX *ff::GraphDevice::GetContext()
 {
-	return _context;
+	return _deviceContext;
 }
 
 IDXGIAdapterX *ff::GraphDevice::GetAdapter()
 {
-	return _adapter;
+	return _dxgiAdapter;
 }
 
 D3D_FEATURE_LEVEL ff::GraphDevice::GetFeatureLevel() const

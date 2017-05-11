@@ -1,8 +1,8 @@
 #pragma once
 
-#include "App/Timer.h"
 #include "Dict/Dict.h"
 #include "Globals/AppGlobals.h"
+#include "Types/Timer.h"
 #include "Windows/Handles.h"
 
 #if METRO_APP
@@ -113,7 +113,6 @@ namespace ff
 		void RenderLoopThread();
 		void UpdateSwapChain();
 		void UpdateDpiScale();
-		void UpdateResourceThread();
 		void ValidateGraphDevice();
 
 		// Update during game loop

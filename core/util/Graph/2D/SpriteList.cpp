@@ -91,11 +91,16 @@ ff::SpriteList::SpriteList()
 
 ff::SpriteList::~SpriteList()
 {
+	if (_device)
+	{
+		_device->RemoveChild(this);
+	}
 }
 
 HRESULT ff::SpriteList::_Construct(IUnknown *unkOuter)
 {
 	assertRetVal(_device.QueryFrom(unkOuter), E_INVALIDARG);
+	_device->AddChild(this);
 
 	return __super::_Construct(unkOuter);
 }

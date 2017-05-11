@@ -4,7 +4,7 @@ namespace ff
 {
 	class BufferCache;
 	class GraphStateCache;
-	class IThreadDispatch;
+	class IGraphDeviceChild;
 
 	class __declspec(uuid("1b26d121-cda5-4705-ae3d-4815b4a4115b")) __declspec(novtable)
 		IGraphDevice : public IUnknown
@@ -24,7 +24,8 @@ namespace ff
 		virtual BufferCache &GetVertexBuffers() = 0;
 		virtual BufferCache &GetIndexBuffers() = 0;
 		virtual GraphStateCache &GetStateCache() = 0;
-		virtual IThreadDispatch *GetThreadDispatch() const = 0;
-		virtual void UpdateThreadDispatch() = 0;
+
+		virtual void AddChild(IGraphDeviceChild *child) = 0;
+		virtual void RemoveChild(IGraphDeviceChild *child) = 0;
 	};
 }

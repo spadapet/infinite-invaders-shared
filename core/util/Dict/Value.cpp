@@ -698,7 +698,7 @@ bool ff::Value::CreateSavedDict(ff::ISavedData *data, Value **ppValue)
 bool ff::Value::CreateSavedDict(const ff::Dict &dict, bool compress, Value **ppValue)
 {
 	ff::ComPtr<ff::IData> data;
-	assertRetVal(ff::SaveDict(dict, true, false, &data), false);
+	assertRetVal(ff::SaveDict(dict, &data), false);
 
 	ff::ComPtr<ff::ISavedData> savedData;
 	assertRetVal(ff::CreateLoadedDataFromMemory(data, compress, &savedData), false);
@@ -1161,7 +1161,7 @@ bool ff::Value::Convert(Type type, Value **ppValue) const
 				ff::ComPtr<ff::IData> data;
 				ff::ComPtr<ff::ISavedData> savedData;
 
-				if (ff::SaveDict(AsDict(), true, false, &data))
+				if (ff::SaveDict(AsDict(), &data))
 				{
 					if (type == Type::Data)
 					{

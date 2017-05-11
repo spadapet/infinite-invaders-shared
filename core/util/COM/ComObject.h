@@ -1,6 +1,6 @@
 #pragma once
 
-#include "COM/ComConnectionHelpers.h"
+#include "COM/ComConnectionPoint.h"
 
 namespace ff
 {

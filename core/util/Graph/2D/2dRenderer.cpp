@@ -345,12 +345,18 @@ Renderer2d::Renderer2d()
 Renderer2d::~Renderer2d()
 {
 	Destroy();
+
+	if (_device)
+	{
+		_device->RemoveChild(this);
+	}
 }
 
 HRESULT Renderer2d::_Construct(IUnknown *unkOuter)
 {
 	assertRetVal(_device.QueryFrom(unkOuter), E_FAIL);
-	
+	_device->AddChild(this);
+
 	return __super::_Construct(unkOuter);
 }
 

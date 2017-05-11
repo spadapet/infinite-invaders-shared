@@ -210,11 +210,17 @@ AudioEffect::~AudioEffect()
 	{
 		_playing[i]->SetEffect(nullptr);
 	}
+
+	if (_device)
+	{
+		_device->RemoveChild(this);
+	}
 }
 
 HRESULT AudioEffect::_Construct(IUnknown *unkOuter)
 {
 	assertRetVal(_device.QueryFrom(unkOuter), E_INVALIDARG);
+	_device->AddChild(this);
 
 	return __super::_Construct(unkOuter);
 }
@@ -393,11 +399,20 @@ AudioEffectPlaying::AudioEffectPlaying()
 AudioEffectPlaying::~AudioEffectPlaying()
 {
 	Reset();
+
+	if (_device)
+	{
+		_device->RemovePlaying(this);
+		_device->RemoveChild(this);
+	}
 }
 
 HRESULT AudioEffectPlaying::_Construct(IUnknown *unkOuter)
 {
 	assertRetVal(_device.QueryFrom(unkOuter), E_INVALIDARG);
+	_device->AddChild(this);
+	_device->AddPlaying(this);
+
 	return __super::_Construct(unkOuter);
 }
 
@@ -554,7 +569,7 @@ void AudioEffectPlaying::OnBufferEnd(void *pBufferContext)
 
 void AudioEffectPlaying::OnBufferEnd()
 {
-	assert(_done && GetDevice()->GetThreadDispatch()->IsCurrentThread());
+	assert(_done && ff::GetGameThreadDispatch()->IsCurrentThread());
 
 	ff::ComPtr<ff::IAudioPlaying> pKeepAlive = this;
 

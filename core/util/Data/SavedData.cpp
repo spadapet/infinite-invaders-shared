@@ -9,10 +9,7 @@
 namespace ff
 {
 	class __declspec(uuid("98514703-8655-49f8-8c2e-13641af6dd9c"))
-		CSavedData
-			: public ComBase
-			, public ISavedData
-			, public IChunkListener
+		CSavedData : public ComBase, public ISavedData
 	{
 	public:
 		DECLARE_HEADER(CSavedData);
@@ -42,12 +39,6 @@ namespace ff
 		virtual bool   Clone(ISavedData **ppSavedData) override;
 		virtual bool   Copy(ISavedData *pDataSource) override;
 
-		// IChunkListener
-
-		virtual bool OnChunk(size_t nChunkSize, size_t nAllChunks, size_t nFullSize) override;
-		virtual void OnChunkSuccess(size_t nFullSize) override;
-		virtual void OnChunkFailure(size_t nAllChunks, size_t nFullSize) override;
-
 	private:
 		ComPtr<IData> _fullData;
 		ComPtr<IData> _origData;
@@ -63,7 +54,6 @@ namespace ff
 
 BEGIN_INTERFACES(ff::CSavedData)
 	HAS_INTERFACE(ff::ISavedData)
-	HAS_INTERFACE(ff::IChunkListener)
 END_INTERFACES()
 
 bool ff::CreateLoadedDataFromMemory(IData *pData, bool bCompress, ISavedData **ppSavedData)
@@ -374,11 +364,11 @@ bool ff::CSavedData::SaveToFile()
 				assertRetVal(StreamCopyData(pReader, _fullData->GetSize(), pWriter), false);
 			}
 
-			_origFile         = pFile;
-			_origFileStart    = 0;
-			_origFileSize     = pWriter->GetPos();
+			_origFile = pFile;
+			_origFileStart = 0;
+			_origFileSize = pWriter->GetPos();
 			_origFileFullSize = _fullData->GetSize();
-			_origData         = nullptr;
+			_origData = nullptr;
 		}
 	}
 
@@ -474,26 +464,13 @@ bool ff::CSavedData::Copy(ISavedData *pDataSource)
 	_fullData = pRealSource->_fullData;
 	_compress = pRealSource->_compress;
 
-	_origData         = pRealSource->_origData;
+	_origData = pRealSource->_origData;
 	_origDataFullSize = pRealSource->_origDataFullSize;
 
-	_origFile         = pRealSource->_origFile;
-	_origFileStart    = pRealSource->_origFileStart;
-	_origFileSize     = pRealSource->_origFileSize;
+	_origFile = pRealSource->_origFile;
+	_origFileStart = pRealSource->_origFileStart;
+	_origFileSize = pRealSource->_origFileSize;
 	_origFileFullSize = pRealSource->_origFileFullSize;
 
 	return true;
-}
-
-bool ff::CSavedData::OnChunk(size_t nChunkSize, size_t nAllChunks, size_t nFullSize)
-{
-	return true;
-}
-
-void ff::CSavedData::OnChunkSuccess(size_t nFullSize)
-{
-}
-
-void ff::CSavedData::OnChunkFailure(size_t nAllChunks, size_t nFullSize)
-{
 }

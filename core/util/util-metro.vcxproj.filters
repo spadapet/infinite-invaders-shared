@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="App">
-      <UniqueIdentifier>{e9ccfe59-8b6f-49f8-aba0-dba63aeccc4a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Audio">
       <UniqueIdentifier>{ab0f61c7-14e7-4e69-aa05-0ba05f4e5a0f}</UniqueIdentifier>
     </Filter>
@@ -75,15 +72,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="App\Log.cpp">
-      <Filter>App</Filter>
-    </ClCompile>
-    <ClCompile Include="App\MostRecentlyUsed.cpp">
-      <Filter>App</Filter>
-    </ClCompile>
-    <ClCompile Include="App\Timer.cpp">
-      <Filter>App</Filter>
-    </ClCompile>
     <ClCompile Include="Audio\AudioBuffer.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
@@ -108,16 +96,10 @@
     <ClCompile Include="COM\ComBase.cpp">
       <Filter>COM</Filter>
     </ClCompile>
-    <ClCompile Include="COM\ComConnectionHelpers.cpp">
-      <Filter>COM</Filter>
-    </ClCompile>
     <ClCompile Include="COM\ComConnectionPoint.cpp">
       <Filter>COM</Filter>
     </ClCompile>
     <ClCompile Include="COM\ComFactory.cpp">
-      <Filter>COM</Filter>
-    </ClCompile>
-    <ClCompile Include="COM\ComListener.cpp">
       <Filter>COM</Filter>
     </ClCompile>
     <ClCompile Include="COM\ComUtil.cpp">
@@ -365,17 +347,14 @@
     <ClCompile Include="State\StateWrapper.cpp">
       <Filter>State</Filter>
     </ClCompile>
+    <ClCompile Include="Globals\Log.cpp">
+      <Filter>Globals</Filter>
+    </ClCompile>
+    <ClCompile Include="Types\Timer.cpp">
+      <Filter>Types</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="App\Log.h">
-      <Filter>App</Filter>
-    </ClInclude>
-    <ClInclude Include="App\MostRecentlyUsed.h">
-      <Filter>App</Filter>
-    </ClInclude>
-    <ClInclude Include="App\Timer.h">
-      <Filter>App</Filter>
-    </ClInclude>
     <ClInclude Include="Audio\AudioBuffer.h">
       <Filter>Audio</Filter>
     </ClInclude>
@@ -406,9 +385,6 @@
     <ClInclude Include="COM\ComBase.h">
       <Filter>COM</Filter>
     </ClInclude>
-    <ClInclude Include="COM\ComConnectionHelpers.h">
-      <Filter>COM</Filter>
-    </ClInclude>
     <ClInclude Include="COM\ComConnectionPoint.h">
       <Filter>COM</Filter>
     </ClInclude>
@@ -416,9 +392,6 @@
       <Filter>COM</Filter>
     </ClInclude>
     <ClInclude Include="COM\ComInclude.h">
-      <Filter>COM</Filter>
-    </ClInclude>
-    <ClInclude Include="COM\ComListener.h">
       <Filter>COM</Filter>
     </ClInclude>
     <ClInclude Include="COM\ComObject.h">
@@ -723,6 +696,12 @@
     </ClInclude>
     <ClInclude Include="State\StateWrapper.h">
       <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="Globals\Log.h">
+      <Filter>Globals</Filter>
+    </ClInclude>
+    <ClInclude Include="Types\Timer.h">
+      <Filter>Types</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

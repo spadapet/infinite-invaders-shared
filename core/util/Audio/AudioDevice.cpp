@@ -2,29 +2,22 @@
 #include "Audio/AudioDevice.h"
 #include "Audio/AudioDeviceChild.h"
 #include "Audio/AudioEffect.h"
+#include "Audio/AudioFactory.h"
 #include "Audio/AudioPlaying.h"
 #include "COM/ComAlloc.h"
-#include "COM/ComListener.h"
 #include "Globals/ThreadGlobals.h"
 #include "Graph/Data/GraphCategory.h"
-#include "Thread/ThreadDispatch.h"
 
 namespace ff
 {
 	class __declspec(uuid("039ec1dd-9e1a-4d08-9678-7937a0671d9a"))
-		AudioDevice
-			: public ComBase
-			, public IAudioDevice
-			, public IComListener
+		AudioDevice : public ComBase, public IAudioDevice
 	{
 	public:
 		DECLARE_HEADER(AudioDevice);
 
-		bool Init(IXAudio2 *pAudio, StringRef name, size_t channels, size_t sampleRate);
-
-		// IComListener functions
-		virtual void OnConstruct(IUnknown *unkOuter, REFGUID catid, REFGUID clsid, IUnknown *pObj) override;
-		virtual void OnDestruct(REFGUID catid, REFGUID clsid, IUnknown *pObj) override;
+		virtual HRESULT _Construct(IUnknown *unkOuter) override;
+		bool Init(StringRef name, size_t channels, size_t sampleRate);
 
 		// IAudioDevice functions
 		virtual bool IsValid() const override;
@@ -44,13 +37,14 @@ namespace ff
 
 		virtual IXAudio2 *GetAudio() const override;
 		virtual IXAudio2Voice *GetVoice(AudioVoiceType type) const override;
-		virtual IThreadDispatch *GetThreadDispatch() const override;
-		virtual void UpdateThreadDispatch() override;
+
+		virtual void AddChild(IAudioDeviceChild *child) override;
+		virtual void RemoveChild(IAudioDeviceChild *child) override;
+		virtual void AddPlaying(IAudioPlaying *child) override;
+		virtual void RemovePlaying(IAudioPlaying *child) override;
 
 	private:
-		ComPtr<IProxyComListener> _listener;
-		ComPtr<IXAudio2> _audio;
-		ComPtr<IThreadDispatch> _dispatch;
+		ComPtr<IAudioFactory> _factory;
 		IXAudio2MasteringVoice *_masterVoice;
 		IXAudio2SubmixVoice *_effectVoice;
 		IXAudio2SubmixVoice *_musicVoice;
@@ -64,7 +58,7 @@ namespace ff
 	};
 
 	bool CreateAudioDevice(
-		IXAudio2 *audio,
+		IAudioFactory *factory,
 		ff::StringRef name,
 		size_t channels,
 		size_t sampleRate,
@@ -76,7 +70,7 @@ BEGIN_INTERFACES(ff::AudioDevice)
 END_INTERFACES()
 
 bool ff::CreateAudioDevice(
-	IXAudio2 *audio,
+	IAudioFactory *factory,
 	ff::StringRef name,
 	size_t channels,
 	size_t sampleRate,
@@ -86,8 +80,8 @@ bool ff::CreateAudioDevice(
 	*device = nullptr;
 
 	ff::ComPtr<ff::AudioDevice, ff::IAudioDevice> pDevice;
-	assertHrRetVal(ff::ComAllocator<ff::AudioDevice>::CreateInstance(&pDevice), false);
-	assertRetVal(pDevice->Init(audio, name, channels, sampleRate), false);
+	assertHrRetVal(ff::ComAllocator<ff::AudioDevice>::CreateInstance(factory, &pDevice), false);
+	assertRetVal(pDevice->Init(name, channels, sampleRate), false);
 
 	*device = pDevice.Detach();
 	return true;
@@ -101,8 +95,6 @@ ff::AudioDevice::AudioDevice()
 	, _sampleRate(0)
 	, _advances(0)
 {
-	verify(CreateProxyComListener(this, &_listener));
-	verify(AddComListener(GetCategoryAudioObject(), _listener));
 }
 
 ff::AudioDevice::~AudioDevice()
@@ -111,36 +103,45 @@ ff::AudioDevice::~AudioDevice()
 
 	Destroy();
 
-	verify(RemoveComListener(GetCategoryAudioObject(), _listener));
-	_listener->SetOwner(nullptr);
+	if (_factory)
+	{
+		_factory->RemoveChild(this);
+	}
 }
 
-bool ff::AudioDevice::Init(
-	IXAudio2 *pAudio,
-	StringRef name,
-	size_t channels,
-	size_t sampleRate)
+HRESULT ff::AudioDevice::_Construct(IUnknown *unkOuter)
 {
-	assertRetVal(!_audio && !_masterVoice, false);
-	assertRetVal(ff::CreateCurrentThreadDispatch(&_dispatch), false);
+	assertRetVal(_factory.QueryFrom(unkOuter), E_INVALIDARG);
+	_factory->AddChild(this);
+
+	return __super::_Construct(unkOuter);
+}
+
+bool ff::AudioDevice::Init(StringRef name, size_t channels, size_t sampleRate)
+{
+	assertRetVal(!_masterVoice, false);
 
 	// There might not be an audio card, and we have to deal with that
 #if (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
-	HRESULT hrMaster = pAudio ? pAudio->CreateMasteringVoice(
-		&_masterVoice,
-		(UINT32)channels,
-		(UINT32)sampleRate,
-		0, // flags
-		name.size() ? name.c_str() : nullptr,
-		nullptr) : E_FAIL;
+	HRESULT hrMaster = _factory->GetAudio()
+		? _factory->GetAudio()->CreateMasteringVoice(
+			&_masterVoice,
+			(UINT32)channels,
+			(UINT32)sampleRate,
+			0, // flags
+			name.size() ? name.c_str() : nullptr,
+			nullptr)
+		: E_FAIL;
 #else
-	HRESULT hrMaster = pAudio ? pAudio->CreateMasteringVoice(
-		&_masterVoice,
-		(UINT32)channels,
-		(UINT32)sampleRate,
-		0, // flags
-		0, // index (ignoring the device name, just use the default)
-		nullptr) : E_FAIL;
+	HRESULT hrMaster = _factory->GetAudio()
+		? _factory->GetAudio()->CreateMasteringVoice(
+			&_masterVoice,
+			(UINT32)channels,
+			(UINT32)sampleRate,
+			0, // flags
+			0, // index (ignoring the device name, just use the default)
+			nullptr)
+		: E_FAIL;
 #endif
 
 	if (SUCCEEDED(hrMaster))
@@ -157,7 +158,7 @@ bool ff::AudioDevice::Init(
 		ff::ZeroObject(details);
 		_masterVoice->GetVoiceDetails(&details);
 
-		assertHrRetVal(pAudio->CreateSubmixVoice(
+		assertHrRetVal(_factory->GetAudio()->CreateSubmixVoice(
 			&_effectVoice,
 			details.InputChannels,
 			details.InputSampleRate,
@@ -166,7 +167,7 @@ bool ff::AudioDevice::Init(
 			&masterSend,
 			nullptr), false);
 
-		assertHrRetVal(pAudio->CreateSubmixVoice(
+		assertHrRetVal(_factory->GetAudio()->CreateSubmixVoice(
 			&_musicVoice,
 			details.InputChannels,
 			details.InputSampleRate,
@@ -177,7 +178,6 @@ bool ff::AudioDevice::Init(
 	}
 
 	_name = name;
-	_audio = pAudio;
 	_channels = channels;
 	_sampleRate = sampleRate;
 
@@ -186,7 +186,7 @@ bool ff::AudioDevice::Init(
 
 bool ff::AudioDevice::IsValid() const
 {
-	return _audio && _masterVoice;
+	return _masterVoice != nullptr;
 }
 
 void ff::AudioDevice::Destroy()
@@ -215,76 +215,30 @@ void ff::AudioDevice::Destroy()
 		_masterVoice->DestroyVoice();
 		_masterVoice = nullptr;
 	}
-	
-	_audio = nullptr;
-	_dispatch = nullptr;
-}
-
-void ff::AudioDevice::OnConstruct(IUnknown *unkOuter, REFGUID catid, REFGUID clsid, IUnknown *pObj)
-{
-	ComPtr<IAudioDeviceChild> pChild;
-
-	if (pChild.QueryFrom(pObj) && pChild->GetDevice() == this)
-	{
-		// Cache child objects so that they can be Reset() if necessary
-
-		_children.Push(pChild);
-
-		ComPtr<IAudioPlaying> pPlaying;
-		if (pPlaying.QueryFrom(pObj))
-		{
-			_playing.Push(pPlaying);
-		}
-	}
-}
-
-void ff::AudioDevice::OnDestruct(REFGUID catid, REFGUID clsid, IUnknown *pObj)
-{
-	ComPtr<IAudioDeviceChild> pChild;
-
-	if (pChild.QueryFrom(pObj) && pChild->GetDevice() == this)
-	{
-		size_t i = _children.Find(pChild);
-		assertRet(i != INVALID_SIZE);
-		_children.Delete(i);
-
-		ComPtr<IAudioPlaying> pPlaying;
-		if (pPlaying.QueryFrom(pObj))
-		{
-			verify(_playing.DeleteItem(pPlaying));
-			_paused.DeleteItem(pPlaying);
-		}
-	}
 }
 
 bool ff::AudioDevice::Reset()
 {
-	if (_audio)
-	{
-		ComPtr<IXAudio2> audio = _audio;
-
-		Destroy();
-
-		assertRetVal(Init(audio, _name, _channels, _sampleRate), false);
-	}
+	Destroy();
+	assertRetVal(Init(_name, _channels, _sampleRate), false);
 
 	return true;
 }
 
 void ff::AudioDevice::Stop()
 {
-	if (_audio)
+	if (_factory->GetAudio())
 	{
 		StopEffects();
-		_audio->StopEngine();
+		_factory->GetAudio()->StopEngine();
 	}
 }
 
 void ff::AudioDevice::Start()
 {
-	if (_audio)
+	if (_factory->GetAudio())
 	{
-		_audio->StartEngine();
+		_factory->GetAudio()->StartEngine();
 	}
 }
 
@@ -359,7 +313,7 @@ void ff::AudioDevice::ResumeEffects()
 
 IXAudio2 *ff::AudioDevice::GetAudio() const
 {
-	return _audio;
+	return _factory->GetAudio();
 }
 
 IXAudio2Voice *ff::AudioDevice::GetVoice(AudioVoiceType type) const
@@ -380,13 +334,24 @@ IXAudio2Voice *ff::AudioDevice::GetVoice(AudioVoiceType type) const
 	}
 }
 
-ff::IThreadDispatch *ff::AudioDevice::GetThreadDispatch() const
+void ff::AudioDevice::AddChild(IAudioDeviceChild *child)
 {
-	return _dispatch;
+	assert(child && _children.Find(child) == ff::INVALID_SIZE);
+	_children.Push(child);
 }
 
-void ff::AudioDevice::UpdateThreadDispatch()
+void ff::AudioDevice::RemoveChild(IAudioDeviceChild *child)
 {
-	_dispatch = nullptr;
-	ff::CreateCurrentThreadDispatch(&_dispatch);
+	verify(_children.DeleteItem(child));
+}
+
+void ff::AudioDevice::AddPlaying(IAudioPlaying *child)
+{
+	assert(child && _playing.Find(child) == ff::INVALID_SIZE);
+	_playing.Push(child);
+}
+
+void ff::AudioDevice::RemovePlaying(IAudioPlaying *child)
+{
+	verify(_playing.DeleteItem(child));
 }

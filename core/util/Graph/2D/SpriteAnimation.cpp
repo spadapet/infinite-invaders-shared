@@ -127,11 +127,17 @@ ff::SpriteAnimation::SpriteAnimation()
 ff::SpriteAnimation::~SpriteAnimation()
 {
 	Clear();
+
+	if (_device)
+	{
+		_device->RemoveChild(this);
+	}
 }
 
 HRESULT ff::SpriteAnimation::_Construct(IUnknown *unkOuter)
 {
 	assertRetVal(_device.QueryFrom(unkOuter), E_INVALIDARG);
+	_device->AddChild(this);
 
 	return __super::_Construct(unkOuter);
 }

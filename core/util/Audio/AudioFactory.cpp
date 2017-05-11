@@ -2,7 +2,6 @@
 #include "Audio/AudioDevice.h"
 #include "Audio/AudioFactory.h"
 #include "COM/ComAlloc.h"
-#include "COM/ComListener.h"
 #include "Globals/ProcessGlobals.h"
 
 #if !METRO_APP
@@ -12,19 +11,12 @@
 namespace ff
 {
 	class __declspec(uuid("b1c52643-fed3-458a-b998-3036c344ced9"))
-		AudioFactory
-			: public ComBase
-			, public IAudioFactory
-			, public IComListener
+		AudioFactory : public ComBase, public IAudioFactory
 	{
 	public:
 		DECLARE_HEADER(AudioFactory);
 
 		bool Init();
-
-		// IComListener
-		virtual void OnConstruct(IUnknown *unkOuter, REFGUID catid, REFGUID clsid, IUnknown *pObj) override;
-		virtual void OnDestruct(REFGUID catid, REFGUID clsid, IUnknown *pObj) override;
 
 		// IAudioFactory
 		virtual IXAudio2 *GetAudio() override;
@@ -35,9 +27,11 @@ namespace ff
 		virtual size_t GetDeviceCount() const override;
 		virtual IAudioDevice *GetDevice(size_t nIndex) const override;
 
+		virtual void AddChild(IAudioDevice *child) override;
+		virtual void RemoveChild(IAudioDevice *child) override;
+
 	private:
 		Mutex _mutex;
-		ComPtr<IProxyComListener> _listener;
 		ComPtr<IXAudio2> _audio;
 		Vector<IAudioDevice *> _devices;
 		IAudioDevice *_defaultDevice;
@@ -45,7 +39,7 @@ namespace ff
 	};
 
 	bool CreateAudioDevice(
-		IXAudio2 *audio,
+		IAudioFactory *factory,
 		StringRef name,
 		size_t channels,
 		size_t sampleRate,
@@ -54,7 +48,6 @@ namespace ff
 
 BEGIN_INTERFACES(ff::AudioFactory)
 	HAS_INTERFACE(ff::IAudioFactory)
-	HAS_INTERFACE(ff::IComListener)
 END_INTERFACES()
 
 bool ff::CreateAudioFactory(IAudioFactory **obj)
@@ -73,14 +66,12 @@ ff::AudioFactory::AudioFactory()
 	: _defaultDevice(nullptr)
 	, _startedMF(false)
 {
-	verify(CreateProxyComListener(this, &_listener));
 }
 
 ff::AudioFactory::~AudioFactory()
 {
 	assert(_devices.IsEmpty());
 
-	_listener->SetOwner(nullptr);
 	_audio = nullptr;
 
 	if (_startedMF)
@@ -143,11 +134,9 @@ bool ff::AudioFactory::CreateDevice(StringRef deviceId, size_t channels, size_t 
 	*device = nullptr;
 
 	ComPtr<IAudioDevice> pDevice;
-	assertRetVal(CreateAudioDevice(GetAudio(), deviceId, channels, sampleRate, &pDevice), false);
+	assertRetVal(ff::CreateAudioDevice(this, deviceId, channels, sampleRate, &pDevice), false);
 
 	_devices.Push(pDevice);
-	AddComListener(pDevice.Interface(), _listener);
-
 	*device = pDevice.Detach();
 	return true;
 }
@@ -163,29 +152,13 @@ ff::IAudioDevice *ff::AudioFactory::GetDevice(size_t nIndex) const
 	return _devices[nIndex];
 }
 
-void ff::AudioFactory::OnConstruct(IUnknown *unkOuter, REFGUID catid, REFGUID clsid, IUnknown *pObj)
+void ff::AudioFactory::AddChild(IAudioDevice *child)
 {
-	assert(false);
+	assert(child && _devices.Find(child) == ff::INVALID_SIZE);
+	_devices.Push(child);
 }
 
-void ff::AudioFactory::OnDestruct(REFGUID catid, REFGUID clsid, IUnknown *pObj)
+void ff::AudioFactory::RemoveChild(IAudioDevice *child)
 {
-	ComPtr<IAudioDevice> pDevice;
-	assertRet(pDevice.QueryFrom(pObj));
-
-	if (pDevice == _defaultDevice)
-	{
-		_defaultDevice = nullptr;
-	}
-
-	for (size_t i = 0; i < _devices.Size(); i++)
-	{
-		if (_devices[i] == pDevice)
-		{
-			_devices.Delete(i);
-			return;
-		}
-	}
-
-	assertRet(false);
+	verify(_devices.DeleteItem(child));
 }

@@ -57,8 +57,6 @@ namespace ff
 	enum GlobalMutex
 	{
 		GCS_COM_BASE,
-		GCS_COM_LISTENER,
-		GCS_DIRECT_INPUT,
 		GCS_FILE_UTIL,
 		GCS_INPUT_MAPPING,
 		GCS_LOG,

@@ -9,7 +9,7 @@ namespace ff
 	class IDataWriter;
 	class ISavedData;
 
-	UTIL_API bool CreateDataWriter(IDataVector *pData, size_t nPos, IDataWriter** ppWriter);
+	UTIL_API bool CreateDataWriter(IDataVector *pData, size_t nPos, IDataWriter **ppWriter);
 	UTIL_API bool CreateDataWriter(IDataVector **ppData, IDataWriter **ppWriter); // shortcut
 	UTIL_API bool CreateDataWriter(IDataFile *pFile, size_t nPos, IDataWriter **ppWriter); // Use INVALID_SIZE to create a new file
 

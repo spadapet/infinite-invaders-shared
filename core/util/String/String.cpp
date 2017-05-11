@@ -1057,6 +1057,17 @@ ff::StaticString::operator ff::StringRef() const
 	return GetString();
 }
 
+ff::hash_t ff::StaticString::GetHash() const
+{
+	if (_hash == 0)
+	{
+		hash_t hash = ff::HashFunc(GetString());
+		::InterlockedCompareExchange(&_hash, hash, 0);
+	}
+
+	return _hash;
+}
+
 void ff::StaticString::Initialize(const wchar_t *sz, size_t lenWithNull)
 {
 	assert(lenWithNull > 0 && !sz[lenWithNull - 1]);
@@ -1064,6 +1075,7 @@ void ff::StaticString::Initialize(const wchar_t *sz, size_t lenWithNull)
 	_str = &_data;
 	_data.DisableRefs();
 	_data.SetStaticData(sz, lenWithNull);
+	_hash = 0;
 }
 
 std::wostream &operator<<(std::wostream &output, ff::StringRef str)

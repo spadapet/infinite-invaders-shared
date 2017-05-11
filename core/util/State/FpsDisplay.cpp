@@ -1,5 +1,4 @@
 #include "pch.h"
-#include "App/Timer.h"
 #include "Globals/AppGlobals.h"
 #include "Globals/MetroGlobals.h"
 #include "Graph/Anim/AnimPos.h"
@@ -10,6 +9,7 @@
 #include "Input/InputMapping.h"
 #include "Input/KeyboardDevice.h"
 #include "Resource/ResourceValue.h"
+#include "Types/Timer.h"
 
 static ff::hash_t EVENT_TOGGLE_NUMBERS = ff::HashFunc(L"toggleNumbers");
 static ff::hash_t EVENT_TOGGLE_CHARTS = ff::HashFunc(L"toggleCharts");

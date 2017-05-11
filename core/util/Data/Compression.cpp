@@ -13,7 +13,7 @@ static size_t GetChunkSizeForDataSize(size_t nDataSize)
 	return std::min<size_t>(nDataSize, s_nMaxChunkSize);
 }
 
-bool ff::CompressData(const BYTE* pFullData, size_t nFullSize, IData **ppCompData, IChunkListener *pListener)
+bool ff::CompressData(const BYTE *pFullData, size_t nFullSize, IData **ppCompData, IChunkListener *pListener)
 {
 	assertRetVal(pFullData && ppCompData, false);
 
@@ -23,7 +23,7 @@ bool ff::CompressData(const BYTE* pFullData, size_t nFullSize, IData **ppCompDat
 	return CompressData(pData, ppCompData, pListener);
 }
 
-bool ff::UncompressData(const BYTE* pCompData, size_t nCompSize, size_t nFullSize, IData **ppFullData, IChunkListener *pListener)
+bool ff::UncompressData(const BYTE *pCompData, size_t nCompSize, size_t nFullSize, IData **ppFullData, IChunkListener *pListener)
 {
 	assertRetVal(pCompData && ppFullData, false);
 
@@ -81,7 +81,7 @@ bool ff::CompressData(IDataReader *pInput, size_t nFullSize, IDataWriter *pOutpu
 	Vector<BYTE> outputChunk;
 	outputChunk.Resize(GetChunkSizeForDataSize(nFullSize));
 
-	bool   bStatus   = true;
+	bool bStatus = true;
 	size_t nProgress = 0;
 
 	for (size_t nPos = 0, nInputChunkSize = GetChunkSizeForDataSize(nFullSize);
@@ -89,14 +89,14 @@ bool ff::CompressData(IDataReader *pInput, size_t nFullSize, IDataWriter *pOutpu
 	{
 		// Read a chunk of input and get ready to pass it to zlib
 
-		size_t      nRead      = std::min(nFullSize - nPos, nInputChunkSize);
-		const BYTE* pChunk     = pInput->Read(nRead);
-		bool        bLastChunk = nPos + nInputChunkSize >= nFullSize;
+		size_t nRead = std::min(nFullSize - nPos, nInputChunkSize);
+		const BYTE *pChunk = pInput->Read(nRead);
+		bool bLastChunk = nPos + nInputChunkSize >= nFullSize;
 
 		if (pChunk)
 		{
 			zlibData.avail_in = (uInt)nRead;
-			zlibData.next_in  = (Bytef*)pChunk;
+			zlibData.next_in = (Bytef*)pChunk;
 
 			do
 			{

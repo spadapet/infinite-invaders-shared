@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "COM/ComAlloc.h"
+#include "Globals/AppGlobals.h"
 #include "Globals/ThreadGlobals.h"
 #include "Globals/ProcessGlobals.h"
 #include "Thread/ThreadDispatch.h"
@@ -135,6 +136,12 @@ ff::IThreadDispatch *ff::GetMainThreadDispatch()
 	}
 
 	return nullptr;
+}
+
+ff::IThreadDispatch *ff::GetGameThreadDispatch()
+{
+	ff::AppGlobals *globals = ff::AppGlobals::Get();
+	return globals ? globals->GetGameDispatch() : ff::GetMainThreadDispatch();
 }
 
 ThreadDispatch::ThreadDispatch()

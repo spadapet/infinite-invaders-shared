@@ -130,11 +130,17 @@ ff::Default2dEffect::Default2dEffect()
 ff::Default2dEffect::~Default2dEffect()
 {
 	Destroy();
+
+	if (_device)
+	{
+		_device->RemoveChild(this);
+	}
 }
 
 HRESULT ff::Default2dEffect::_Construct(IUnknown *unkOuter)
 {
 	assertRetVal(_device.QueryFrom(unkOuter), E_FAIL);
+	_device->AddChild(this);
 	
 	return __super::_Construct(unkOuter);
 }

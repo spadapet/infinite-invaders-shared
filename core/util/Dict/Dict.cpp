@@ -1,73 +1,40 @@
 #include "pch.h"
-#include "App/Log.h"
 #include "Data/Data.h"
 #include "Data/SavedData.h"
 #include "Dict/Dict.h"
 #include "Dict/DictPersist.h"
+#include "Globals/Log.h"
 #include "Globals/ProcessGlobals.h"
 #include "String/StringUtil.h"
 
 static const size_t MAX_SMALL_DICT = 128;
 
-ff::StaticString ff::OPTION_APP_MRU(L"App.Mru");
-ff::StaticString ff::OPTION_APP_USE_DIRECT3D(L"App.UseDirect3d");
-ff::StaticString ff::OPTION_APP_USE_JOYSTICKS(L"App.UseJoysticks");
-ff::StaticString ff::OPTION_APP_USE_MAIN_WINDOW_KEYBOARD(L"App.UseMainWindowKeyboard");
-ff::StaticString ff::OPTION_APP_USE_MAIN_WINDOW_MOUSE(L"App.UseMainWindowMouse");
-ff::StaticString ff::OPTION_APP_USE_MAIN_WINDOW_TOUCH(L"App.UseMainWindowTouch");
-ff::StaticString ff::OPTION_APP_USE_RENDER_2D(L"App.UseRender2d");
-ff::StaticString ff::OPTION_APP_USE_RENDER_DEPTH(L"App.UseRenderDepth");
-ff::StaticString ff::OPTION_APP_USE_RENDER_MAIN_WINDOW(L"App.UseRenderMainWindow");
-ff::StaticString ff::OPTION_APP_USE_XAUDIO(L"App.UseXAudio");
-ff::StaticString ff::OPTION_APP_USE_XINPUT(L"App.UseXInput");
-ff::StaticString ff::OPTION_APP_ADVANCES_PER_SECOND(L"App.AdvancesPerSecond");
-ff::StaticString ff::OPTION_GRAPH_FRAMES_PER_SECOND(L"Graph.FramesPerSecond");
-ff::StaticString ff::OPTION_GRAPH_BACK_BUFFERS(L"Graph.BackBuffers");
-ff::StaticString ff::OPTION_GRAPH_MULTI_SAMPLES(L"Graph.MultiSamples");
-ff::StaticString ff::OPTION_GRAPH_SHOW_FPS_ON(L"Graph.ShowFpsOn");
-ff::StaticString ff::OPTION_GRAPH_VSYNC_ON(L"Graph.VsyncOn");
-ff::StaticString ff::OPTION_SOUND_MASTER_ON(L"Sound.MasterOn");
-ff::StaticString ff::OPTION_SOUND_MASTER_VOLUME(L"Sound.MasterVolume");
-ff::StaticString ff::OPTION_SOUND_EFFECTS_VOLUME(L"Sound.EffectsVolume");
-ff::StaticString ff::OPTION_SOUND_MUSIC_VOLUME(L"Sound.MusicVolume");
-ff::StaticString ff::OPTION_WINDOW_DEFAULT_CLIENT_SIZE(L"Window.DefaultClientSize");
-ff::StaticString ff::OPTION_WINDOW_FULL_SCREEN(L"Window.FullScreen");
-ff::StaticString ff::OPTION_WINDOW_MAXIMIZED(L"Window.Maximized");
-ff::StaticString ff::OPTION_WINDOW_PADDING(L"Window.Padding");
-ff::StaticString ff::OPTION_WINDOW_POSITION(L"Window.Position");
-
-ff::Dict::Dict(const Dict *parent)
-	: _parent(parent)
-	, _atomizer(nullptr)
+ff::Dict::Dict()
+	: _atomizer(nullptr)
 {
 }
 
 ff::Dict::Dict(const Dict &rhs)
-	: _parent(nullptr)
-	, _atomizer(rhs._atomizer)
+	: _atomizer(rhs._atomizer)
 {
 	*this = rhs;
 }
 
 ff::Dict::Dict(Dict &&rhs)
-	: _parent(rhs._parent)
-	, _atomizer(rhs._atomizer)
+	: _atomizer(rhs._atomizer)
 	, _propsLarge(std::move(rhs._propsLarge))
 	, _propsSmall(std::move(rhs._propsSmall))
 {
-	rhs._parent = nullptr;
 }
 
 ff::Dict::Dict(const SmallDict &rhs)
-	: _parent(nullptr)
-	, _atomizer(nullptr)
+	: _atomizer(nullptr)
 {
 	*this = rhs;
 }
 
 ff::Dict::Dict(SmallDict &&rhs)
-	: _parent(nullptr)
-	, _atomizer(nullptr)
+	: _atomizer(nullptr)
 	, _propsSmall(std::move(rhs))
 {
 }
@@ -78,7 +45,6 @@ const ff::Dict &ff::Dict::operator=(const Dict &rhs)
 	{
 		Clear();
 
-		_parent = rhs._parent;
 		_atomizer = rhs._atomizer;
 		_propsSmall = rhs._propsSmall;
 		_propsLarge.reset();
@@ -109,55 +75,36 @@ ff::Dict::~Dict()
 	Clear();
 }
 
-void ff::Dict::SetParent(const Dict *parent)
-{
-	for (const Dict *checkParent = parent; checkParent; checkParent = checkParent->GetParent())
-	{
-		if (checkParent == this)
-		{
-			assertSz(false, L"Recursive dict parents");
-			parent = nullptr;
-		}
-	}
-
-	_parent = parent;
-}
-
-const ff::Dict *ff::Dict::GetParent() const
-{
-	return _parent;
-}
-
 void ff::Dict::Clear()
 {
 	_propsSmall.Clear();
 	_propsLarge.reset();
 }
 
-void ff::Dict::Add(const Dict &rhs, bool chain)
+void ff::Dict::Add(const Dict &rhs)
 {
-	Vector<String> names = rhs.GetAllNames(chain);
+	Vector<String> names = rhs.GetAllNames();
 
 	for (StringRef name: names)
 	{
-		Value *value = rhs.GetValue(name, chain);
+		Value *value = rhs.GetValue(name);
 		SetValue(name, value);
 	}
 }
 
-void ff::Dict::Merge(const Dict &rhs, bool chain)
+void ff::Dict::Merge(const Dict &rhs)
 {
-	Vector<String> names = rhs.GetAllNames(chain);
+	Vector<String> names = rhs.GetAllNames();
 
 	for (StringRef name: names)
 	{
-		Value *value = rhs.GetValue(name, chain);
+		Value *value = rhs.GetValue(name);
 		ff::ValuePtr newValue;
 
 		if (value->IsType(ff::Value::Type::Dict) ||
 			value->IsType(ff::Value::Type::SavedDict))
 		{
-			Value *myValue = GetValue(name, true);
+			Value *myValue = GetValue(name);
 			if (myValue && (myValue->IsType(ff::Value::Type::Dict) ||
 				myValue->IsType(ff::Value::Type::SavedDict)))
 			{
@@ -166,7 +113,7 @@ void ff::Dict::Merge(const Dict &rhs, bool chain)
 					myValue->Convert(ff::Value::Type::Dict, &myDictValue))
 				{
 					Dict myDict = myDictValue->AsDict();
-					myDict.Merge(dictValue->AsDict(), true);
+					myDict.Merge(dictValue->AsDict());
 
 					if (ff::Value::CreateDict(std::move(myDict), &newValue))
 					{
@@ -188,7 +135,7 @@ void ff::Dict::Reserve(size_t count)
 	}
 }
 
-bool ff::Dict::IsEmpty(bool chain) const
+bool ff::Dict::IsEmpty() const
 {
 	bool empty = true;
 
@@ -201,15 +148,10 @@ bool ff::Dict::IsEmpty(bool chain) const
 		empty = false;
 	}
 
-	if (empty)
-	{
-		return !chain || !_parent || _parent->IsEmpty(true);
-	}
-
 	return false;
 }
 
-size_t ff::Dict::Size(bool chain) const
+size_t ff::Dict::Size() const
 {
 	size_t size = 0;
 
@@ -220,11 +162,6 @@ size_t ff::Dict::Size(bool chain) const
 	else
 	{
 		size = _propsSmall.Size();
-	}
-
-	if (chain && _parent)
-	{
-		size += _parent->Size(chain);
 	}
 
 	return size;
@@ -267,7 +204,7 @@ void ff::Dict::SetValue(ff::StringRef name, ff::Value *value)
 	}
 }
 
-ff::Value *ff::Dict::GetValue(ff::StringRef name, bool chain) const
+ff::Value *ff::Dict::GetValue(ff::StringRef name) const
 {
 	Value *value = nullptr;
 
@@ -284,11 +221,6 @@ ff::Value *ff::Dict::GetValue(ff::StringRef name, bool chain) const
 	else
 	{
 		value = _propsSmall.GetValue(name);
-	}
-
-	if (!value && chain && _parent)
-	{
-		value = _parent->GetValue(name, chain);
 	}
 
 	return value;
@@ -415,9 +347,9 @@ void ff::Dict::SetResource(ff::StringRef name, const ff::SharedResourceValue &va
 	SetValue(name, newValue);
 }
 
-int ff::Dict::GetInt(ff::StringRef name, int defaultValue, bool chain) const
+int ff::Dict::GetInt(ff::StringRef name, int defaultValue) const
 {
-	Value *value = GetValue(name, chain);
+	Value *value = GetValue(name);
 
 	if (value)
 	{
@@ -439,9 +371,9 @@ int ff::Dict::GetInt(ff::StringRef name, int defaultValue, bool chain) const
 	return defaultValue;
 }
 
-size_t ff::Dict::GetSize(StringRef name, size_t defaultValue, bool chain) const
+size_t ff::Dict::GetSize(StringRef name, size_t defaultValue) const
 {
-	Value *value = GetValue(name, chain);
+	Value *value = GetValue(name);
 
 	if (value)
 	{
@@ -456,9 +388,9 @@ size_t ff::Dict::GetSize(StringRef name, size_t defaultValue, bool chain) const
 	return defaultValue;
 }
 
-bool ff::Dict::GetBool(ff::StringRef name, bool defaultValue, bool chain) const
+bool ff::Dict::GetBool(ff::StringRef name, bool defaultValue) const
 {
-	Value *value = GetValue(name, chain);
+	Value *value = GetValue(name);
 
 	if (value)
 	{
@@ -480,9 +412,9 @@ bool ff::Dict::GetBool(ff::StringRef name, bool defaultValue, bool chain) const
 	return defaultValue;
 }
 
-ff::RectInt ff::Dict::GetRect(ff::StringRef name, RectInt defaultValue, bool chain) const
+ff::RectInt ff::Dict::GetRect(ff::StringRef name, RectInt defaultValue) const
 {
-	Value *value = GetValue(name, chain);
+	Value *value = GetValue(name);
 
 	if (value)
 	{
@@ -504,9 +436,9 @@ ff::RectInt ff::Dict::GetRect(ff::StringRef name, RectInt defaultValue, bool cha
 	return defaultValue;
 }
 
-ff::RectFloat ff::Dict::GetRectF(ff::StringRef name, RectFloat defaultValue, bool chain) const
+ff::RectFloat ff::Dict::GetRectF(ff::StringRef name, RectFloat defaultValue) const
 {
-	Value *value = GetValue(name, chain);
+	Value *value = GetValue(name);
 
 	if (value)
 	{
@@ -528,9 +460,9 @@ ff::RectFloat ff::Dict::GetRectF(ff::StringRef name, RectFloat defaultValue, boo
 	return defaultValue;
 }
 
-float ff::Dict::GetFloat(ff::StringRef name, float defaultValue, bool chain) const
+float ff::Dict::GetFloat(ff::StringRef name, float defaultValue) const
 {
-	Value *value = GetValue(name, chain);
+	Value *value = GetValue(name);
 
 	if (value)
 	{
@@ -552,9 +484,9 @@ float ff::Dict::GetFloat(ff::StringRef name, float defaultValue, bool chain) con
 	return defaultValue;
 }
 
-double ff::Dict::GetDouble(ff::StringRef name, double defaultValue, bool chain) const
+double ff::Dict::GetDouble(ff::StringRef name, double defaultValue) const
 {
-	Value *value = GetValue(name, chain);
+	Value *value = GetValue(name);
 
 	if (value)
 	{
@@ -576,9 +508,9 @@ double ff::Dict::GetDouble(ff::StringRef name, double defaultValue, bool chain) 
 	return defaultValue;
 }
 
-ff::PointInt ff::Dict::GetPoint(ff::StringRef name, PointInt defaultValue, bool chain) const
+ff::PointInt ff::Dict::GetPoint(ff::StringRef name, PointInt defaultValue) const
 {
-	Value *value = GetValue(name, chain);
+	Value *value = GetValue(name);
 
 	if (value)
 	{
@@ -600,9 +532,9 @@ ff::PointInt ff::Dict::GetPoint(ff::StringRef name, PointInt defaultValue, bool 
 	return defaultValue;
 }
 
-ff::PointFloat ff::Dict::GetPointF(ff::StringRef name, PointFloat defaultValue, bool chain) const
+ff::PointFloat ff::Dict::GetPointF(ff::StringRef name, PointFloat defaultValue) const
 {
-	Value *value = GetValue(name, chain);
+	Value *value = GetValue(name);
 
 	if (value)
 	{
@@ -624,9 +556,9 @@ ff::PointFloat ff::Dict::GetPointF(ff::StringRef name, PointFloat defaultValue, 
 	return defaultValue;
 }
 
-ff::String ff::Dict::GetString(ff::StringRef name, String defaultValue, bool chain) const
+ff::String ff::Dict::GetString(ff::StringRef name, String defaultValue) const
 {
-	Value *value = GetValue(name, chain);
+	Value *value = GetValue(name);
 
 	if (value)
 	{
@@ -648,9 +580,9 @@ ff::String ff::Dict::GetString(ff::StringRef name, String defaultValue, bool cha
 	return defaultValue;
 }
 
-GUID ff::Dict::GetGuid(ff::StringRef name, REFGUID defaultValue, bool chain) const
+GUID ff::Dict::GetGuid(ff::StringRef name, REFGUID defaultValue) const
 {
-	Value *value = GetValue(name, chain);
+	Value *value = GetValue(name);
 
 	if (value)
 	{
@@ -672,9 +604,9 @@ GUID ff::Dict::GetGuid(ff::StringRef name, REFGUID defaultValue, bool chain) con
 	return defaultValue;
 }
 
-ff::ComPtr<ff::IData> ff::Dict::GetData(ff::StringRef name, bool chain) const
+ff::ComPtr<ff::IData> ff::Dict::GetData(ff::StringRef name) const
 {
-	Value *value = GetValue(name, chain);
+	Value *value = GetValue(name);
 	ValuePtr dataValue;
 
 	if (value && value->Convert(Value::Type::Data, &dataValue))
@@ -685,9 +617,9 @@ ff::ComPtr<ff::IData> ff::Dict::GetData(ff::StringRef name, bool chain) const
 	return nullptr;
 }
 
-ff::ComPtr<ff::ISavedData> ff::Dict::GetSavedData(StringRef name, bool chain) const
+ff::ComPtr<ff::ISavedData> ff::Dict::GetSavedData(StringRef name) const
 {
-	Value *value = GetValue(name, chain);
+	Value *value = GetValue(name);
 	ValuePtr dataValue;
 
 	if (value && value->Convert(Value::Type::SavedData, &dataValue))
@@ -698,9 +630,9 @@ ff::ComPtr<ff::ISavedData> ff::Dict::GetSavedData(StringRef name, bool chain) co
 	return nullptr;
 }
 
-ff::Dict ff::Dict::GetDict(StringRef name, bool chain) const
+ff::Dict ff::Dict::GetDict(StringRef name) const
 {
-	Value *value = GetValue(name, chain);
+	Value *value = GetValue(name);
 	ValuePtr newValue;
 
 	if (value && value->Convert(Value::Type::Dict, &newValue))
@@ -711,9 +643,9 @@ ff::Dict ff::Dict::GetDict(StringRef name, bool chain) const
 	return ff::Dict();
 }
 
-ff::SharedResourceValue ff::Dict::GetResource(ff::StringRef name, bool chain) const
+ff::SharedResourceValue ff::Dict::GetResource(ff::StringRef name) const
 {
-	Value *value = GetValue(name, chain);
+	Value *value = GetValue(name);
 	ValuePtr newValue;
 
 	if (value && value->Convert(Value::Type::Resource, &newValue))
@@ -724,10 +656,10 @@ ff::SharedResourceValue ff::Dict::GetResource(ff::StringRef name, bool chain) co
 	return ff::SharedResourceValue();
 }
 
-ff::Vector<ff::String> ff::Dict::GetAllNames(bool chain, bool sorted, bool nameHashOnly) const
+ff::Vector<ff::String> ff::Dict::GetAllNames(bool sorted) const
 {
 	Set<String> nameSet;
-	InternalGetAllNames(nameSet, chain, nameHashOnly);
+	InternalGetAllNames(nameSet);
 
 	Vector<String> names;
 	for (StringRef name: nameSet)
@@ -743,21 +675,14 @@ ff::Vector<ff::String> ff::Dict::GetAllNames(bool chain, bool sorted, bool nameH
 	return names;
 }
 
-void ff::Dict::InternalGetAllNames(Set<String> &names, bool chain, bool nameHashOnly) const
+void ff::Dict::InternalGetAllNames(Set<String> &names) const
 {
-	StringCache emptyCache;
-
-	if (chain && _parent)
-	{
-		_parent->InternalGetAllNames(names, chain, nameHashOnly);
-	}
-
 	if (_propsLarge != nullptr)
 	{
 		for (const auto &iter: *_propsLarge)
 		{
 			hash_t hash = iter.GetKey();
-			String name = nameHashOnly ? emptyCache.GetString(hash) : GetAtomizer().GetString(hash);
+			String name = GetAtomizer().GetString(hash);
 			names.SetKey(name);
 		}
 	}
@@ -765,7 +690,7 @@ void ff::Dict::InternalGetAllNames(Set<String> &names, bool chain, bool nameHash
 	{
 		for (size_t i = 0; i < _propsSmall.Size(); i++)
 		{
-			String name = nameHashOnly ? emptyCache.GetString(_propsSmall.KeyHashAt(i)) : _propsSmall.KeyAt(i);
+			String name = _propsSmall.KeyAt(i);
 			names.SetKey(name);
 		}
 	}

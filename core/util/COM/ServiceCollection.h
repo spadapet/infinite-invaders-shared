@@ -6,7 +6,7 @@ namespace ff
 		IServiceProvider : public IUnknown
 	{
 	public:
-		COM_FUNC QueryService(REFGUID guidService, REFIID riid, void** ppvObject) = 0;
+		COM_FUNC QueryService(REFGUID guidService, REFIID riid, void **ppvObject) = 0;
 	};
 
 	class __declspec(uuid("58f51830-33c4-42fb-98c6-4f1fc1f97ad8")) __declspec(novtable)

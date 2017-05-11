@@ -50,6 +50,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Globals\Log.cpp" />
     <ClCompile Include="Globals\MetroGlobals.cpp" />
     <ClCompile Include="Audio\AudioBuffer.cpp" />
     <ClCompile Include="Audio\AudioDevice.cpp" />
@@ -59,10 +60,8 @@
     <ClCompile Include="Audio\AudioStream.cpp" />
     <ClCompile Include="Audio\DestroyVoice.cpp" />
     <ClCompile Include="COM\ComBase.cpp" />
-    <ClCompile Include="COM\ComConnectionHelpers.cpp" />
     <ClCompile Include="COM\ComConnectionPoint.cpp" />
     <ClCompile Include="COM\ComFactory.cpp" />
-    <ClCompile Include="COM\ComListener.cpp" />
     <ClCompile Include="COM\ComUtil.cpp" />
     <ClCompile Include="COM\ServiceCollection.cpp" />
     <ClCompile Include="Core\AssertUtil.cpp" />
@@ -143,18 +142,14 @@
     <ClCompile Include="Thread\ThreadUtil.cpp" />
     <ClCompile Include="Types\Hash.cpp" />
     <ClCompile Include="Types\MemAlloc.cpp" />
+    <ClCompile Include="Types\Timer.cpp" />
     <ClCompile Include="Windows\FileUtil.cpp" />
     <ClCompile Include="Windows\Handles.cpp" />
     <ClCompile Include="Windows\RegUtil.cpp" />
     <ClCompile Include="Windows\WinUtil.cpp" />
-    <ClInclude Include="App\Log.h" />
     <ClInclude Include="Globals\AppGlobals.h" />
+    <ClInclude Include="Globals\Log.h" />
     <ClInclude Include="Globals\MetroGlobals.h" />
-    <ClInclude Include="App\MostRecentlyUsed.h" />
-    <ClInclude Include="App\Timer.h" />
-    <ClCompile Include="App\Log.cpp" />
-    <ClCompile Include="App\MostRecentlyUsed.cpp" />
-    <ClCompile Include="App\Timer.cpp" />
     <ClInclude Include="Audio\AudioBuffer.h" />
     <ClInclude Include="Audio\AudioDevice.h" />
     <ClInclude Include="Audio\AudioDeviceChild.h" />
@@ -165,11 +160,9 @@
     <ClInclude Include="Audio\AudioStream.h" />
     <ClInclude Include="COM\ComAlloc.h" />
     <ClInclude Include="COM\ComBase.h" />
-    <ClInclude Include="COM\ComConnectionHelpers.h" />
     <ClInclude Include="COM\ComConnectionPoint.h" />
     <ClInclude Include="COM\ComFactory.h" />
     <ClInclude Include="COM\ComInclude.h" />
-    <ClInclude Include="COM\ComListener.h" />
     <ClInclude Include="COM\ComObject.h" />
     <ClInclude Include="COM\ComPch.h" />
     <ClInclude Include="COM\ComPtr.h" />
@@ -264,6 +257,7 @@
     <ClInclude Include="Types\Set.h" />
     <ClInclude Include="Types\SharedObject.h" />
     <ClInclude Include="Types\SmartPtr.h" />
+    <ClInclude Include="Types\Timer.h" />
     <ClInclude Include="Types\Vector.h" />
     <ClInclude Include="UtilApi.h" />
     <ClInclude Include="Windows\FileUtil.h" />

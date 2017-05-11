@@ -19,11 +19,11 @@ namespace ff
 	UTIL_API bool RegEnumKey(HKEY key, DWORD nIndex, StringOut outName);
 	UTIL_API bool RegEnumValue(HKEY key, DWORD nIndex, StringOut outName, LPDWORD pType = nullptr);
 
-	class CRegKey
+	class RegKey
 	{
 	public:
-		UTIL_API CRegKey();
-		UTIL_API ~CRegKey();
+		UTIL_API RegKey();
+		UTIL_API ~RegKey();
 
 		UTIL_API operator HKEY() const;
 

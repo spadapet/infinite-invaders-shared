@@ -18,6 +18,8 @@ namespace ff
 	class AppGlobals
 	{
 	public:
+		static AppGlobals *Get();
+
 		virtual IAudioDevice *GetAudio() const = 0;
 		virtual IGraphDevice *GetGraph() const = 0;
 		virtual IRenderTargetWindow *GetTarget() const = 0;

@@ -1,14 +1,13 @@
 #include "pch.h"
 #include "COM/ComAlloc.h"
 #include "COM/ComFactory.h"
-#include "COM/ComListener.h"
 #include "Module/Module.h"
 
 class __declspec(uuid("d79aaf15-483c-4040-9836-fc9cc2ff14ac"))
-	CFactory : public ff::ComBase, public IClassFactory
+	ClassFactory : public ff::ComBase, public IClassFactory
 {
 public:
-	DECLARE_HEADER(CFactory);
+	DECLARE_HEADER(ClassFactory);
 
 	void SetAllocator(REFGUID clsid, const ff::Module *module, ff::ClassFactoryFunc func);
 
@@ -22,30 +21,8 @@ private:
 	GUID _clsid;
 };
 
-BEGIN_INTERFACES(CFactory)
+BEGIN_INTERFACES(ClassFactory)
 	HAS_INTERFACE(IClassFactory)
-END_INTERFACES()
-
-class __declspec(uuid("fb7e618b-a9ba-4e66-86aa-7f078abc7489"))
-	CSingletonFactory : public CFactory, public ff::IComListener
-{
-public:
-	DECLARE_HEADER(CSingletonFactory);
-
-	// IClassFactory
-	COM_FUNC CreateInstance(IUnknown *unkOuter, REFIID iid, void **ppv) override;
-
-	// IComListener
-	virtual void OnConstruct(IUnknown *unkOuter, REFGUID catid, REFGUID clsid, IUnknown *pObj) override;
-	virtual void OnDestruct (REFGUID catid, REFGUID clsid, IUnknown *pObj) override;
-
-private:
-	ff::Mutex _cs;
-	IUnknown *_object;
-};
-
-BEGIN_INTERFACES(CSingletonFactory)
-	PARENT_INTERFACES(CFactory)
 END_INTERFACES()
 
 bool ff::CreateClassFactory(REFGUID clsid, const ff::Module *module, ff::ClassFactoryFunc func, IClassFactory **factory)
@@ -53,45 +30,32 @@ bool ff::CreateClassFactory(REFGUID clsid, const ff::Module *module, ff::ClassFa
 	assertRetVal(factory && module && func, false);
 	*factory = nullptr;
 
-	ff::ComPtr<CFactory> myFactory;
-	assertHrRetVal(ff::ComAllocator<CFactory>::CreateInstance(&myFactory), false);
+	ff::ComPtr<ClassFactory> myFactory;
+	assertHrRetVal(ff::ComAllocator<ClassFactory>::CreateInstance(&myFactory), false);
 	myFactory->SetAllocator(clsid, module, func);
 
 	*factory = myFactory.Detach();
 	return true;
 }
 
-bool ff::CreateSingletonClassFactory(REFGUID clsid, const ff::Module *module, ff::ClassFactoryFunc func, IClassFactory **factory)
-{
-	assertRetVal(*factory && module && func, false);
-	*factory = nullptr;
-
-	ff::ComPtr<CSingletonFactory, IClassFactory> myFactory;
-	assertHrRetVal(ff::ComAllocator<CSingletonFactory>::CreateInstance(&myFactory), false);
-	myFactory->SetAllocator(clsid, module, func);
-
-	*factory = myFactory.Detach();
-	return true;
-}
-
-CFactory::CFactory()
+ClassFactory::ClassFactory()
 	: _module(nullptr)
 	, _func(nullptr)
 {
 }
 
-CFactory::~CFactory()
+ClassFactory::~ClassFactory()
 {
 }
 
-void CFactory::SetAllocator(REFGUID clsid, const ff::Module *module, ff::ClassFactoryFunc func)
+void ClassFactory::SetAllocator(REFGUID clsid, const ff::Module *module, ff::ClassFactoryFunc func)
 {
 	_module = module;
 	_func   = func;
 	_clsid   = clsid;
 }
 
-HRESULT CFactory::CreateInstance(IUnknown *unkOuter, REFIID iid, void **ppv)
+HRESULT ClassFactory::CreateInstance(IUnknown *unkOuter, REFIID iid, void **ppv)
 {
 	assertRetVal(ppv, E_INVALIDARG);
 	assertRetVal(_func, E_FAIL);
@@ -99,7 +63,7 @@ HRESULT CFactory::CreateInstance(IUnknown *unkOuter, REFIID iid, void **ppv)
 	return _func(unkOuter, _clsid, iid, ppv);
 }
 
-HRESULT CFactory::LockServer(BOOL bLock)
+HRESULT ClassFactory::LockServer(BOOL bLock)
 {
 	assertRetVal(_module, E_FAIL);
 
@@ -113,43 +77,4 @@ HRESULT CFactory::LockServer(BOOL bLock)
 	}
 
 	return S_OK;
-}
-
-CSingletonFactory::CSingletonFactory()
-	: _object(nullptr)
-{
-}
-
-CSingletonFactory::~CSingletonFactory()
-{
-}
-
-HRESULT CSingletonFactory::CreateInstance(IUnknown *unkOuter, REFIID iid, void **ppv)
-{
-	ff::LockMutex crit(_cs);
-
-	ff::ComPtr<IUnknown> obj = _object;
-
-	if (!obj)
-	{
-		HRESULT hr = __super::CreateInstance(unkOuter, __uuidof(IUnknown), (void**)&obj);
-		assertHrRetVal(hr, hr);
-
-		AddComListener(obj, this);
-
-		_object = obj;
-	}
-
-	return obj->QueryInterface(iid, ppv);
-}
-
-void CSingletonFactory::OnConstruct(IUnknown *unkOuter, REFGUID catid, REFGUID clsid, IUnknown *pObj)
-{
-}
-
-void CSingletonFactory::OnDestruct(REFGUID catid, REFGUID clsid, IUnknown *pObj)
-{
-	ff::LockMutex crit(_cs);
-
-	_object = nullptr;
 }

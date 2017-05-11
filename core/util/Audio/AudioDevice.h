@@ -2,7 +2,8 @@
 
 namespace ff
 {
-	class IAudioDevice;
+	class IAudioDeviceChild;
+	class IAudioPlaying;
 	class IThreadDispatch;
 
 	enum class AudioVoiceType
@@ -33,7 +34,10 @@ namespace ff
 
 		virtual IXAudio2 *GetAudio() const = 0;
 		virtual IXAudio2Voice *GetVoice(AudioVoiceType type) const = 0;
-		virtual IThreadDispatch *GetThreadDispatch() const = 0;
-		virtual void UpdateThreadDispatch() = 0;
+
+		virtual void AddChild(IAudioDeviceChild *child) = 0;
+		virtual void RemoveChild(IAudioDeviceChild *child) = 0;
+		virtual void AddPlaying(IAudioPlaying *child) = 0;
+		virtual void RemovePlaying(IAudioPlaying *child) = 0;
 	};
 }

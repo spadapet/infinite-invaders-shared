@@ -171,6 +171,12 @@ void ff::Module::LoadResources()
 		if (Value::CreateSavedDict(datas[i], &savedData) &&
 			savedData->Convert(Value::Type::Dict, &savedDict))
 		{
+#ifdef _DEBUG
+			for (ff::StringRef name : savedDict->AsDict().GetAllNames())
+			{
+				assert(finalDict.GetValue(name) == nullptr);
+			}
+#endif
 			finalDict.Add(savedDict->AsDict());
 		}
 	}

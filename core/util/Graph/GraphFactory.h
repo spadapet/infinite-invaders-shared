@@ -21,6 +21,9 @@ namespace ff
 		virtual Vector<ComPtr<IDXGIAdapterX>> GetAdapters() = 0;
 		virtual Vector<ComPtr<IDXGIOutputX>> GetOutputs(IDXGIAdapterX *pCard) = 0;
 
+		virtual void AddChild(IGraphDevice *child) = 0;
+		virtual void RemoveChild(IGraphDevice *child) = 0;
+
 #if !METRO_APP
 		virtual bool GetAdapterForWindow(HWND hwnd, IDXGIAdapterX **ppCard, IDXGIOutputX **ppOutput) = 0;
 		virtual bool GetAdapterForMonitor(HMONITOR hMonitor, IDXGIAdapterX **ppCard, IDXGIOutputX **ppOutput) = 0;

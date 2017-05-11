@@ -118,11 +118,17 @@ RenderTargetWindowMetro::RenderTargetWindowMetro()
 
 RenderTargetWindowMetro::~RenderTargetWindowMetro()
 {
+	if (_device)
+	{
+		_device->RemoveChild(this);
+	}
 }
 
 HRESULT RenderTargetWindowMetro::_Construct(IUnknown *unkOuter)
 {
 	assertRetVal(_device.QueryFrom(unkOuter), E_FAIL);
+	_device->AddChild(this);
+
 	return __super::_Construct(unkOuter);
 }
 

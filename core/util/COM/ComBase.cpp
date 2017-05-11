@@ -1,5 +1,4 @@
 #include "pch.h"
-#include "COM/ComListener.h"
 #include "Module/Module.h"
 
 #ifdef _DEBUG
@@ -30,14 +29,11 @@ ff::ComBaseEx::~ComBaseEx()
 
 HRESULT ff::ComBaseEx::_Construct(IUnknown *unkOuter)
 {
-	IComListener::CallOnConstruct(unkOuter, _GetCategoryID(), _GetClassID(), _GetUnknown());
-
 	return S_OK;
 }
 
 void ff::ComBaseEx::_Destruct()
 {
-	IComListener::CallOnDestruct(_GetCategoryID(), _GetClassID(), _GetUnknown());
 }
 
 void ff::ComBaseEx::_DeleteThis()

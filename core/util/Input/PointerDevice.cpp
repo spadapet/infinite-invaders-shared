@@ -434,7 +434,7 @@ const ff::TouchInfo &ff::PointerDevice::GetTouchInfo(size_t index) const
 		TouchType::TOUCH_TYPE_NONE,
 		PointDouble(0, 0),
 		PointDouble(0, 0),
-		0, 0,
+		0,
 	};
 
 	assertRetVal(false, blankInfo);

@@ -16,23 +16,23 @@ namespace ff
 	class ISavedData;
 
 	UTIL_API bool CreateLoadedDataFromMemory(
-			IData *pData,
-			bool bCompress,
-			ISavedData **ppSavedData);
+		IData *pData,
+		bool bCompress,
+		ISavedData **ppSavedData);
 
 	UTIL_API bool CreateSavedDataFromMemory(
-			IData *pData,
-			size_t nFullSize,
-			bool bCompressed,
-			ISavedData **ppSavedData);
+		IData *pData,
+		size_t nFullSize,
+		bool bCompressed,
+		ISavedData **ppSavedData);
 
 	UTIL_API bool CreateSavedDataFromFile(
-			IDataFile *pFile,
-			size_t nStart,
-			size_t nSavedSize,
-			size_t nFullSize,
-			bool bCompressed,
-			ISavedData **ppSavedData);
+		IDataFile *pFile,
+		size_t nStart,
+		size_t nSavedSize,
+		size_t nFullSize,
+		bool bCompressed,
+		ISavedData **ppSavedData);
 
 	class __declspec(uuid("04f35c9d-b5bb-4e42-8df5-3b13630e6516")) __declspec(novtable)
 		ISavedData : public IUnknown

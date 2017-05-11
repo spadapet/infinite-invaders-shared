@@ -1,6 +1,6 @@
 #pragma once
 
-#include "App/Log.h"
+#include "Globals/Log.h"
 #include "Globals/ThreadGlobals.h"
 #include "Module/Modules.h"
 #include "String/StringCache.h"

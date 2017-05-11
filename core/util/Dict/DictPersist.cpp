@@ -1,5 +1,4 @@
 #include "pch.h"
-#include "App/Log.h"
 #include "Data/Data.h"
 #include "Data/DataPersist.h"
 #include "Data/DataWriterReader.h"
@@ -7,6 +6,7 @@
 #include "Dict/Dict.h"
 #include "Dict/DictPersist.h"
 #include "Dict/Value.h"
+#include "Globals/Log.h"
 #include "Module/Module.h"
 #include "Module/ModuleFactory.h"
 #include "Resource/ResourcePersist.h"
@@ -57,10 +57,10 @@ static bool CanSaveValue(ff::Value *value)
 	return false;
 }
 
-static bool InternalSaveDict(const ff::Dict &dict, bool chain, bool nameHashOnly, ff::IData **data);
+static bool InternalSaveDict(const ff::Dict &dict, ff::IData **data);
 static bool InternalLoadDict(ff::IDataReader *reader, ff::Dict &dict);
 
-static bool InternalSaveValue(ff::Value *value, ff::IDataWriter *writer, bool nameHashOnly)
+static bool InternalSaveValue(ff::Value *value, ff::IDataWriter *writer)
 {
 	assertRetVal(value && writer, false);
 
@@ -236,7 +236,7 @@ static bool InternalSaveValue(ff::Value *value, ff::IDataWriter *writer, bool na
 
 			for (const ff::ValuePtr &nestedValue: value->AsValueVector())
 			{
-				assertRetVal(InternalSaveValue(nestedValue, writer, nameHashOnly), false);
+				assertRetVal(InternalSaveValue(nestedValue, writer), false);
 			}
 		}
 		break;
@@ -255,7 +255,7 @@ static bool InternalSaveValue(ff::Value *value, ff::IDataWriter *writer, bool na
 
 			ff::ValuePtr nestedValue;
 			assertRetVal(ff::Value::CreateDict(std::move(objDict), &nestedValue), false);
-			assertRetVal(InternalSaveValue(nestedValue, writer, nameHashOnly), false);
+			assertRetVal(InternalSaveValue(nestedValue, writer), false);
 		}
 		break;
 	}
@@ -524,7 +524,7 @@ static bool InternalLoadValue(ff::IDataReader *reader, ff::Value **value)
 	return true;
 }
 
-static bool InternalSaveDict(const ff::Dict &dict, bool chain, bool nameHashOnly, ff::IData **data)
+static bool InternalSaveDict(const ff::Dict &dict, ff::IData **data)
 {
 	assertRetVal(data, false);
 	*data = nullptr;
@@ -533,10 +533,9 @@ static bool InternalSaveDict(const ff::Dict &dict, bool chain, bool nameHashOnly
 	ff::ComPtr<ff::IDataWriter> writer;
 	assertRetVal(CreateDataWriter(&dataVector, &writer), false);
 
-	ff::Vector<ff::String> names = dict.GetAllNames(chain, false, nameHashOnly);
+	ff::Vector<ff::String> names = dict.GetAllNames();
 	DWORD count = (DWORD)names.Size();
-	DWORD version = nameHashOnly ? 1 : 0;
-	ff::StringCache emptyCache;
+	DWORD version = 0;
 
 	assertRetVal(ff::SaveData(writer, DICT_HEADER), false);
 	assertRetVal(ff::SaveData(writer, version), false);
@@ -544,27 +543,19 @@ static bool InternalSaveDict(const ff::Dict &dict, bool chain, bool nameHashOnly
 
 	for (ff::StringRef name: names)
 	{
-		if (nameHashOnly)
-		{
-			ff::hash_t hash = emptyCache.GetHash(name);
-			assertRetVal(ff::SaveData(writer, hash), false);
-		}
-		else
-		{
-			assertRetVal(ff::SaveData(writer, name), false);
-		}
+		assertRetVal(ff::SaveData(writer, name), false);
 
-		ff::Value *value = dict.GetValue(name, chain);
-		assertRetVal(InternalSaveValue(value, writer, nameHashOnly), false);
+		ff::Value *value = dict.GetValue(name);
+		assertRetVal(InternalSaveValue(value, writer), false);
 	}
 
 	*data = dataVector.Detach();
 	return true;
 }
 
-bool ff::SaveDict(const ff::Dict &dict, bool chain, bool nameHashOnly, ff::IData **data)
+bool ff::SaveDict(const ff::Dict &dict, ff::IData **data)
 {
-	return InternalSaveDict(dict, chain, nameHashOnly, data);
+	return InternalSaveDict(dict, data);
 }
 
 static bool InternalLoadDict(ff::IDataReader *reader, ff::Dict &dict)
@@ -580,23 +571,12 @@ static bool InternalLoadDict(ff::IDataReader *reader, ff::Dict &dict)
 	assertRetVal(ff::LoadData(reader, count), false);
 	dict.Reserve(count);
 
-	bool nameHashOnly = (version == 1);
 	ff::StringCache emptyCache;
 
 	for (size_t i = 0; i < count; i++)
 	{
 		ff::String name;
-
-		if (nameHashOnly)
-		{
-			ff::hash_t hash;
-			assertRetVal(ff::LoadData(reader, hash), false);
-			name = emptyCache.GetString(hash);
-		}
-		else
-		{
-			assertRetVal(ff::LoadData(reader, name), false);
-		}
+		assertRetVal(ff::LoadData(reader, name), false);
 
 		ff::ValuePtr value;
 		assertRetVal(InternalLoadValue(reader, &value), false);
@@ -627,7 +607,7 @@ static ff::String SanitizeString(ff::StringRef str)
 	return cleanStr;
 }
 
-static void InternalDumpDict(const ff::Dict &dict, ff::Log &log, bool chain, size_t level);
+static void InternalDumpDict(const ff::Dict &dict, ff::Log &log, size_t level);
 
 static void InternalDumpValue(ff::StringRef name, ff::ValuePtr value, ff::Log &log, size_t level)
 {
@@ -709,7 +689,7 @@ static void InternalDumpValue(ff::StringRef name, ff::ValuePtr value, ff::Log &l
 
 	case ff::Value::Type::Dict:
 		log.TraceF(L"<dict: %lu>\r\n", value->AsDict().Size());
-		InternalDumpDict(value->AsDict(), log, true, level + 1);
+		InternalDumpDict(value->AsDict(), log, level + 1);
 		break;
 
 	case ff::Value::Type::SavedData:
@@ -747,7 +727,7 @@ static void InternalDumpValue(ff::StringRef name, ff::ValuePtr value, ff::Log &l
 			ff::ValuePtr dictValue;
 			if (value->Convert(ff::Value::Type::Dict, &dictValue))
 			{
-				InternalDumpDict(dictValue->AsDict(), log, true, level + 1);
+				InternalDumpDict(dictValue->AsDict(), log, level + 1);
 			}
 		}
 		break;
@@ -774,7 +754,7 @@ static void InternalDumpValue(ff::StringRef name, ff::ValuePtr value, ff::Log &l
 				ff::Dict resDict;
 				if (resObj->SaveResource(resDict))
 				{
-					InternalDumpDict(resDict, log, true, level + 1);
+					InternalDumpDict(resDict, log, level + 1);
 				}
 			}
 		}
@@ -782,17 +762,17 @@ static void InternalDumpValue(ff::StringRef name, ff::ValuePtr value, ff::Log &l
 	}
 }
 
-static void InternalDumpDict(const ff::Dict &dict, ff::Log &log, bool chain, size_t level)
+static void InternalDumpDict(const ff::Dict &dict, ff::Log &log, size_t level)
 {
-	ff::Vector<ff::String> names = dict.GetAllNames(chain, true, false);
+	ff::Vector<ff::String> names = dict.GetAllNames(true);
 	for (ff::StringRef name : names)
 	{
-		ff::ValuePtr value = dict.GetValue(name, chain);
+		ff::ValuePtr value = dict.GetValue(name);
 		InternalDumpValue(name, value, log, level);
 	}
 }
 
-void ff::DumpDict(StringRef name, const Dict &dict, Log *log, bool chain, bool debugOnly)
+void ff::DumpDict(StringRef name, const Dict &dict, Log *log, bool debugOnly)
 {
 	if (!debugOnly || GetThisModule().IsDebugBuild())
 	{
@@ -801,7 +781,7 @@ void ff::DumpDict(StringRef name, const Dict &dict, Log *log, bool chain, bool d
 
 		realLog.TraceF(L"-- Dict %s --\r\n", name.c_str());
 
-		InternalDumpDict(dict, realLog, chain, 0);
+		InternalDumpDict(dict, realLog, 0);
 
 		realLog.Trace(L"-- Done --\r\n");
 	}
@@ -809,5 +789,5 @@ void ff::DumpDict(StringRef name, const Dict &dict, Log *log, bool chain, bool d
 
 void ff::DebugDumpDict(const Dict &dict)
 {
-	ff::DumpDict(ff::GetEmptyString(), dict, nullptr, true, true);
+	ff::DumpDict(ff::GetEmptyString(), dict, nullptr, true);
 }

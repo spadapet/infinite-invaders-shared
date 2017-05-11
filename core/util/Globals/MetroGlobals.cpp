@@ -1,5 +1,4 @@
 #include "pch.h"
-#include "App/Log.h"
 #include "Audio/AudioDevice.h"
 #include "Audio/AudioFactory.h"
 #include "Data/Data.h"
@@ -7,6 +6,7 @@
 #include "Data/DataWriterReader.h"
 #include "Dict/DictPersist.h"
 #include "Globals/GlobalsScope.h"
+#include "Globals/Log.h"
 #include "Globals/MetroGlobals.h"
 #include "Globals/ProcessGlobals.h"
 #include "Globals/ThreadGlobals.h"
@@ -241,6 +241,11 @@ ff::MetroGlobals::~MetroGlobals()
 	s_metroGlobals = nullptr;
 }
 
+ff::AppGlobals *ff::AppGlobals::Get()
+{
+	return s_metroGlobals;
+}
+
 ff::MetroGlobals *ff::MetroGlobals::Get()
 {
 	return s_metroGlobals;
@@ -438,14 +443,13 @@ bool ff::MetroGlobals::SaveState()
 		Dict namedDict = kvp.GetValue();
 		if (!namedDict.IsEmpty())
 		{
-			namedDict.SetParent(nullptr);
 			state.SetDict(kvp.GetKey(), namedDict);
 		}
 	}
 
 	File file;
 	ComPtr<IData> data;
-	assertRetVal(ff::SaveDict(state, true, false, &data), false);
+	assertRetVal(ff::SaveDict(state, &data), false);
 	assertRetVal(file.OpenWrite(fileName), false);
 	assertRetVal(ff::WriteFile(file, data), false);
 
@@ -476,7 +480,7 @@ ff::Dict ff::MetroGlobals::GetState(StringRef name)
 		}
 
 		namedIter = _namedState.SetKey(name, state);
-		ff::DumpDict(name, state, &ff::ProcessGlobals::Get()->GetLog(), true, true);
+		ff::DumpDict(name, state, &ff::ProcessGlobals::Get()->GetLog(), true);
 	}
 
 	return _namedState.ValueAt(namedIter);
@@ -792,7 +796,6 @@ void ff::MetroGlobals::StopRenderLoop()
 
 	_gameLoopAction->Cancel();
 	ff::WaitForEventAndReset(_gameLoopEvent);
-	UpdateResourceThread();
 
 	_gameLoopAction = nullptr;
 }
@@ -819,9 +822,7 @@ void ff::MetroGlobals::RenderLoopThread()
 	ff::ThreadGlobalsScope<ff::ThreadGlobals> threadScope;
 	_gameLoopDispatch = threadScope.GetGlobals().GetDispatch();
 
-	UpdateResourceThread();
 	FrameResetTimer();
-
 	::SetEvent(_gameLoopEvent);
 
 	while (_gameLoopAction == nullptr || _gameLoopAction->Status == Windows::Foundation::AsyncStatus::Started)
@@ -886,19 +887,6 @@ void ff::MetroGlobals::UpdateDpiScale()
 	_dpiScale = _displayInfo->LogicalDpi / 96.0;
 }
 
-void ff::MetroGlobals::UpdateResourceThread()
-{
-	if (_graph)
-	{
-		_graph->UpdateThreadDispatch();
-	}
-
-	if (_audio)
-	{
-		_audio->UpdateThreadDispatch();
-	}
-}
-
 void ff::MetroGlobals::ValidateGraphDevice()
 {
 	if (_graph)
@@ -916,7 +904,7 @@ ff::IThreadDispatch *ff::MetroGlobals::GetGameDispatch() const
 {
 	return _gameLoopDispatch
 		? _gameLoopDispatch
-		: ff::GetThreadDispatch();
+		: ff::GetMainThreadDispatch();
 }
 
 bool ff::MetroGlobals::FrameAdvanceAndRender()
@@ -1029,6 +1017,13 @@ bool ff::MetroGlobals::FrameAdvanceTimer()
 		_frameTime._advanceCount++;
 		return true;
 	}
+}
+
+#else
+
+ff::AppGlobals *ff::AppGlobals::Get()
+{
+	return nullptr;
 }
 
 #endif

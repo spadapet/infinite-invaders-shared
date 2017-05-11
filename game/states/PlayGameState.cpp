@@ -1,5 +1,4 @@
 #include "pch.h"
-#include "App\Timer.h"
 #include "App.xaml.h"
 #include "COM\ServiceCollection.h"
 #include "components\core\LoadingComponent.h"
@@ -25,6 +24,7 @@
 #include "states\TransitionState.h"
 #include "systems\AudioSystem.h"
 #include "ThisApplication.h"
+#include "Types\Timer.h"
 
 enum CustomInputEvent
 {

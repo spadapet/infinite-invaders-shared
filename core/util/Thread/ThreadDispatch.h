@@ -21,4 +21,5 @@ namespace ff
 	UTIL_API IThreadDispatch *GetThreadDispatch();
 	UTIL_API IThreadDispatch *GetCurrentThreadDispatch();
 	UTIL_API IThreadDispatch *GetMainThreadDispatch();
+	UTIL_API IThreadDispatch *GetGameThreadDispatch();
 }

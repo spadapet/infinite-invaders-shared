@@ -1,15 +1,13 @@
 #include "pch.h"
-#include "App/Log.h"
 #include "COM/ComAlloc.h"
 #include "COM/ServiceCollection.h"
+#include "Globals/Log.h"
 #include "Globals/ProcessGlobals.h"
 
 namespace ff
 {
 	class __declspec(uuid("47744916-f538-47b6-801a-06c590ce01e1"))
-		CServiceCollection
-			: public ComBase
-			, public IServiceCollection
+		CServiceCollection : public ComBase, public IServiceCollection
 	{
 	public:
 		DECLARE_HEADER(CServiceCollection);

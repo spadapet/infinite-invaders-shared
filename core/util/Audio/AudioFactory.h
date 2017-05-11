@@ -15,6 +15,9 @@ namespace ff
 
 		virtual size_t GetDeviceCount() const = 0;
 		virtual IAudioDevice *GetDevice(size_t nIndex) const = 0;
+
+		virtual void AddChild(IAudioDevice *child) = 0;
+		virtual void RemoveChild(IAudioDevice *child) = 0;
 	};
 
 	bool CreateAudioFactory(IAudioFactory **obj);

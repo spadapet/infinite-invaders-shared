@@ -239,11 +239,16 @@ ff::SpriteFont::SpriteFont()
 
 ff::SpriteFont::~SpriteFont()
 {
+	if (_device)
+	{
+		_device->RemoveChild(this);
+	}
 }
 
 HRESULT ff::SpriteFont::_Construct(IUnknown *unkOuter)
 {
 	assertRetVal(_device.QueryFrom(unkOuter), E_INVALIDARG);
+	_device->AddChild(this);
 
 	return __super::_Construct(unkOuter);
 }

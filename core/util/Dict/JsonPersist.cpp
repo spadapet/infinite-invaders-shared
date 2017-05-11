@@ -308,7 +308,7 @@ static void JsonWriteObject(const ff::Dict &dict, size_t spaces, ff::StringOut o
 {
 	output.append(1, '{');
 
-	ff::Vector<ff::String> names = dict.GetAllNames(true, true);
+	ff::Vector<ff::String> names = dict.GetAllNames(true);
 	if (names.Size())
 	{
 		output.append(L"\r\n", 2);
@@ -322,7 +322,7 @@ static void JsonWriteObject(const ff::Dict &dict, size_t spaces, ff::StringOut o
 			ff::StringRef name = names[i];
 			output.append(JsonEncode(name));
 			output.append(1, ':');
-			JsonWriteValue(dict.GetValue(name, true), spaces + INDENT_SPACES, output);
+			JsonWriteValue(dict.GetValue(name), spaces + INDENT_SPACES, output);
 
 			if (i + 1 < names.Size())
 			{

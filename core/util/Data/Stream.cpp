@@ -1,9 +1,9 @@
 #include "pch.h"
-#include "App/Log.h"
 #include "COM/ComObject.h"
 #include "Data/Data.h"
 #include "Data/DataWriterReader.h"
 #include "Data/Stream.h"
+#include "Globals/Log.h"
 
 namespace ff
 {

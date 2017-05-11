@@ -1,24 +1,16 @@
 #include "pch.h"
 #include "COM/ComAlloc.h"
-#include "COM/ComListener.h"
 #include "Globals/ProcessGlobals.h"
 #include "Graph/GraphDevice.h"
 #include "Graph/GraphFactory.h"
 
 class __declspec(uuid("b38739e9-19e5-4cec-8065-6bb784f7ad39"))
-	GraphicFactory
-		: public ff::ComBase
-		, public ff::IGraphicFactory
-		, public ff::IComListener
+	GraphicFactory : public ff::ComBase, public ff::IGraphicFactory
 {
 public:
 	DECLARE_HEADER(GraphicFactory);
 
 	bool Init();
-
-	// IComListener
-	virtual void OnConstruct(IUnknown *unkOuter, REFGUID catid, REFGUID clsid, IUnknown *pObj) override;
-	virtual void OnDestruct(REFGUID catid, REFGUID clsid, IUnknown *pObj) override;
 
 	// IGraphicFactory
 	virtual IDXGIFactoryX *GetDXGI() override;
@@ -33,6 +25,9 @@ public:
 	virtual ff::Vector<ff::ComPtr<IDXGIAdapterX>> GetAdapters() override;
 	virtual ff::Vector<ff::ComPtr<IDXGIOutputX>> GetOutputs(IDXGIAdapterX *pCard) override;
 
+	virtual void AddChild(ff::IGraphDevice *child) override;
+	virtual void RemoveChild(ff::IGraphDevice *child) override;
+
 #if !METRO_APP
 	virtual bool GetAdapterForWindow(HWND hwnd, IDXGIAdapterX **ppCard, IDXGIOutputX **ppOutput) override;
 	virtual bool GetAdapterForMonitor(HMONITOR hMonitor, IDXGIAdapterX **ppCard, IDXGIOutputX **ppOutput) override;
@@ -40,7 +35,6 @@ public:
 
 private:
 	ff::Mutex _mutex;
-	ff::ComPtr<ff::IProxyComListener> _listener;
 	ff::ComPtr<IDXGIFactoryX> _dxgi;
 	ff::ComPtr<ID2D1FactoryX> _factory2d;
 	ff::Vector<ff::IGraphDevice *> _devices;
@@ -48,14 +42,13 @@ private:
 
 namespace ff
 {
-	bool CreateHardwareGraphDevice(ff::IGraphDevice **device);
-	bool CreateSoftwareGraphDevice(ff::IGraphDevice **device);
-	bool CreateGraphDevice(IDXGIAdapterX *pCard, ff::IGraphDevice **device);
+	bool CreateHardwareGraphDevice(IGraphicFactory *factory, ff::IGraphDevice **device);
+	bool CreateSoftwareGraphDevice(IGraphicFactory *factory, ff::IGraphDevice **device);
+	bool CreateGraphDevice(IGraphicFactory *factory, IDXGIAdapterX *pCard, ff::IGraphDevice **device);
 }
 
 BEGIN_INTERFACES(GraphicFactory)
 	HAS_INTERFACE(ff::IGraphicFactory)
-	HAS_INTERFACE(ff::IComListener)
 END_INTERFACES()
 
 bool ff::CreateGraphicFactory(ff::IGraphicFactory **ppObj)
@@ -87,12 +80,10 @@ bool ff::GetParentDXGI(IUnknown *pObject, REFGUID iid, void **ppParent)
 
 GraphicFactory::GraphicFactory()
 {
-	verify(CreateProxyComListener(this, &_listener));
 }
 
 GraphicFactory::~GraphicFactory()
 {
-	_listener->SetOwner(nullptr);
 }
 
 bool GraphicFactory::Init()
@@ -161,15 +152,13 @@ bool GraphicFactory::CreateDevice(IDXGIAdapterX *pCard, ff::IGraphDevice **devic
 	ff::ComPtr<ff::IGraphDevice> pDevice;
 	if (pCard)
 	{
-		assertRetVal(CreateGraphDevice(pCard, &pDevice), false);
+		assertRetVal(ff::CreateGraphDevice(this, pCard, &pDevice), false);
 	}
 	else
 	{
-		assertRetVal(CreateHardwareGraphDevice(&pDevice), false);
+		assertRetVal(ff::CreateHardwareGraphDevice(this, &pDevice), false);
 	}
 
-	_devices.Push(pDevice);
-	ff::AddComListener(pDevice.Interface(), _listener);
 	*device = pDevice.Detach();
 
 	return true;
@@ -181,10 +170,8 @@ bool GraphicFactory::CreateSoftwareDevice(ff::IGraphDevice **device)
 	*device = nullptr;
 
 	ff::ComPtr<ff::IGraphDevice> pDevice;
-	assertRetVal(CreateGraphDevice(nullptr, &pDevice), false);
+	assertRetVal(ff::CreateGraphDevice(this, nullptr, &pDevice), false);
 
-	_devices.Push(pDevice);
-	ff::AddComListener(pDevice.Interface(), _listener);
 	*device = pDevice.Detach();
 
 	return true;
@@ -232,6 +219,17 @@ ff::Vector<ff::ComPtr<IDXGIOutputX>> GraphicFactory::GetOutputs(IDXGIAdapterX *p
 	}
 
 	return outputs;
+}
+
+void GraphicFactory::AddChild(ff::IGraphDevice *child)
+{
+	assert(child && _devices.Find(child) == ff::INVALID_SIZE);
+	_devices.Push(child);
+}
+
+void GraphicFactory::RemoveChild(ff::IGraphDevice *child)
+{
+	verify(_devices.DeleteItem(child));
 }
 
 #if !METRO_APP
@@ -309,25 +307,3 @@ bool GraphicFactory::GetAdapterForMonitor(HMONITOR hMonitor, IDXGIAdapterX **ppC
 	assertRetVal(false, false);
 }
 #endif
-
-void GraphicFactory::OnConstruct(IUnknown *unkOuter, REFGUID catid, REFGUID clsid, IUnknown *pObj)
-{
-	assert(false);
-}
-
-void GraphicFactory::OnDestruct(REFGUID catid, REFGUID clsid, IUnknown *pObj)
-{
-	ff::ComPtr<ff::IGraphDevice> pDevice;
-	assertRet(pDevice.QueryFrom(pObj));
-
-	for (size_t i = 0; i < _devices.Size(); i++)
-	{
-		if (_devices[i] == pDevice)
-		{
-			_devices.Delete(i);
-			return;
-		}
-	}
-
-	assert(false);
-}

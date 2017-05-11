@@ -208,12 +208,14 @@ namespace ff
 
 		UTIL_API StringRef GetString() const;
 		UTIL_API operator StringRef() const;
+		UTIL_API hash_t GetHash() const;
 
 	private:
 		UTIL_API void Initialize(const wchar_t *sz, size_t lenWithNull);
 
 		SharedStringVectorAllocator::SharedStringVector *_str;
 		SharedStringVectorAllocator::SharedStringVector _data;
+		mutable hash_t _hash;
 	};
 
 	template<>
@@ -225,7 +227,7 @@ namespace ff
 	template<>
 	inline hash_t HashFunc<StaticString>(const StaticString &val)
 	{
-		return HashFunc(val.GetString());
+		return val.GetHash();
 	}
 }
 

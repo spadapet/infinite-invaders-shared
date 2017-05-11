@@ -94,7 +94,7 @@ static bool InternalRegDeleteKey(HKEY parentKey, ff::StringRef keyName, int dept
 
 	// delete child keys first
 	{
-		ff::CRegKey key;
+		ff::RegKey key;
 		if (!key.Open(parentKey, keyName))
 		{
 			return false;
@@ -206,22 +206,22 @@ bool ff::RegEnumValue(HKEY key, DWORD nIndex, StringOut outName, LPDWORD pType)
 	}
 }
 
-ff::CRegKey::CRegKey()
+ff::RegKey::RegKey()
 	: _key(nullptr)
 {
 }
 
-ff::CRegKey::~CRegKey()
+ff::RegKey::~RegKey()
 {
 	Close();
 }
 
-ff::CRegKey::operator HKEY() const
+ff::RegKey::operator HKEY() const
 {
 	return _key;
 }
 
-HKEY ff::CRegKey::Create(HKEY parentKey, StringRef keyName)
+HKEY ff::RegKey::Create(HKEY parentKey, StringRef keyName)
 {
 	Close();
 
@@ -234,7 +234,7 @@ HKEY ff::CRegKey::Create(HKEY parentKey, StringRef keyName)
 	return _key;
 }
 
-HKEY ff::CRegKey::Open(HKEY parentKey, StringRef keyName, bool bReadOnly)
+HKEY ff::RegKey::Open(HKEY parentKey, StringRef keyName, bool bReadOnly)
 {
 	Close();
 
@@ -246,7 +246,7 @@ HKEY ff::CRegKey::Open(HKEY parentKey, StringRef keyName, bool bReadOnly)
 	return _key;
 }
 
-void ff::CRegKey::Close()
+void ff::RegKey::Close()
 {
 	if (_key)
 	{
