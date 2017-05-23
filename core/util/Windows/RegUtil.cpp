@@ -125,7 +125,7 @@ bool ff::RegDeleteKey(HKEY parentKey, StringRef keyName)
 
 bool ff::RegEnumKey(HKEY key, DWORD nIndex, StringOut outName)
 {
-	DWORD nSubKeys          = 0;
+	DWORD nSubKeys = 0;
 	DWORD nMaxSubKeyNameLen = 0;
 
 	if (::RegQueryInfoKey(key,
@@ -167,7 +167,7 @@ bool ff::RegEnumKey(HKEY key, DWORD nIndex, StringOut outName)
 
 bool ff::RegEnumValue(HKEY key, DWORD nIndex, StringOut outName, LPDWORD pType)
 {
-	DWORD nValues          = 0;
+	DWORD nValues = 0;
 	DWORD nMaxValueNameLen = 0;
 
 	if (::RegQueryInfoKey(key,

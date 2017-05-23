@@ -101,7 +101,7 @@ bool ff::CompressData(IDataReader *pInput, size_t nFullSize, IDataWriter *pOutpu
 			do
 			{
 				zlibData.avail_out = (uInt)outputChunk.Size();
-				zlibData.next_out  = outputChunk.Data();
+				zlibData.next_out = outputChunk.Data();
 				deflate(&zlibData, bLastChunk ? Z_FINISH : Z_NO_FLUSH);
 
 				size_t nWrite = outputChunk.Size() - zlibData.avail_out;
@@ -167,28 +167,28 @@ bool ff::UncompressData(IDataReader *pInput, size_t nCompSize, IDataWriter *pOut
 	Vector<BYTE> outputChunk;
 	outputChunk.Resize(GetChunkSizeForDataSize(nCompSize * 2));
 
-	bool   bStatus        = true;
-	int    nInflateStatus = Z_OK;
-	size_t nProgress      = 0;
-	size_t nPos           = 0;
+	bool bStatus = true;
+	int nInflateStatus = Z_OK;
+	size_t nProgress = 0;
+	size_t nPos = 0;
 
 	for (size_t nInputChunkSize = GetChunkSizeForDataSize(nCompSize);
 		bStatus && nPos < nCompSize; nPos = std::min(nPos + nInputChunkSize, nCompSize))
 	{
 		// Read a chunk of input and get ready to pass it to zlib
 
-		size_t      nRead  = std::min(nCompSize - nPos, nInputChunkSize);
-		const BYTE* pChunk = pInput->Read(nRead);
+		size_t nRead = std::min(nCompSize - nPos, nInputChunkSize);
+		const BYTE *pChunk = pInput->Read(nRead);
 
 		if (pChunk)
 		{
 			zlibData.avail_in = (uInt)nRead;
-			zlibData.next_in  = (Bytef*)pChunk;
+			zlibData.next_in = (Bytef *)pChunk;
 
 			do
 			{
 				zlibData.avail_out = (uInt)outputChunk.Size();
-				zlibData.next_out  = outputChunk.Data();
+				zlibData.next_out = outputChunk.Data();
 				nInflateStatus = inflate(&zlibData, Z_NO_FLUSH);
 
 				bStatus =

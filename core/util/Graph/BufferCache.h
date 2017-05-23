@@ -10,7 +10,7 @@ namespace ff
 		BufferCache(D3D11_BIND_FLAG binding);
 		~BufferCache();
 
-		IGraphDevice* GetDevice() const;
+		IGraphDevice *GetDevice() const;
 		void SetDevice(IGraphDevice *pDevice);
 		void Reset();
 
@@ -27,7 +27,6 @@ namespace ff
 		std::vector<ComPtr<ID3D11Buffer>> _buffers[4];
 		size_t _allocated[4];
 	};
-
 
 	// Automatically borrows a buffer from the cache, maps it, and releases it
 	template<typename T>
@@ -62,7 +61,7 @@ namespace ff
 		}
 
 		ID3D11Buffer *GetBuffer() { return _buffer; }
-		T *GetMem() { return _mem;  }
+		T *GetMem() { return _mem; }
 		size_t GetSize() { return _count * sizeof(T); }
 		size_t GetCount() { return _count; }
 

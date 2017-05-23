@@ -366,6 +366,41 @@ const ff::FrameTime &ff::MetroGlobals::GetFrameTime() const
 	return _frameTime;
 }
 
+void ff::MetroGlobals::PostGameEvent(hash_t eventId, int data)
+{
+	GetGameDispatch()->Post([this, eventId, data]()
+	{
+		if (_gameState != nullptr)
+		{
+			_gameState->Notify(eventId, data, nullptr);
+		}
+	});
+}
+
+bool ff::MetroGlobals::SendGameEvent(hash_t eventId, int data1, void *data2)
+{
+	ff::IThreadDispatch *dispatch = GetGameDispatch();
+
+	if (dispatch->IsCurrentThread())
+	{
+		return (_gameState != nullptr) && _gameState->Notify(eventId, data1, data2);
+	}
+	else
+	{
+		bool result = false;
+
+		dispatch->Send([this, eventId, data1, data2, &result]()
+		{
+			if (_gameState != nullptr)
+			{
+				result = _gameState->Notify(eventId, data1, data2);
+			}
+		});
+
+		return result;
+	}
+}
+
 ff::String ff::MetroGlobals::GetLogFile() const
 {
 	return _logFile;

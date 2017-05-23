@@ -12,10 +12,11 @@ namespace ff
 		UTIL_API State();
 		UTIL_API virtual ~State();
 
-		UTIL_API virtual std::shared_ptr<State> Advance(AppGlobals *context);
-		UTIL_API virtual void Render(AppGlobals *context, IRenderTarget *target);
-		UTIL_API virtual void SaveState(AppGlobals *context);
-		UTIL_API virtual void LoadState(AppGlobals *context);
+		UTIL_API virtual std::shared_ptr<State> Advance(AppGlobals *globals);
+		UTIL_API virtual void Render(AppGlobals *globals, IRenderTarget *target);
+		UTIL_API virtual void SaveState(AppGlobals *globals);
+		UTIL_API virtual void LoadState(AppGlobals *globals);
+		UTIL_API virtual bool Notify(hash_t eventId, int data1, void *data2);
 
 		enum class Status
 		{

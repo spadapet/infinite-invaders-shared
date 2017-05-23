@@ -148,13 +148,13 @@ bool OptimizedTextureInfo::PlaceRect(ff::RectInt rect)
 {
 	ff::RectInt rectCells(
 		rect.left / s_gridSize,
-		rect.top  / s_gridSize,
-		(rect.right  + s_gridSize - 1) / s_gridSize,
+		rect.top / s_gridSize,
+		(rect.right + s_gridSize - 1) / s_gridSize,
 		(rect.bottom + s_gridSize - 1) / s_gridSize);
 
 	assertRetVal(
-		rect.left >= 0 && rect.right  <= _size.x &&
-		rect.top  >= 0 && rect.bottom <= _size.y &&
+		rect.left >= 0 && rect.right <= _size.x &&
+		rect.top >= 0 && rect.bottom <= _size.y &&
 		rect.Width() > 0 &&
 		rect.Height() > 0, false);
 
@@ -166,7 +166,7 @@ bool OptimizedTextureInfo::PlaceRect(ff::RectInt rect)
 		{
 			// Must be a one cell gap between sprites
 			assertRetVal(!_rowRight[y] ||
-				_rowRight[y]   + 1 <= rectCells.left ||
+				_rowRight[y] + 1 <= rectCells.left ||
 				rectCells.right + 1 <= _rowLeft[y], false);
 		}
 	}
@@ -179,12 +179,12 @@ bool OptimizedTextureInfo::PlaceRect(ff::RectInt rect)
 		{
 			if (_rowRight[y])
 			{
-				_rowLeft[y]  = std::min<BYTE>(_rowLeft[y],  rectCells.left);
+				_rowLeft[y] = std::min<BYTE>(_rowLeft[y], rectCells.left);
 				_rowRight[y] = std::max<BYTE>(_rowRight[y], rectCells.right);
 			}
 			else
 			{
-				_rowLeft[y]  = rectCells.left;
+				_rowLeft[y] = rectCells.left;
 				_rowRight[y] = rectCells.right;
 			}
 		}
@@ -195,8 +195,8 @@ bool OptimizedTextureInfo::PlaceRect(ff::RectInt rect)
 
 static int CompareSpriteInfo(const OptimizedSpriteInfo &sprite1, const OptimizedSpriteInfo &sprite2)
 {
-	const ff::SpriteData& data1 = sprite1._sprite->GetSpriteData();
-	const ff::SpriteData& data2 = sprite2._sprite->GetSpriteData();
+	const ff::SpriteData &data1 = sprite1._sprite->GetSpriteData();
+	const ff::SpriteData &data2 = sprite2._sprite->GetSpriteData();
 
 	if (sprite1._srcRect.Height() == sprite2._srcRect.Height())
 	{
@@ -287,7 +287,7 @@ static bool PlaceSprites(
 		{
 			if (sprite._destTexture == ff::INVALID_SIZE)
 			{
-				if (sprite._srcRect.Width()  > s_textureSizeMax ||
+				if (sprite._srcRect.Width() > s_textureSizeMax ||
 					sprite._srcRect.Height() > s_textureSizeMax)
 				{
 					ff::PointInt size = sprite._srcRect.Size();

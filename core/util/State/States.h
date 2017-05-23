@@ -8,16 +8,17 @@ namespace ff
 	class States : public ff::State
 	{
 	public:
-		States();
+		UTIL_API States();
 		virtual ~States();
 
-		void AddTop(std::shared_ptr<State> state);
-		void AddBottom(std::shared_ptr<State> state);
+		UTIL_API void AddTop(std::shared_ptr<State> state);
+		UTIL_API void AddBottom(std::shared_ptr<State> state);
 
-		virtual std::shared_ptr<State> Advance(AppGlobals *context) override;
-		virtual void Render(AppGlobals *context, IRenderTarget *target) override;
-		virtual void SaveState(AppGlobals *context) override;
-		virtual void LoadState(AppGlobals *context) override;
+		virtual std::shared_ptr<State> Advance(AppGlobals *globals) override;
+		virtual void Render(AppGlobals *globals, IRenderTarget *target) override;
+		virtual void SaveState(AppGlobals *globals) override;
+		virtual void LoadState(AppGlobals *globals) override;
+		virtual bool Notify(hash_t eventId, int data1, void *data2) override;
 		virtual Status GetStatus() override;
 
 	private:

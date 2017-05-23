@@ -62,8 +62,7 @@ namespace ff
 			DWORD _cookie;
 		};
 
-		typedef SharedObject<Vector<Sink>> SharedSinks;
-		typedef SmartPtr<SharedSinks> SharedSinksPtr;
+		typedef std::shared_ptr<Vector<Sink>> SharedSinksPtr;
 
 		UTIL_API SharedSinksPtr GetSinks() const;
 
@@ -87,7 +86,7 @@ namespace ff
 		SharedSinksPtr _sinks;
 	};
 
-	template<class T>
+	template<typename T>
 	class ConnectionPointType : public ConnectionPointBase
 	{
 	public:
@@ -97,7 +96,7 @@ namespace ff
 		COM_FUNC GetConnectionInterface(IID *iid) override;
 	};
 
-	template<class T>
+	template<typename T>
 	class ConnectionPoint : public IConnectionPointHolder
 	{
 	public:
@@ -177,13 +176,13 @@ namespace ff
 			size_t _cur;
 		};
 
-		iterator begin()  const { return iterator(_sinks ? _sinks->GetSinks() : ConnectionPointBase::SharedSinksPtr(), 0); }
-		iterator end()    const { return iterator(_sinks ? _sinks->GetSinks() : ConnectionPointBase::SharedSinksPtr(), INVALID_SIZE); }
+		iterator begin() const { return iterator(_sinks ? _sinks->GetSinks() : ConnectionPointBase::SharedSinksPtr(), 0); }
+		iterator end() const { return iterator(_sinks ? _sinks->GetSinks() : ConnectionPointBase::SharedSinksPtr(), INVALID_SIZE); }
 		iterator cbegin() const { return iterator(_sinks ? _sinks->GetSinks() : ConnectionPointBase::SharedSinksPtr(), 0); }
-		iterator cend()   const { return iterator(_sinks ? _sinks->GetSinks() : ConnectionPointBase::SharedSinksPtr(), INVALID_SIZE); }
+		iterator cend() const { return iterator(_sinks ? _sinks->GetSinks() : ConnectionPointBase::SharedSinksPtr(), INVALID_SIZE); }
 	};
 
-	template<class T>
+	template<typename T>
 	class Connection
 	{
 	public:
@@ -204,7 +203,7 @@ namespace ff
 }
 
 // static
-template<class T>
+template<typename T>
 bool ff::ConnectionPointType<T>::Create(IConnectionPointContainer *parent, ConnectionPointType<T> **value)
 {
 	assertRetVal(value, false);
@@ -216,7 +215,7 @@ bool ff::ConnectionPointType<T>::Create(IConnectionPointContainer *parent, Conne
 	return true;
 }
 
-template<class T>
+template<typename T>
 HRESULT ff::ConnectionPointType<T>::GetConnectionInterface(IID *iid)
 {
 	assertRetVal(iid, E_INVALIDARG);
@@ -224,12 +223,12 @@ HRESULT ff::ConnectionPointType<T>::GetConnectionInterface(IID *iid)
 	return S_OK;
 }
 
-template<class T>
+template<typename T>
 ff::ConnectionPoint<T>::ConnectionPoint()
 {
 }
 
-template<class T>
+template<typename T>
 ff::ConnectionPoint<T>::~ConnectionPoint()
 {
 	if (_sinks)
@@ -238,13 +237,13 @@ ff::ConnectionPoint<T>::~ConnectionPoint()
 	}
 }
 
-template<class T>
+template<typename T>
 bool ff::ConnectionPoint<T>::HasConnectionPoint() const
 {
 	return _sinks != nullptr;
 }
 
-template<class T>
+template<typename T>
 IConnectionPoint *ff::ConnectionPoint<T>::GetConnectionPoint(IConnectionPointContainer *parent)
 {
 	if (_sinks == nullptr && parent != nullptr)
@@ -255,19 +254,19 @@ IConnectionPoint *ff::ConnectionPoint<T>::GetConnectionPoint(IConnectionPointCon
 	return _sinks;
 }
 
-template<class T>
+template<typename T>
 REFGUID ff::ConnectionPoint<T>::GetConnectionInterface() const
 {
 	return __uuidof(T);
 }
 
-template<class T>
+template<typename T>
 ff::Connection<T>::Connection()
 	: _cookie(0)
 {
 }
 
-template<class T>
+template<typename T>
 ff::Connection<T>::Connection(Connection<T> &&rhs)
 	: _cookie(rhs._cookie)
 	, _point(std::move(rhs._point))
@@ -275,13 +274,13 @@ ff::Connection<T>::Connection(Connection<T> &&rhs)
 	rhs._cookie = 0;
 }
 
-template<class T>
+template<typename T>
 ff::Connection<T>::~Connection()
 {
 	Disconnect();
 }
 
-template<class T>
+template<typename T>
 bool ff::Connection<T>::Connect(IUnknown *parent, T *listener)
 {
 	Disconnect();
@@ -305,7 +304,7 @@ bool ff::Connection<T>::Connect(IUnknown *parent, T *listener)
 	return true;
 }
 
-template<class T>
+template<typename T>
 void ff::Connection<T>::Disconnect()
 {
 	if (_point)

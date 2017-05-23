@@ -15,7 +15,7 @@ namespace ff
 	public:
 		DECLARE_HEADER(CData);
 
-		bool Init(const BYTE* pMem, size_t nSize, IDataFile *pFile);
+		bool Init(const BYTE *pMem, size_t nSize, IDataFile *pFile);
 
 		// IData functions
 		virtual const BYTE *GetMem() override;
@@ -126,7 +126,7 @@ bool ff::CreateDataInMemMappedFile(IDataFile *pFile, IData **ppData)
 	return CreateDataInMemMappedFile(nullptr, INVALID_SIZE, pFile, ppData);
 }
 
-bool ff::CreateDataInMemMappedFile(const BYTE* pMem, size_t nSize, IDataFile *pFile, IData **ppData)
+bool ff::CreateDataInMemMappedFile(const BYTE *pMem, size_t nSize, IDataFile *pFile, IData **ppData)
 {
 	assertRetVal(ppData, false);
 	*ppData = nullptr;
@@ -139,7 +139,7 @@ bool ff::CreateDataInMemMappedFile(const BYTE* pMem, size_t nSize, IDataFile *pF
 	return true;
 }
 
-bool ff::CreateDataInStaticMem(const BYTE* pMem, size_t nSize, IData **ppData)
+bool ff::CreateDataInStaticMem(const BYTE *pMem, size_t nSize, IData **ppData)
 {
 	return CreateDataInMemMappedFile(pMem, nSize, nullptr, ppData);
 }
@@ -219,10 +219,10 @@ ff::CData::~CData()
 	}
 }
 
-bool ff::CData::Init(const BYTE* pMem, size_t nSize, IDataFile *pFile)
+bool ff::CData::Init(const BYTE *pMem, size_t nSize, IDataFile *pFile)
 {
 	_file = pFile;
-	_mem  = pMem;
+	_mem = pMem;
 	_size = nSize;
 
 	if (_file)
@@ -281,8 +281,8 @@ bool ff::CChildData::Init(IData *pParentData, size_t nPos, size_t nSize)
 		false);
 
 	_parentData = pParentData;
-	_pos        = nPos;
-	_size       = nSize;
+	_pos = nPos;
+	_size = nSize;
 
 	return true;
 }

@@ -9,7 +9,6 @@
 #include "Graph/2D/SpriteList.h"
 #include "Graph/2D/SpriteOptimizer.h"
 #include "Graph/Anim/AnimPos.h"
-#include "Graph/Data/GraphCategory.h"
 #include "Graph/Font/FontData.h"
 #include "Graph/Font/SpriteFont.h"
 #include "Graph/GraphDevice.h"
@@ -29,9 +28,9 @@ static ff::StaticString PROP_SPRITES(L"sprites");
 #if METRO_APP
 typedef struct tagKERNINGPAIR
 {
-   WORD wFirst;
-   WORD wSecond;
-   int iKernAmount;
+	WORD wFirst;
+	WORD wSecond;
+	int iKernAmount;
 } KERNINGPAIR, *LPKERNINGPAIR;
 #endif
 
@@ -139,7 +138,7 @@ END_INTERFACES()
 static ff::ModuleStartup Register([](ff::Module &module)
 {
 	static ff::StaticString name(L"font");
-	module.RegisterClassT<ff::SpriteFont>(name, __uuidof(ff::ISpriteFont), ff::GetCategoryGraphicsObject());
+	module.RegisterClassT<ff::SpriteFont>(name, __uuidof(ff::ISpriteFont));
 });
 
 bool ff::CreateSpriteFont(IGraphDevice *pDevice, const LOGFONT &logFont, ISpriteFont **ppFont)
@@ -321,10 +320,10 @@ bool ff::SpriteFont::InitGlyphs()
 	HDC hdcDesktop = GetDC(nullptr);
 	assertRetVal(hdcDesktop, false);
 
-	CreateDcHandle hdc     = CreateCompatibleDC(hdcDesktop);
-	BitmapHandle   hBitmap = CreateCompatibleBitmap(hdcDesktop, 1, 1);
+	CreateDcHandle hdc = CreateCompatibleDC(hdcDesktop);
+	BitmapHandle hBitmap = CreateCompatibleBitmap(hdcDesktop, 1, 1);
 	SelectGdiObject<HBITMAP> selectBitmap(hdc, hBitmap);
-	SelectGdiObject<HFONT>   selectFont(hdc, hFont);
+	SelectGdiObject<HFONT> selectFont(hdc, hFont);
 
 	ReleaseDC(nullptr, hdcDesktop);
 	hdcDesktop = nullptr;
@@ -361,9 +360,9 @@ bool ff::SpriteFont::InitGlyphs()
 
 	DWORD nGlyphSetSize = GetFontUnicodeRanges(hdc, nullptr);
 	Vector<BYTE> glyphSetData;
-	Set<size_t>  glyphSet;
-	GLYPHSET*    pGlyphSet = nullptr;
-	size_t       nGlyphsSupported = 0;
+	Set<size_t> glyphSet;
+	GLYPHSET *pGlyphSet = nullptr;
+	size_t nGlyphsSupported = 0;
 
 	if (nGlyphSetSize)
 	{
@@ -452,9 +451,9 @@ bool ff::SpriteFont::InitGlyphs()
 
 	for (BucketIter iter = glyphSet.StartIteration(); iter != INVALID_ITER; iter = glyphSet.Iterate(iter))
 	{
-		size_t nGlyph  = glyphSet.KeyAt(iter);
-		wchar_t  chGlyph = (wchar_t)(nGlyph & 0xFFFF);
-		wchar_t  name[2] = { chGlyph, 0 };
+		size_t nGlyph = glyphSet.KeyAt(iter);
+		wchar_t chGlyph = (wchar_t)(nGlyph & 0xFFFF);
+		wchar_t name[2] = { chGlyph, 0 };
 
 		SGlyphData glyphData;
 		ZeroObject(glyphData);
@@ -503,7 +502,7 @@ bool ff::SpriteFont::InitGlyphs()
 			for (int y = 0; y < blackBox.y; y++)
 			{
 				LPBYTE pAlpha = &glyphBytes[y * nByteWidth];
-				LPBYTE pData  = (LPBYTE)mapStaging.pData + (stagingPos.y + y) * mapStaging.RowPitch + stagingPos.x * 4;
+				LPBYTE pData = (LPBYTE)mapStaging.pData + (stagingPos.y + y) * mapStaging.RowPitch + stagingPos.x * 4;
 
 				for (int x = 0; x < blackBox.x; x++)
 				{
@@ -517,7 +516,7 @@ bool ff::SpriteFont::InitGlyphs()
 			// Add sprite to staging texture
 
 			PointFloat spriteHandle((float)-gm.gmptGlyphOrigin.x, (float)(gm.gmptGlyphOrigin.y - _textMetric.tmAscent));
-			RectInt  spriteRect(stagingPos.x, stagingPos.y, stagingPos.x + blackBox.x, stagingPos.y + blackBox.y);
+			RectInt spriteRect(stagingPos.x, stagingPos.y, stagingPos.x + blackBox.x, stagingPos.y + blackBox.y);
 
 			glyphData._sprite = pGlyphSprites->Add(
 				pStagingTexture,
@@ -581,7 +580,7 @@ bool ff::SpriteFont::InitGlyphs()
 	}
 
 	_loadedSprites = true;
-	_spritesValid  = true;
+	_spritesValid = true;
 
 	return true;
 }
@@ -609,7 +608,7 @@ bool ff::SpriteFont::InitSprites()
 		}
 
 		_loadedSprites = true;
-		_spritesValid  = (nSprite == _glyphSprites->GetCount());
+		_spritesValid = (nSprite == _glyphSprites->GetCount());
 
 		assert(_spritesValid);
 	}
@@ -669,7 +668,7 @@ ff::PointFloat ff::SpriteFont::InternalDrawText(
 					{
 						const RectFloat &spriteBox = data._sprite->GetSpriteData()._worldRect;
 
-						pBox->right  = std::max(pBox->right,  curPos.x + spriteBox.right  * scale.x);
+						pBox->right = std::max(pBox->right, curPos.x + spriteBox.right * scale.x);
 						pBox->bottom = std::max(pBox->bottom, curPos.y + spriteBox.bottom * scale.y);
 					}
 				}
@@ -683,7 +682,7 @@ ff::PointFloat ff::SpriteFont::InternalDrawText(
 					wchar_t ch2 = text[i + 1];
 
 					KERNINGPAIR kp;
-					kp.wFirst  = ch;
+					kp.wFirst = ch;
 					kp.wSecond = ch2;
 
 					size_t nKern = 0;

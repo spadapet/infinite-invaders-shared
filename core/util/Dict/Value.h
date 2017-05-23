@@ -105,13 +105,11 @@ namespace ff
 		void AddRef();
 		void Release();
 
-	private:
-		friend class PoolAllocator<Value>;
-		friend struct ff::details::PoolObj<Value>;
-
+		// Don't use these directly
 		Value();
 		~Value();
 
+	private:
 		// not implemented, cannot copy
 		Value(const Value &r);
 		const Value &operator=(const Value &r);

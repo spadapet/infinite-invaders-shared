@@ -7,7 +7,6 @@
 #include "Graph/2D/SpriteAnimation.h"
 #include "Graph/Anim/KeyFrames.h"
 #include "Graph/Anim/AnimKeys.h"
-#include "Graph/Data/GraphCategory.h"
 #include "Graph/GraphDevice.h"
 #include "Module/ModuleFactory.h"
 #include "Resource/ResourcePersist.h"
@@ -53,12 +52,12 @@ namespace ff
 			float rotate,
 			const DirectX::XMFLOAT4 *pColor) override;
 
-		virtual void SetSprite(float frame, size_t nPart, size_t nSprite, ISprite* pSprite) override;
-		virtual void SetColor(float frame, size_t nPart, size_t nSprite, const DirectX::XMFLOAT4& color) override;
+		virtual void SetSprite(float frame, size_t nPart, size_t nSprite, ISprite *pSprite) override;
+		virtual void SetColor(float frame, size_t nPart, size_t nSprite, const DirectX::XMFLOAT4 &color) override;
 		virtual void SetOffset(float frame, size_t nPart, PointFloat offset) override;
 		virtual void SetScale(float frame, size_t nPart, PointFloat scale) override;
 		virtual void SetRotate(float frame, size_t nPart, float rotate) override;
-		virtual void SetHitBox(float frame, size_t nPart, RectFloat  hitBox) override;
+		virtual void SetHitBox(float frame, size_t nPart, RectFloat hitBox) override;
 		virtual RectFloat GetHitBox(float frame, size_t nPart, AnimTweenType type) override;
 
 		virtual void SetLastFrame(float frame) override;
@@ -83,7 +82,7 @@ namespace ff
 			KeyFrames<VectorKey> _colors[4];
 			KeyFrames<VectorKey> _offset;
 			KeyFrames<VectorKey> _scale;
-			KeyFrames<FloatKey>  _rotate;
+			KeyFrames<FloatKey> _rotate;
 			KeyFrames<VectorKey> _hitBox;
 		};
 
@@ -108,7 +107,7 @@ END_INTERFACES()
 static ff::ModuleStartup Register([](ff::Module &module)
 {
 	static ff::StaticString name(L"spriteanim");
-	module.RegisterClassT<ff::SpriteAnimation>(name, __uuidof(ff::ISpriteAnimation), ff::GetCategoryGraphicsObject());
+	module.RegisterClassT<ff::SpriteAnimation>(name, __uuidof(ff::ISpriteAnimation));
 });
 
 bool ff::CreateSpriteAnimation(IGraphDevice *pDevice, ISpriteAnimation **ppAnim)
@@ -261,7 +260,7 @@ void ff::SpriteAnimation::Render(
 	}
 }
 
-void ff::SpriteAnimation::SetSprite(float frame, size_t nPart, size_t nSprite, ISprite* pSprite)
+void ff::SpriteAnimation::SetSprite(float frame, size_t nPart, size_t nSprite, ISprite *pSprite)
 {
 	assertRet(nSprite >= 0 && nSprite < 4);
 
@@ -270,7 +269,7 @@ void ff::SpriteAnimation::SetSprite(float frame, size_t nPart, size_t nSprite, I
 	keys._sprites[nSprite].Set(frame, pSprite);
 }
 
-void ff::SpriteAnimation::SetColor(float frame, size_t nPart, size_t nSprite, const DirectX::XMFLOAT4& color)
+void ff::SpriteAnimation::SetColor(float frame, size_t nPart, size_t nSprite, const DirectX::XMFLOAT4 &color)
 {
 	assertRet(nSprite >= 0 && nSprite < 4);
 

@@ -9,21 +9,26 @@ ff::State::~State()
 {
 }
 
-std::shared_ptr<ff::State> ff::State::Advance(AppGlobals *context)
+std::shared_ptr<ff::State> ff::State::Advance(AppGlobals *globals)
 {
 	return nullptr;
 }
 
-void ff::State::Render(AppGlobals *context, IRenderTarget *target)
+void ff::State::Render(AppGlobals *globals, IRenderTarget *target)
 {
 }
 
-void ff::State::SaveState(AppGlobals *context)
+void ff::State::SaveState(AppGlobals *globals)
 {
 }
 
-void ff::State::LoadState(AppGlobals *context)
+void ff::State::LoadState(AppGlobals *globals)
 {
+}
+
+bool ff::State::Notify(hash_t eventId, int data1, void *data2)
+{
+	return false;
 }
 
 ff::State::Status ff::State::GetStatus()

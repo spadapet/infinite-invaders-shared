@@ -304,7 +304,7 @@ bool ff::Value::CreateInt(int val, Value **ppValue)
 	{
 		*ppValue = NewValueOneRef();
 		(*ppValue)->SetType(Type::Int);
-		(*ppValue)->_int  = val;
+		(*ppValue)->_int = val;
 	}
 	else
 	{
@@ -322,7 +322,7 @@ bool ff::Value::CreateInt(int val, Value **ppValue)
 					Value *pVal = s_data[i].AsValue();
 					pVal->Value::Value();
 					pVal->SetType(Type::Int);
-					pVal->_int  = i - 100;
+					pVal->_int = i - 100;
 				}
 
 				s_init = true;
@@ -436,7 +436,6 @@ bool ff::Value::CreatePointF(const PointFloat &point, Value **ppValue)
 
 	return true;
 }
-
 
 bool ff::Value::CreateRect(const RectInt &rect, Value **ppValue)
 {

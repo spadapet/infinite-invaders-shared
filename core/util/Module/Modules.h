@@ -21,13 +21,9 @@ namespace ff
 		UTIL_API const ModuleClassInfo *FindClassInfo(ff::StringRef name);
 		UTIL_API const ModuleClassInfo *FindClassInfo(REFGUID classId);
 		UTIL_API const ModuleClassInfo *FindClassInfoForInterface(REFGUID interfaceId);
+
 		UTIL_API bool FindClassFactory(REFGUID classId, IClassFactory **factory);
-		UTIL_API const ModuleInterfaceInfo *FindInterfaceInfo(REFGUID interfaceId);
-		UTIL_API const ModuleCategoryInfo *FindCategoryInfo(REFGUID categoryId);
-		UTIL_API ComPtr<IUnknown> CreateParentForCategory(REFGUID categoryId, AppGlobals *context);
-		UTIL_API ComPtr<IUnknown> CreateParentForObject(IUnknown *obj, AppGlobals *context);
-		UTIL_API ComPtr<IUnknown> CreateParentForClass(ff::StringRef name, AppGlobals *context);
-		UTIL_API ComPtr<IUnknown> CreateClass(ff::StringRef name, AppGlobals *context);
+		UTIL_API ComPtr<IUnknown> CreateClass(ff::StringRef name, AppGlobals *globals);
 
 		UTIL_API void Clear();
 

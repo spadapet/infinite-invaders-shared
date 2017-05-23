@@ -233,7 +233,7 @@ HRESULT ff::ConnectionPointBase::Advise(IUnknown *sink, DWORD *cookie)
 	mySink._sink->Release();
 	mySink._cookie = InterlockedIncrement(&s_nextCookie);
 
-	SharedSinks::GetUnshared(_sinks.Address());
+	ff::MakeUnshared(_sinks);
 	_sinks->Push(mySink);
 
 	*cookie = mySink._cookie;
@@ -242,7 +242,7 @@ HRESULT ff::ConnectionPointBase::Advise(IUnknown *sink, DWORD *cookie)
 
 HRESULT ff::ConnectionPointBase::Unadvise(DWORD cookie)
 {
-	SharedSinks::GetUnshared(_sinks.Address());
+	ff::MakeUnshared(_sinks);
 	for (Sink &sink: *_sinks)
 	{
 		if (sink._cookie == cookie)

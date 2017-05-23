@@ -21,5 +21,5 @@ namespace ff
 		virtual AppGlobals *GetContext() const = 0;
 	};
 
-	UTIL_API bool CreateResources(AppGlobals *context, const Dict &dict, IResources **obj);
+	UTIL_API bool CreateResources(AppGlobals *globals, const Dict &dict, IResources **obj);
 }

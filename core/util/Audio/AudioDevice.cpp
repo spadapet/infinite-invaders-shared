@@ -6,7 +6,6 @@
 #include "Audio/AudioPlaying.h"
 #include "COM/ComAlloc.h"
 #include "Globals/ThreadGlobals.h"
-#include "Graph/Data/GraphCategory.h"
 
 namespace ff
 {
@@ -44,6 +43,7 @@ namespace ff
 		virtual void RemovePlaying(IAudioPlaying *child) override;
 
 	private:
+		Mutex _mutex;
 		ComPtr<IAudioFactory> _factory;
 		IXAudio2MasteringVoice *_masterVoice;
 		IXAudio2SubmixVoice *_effectVoice;
@@ -336,22 +336,30 @@ IXAudio2Voice *ff::AudioDevice::GetVoice(AudioVoiceType type) const
 
 void ff::AudioDevice::AddChild(IAudioDeviceChild *child)
 {
+	LockMutex crit(_mutex);
+
 	assert(child && _children.Find(child) == ff::INVALID_SIZE);
 	_children.Push(child);
 }
 
 void ff::AudioDevice::RemoveChild(IAudioDeviceChild *child)
 {
+	LockMutex crit(_mutex);
+
 	verify(_children.DeleteItem(child));
 }
 
 void ff::AudioDevice::AddPlaying(IAudioPlaying *child)
 {
+	LockMutex crit(_mutex);
+
 	assert(child && _playing.Find(child) == ff::INVALID_SIZE);
 	_playing.Push(child);
 }
 
 void ff::AudioDevice::RemovePlaying(IAudioPlaying *child)
 {
+	LockMutex crit(_mutex);
+
 	verify(_playing.DeleteItem(child));
 }

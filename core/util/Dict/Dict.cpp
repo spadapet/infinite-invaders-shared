@@ -94,9 +94,7 @@ void ff::Dict::Add(const Dict &rhs)
 
 void ff::Dict::Merge(const Dict &rhs)
 {
-	Vector<String> names = rhs.GetAllNames();
-
-	for (StringRef name: names)
+	for (StringRef name: rhs.GetAllNames())
 	{
 		Value *value = rhs.GetValue(name);
 		ff::ValuePtr newValue;
@@ -190,17 +188,14 @@ void ff::Dict::SetValue(ff::StringRef name, ff::Value *value)
 			CheckSize();
 		}
 	}
+	else if (_propsLarge != nullptr)
+	{
+		hash_t hash = GetAtomizer().CacheString(name);
+		_propsLarge->DeleteKey(hash);
+	}
 	else
 	{
-		if (_propsLarge != nullptr)
-		{
-			hash_t hash = GetAtomizer().CacheString(name);
-			_propsLarge->DeleteKey(hash);
-		}
-		else
-		{
-			_propsSmall.Remove(name);
-		}
+		_propsSmall.Remove(name);
 	}
 }
 
@@ -318,6 +313,16 @@ void ff::Dict::SetData(ff::StringRef name, ff::IData *value)
 	assertRet(Value::CreateData(value, &newValue));
 
 	SetValue(name, newValue);
+}
+
+void ff::Dict::SetData(StringRef name, const void *data, size_t size)
+{
+	ff::ComPtr<ff::IDataVector> dataVector;
+	if (ff::CreateDataVector(size, &dataVector))
+	{
+		memcpy(dataVector->GetVector().Data(), data, size);
+		SetData(name, dataVector);
+	}
 }
 
 void ff::Dict::SetSavedData(StringRef name, ISavedData *value)

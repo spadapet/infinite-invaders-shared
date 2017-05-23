@@ -1,4 +1,10 @@
 #include "pch.h"
+#include "Audio/AudioDevice.h"
+#include "Audio/AudioFactory.h"
+#include "Globals/AppGlobals.h"
+#include "Globals/ProcessGlobals.h"
+#include "Graph/GraphDevice.h"
+#include "Graph/GraphFactory.h"
 #include "Module/ModuleFactory.h"
 #include "Module/Modules.h"
 #include "Resource/Resources.h"
@@ -238,94 +244,61 @@ bool ff::Modules::FindClassFactory(REFGUID classId, IClassFactory **factory)
 	return false;
 }
 
-const ff::ModuleInterfaceInfo *ff::Modules::FindInterfaceInfo(REFGUID interfaceId)
+class AppGlobalsWrapper : public IUnknown
 {
-	LockMutex lock(_mutex);
-
-	// First try modules that were already created
-	for (size_t i = 0; i < 2; i++)
+public:
+	AppGlobalsWrapper(ff::AppGlobals *globals)
+		: _globals(globals ? globals : ff::AppGlobals::Get())
 	{
-		if (i == 1)
-		{
-			CreateAllModules();
-		}
-
-		for (auto &module: _modules)
-		{
-			const ModuleInterfaceInfo *info = module->GetInterfaceInfo(interfaceId);
-			if (info != nullptr)
-			{
-				return info;
-			}
-		}
 	}
 
-	return nullptr;
-}
-
-const ff::ModuleCategoryInfo *ff::Modules::FindCategoryInfo(REFGUID categoryId)
-{
-	LockMutex lock(_mutex);
-
-	// First try modules that were already created
-	for (size_t i = 0; i < 2; i++)
+	COM_FUNC QueryInterface(REFIID riid, void **obj)
 	{
-		if (i == 1)
+		assertRetVal(obj, E_INVALIDARG);
+		*obj = nullptr;
+
+		if (riid == __uuidof(ff::IAudioDevice))
 		{
-			CreateAllModules();
+			*obj = ff::GetAddRef(_globals->GetAudio());
+		}
+		else if (riid == __uuidof(ff::IAudioFactory))
+		{
+			*obj = ff::GetAddRef(ff::ProcessGlobals::Get()->GetAudioFactory());
+		}
+		else if (riid == __uuidof(ff::IGraphDevice))
+		{
+			*obj = ff::GetAddRef(_globals->GetGraph());
+		}
+		else if (riid == __uuidof(ff::IGraphicFactory))
+		{
+			*obj = ff::GetAddRef(ff::ProcessGlobals::Get()->GetGraphicFactory());
 		}
 
-		for (auto &module: _modules)
-		{
-			const ModuleCategoryInfo *info = module->GetCategoryInfo(categoryId);
-			if (info != nullptr)
-			{
-				return info;
-			}
-		}
+		return *obj ? S_OK : E_NOINTERFACE;
 	}
 
-	return nullptr;
-}
-
-ff::ComPtr<IUnknown> ff::Modules::CreateParentForCategory(REFGUID categoryId, AppGlobals *context)
-{
-	const ModuleCategoryInfo *info = FindCategoryInfo(categoryId);
-
-	if (info != nullptr && info->_parentObjectFactory != nullptr)
+	COM_FUNC_RET(ULONG) AddRef()
 	{
-		ComPtr<IUnknown> parent;
-		if (SUCCEEDED(info->_parentObjectFactory(context, &parent)))
-		{
-			return parent;
-		}
+		assertRetVal(false, 0);
 	}
 
-	return nullptr;
-}
+	COM_FUNC_RET(ULONG) Release()
+	{
+		assertRetVal(false, 0);
+	}
 
-ff::ComPtr<IUnknown> ff::Modules::CreateParentForObject(IUnknown *obj, AppGlobals *context)
-{
-	ff::ComPtr<ff::IComObject> comObj;
-	noAssertRetVal(comObj.QueryFrom(obj), nullptr);
-	return CreateParentForCategory(comObj->GetComCategoryID(), context);
-}
+private:
+	ff::AppGlobals *_globals;
+};
 
-ff::ComPtr<IUnknown> ff::Modules::CreateParentForClass(ff::StringRef name, AppGlobals *context)
-{
-	const ModuleClassInfo *info = FindClassInfo(name);
-	noAssertRetVal(info, nullptr);
-	return CreateParentForCategory(info->_categoryId, context);
-}
-
-ff::ComPtr<IUnknown> ff::Modules::CreateClass(ff::StringRef name, AppGlobals *context)
+ff::ComPtr<IUnknown> ff::Modules::CreateClass(ff::StringRef name, AppGlobals *globals)
 {
 	const ff::ModuleClassInfo *info = FindClassInfo(name);
 	assertRetVal(info && info->_factory, nullptr);
 
 	ff::ComPtr<IUnknown> obj;
-	ff::ComPtr<IUnknown> parent = CreateParentForCategory(info->_categoryId, context);
-	assertHrRetVal(info->_factory(parent, info->_classId, __uuidof(IUnknown), (void**)&obj), nullptr);
+	AppGlobalsWrapper contextWrapper(globals);
+	assertHrRetVal(info->_factory(&contextWrapper, info->_classId, __uuidof(IUnknown), (void**)&obj), nullptr);
 
 	return obj;
 }

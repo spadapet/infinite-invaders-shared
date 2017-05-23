@@ -50,6 +50,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Entity\Component.cpp" />
+    <ClCompile Include="Entity\ComponentFactory.cpp" />
+    <ClCompile Include="Entity\EntityDomain.cpp" />
+    <ClCompile Include="Entity\EntityEvents.cpp" />
+    <ClCompile Include="Entity\EntitySystem.cpp" />
     <ClCompile Include="Globals\Log.cpp" />
     <ClCompile Include="Globals\MetroGlobals.cpp" />
     <ClCompile Include="Audio\AudioBuffer.cpp" />
@@ -94,8 +99,7 @@
     <ClCompile Include="Graph\Anim\AnimKeys.cpp" />
     <ClCompile Include="Graph\Anim\AnimPos.cpp" />
     <ClCompile Include="Graph\BufferCache.cpp" />
-    <ClCompile Include="Graph\Data\DataBlob.cpp" />
-    <ClCompile Include="Graph\Data\GraphCategory.cpp" />
+    <ClCompile Include="Graph\DataBlob.cpp" />
     <ClCompile Include="Graph\Font\FontData.cpp" />
     <ClCompile Include="Graph\Font\SpriteFont.cpp" />
     <ClCompile Include="Graph\GraphDevice.cpp" />
@@ -147,6 +151,13 @@
     <ClCompile Include="Windows\Handles.cpp" />
     <ClCompile Include="Windows\RegUtil.cpp" />
     <ClCompile Include="Windows\WinUtil.cpp" />
+    <ClInclude Include="Entity\Component.h" />
+    <ClInclude Include="Entity\ComponentFactory.h" />
+    <ClInclude Include="Entity\Entity.h" />
+    <ClInclude Include="Entity\EntityDomain.h" />
+    <ClInclude Include="Entity\EntityEvents.h" />
+    <ClInclude Include="Entity\EntitySystem.h" />
+    <ClInclude Include="Entity\Include.h" />
     <ClInclude Include="Globals\AppGlobals.h" />
     <ClInclude Include="Globals\Log.h" />
     <ClInclude Include="Globals\MetroGlobals.h" />
@@ -202,8 +213,7 @@
     <ClInclude Include="Graph\Anim\AnimPos.h" />
     <ClInclude Include="Graph\Anim\KeyFrames.h" />
     <ClInclude Include="Graph\BufferCache.h" />
-    <ClInclude Include="Graph\Data\DataBlob.h" />
-    <ClInclude Include="Graph\Data\GraphCategory.h" />
+    <ClInclude Include="Graph\DataBlob.h" />
     <ClInclude Include="Graph\DirectXPch.h" />
     <ClInclude Include="Graph\Font\FontData.h" />
     <ClInclude Include="Graph\Font\SpriteFont.h" />
@@ -249,6 +259,7 @@
     <ClInclude Include="Thread\ThreadUtil.h" />
     <ClInclude Include="Types\Hash.h" />
     <ClInclude Include="Types\KeyValue.h" />
+    <ClInclude Include="Types\List.h" />
     <ClInclude Include="Types\Map.h" />
     <ClInclude Include="Types\MemAlloc.h" />
     <ClInclude Include="Types\Point.h" />

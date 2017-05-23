@@ -8,7 +8,6 @@ namespace ff
 	class KeyValue
 	{
 	public:
-		KeyValue();
 		KeyValue(const KeyValue<Key, Value> &rhs);
 		KeyValue(KeyValue<Key, Value> &&rhs);
 		KeyValue(const Key &key, const Value &val);
@@ -38,11 +37,6 @@ namespace ff
 			return HashFunc<Key>(rhs._key);
 		}
 	};
-}
-
-template<typename Key, typename Value>
-ff::KeyValue<Key, Value>::KeyValue()
-{
 }
 
 template<typename Key, typename Value>
@@ -111,7 +105,6 @@ bool ff::KeyValue<Key, Value>::operator<(const KeyValue<Key, Value> &rhs) const
 {
 	return _key < rhs._key;
 }
-
 
 template<typename Key, typename Value>
 const Key &ff::KeyValue<Key, Value>::GetKey() const

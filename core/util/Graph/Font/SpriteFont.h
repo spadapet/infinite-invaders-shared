@@ -19,7 +19,7 @@ namespace ff
 			PointFloat pos,
 			PointFloat scale,
 			PointFloat spacing,
-			const DirectX::XMFLOAT4* pColor) = 0;
+			const DirectX::XMFLOAT4 *pColor) = 0;
 
 		virtual PointFloat MeasureText(StringRef text, PointFloat scale, PointFloat spacing) = 0;
 	};

@@ -145,11 +145,4 @@ namespace ff
 			*obj = newObj;
 		}
 	}
-
-	// Helper function to make it easier to call GetUnshared when you have a SmartPtr
-	template<typename T>
-	static void GetUnsharedObject(SmartPtr<SharedObject<T>> &obj)
-	{
-		SharedObject<T>::GetUnshared(obj.Address());
-	}
 }

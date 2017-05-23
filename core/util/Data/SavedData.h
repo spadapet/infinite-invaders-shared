@@ -4,9 +4,9 @@ namespace ff
 {
 	// ISavedData: A way to load or save data to or from any location.
 	// The data always exists in one of two states:
-	//    LOADED: The data is fully loaded into memory (uncompressed).
-	//    SAVED: The data exists either on disk, in a resource, or just in memory.
-	//           When saved, the data is optionally compressed.
+	// LOADED: The data is fully loaded into memory (uncompressed).
+	// SAVED: The data exists either on disk, in a resource, or just in memory.
+	// When saved, the data is optionally compressed.
 	// You can change the state of the data at any time.
 
 	class IData;

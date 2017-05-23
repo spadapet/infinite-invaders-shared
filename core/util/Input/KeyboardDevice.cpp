@@ -48,7 +48,7 @@ END_INTERFACES()
 
 static ff::Vector<ff::KeyboardDevice*, 8> s_allKeyInputs;
 
-bool ff::CreateKeyboardDevice(HWND hwnd, IKeyboardDevice** ppInput)
+bool ff::CreateKeyboardDevice(HWND hwnd, IKeyboardDevice **ppInput)
 {
 	assertRetVal(ppInput, false);
 	*ppInput = nullptr;
@@ -110,7 +110,7 @@ void ff::KeyboardDevice::Destroy()
 		SubclassWindow(_hwnd, _oldWindowProc);
 
 		_oldWindowProc = nullptr;
-		_hwnd           = nullptr;
+		_hwnd = nullptr;
 	}
 }
 

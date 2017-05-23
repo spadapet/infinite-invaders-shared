@@ -70,6 +70,8 @@ namespace ff
 		UTIL_API virtual IThreadDispatch *GetGameDispatch() const override;
 		UTIL_API virtual const GlobalTime &GetGlobalTime() const override;
 		UTIL_API virtual const FrameTime &GetFrameTime() const override;
+		UTIL_API virtual void PostGameEvent(hash_t eventId, int data) override;
+		UTIL_API virtual bool SendGameEvent(hash_t eventId, int data1 = 0, void *data2 = nullptr) override;
 
 		UTIL_API String GetLogFile() const;
 		UTIL_API Windows::UI::Xaml::Window ^GetWindow() const;
@@ -84,11 +86,11 @@ namespace ff
 		UTIL_API bool LoadState();
 		UTIL_API bool SaveState();
 		UTIL_API Dict GetState();
-		UTIL_API Dict GetState(StringRef name);
 		UTIL_API void SetState(const Dict &dict);
-		UTIL_API void SetState(StringRef name, const Dict &dict);
 		UTIL_API void ClearAllState();
 		UTIL_API String GetStateFile() const;
+		UTIL_API virtual Dict GetState(StringRef name) override;
+		UTIL_API virtual void SetState(StringRef name, const Dict &dict) override;
 
 	private:
 		friend ref class ::MetroGlobalsEvents;

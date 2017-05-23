@@ -55,8 +55,8 @@ void ff::AtScope::Close()
 
 // Keep CRT memory usage statistics
 static size_t s_totalAlloc = 0;
-static size_t s_curAlloc   = 0;
-static size_t s_maxAlloc   = 0;
+static size_t s_curAlloc = 0;
+static size_t s_maxAlloc = 0;
 static size_t s_allocCount = 0;
 
 static int CrtAllocHook(

@@ -29,7 +29,7 @@ namespace ff
 		// IDataStream functions
 		virtual size_t GetSize() const override;
 		virtual size_t GetPos() const override;
-		virtual bool   SetPos(size_t nPos) override;
+		virtual bool SetPos(size_t nPos) override;
 
 		virtual bool CreateSavedData(
 			size_t start,
@@ -60,12 +60,12 @@ namespace ff
 		bool Init(IDataVector *pData, size_t nPos);
 
 		// IDataWriter functions
-		virtual bool   Write(LPCVOID pMem, size_t nBytes) override;
+		virtual bool Write(LPCVOID pMem, size_t nBytes) override;
 
 		// IDataStream functions
 		virtual size_t GetSize() const override;
 		virtual size_t GetPos() const override;
-		virtual bool   SetPos(size_t nPos) override;
+		virtual bool SetPos(size_t nPos) override;
 
 		virtual bool CreateSavedData(
 			size_t start,
@@ -97,13 +97,13 @@ namespace ff
 
 		// IDataReader functions
 		virtual const BYTE *Read(size_t nBytes) override;
-		virtual bool        Read(size_t nBytes, IData **ppData) override;
-		virtual bool        Read(size_t nStart, size_t nBytes, IData **ppData) override;
+		virtual bool Read(size_t nBytes, IData **ppData) override;
+		virtual bool Read(size_t nStart, size_t nBytes, IData **ppData) override;
 
 		// IDataStream functions
 		virtual size_t GetSize() const override;
 		virtual size_t GetPos() const override;
-		virtual bool   SetPos(size_t nPos) override;
+		virtual bool SetPos(size_t nPos) override;
 
 		virtual bool CreateSavedData(
 			size_t start,
@@ -136,13 +136,13 @@ namespace ff
 
 		// IDataReader functions
 		virtual const BYTE *Read(size_t nBytes) override;
-		virtual bool        Read(size_t nBytes, IData **ppData) override;
-		virtual bool        Read(size_t nStart, size_t nBytes, IData **ppData) override;
+		virtual bool Read(size_t nBytes, IData **ppData) override;
+		virtual bool Read(size_t nStart, size_t nBytes, IData **ppData) override;
 
 		// IDataStream functions
 		virtual size_t GetSize() const override;
 		virtual size_t GetPos() const override;
-		virtual bool   SetPos(size_t nPos) override;
+		virtual bool SetPos(size_t nPos) override;
 
 		virtual bool CreateSavedData(
 			size_t start,
@@ -258,7 +258,7 @@ bool ff::CreateDataReader(IData *pData, size_t nPos, IDataReader **ppReader)
 	return true;
 }
 
-bool ff::CreateDataReader(const BYTE* pMem, size_t nLen, size_t nPos, IDataReader **ppReader)
+bool ff::CreateDataReader(const BYTE *pMem, size_t nLen, size_t nPos, IDataReader **ppReader)
 {
 	ComPtr<IData> pData;
 	assertRetVal(CreateDataInStaticMem(pMem, nLen, &pData), false);
@@ -324,8 +324,8 @@ bool ff::StreamCopyData(IDataReader *pReader, size_t nSize, IDataWriter *pWriter
 
 	for (size_t nPos = 0; nPos < nSize; nPos += nChunkSize)
 	{
-		size_t      nRead  = std::min(nSize - nPos, nChunkSize);
-		const BYTE* pChunk = pReader->Read(nRead);
+		size_t nRead = std::min(nSize - nPos, nChunkSize);
+		const BYTE *pChunk = pReader->Read(nRead);
 
 		assertRetVal(pChunk, false);
 		assertRetVal(pWriter->Write(pChunk, nRead), false);
@@ -414,7 +414,7 @@ bool ff::VectorDataWriter::Init(IDataVector *pData, size_t nPos)
 	assertRetVal(pData && nPos >= 0 && nPos <= pData->GetVector().Size(), false);
 
 	_data = pData;
-	_pos  = nPos;
+	_pos = nPos;
 
 	return true;
 }
@@ -595,7 +595,7 @@ bool ff::CMemDataReader::Init(IData *pData, size_t nPos)
 	assertRetVal(pData && nPos >= 0 && nPos <= pData->GetSize(), false);
 
 	_data = pData;
-	_pos  = nPos;
+	_pos = nPos;
 
 	return true;
 }
@@ -604,7 +604,7 @@ const BYTE *ff::CMemDataReader::Read(size_t nBytes)
 {
 	assertRetVal(_data && _pos + nBytes <= _data->GetSize(), nullptr);
 
-	const BYTE* pMem = _data->GetMem() + _pos;
+	const BYTE *pMem = _data->GetMem() + _pos;
 	_pos += nBytes;
 
 	return pMem;

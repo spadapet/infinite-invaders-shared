@@ -52,7 +52,7 @@ namespace ff
 		const ReaderWriterLock *_lock;
 	};
 
-	template<class T>
+	template<typename T>
 	class LockObjectRead
 	{
 	public:
@@ -67,7 +67,7 @@ namespace ff
 		LockReader _lock;
 	};
 
-	template<class T>
+	template<typename T>
 	class LockObjectWrite
 	{
 	public:
@@ -83,53 +83,53 @@ namespace ff
 	};
 }
 
-template<class T>
+template<typename T>
 ff::LockObjectRead<T>::LockObjectRead(T &obj, ReaderWriterLock &lock)
 	: _obj(obj)
 	, _lock(lock)
 {
 }
 
-template<class T>
+template<typename T>
 ff::LockObjectRead<T>::LockObjectRead(LockObjectRead<T> &&rhs)
 	: _obj(rhs._obj)
 	, _lock(std::move(rhs._lock))
 {
 }
 
-template<class T>
+template<typename T>
 T &ff::LockObjectRead<T>::Get() const
 {
 	return _obj;
 }
 
-template<class T>
+template<typename T>
 T *ff::LockObjectRead<T>::operator->() const
 {
 	return &_obj;
 }
 
-template<class T>
+template<typename T>
 ff::LockObjectWrite<T>::LockObjectWrite(T &obj, ReaderWriterLock &lock)
 	: _obj(obj)
 	, _lock(lock)
 {
 }
 
-template<class T>
+template<typename T>
 ff::LockObjectWrite<T>::LockObjectWrite(LockObjectWrite<T> &&rhs)
 	: _obj(rhs._obj)
 	, _lock(std::move(rhs._lock))
 {
 }
 
-template<class T>
+template<typename T>
 T &ff::LockObjectWrite<T>::Get() const
 {
 	return _obj;
 }
 
-template<class T>
+template<typename T>
 T *ff::LockObjectWrite<T>::operator->() const
 {
 	return &_obj;

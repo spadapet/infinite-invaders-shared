@@ -15,7 +15,7 @@ namespace ff
 	};
 
 	// T must be ThreadGlobals or something derived from it
-	template<class T>
+	template<typename T>
 	class ThreadGlobalsScope
 	{
 	public:
@@ -30,18 +30,18 @@ namespace ff
 	};
 }
 
-template<class T>
+template<typename T>
 ff::ThreadGlobalsScope<T>::ThreadGlobalsScope()
 	: _scope(_globals)
 {
 }
 
-template<class T>
+template<typename T>
 ff::ThreadGlobalsScope<T>::~ThreadGlobalsScope()
 {
 }
 
-template<class T>
+template<typename T>
 T &ff::ThreadGlobalsScope<T>::GetGlobals()
 {
 	return _globals;

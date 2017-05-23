@@ -20,7 +20,6 @@ namespace ff
 		virtual const Module &_GetSourceModule() const = 0;
 
 		// These can be overridden either in ComObject<T> or in your type
-		virtual REFGUID _GetCategoryID() const;
 		virtual const char *_GetClassName() const;
 		virtual size_t _GetTypeLibIndex() const;
 		virtual HRESULT _GetClassInfo(ITypeInfo **typeInfo) const;

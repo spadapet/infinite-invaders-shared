@@ -2,7 +2,6 @@
 #include "Audio/AudioDevice.h"
 #include "Audio/AudioDeviceChild.h"
 #include "Globals/ProcessGlobals.h"
-#include "Graph/Data/GraphCategory.h"
 #include "Module/ModuleFactory.h"
 #include "Thread/ThreadPool.h"
 
@@ -49,12 +48,7 @@ static ff::ModuleStartup RegisterWorkItem([](ff::Module &module)
 {
 	static ff::StaticString name(L"Destroy Source Voice Work Item");
 
-	module.RegisterClass(
-		name,
-		__uuidof(DestroyVoiceWorkItem),
-		::CreateDestroyVoiceWorkItem,
-		__uuidof(DestroyVoiceWorkItem),
-		ff::GetCategoryAudioObject());
+	module.RegisterClass(name, __uuidof(DestroyVoiceWorkItem), ::CreateDestroyVoiceWorkItem, __uuidof(DestroyVoiceWorkItem));
 });
 
 namespace ff

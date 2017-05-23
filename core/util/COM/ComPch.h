@@ -10,9 +10,9 @@ namespace ff
 
 	template class UTIL_API std::function<HRESULT(IUnknown *pParent, REFGUID clsid, REFGUID iid, void **ppObj)>;
 	typedef std::function<HRESULT(IUnknown *pParent, REFGUID clsid, REFGUID iid, void **ppObj)> ClassFactoryFunc;
-	typedef std::function<bool(AppGlobals *context, IUnknown **obj)> ParentFactoryFunc;
+	typedef std::function<bool(AppGlobals *globals, IUnknown **obj)> ParentFactoryFunc;
 
-	template<class T, class I = T>
+	template<typename T, typename I = T>
 	inline T *GetAddRef(T *obj)
 	{
 		if (obj != nullptr)
@@ -23,7 +23,7 @@ namespace ff
 		return obj;
 	}
 
-	template<class T>
+	template<typename T>
 	inline void ReleaseRef(T *&obj)
 	{
 		if (obj != nullptr)

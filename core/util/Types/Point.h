@@ -64,9 +64,9 @@ namespace ff
 		};
 	};
 
-	typedef PointType<int>    PointInt;
-	typedef PointType<short>  PointShort;
-	typedef PointType<float>  PointFloat;
+	typedef PointType<int> PointInt;
+	typedef PointType<short> PointShort;
+	typedef PointType<float> PointFloat;
 	typedef PointType<double> PointDouble;
 	typedef PointType<size_t> PointSize;
 }

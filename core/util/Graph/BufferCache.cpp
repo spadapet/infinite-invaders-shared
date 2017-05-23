@@ -100,9 +100,9 @@ bool ff::BufferCache::CreateBuffer(size_t nBytes, ID3D11Buffer **ppBuffer)
 	D3D11_BUFFER_DESC desc;
 	ZeroObject(desc);
 
-	desc.ByteWidth      = (UINT)nBytes;
-	desc.Usage          = D3D11_USAGE_DYNAMIC;
-	desc.BindFlags      = _binding;
+	desc.ByteWidth = (UINT)nBytes;
+	desc.Usage = D3D11_USAGE_DYNAMIC;
+	desc.BindFlags = _binding;
 	desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 
 	assertHrRetVal(_device->Get3d()->CreateBuffer(&desc, nullptr, ppBuffer), false);
@@ -119,7 +119,7 @@ bool ff::BufferCache::CreateStaticBuffer(const void *pData, size_t nBytes, ID3D1
 	ZeroObject(desc);
 
 	desc.ByteWidth = (UINT)nBytes;
-	desc.Usage     = D3D11_USAGE_IMMUTABLE;
+	desc.Usage = D3D11_USAGE_IMMUTABLE;
 	desc.BindFlags = _binding;
 
 	D3D11_SUBRESOURCE_DATA data;
@@ -141,7 +141,7 @@ void ff::BufferCache::ReturnBuffer(ID3D11Buffer *pBuffer)
 {
 	assertRet(pBuffer);
 
-	size_t nBytes  = GetBufferSize(pBuffer);
+	size_t nBytes = GetBufferSize(pBuffer);
 	size_t nBuffer = GetBufferIndex(nBytes);
 
 	_buffers[nBuffer].push_back(pBuffer);

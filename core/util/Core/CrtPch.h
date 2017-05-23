@@ -15,6 +15,8 @@
 #include <new>
 #include <queue>
 #include <stack>
+#include <type_traits>
+#include <typeindex>
 #include <typeinfo>
 #include <utility>
 #include <vector>

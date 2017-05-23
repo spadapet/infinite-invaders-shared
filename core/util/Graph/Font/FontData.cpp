@@ -22,10 +22,10 @@ namespace ff
 		virtual bool SetData(IData *pData) override;
 
 		// IData functions
-		virtual const BYTE* GetMem() override;
-		virtual size_t      GetSize() override;
-		virtual IDataFile*  GetFile() override;
-		virtual bool        IsStatic() override;
+		virtual const BYTE *GetMem() override;
+		virtual size_t GetSize() override;
+		virtual IDataFile *GetFile() override;
+		virtual bool IsStatic() override;
 
 	private:
 		bool RegisterFontFamily();

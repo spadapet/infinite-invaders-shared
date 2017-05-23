@@ -18,7 +18,7 @@ bool ff::AssertCore(const wchar_t *szExp, const wchar_t *szText, const wchar_t *
 	_snwprintf_s(dialogText, _countof(dialogText), _TRUNCATE,
 		L"ASSERT: %s\r\nExpression: %s\r\nFile: %s\r\nLine: %u\r\n\r\nBreak?",
 		szText ? szText : L"",
-		szExp  ? szExp  : L"",
+		szExp ? szExp : L"",
 		szFile ? szFile : L"",
 		nLine);
 

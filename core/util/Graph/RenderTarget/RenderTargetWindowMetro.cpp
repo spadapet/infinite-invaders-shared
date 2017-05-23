@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "COM/ComAlloc.h"
 #include "Globals/MetroGlobals.h"
-#include "Graph/Data/GraphCategory.h"
 #include "Graph/GraphDevice.h"
 #include "Graph/GraphFactory.h"
 #include "Graph/RenderTarget/RenderTarget.h"
@@ -82,7 +81,7 @@ END_INTERFACES()
 static ff::ModuleStartup Register([](ff::Module &module)
 {
 	ff::StaticString name(L"RenderTargetWindow");
-	module.RegisterClassT<RenderTargetWindowMetro>(name, GUID_NULL, ff::GetCategoryGraphicsObject());
+	module.RegisterClassT<RenderTargetWindowMetro>(name);
 });
 
 bool ff::CreateRenderTargetWindow(

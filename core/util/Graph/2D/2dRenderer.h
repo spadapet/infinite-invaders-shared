@@ -44,7 +44,7 @@ namespace ff
 		virtual bool ForceOpaqueUntilFlush(bool forceOpaque) = 0;
 
 		virtual void DrawSprite(ISprite *pSprite, const PointFloat *pPos, const PointFloat *pScale, const float rotate, const DirectX::XMFLOAT4 *pColor) = 0;
-		virtual void DrawMultiSprite(ISprite **ppSprite, size_t nSpriteCount, const PointFloat *pPos, const PointFloat *pScale,  const float rotate,const DirectX::XMFLOAT4 *pColor, size_t nColorCount) = 0;
+		virtual void DrawMultiSprite(ISprite **ppSprite, size_t nSpriteCount, const PointFloat *pPos, const PointFloat *pScale, const float rotate,const DirectX::XMFLOAT4 *pColor, size_t nColorCount) = 0;
 		virtual void DrawPolyLine(const PointFloat *pPoints, size_t nCount, const DirectX::XMFLOAT4 *pColor) = 0;
 		virtual void DrawClosedPolyLine(const PointFloat *pPoints, size_t nCount, const DirectX::XMFLOAT4 *pColor) = 0;
 		virtual void DrawLine(const PointFloat *pStart, const PointFloat *pEnd, const DirectX::XMFLOAT4 *pColor) = 0;

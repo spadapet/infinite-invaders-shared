@@ -324,7 +324,6 @@ ff::PointInt ff::ToPoint(POINT pt)
 	return PointInt(pt.x, pt.y);
 }
 
-
 ff::PointInt ff::ToPoint(POINTL pt)
 {
 	return PointInt(pt.x, pt.y);
@@ -452,14 +451,14 @@ int ff::HandleHScroll(HWND hwnd, WPARAM wParam, int lineJump, int pageJump, bool
 
 	switch (LOWORD(wParam))
 	{
-		case SB_THUMBPOSITION: si.nPos =  si.nTrackPos; break;
-		case SB_THUMBTRACK:    si.nPos =  si.nTrackPos; break;
-		case SB_LEFT:          si.nPos =  si.nMin;      break;
-		case SB_RIGHT:         si.nPos =  si.nMax;      break;
-		case SB_LINELEFT:      si.nPos -= lineJump;     break;
-		case SB_LINERIGHT:     si.nPos += lineJump;     break;
-		case SB_PAGELEFT:      si.nPos -= pageJump;     break;
-		case SB_PAGERIGHT:     si.nPos += pageJump;     break;
+		case SB_THUMBPOSITION: si.nPos = si.nTrackPos; break;
+		case SB_THUMBTRACK: si.nPos = si.nTrackPos; break;
+		case SB_LEFT: si.nPos = si.nMin; break;
+		case SB_RIGHT: si.nPos = si.nMax; break;
+		case SB_LINELEFT: si.nPos -= lineJump; break;
+		case SB_LINERIGHT: si.nPos += lineJump; break;
+		case SB_PAGELEFT: si.nPos -= pageJump; break;
+		case SB_PAGERIGHT: si.nPos += pageJump; break;
 	}
 
 	si.nPos = std::min(si.nMax - (int)si.nPage + 1, si.nPos);
@@ -486,14 +485,14 @@ int ff::HandleVScroll(HWND hwnd, WPARAM wParam, int lineJump, int pageJump, bool
 
 	switch (LOWORD(wParam))
 	{
-		case SB_THUMBPOSITION: si.nPos =  si.nTrackPos; break;
-		case SB_THUMBTRACK:    si.nPos =  si.nTrackPos; break;
-		case SB_TOP:           si.nPos =  si.nMin;      break;
-		case SB_BOTTOM:        si.nPos =  si.nMax;      break;
-		case SB_LINEUP:        si.nPos -= lineJump;     break;
-		case SB_LINEDOWN:      si.nPos += lineJump;     break;
-		case SB_PAGEUP:        si.nPos -= pageJump;     break;
-		case SB_PAGEDOWN:      si.nPos += pageJump;     break;
+		case SB_THUMBPOSITION: si.nPos = si.nTrackPos; break;
+		case SB_THUMBTRACK: si.nPos = si.nTrackPos; break;
+		case SB_TOP: si.nPos = si.nMin; break;
+		case SB_BOTTOM: si.nPos = si.nMax; break;
+		case SB_LINEUP: si.nPos -= lineJump; break;
+		case SB_LINEDOWN: si.nPos += lineJump; break;
+		case SB_PAGEUP: si.nPos -= pageJump; break;
+		case SB_PAGEDOWN: si.nPos += pageJump; break;
 	}
 
 	si.nPos = std::min(si.nMax - (int)si.nPage + 1, si.nPos);
@@ -624,7 +623,7 @@ ff::PointInt ff::GetScrollPos(HWND hwnd)
 	ZeroObject(si);
 
 	si.cbSize = sizeof(si);
-	si.fMask  = SIF_POS;
+	si.fMask = SIF_POS;
 
 	PointInt pos(0, 0);
 
@@ -647,7 +646,7 @@ ff::PointInt ff::GetThumbPos(HWND hwnd)
 	ZeroObject(si);
 
 	si.cbSize = sizeof(si);
-	si.fMask  = SIF_TRACKPOS;
+	si.fMask = SIF_TRACKPOS;
 
 	PointInt pos(0, 0);
 
@@ -1030,13 +1029,13 @@ ff::CustomWindow::~CustomWindow()
 // static
 bool ff::CustomWindow::CreateClass(
 		StringRef name,
-		DWORD     nStyle,
+		DWORD nStyle,
 		HINSTANCE hInstance,
-		HCURSOR   hCursor,
-		HBRUSH    hBrush,
-		UINT      menu,
-		HICON     hLargeIcon,
-		HICON     hSmallIcon)
+		HCURSOR hCursor,
+		HBRUSH hBrush,
+		UINT menu,
+		HICON hLargeIcon,
+		HICON hSmallIcon)
 {
 	// see if the class was already registered
 	{
@@ -1072,12 +1071,12 @@ bool ff::CustomWindow::CreateClass(
 bool ff::CustomWindow::Create(
 		StringRef className,
 		StringRef windowName,
-		HWND      hParent,
-		DWORD     nStyle,
-		DWORD     nExStyle,
+		HWND hParent,
+		DWORD nStyle,
+		DWORD nExStyle,
 		int x, int y, int cx, int cy,
 		HINSTANCE hInstance,
-		HMENU     hMenu)
+		HMENU hMenu)
 {
 	assert(!_hwnd);
 
@@ -1106,11 +1105,11 @@ bool ff::CustomWindow::Create(
 
 bool ff::CustomWindow::CreateBlank(
 		StringRef windowName,
-		HWND      hParent,
-		DWORD     nStyle,
-		DWORD     nExStyle,
+		HWND hParent,
+		DWORD nStyle,
+		DWORD nExStyle,
 		int x, int y, int cx, int cy,
-		HMENU     hMenu)
+		HMENU hMenu)
 {
 	static StaticString className(L"BlankCustomWindow");
 
@@ -1336,12 +1335,12 @@ ff::StandardWindow::~StandardWindow()
 bool ff::StandardWindow::Create(
 		StringRef className,
 		StringRef windowName,
-		HWND      hParent,
-		DWORD     nStyle,
-		DWORD     nExStyle,
+		HWND hParent,
+		DWORD nStyle,
+		DWORD nExStyle,
 		int x, int y, int cx, int cy,
 		HINSTANCE hInstance,
-		HMENU     szMenu)
+		HMENU szMenu)
 {
 	HWND hNewWindow = CreateWindowEx(
 		nExStyle, // extended style

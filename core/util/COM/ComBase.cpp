@@ -74,12 +74,6 @@ void ff::ComBaseEx::_ReleaseModule(const Module &module)
 	module.Release();
 }
 
-REFGUID ff::ComBaseEx::_GetCategoryID() const
-{
-	const ModuleClassInfo *info = _GetSourceModule().GetClassInfo(_GetClassID());
-	return info ? info->_categoryId : GUID_NULL;
-}
-
 const char *ff::ComBaseEx::_GetClassName() const
 {
 	return typeid(this).name();

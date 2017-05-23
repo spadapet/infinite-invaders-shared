@@ -139,7 +139,6 @@ ff::KeyboardDevice::KeyboardDevice()
 	ff::ZeroObject(_pressesPending);
 }
 
-
 ff::KeyboardDevice::~KeyboardDevice()
 {
 	Destroy();

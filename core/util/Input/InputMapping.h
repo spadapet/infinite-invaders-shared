@@ -164,7 +164,7 @@ namespace ff
 		virtual bool RemoveListener(IInputEventListener *pListener) = 0;
 	};
 
-	UTIL_API bool CreateInputMapping(IInputDevice** ppDevices, size_t nDevices, IInputMapping** ppMapping);
+	UTIL_API bool CreateInputMapping(IInputDevice **ppDevices, size_t nDevices, IInputMapping **ppMapping);
 
 	class __declspec(uuid("7e363dc0-78b6-49e3-bd7a-0dde743e9393")) __declspec(novtable)
 		IInputEventListener : public IUnknown

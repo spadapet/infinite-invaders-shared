@@ -64,7 +64,6 @@ namespace ff
 	class IPoolAllocator
 	{
 	public:
-		virtual void *NewVoid() = 0;
 		virtual void DeleteVoid(void *obj) = 0;
 	};
 
@@ -83,20 +82,43 @@ namespace ff
 		void Delete(T *obj);
 
 		// IPoolAllocator
-		virtual void *NewVoid() override;
 		virtual void DeleteVoid(void *obj) override;
 
-		size_t GetCurAlloc() const;   // how many allocations are currently in memory?
+		size_t GetCurAlloc() const; // how many allocations are currently in memory?
 		size_t GetTotalAlloc() const; // how many allocations have ever been made?
-		size_t GetMaxAlloc() const;   // the largest value ever of GetCurAlloc()
-		size_t GetNumFree() const;    // how much "wasted" space is there?
-		size_t MemUsage() const;      // how much total memory is allocated
+		size_t GetMaxAlloc() const; // the largest value ever of GetCurAlloc()
+		size_t GetNumFree() const; // how much "wasted" space is there?
+		size_t MemUsage() const; // how much total memory is allocated
 
 	private:
 		PoolAllocator(const PoolAllocator &rhs);
 		PoolAllocator &operator=(const PoolAllocator &rhs);
 
 		T *NewUnconstructed();
+
+		template<typename T2>
+		typename std::enable_if<std::is_default_constructible<T2>::value, T2>::type *InternalNew()
+		{
+			T2 *newObj = NewUnconstructed();
+			::new(newObj) T2;
+			return newObj;
+		}
+
+		template<typename T2>
+		typename std::enable_if<std::is_copy_constructible<T2>::value, T2>::type *InternalNew(const T2 &rhs)
+		{
+			T2 *newObj = NewUnconstructed();
+			::new(newObj) T2(rhs);
+			return newObj;
+		}
+
+		template<typename T2>
+		typename std::enable_if<std::is_move_constructible<T2>::value, T2>::type *InternalNew(T2 &&rhs)
+		{
+			T2 *newObj = NewUnconstructed();
+			::new(newObj) T2(std::move(rhs));
+			return newObj;
+		}
 
 		Mutex _mutex;
 		Vector<details::SubPool<T>> _subPools;
@@ -158,12 +180,6 @@ namespace ff
 	}
 
 	template<typename T>
-	void *PoolAllocator<T>::NewVoid()
-	{
-		return (void *)New();
-	}
-
-	template<typename T>
 	void PoolAllocator<T>::DeleteVoid(void *obj)
 	{
 		Delete((T *)obj);
@@ -206,25 +222,19 @@ namespace ff
 	template<typename T>
 	T *PoolAllocator<T>::New()
 	{
-		T *newObj = NewUnconstructed();
-		::new(newObj) T;
-		return newObj;
+		return InternalNew<T>();
 	}
 
 	template<typename T>
 	T *PoolAllocator<T>::New(const T &rhs)
 	{
-		T *newObj = NewUnconstructed();
-		::new(newObj) T(rhs);
-		return newObj;
+		return InternalNew<T>(rhs);
 	}
 
 	template<typename T>
 	T *PoolAllocator<T>::New(T &&rhs)
 	{
-		T *newObj = NewUnconstructed();
-		::new(newObj) T(std::move(rhs));
-		return newObj;
+		return InternalNew<T>(std::move(rhs));
 	}
 
 	template<typename T>
@@ -291,36 +301,4 @@ namespace ff
 
 		return bytes;
 	}
-
-	template<typename T>
-	struct PoolAllocatorStatic
-	{
-		T *NewOne()
-		{
-			return s_pool.New();
-		}
-
-		T *NewOne(const T &rhs)
-		{
-			return s_pool.New(rhs);
-		}
-
-		T *NewOne(T &&rhs)
-		{
-			return s_pool.New(std::move(rhs));
-		}
-
-		void DeleteOne(T *pOne)
-		{
-			s_pool.Delete(pOne);
-		}
-
-	private:
-		static PoolAllocator<T> s_pool;
-	};
-
-	// STATIC_DATA (object)
-	template<typename T>
-	PoolAllocator<T> PoolAllocatorStatic<T>::s_pool(true);
-
-} // end namespace ff
+}

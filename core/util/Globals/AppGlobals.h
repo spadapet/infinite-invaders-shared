@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Dict/Dict.h"
+
 namespace ff
 {
 	struct FrameTime;
@@ -18,7 +20,7 @@ namespace ff
 	class AppGlobals
 	{
 	public:
-		static AppGlobals *Get();
+		UTIL_API static AppGlobals *Get();
 
 		virtual IAudioDevice *GetAudio() const = 0;
 		virtual IGraphDevice *GetGraph() const = 0;
@@ -30,7 +32,14 @@ namespace ff
 		virtual I2dRenderer *Get2dRender() const = 0;
 		virtual I2dEffect *Get2dEffect() const = 0;
 		virtual IThreadDispatch *GetGameDispatch() const = 0;
+
 		virtual const GlobalTime &GetGlobalTime() const = 0;
 		virtual const FrameTime &GetFrameTime() const = 0;
+
+		virtual Dict GetState(StringRef name) = 0;
+		virtual void SetState(StringRef name, const Dict &dict) = 0;
+
+		virtual void PostGameEvent(hash_t eventId, int data) = 0;
+		virtual bool SendGameEvent(hash_t eventId, int data1 = 0, void *data2 = nullptr) = 0;
 	};
 }

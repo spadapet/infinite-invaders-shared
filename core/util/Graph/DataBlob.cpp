@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "COM/ComObject.h"
 #include "Data/Data.h"
-#include "Graph/Data/DataBlob.h"
+#include "Graph/DataBlob.h"
 
 #include <DirectXTex.h>
 

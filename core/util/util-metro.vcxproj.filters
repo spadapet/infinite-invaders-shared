@@ -46,9 +46,6 @@
     <Filter Include="Graph\Anim">
       <UniqueIdentifier>{88126682-97b8-476c-9475-6d969ca09ef4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Graph\Data">
-      <UniqueIdentifier>{b383754c-69de-42d0-8d22-1fbf30915d85}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Graph\Font">
       <UniqueIdentifier>{311ea994-e0fd-4cb2-810d-3ef6b6a54281}</UniqueIdentifier>
     </Filter>
@@ -69,6 +66,9 @@
     </Filter>
     <Filter Include="State">
       <UniqueIdentifier>{48200a64-d1cb-4aab-934b-4a07ac377295}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity">
+      <UniqueIdentifier>{9a25bbd4-0ab8-4d4f-bc09-ec7de71f2c1a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -231,12 +231,6 @@
     <ClCompile Include="Graph\Anim\AnimPos.cpp">
       <Filter>Graph\Anim</Filter>
     </ClCompile>
-    <ClCompile Include="Graph\Data\DataBlob.cpp">
-      <Filter>Graph\Data</Filter>
-    </ClCompile>
-    <ClCompile Include="Graph\Data\GraphCategory.cpp">
-      <Filter>Graph\Data</Filter>
-    </ClCompile>
     <ClCompile Include="Graph\Font\FontData.cpp">
       <Filter>Graph\Font</Filter>
     </ClCompile>
@@ -352,6 +346,24 @@
     </ClCompile>
     <ClCompile Include="Types\Timer.cpp">
       <Filter>Types</Filter>
+    </ClCompile>
+    <ClCompile Include="Graph\DataBlob.cpp">
+      <Filter>Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\EntityDomain.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\EntityEvents.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Component.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\ComponentFactory.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\EntitySystem.cpp">
+      <Filter>Entity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -583,12 +595,6 @@
     <ClInclude Include="Graph\Anim\KeyFrames.h">
       <Filter>Graph\Anim</Filter>
     </ClInclude>
-    <ClInclude Include="Graph\Data\DataBlob.h">
-      <Filter>Graph\Data</Filter>
-    </ClInclude>
-    <ClInclude Include="Graph\Data\GraphCategory.h">
-      <Filter>Graph\Data</Filter>
-    </ClInclude>
     <ClInclude Include="Graph\Font\FontData.h">
       <Filter>Graph\Font</Filter>
     </ClInclude>
@@ -702,6 +708,33 @@
     </ClInclude>
     <ClInclude Include="Types\Timer.h">
       <Filter>Types</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph\DataBlob.h">
+      <Filter>Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Entity.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\EntityDomain.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\EntityEvents.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\EntitySystem.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Component.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Types\List.h">
+      <Filter>Types</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\ComponentFactory.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Include.h">
+      <Filter>Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -5,7 +5,6 @@
 #include "Graph/2D/2dRenderer.h"
 #include "Graph/2D/Sprite.h"
 #include "Graph/BufferCache.h"
-#include "Graph/Data/GraphCategory.h"
 #include "Graph/GraphDevice.h"
 #include "Graph/GraphTexture.h"
 #include "Graph/RenderTarget/RenderTarget.h"
@@ -196,7 +195,7 @@ private:
 	ff::MultiSpriteVertexes *NewMultiSpriteVertexes();
 	void DeleteTextureBucket(TextureBucket *pObj);
 	void DeleteSpriteVertexes(ff::SpriteVertexes *pObj);
-	void DeleteMultiSpriteVertexes(ff::MultiSpriteVertexes* pObj);
+	void DeleteMultiSpriteVertexes(ff::MultiSpriteVertexes *pObj);
 
 	ff::PoolAllocator<TextureBucket> _textureBucketPool;
 	ff::Vector<ff::SpriteVertexes *> _freeSprites;
@@ -212,7 +211,7 @@ END_INTERFACES()
 static ff::ModuleStartup Register([](ff::Module &module)
 {
 	static ff::StaticString name(L"Renderer2d");
-	module.RegisterClassT<Renderer2d>(name, GUID_NULL, ff::GetCategoryGraphicsObject());
+	module.RegisterClassT<Renderer2d>(name);
 });
 
 bool ff::Create2dRenderer(ff::IGraphDevice *pDevice, ff::I2dRenderer **ppRender)
@@ -761,10 +760,10 @@ static void AdjustSpriteRect(
 		rotate,
 		pos ? DirectX::XMLoadFloat2((DirectX::XMFLOAT2*)pos) : DirectX::XMVectorZero());
 
-	outRectPoints[0].SetPoint(rect.left,  rect.top);
+	outRectPoints[0].SetPoint(rect.left, rect.top);
 	outRectPoints[1].SetPoint(rect.right, rect.top);
 	outRectPoints[2].SetPoint(rect.right, rect.bottom);
-	outRectPoints[3].SetPoint(rect.left,  rect.bottom);
+	outRectPoints[3].SetPoint(rect.left, rect.bottom);
 
 	DirectX::XMFLOAT4 output[4];
 	DirectX::XMVector2TransformStream(output, sizeof(DirectX::XMFLOAT4), (DirectX::XMFLOAT2*)outRectPoints, sizeof(DirectX::XMFLOAT2), 4, matrix);
@@ -1085,7 +1084,7 @@ void Renderer2d::DrawRectangle(const ff::RectFloat *rectIn, float thickness, con
 		DirectX::XMVECTOR bottom = DirectX::XMVectorAdd(DirectX::XMVectorSet(rect.left, rect.bottom, rect.right, rect.bottom), thickVector);
 
 		thickVector = DirectX::XMVectorSet(-ht, ht, ht, -ht);
-		DirectX::XMVECTOR left = DirectX::XMVectorAdd(DirectX::XMVectorSet(rect.left, rect.top, rect.left,  rect.bottom), thickVector);
+		DirectX::XMVECTOR left = DirectX::XMVectorAdd(DirectX::XMVectorSet(rect.left, rect.top, rect.left, rect.bottom), thickVector);
 		DirectX::XMVECTOR right = DirectX::XMVectorAdd(DirectX::XMVectorSet(rect.right, rect.top, rect.right, rect.bottom), thickVector);
 
 		DirectX::XMStoreFloat4((DirectX::XMFLOAT4*)&rect, top);
@@ -1343,7 +1342,7 @@ void Renderer2d::FlushOpaqueSprites()
 			for (size_t i = 0, count = 0; i < sprites->Size(); i += count)
 			{
 				count = std::min(
-					sprites->Size() - i,   // the number of vertexes left for this bucket
+					sprites->Size() - i, // the number of vertexes left for this bucket
 					SPRITE_CHUNK_SIZE * 4); // the number of vertex slots left for drawing
 
 				ff::AutoBufferMap<ff::SpriteVertex> vertexBuffer(_device->GetVertexBuffers(), count);
@@ -1795,7 +1794,7 @@ void Renderer2d::CombineTextureBuckets()
 	for (size_t i = 0; i + 1 < _textureBuckets.Size(); i++)
 	{
 		TextureBucket *bucket = _textureBuckets[i];
-		size_t count  = bucket->_textures.Size();
+		size_t count = bucket->_textures.Size();
 		size_t unused = MAX_BUCKET_TEXTURES - count;
 
 		// Look for another bucket to fill the unused textures slots
@@ -1866,7 +1865,7 @@ void Renderer2d::CombineTextureBuckets()
 			}
 
 			bucket->_textures.Push(otherBucket->_textures.Data(), otherBucket->_textures.Size());
-			count  = bucket->_textures.Size();
+			count = bucket->_textures.Size();
 			unused = MAX_BUCKET_TEXTURES - count;
 
 			DeleteTextureBucket(otherBucket);

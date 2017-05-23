@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "COM/ComAlloc.h"
-#include "Graph/Data/GraphCategory.h"
 #include "Graph/GraphDevice.h"
 #include "Graph/RenderTarget/RenderTarget.h"
 #include "Module/ModuleFactory.h"
@@ -48,8 +47,8 @@ END_INTERFACES()
 
 static ff::ModuleStartup Register([](ff::Module &module)
 {
-	static ff::StaticString name(L"CRenderDepth");
-	module.RegisterClassT<ff::RenderDepth>(name, GUID_NULL, ff::GetCategoryGraphicsObject());
+	static ff::StaticString name(L"RenderDepth");
+	module.RegisterClassT<ff::RenderDepth>(name, __uuidof(ff::IRenderDepth));
 });
 
 bool ff::CreateRenderDepth(

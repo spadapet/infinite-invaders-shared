@@ -51,8 +51,8 @@ ClassFactory::~ClassFactory()
 void ClassFactory::SetAllocator(REFGUID clsid, const ff::Module *module, ff::ClassFactoryFunc func)
 {
 	_module = module;
-	_func   = func;
-	_clsid   = clsid;
+	_func = func;
+	_clsid = clsid;
 }
 
 HRESULT ClassFactory::CreateInstance(IUnknown *unkOuter, REFIID iid, void **ppv)

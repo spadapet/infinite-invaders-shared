@@ -36,11 +36,11 @@ namespace ff
 	{
 		enum KeyType
 		{
-			KEY_NONE      = 0,
-			KEY_SCALE     = 1,
-			KEY_ROTATE    = 2,
+			KEY_NONE = 0,
+			KEY_SCALE = 1,
+			KEY_ROTATE = 2,
 			KEY_TRANSLATE = 4,
-			KEY_ANY       = 7,
+			KEY_ANY = 7,
 
 			KEY_FORCE_DWORD = 0x7fffffff,
 		};
@@ -48,9 +48,9 @@ namespace ff
 		const AnimPosKey &operator=(const AnimPos &rhs);
 		void Add(const AnimPos &pos, KeyType type, float weight);
 
-		KeyType GetType()             const { return (KeyType)_flags; }
-		bool    HasType(KeyType type) const { return (_flags & type) != 0; }
-		void    AddType(KeyType type)       { _flags |= type; }
-		void    ClearType()                 { _flags = 0; }
+		KeyType GetType() const { return (KeyType)_flags; }
+		bool HasType(KeyType type) const { return (_flags & type) != 0; }
+		void AddType(KeyType type) { _flags |= type; }
+		void ClearType() { _flags = 0; }
 	};
 }

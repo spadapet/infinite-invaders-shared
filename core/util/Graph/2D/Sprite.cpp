@@ -184,7 +184,7 @@ bool ff::CreateSprite(
 {
 	assertRetVal(pParentSprite && ppSprite, false);
 
-	const SpriteData& parentData = pParentSprite->GetSpriteData();
+	const SpriteData &parentData = pParentSprite->GetSpriteData();
 	RectFloat parentRect = parentData.GetTextureRectF();
 
 	rect.Offset(parentRect.TopLeft());

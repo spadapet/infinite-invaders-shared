@@ -14,16 +14,30 @@ namespace ff
 		return HashBytes(&value, sizeof(value));
 	}
 
-	// Hash a constant string
+	template<>
+	inline hash_t HashFunc<std::type_index>(const std::type_index &value)
+	{
+		return HashFunc<size_t>(value.hash_code());
+	}
+
 	inline hash_t HashFunc(const wchar_t *value)
 	{
 		return HashBytes(value, value ? wcslen(value) * sizeof(wchar_t) : 0);
 	}
 
-	// Hash an editable string
 	inline hash_t HashFunc(wchar_t *value)
 	{
 		return HashBytes(value, value ? wcslen(value) * sizeof(wchar_t) : 0);
+	}
+
+	inline hash_t HashFunc(const char *value)
+	{
+		return HashBytes(value, value ? strlen(value) * sizeof(char) : 0);
+	}
+
+	inline hash_t HashFunc(char *value)
+	{
+		return HashBytes(value, value ? strlen(value) * sizeof(char) : 0);
 	}
 
 	// For when an object is really needed and a function pointer won't do

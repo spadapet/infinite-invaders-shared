@@ -81,7 +81,7 @@ CDataFile::~CDataFile()
 bool CDataFile::InitTempFile()
 {
 	_path = ff::CreateTempFile();
-	_temp  = true;
+	_temp = true;
 
 	return !_path.empty();
 }

@@ -105,28 +105,28 @@ namespace ff
 		typedef SharedStringVectorAllocator::StringVector::reverse_iterator reverse_iterator;
 		typedef SharedStringVectorAllocator::StringVector::const_reverse_iterator const_reverse_iterator;
 
-		iterator               begin();
-		const_iterator         begin() const;
-		const_iterator         cbegin() const;
-		iterator               end();
-		const_iterator         end() const;
-		const_iterator         cend() const;
-		reverse_iterator       rbegin();
+		iterator begin();
+		const_iterator begin() const;
+		const_iterator cbegin() const;
+		iterator end();
+		const_iterator end() const;
+		const_iterator cend() const;
+		reverse_iterator rbegin();
 		const_reverse_iterator rbegin() const;
 		const_reverse_iterator crbegin() const;
-		reverse_iterator       rend();
+		reverse_iterator rend();
 		const_reverse_iterator rend() const;
 		const_reverse_iterator crend() const;
 
-		wchar_t       &front();
+		wchar_t &front();
 		const wchar_t &front() const;
-		wchar_t       &back();
+		wchar_t &back();
 		const wchar_t &back() const;
 
-		wchar_t       &at(size_t pos);
+		wchar_t &at(size_t pos);
 		const wchar_t &at(size_t pos) const;
 
-		wchar_t       &operator[](size_t pos);
+		wchar_t &operator[](size_t pos);
 		const wchar_t &operator[](size_t pos) const;
 
 		const wchar_t *c_str() const;

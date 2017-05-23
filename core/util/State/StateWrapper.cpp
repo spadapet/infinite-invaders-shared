@@ -1,61 +1,88 @@
 #include "pch.h"
 #include "State/StateWrapper.h"
 
-ff::StateWrapper::StateWrapper(std::shared_ptr<ff::State> state)
-	: _state(state)
+ff::StateWrapper::StateWrapper()
 {
-	CheckState();
+}
+
+ff::StateWrapper::StateWrapper(std::shared_ptr<ff::State> state)
+{
+	SetState(nullptr, state);
 }
 
 ff::StateWrapper::~StateWrapper()
 {
 }
 
-std::shared_ptr<ff::State> ff::StateWrapper::Advance(AppGlobals *context)
+ff::StateWrapper &ff::StateWrapper::operator=(const std::shared_ptr<State> &state)
+{
+	SetState(nullptr, state);
+	return *this;
+}
+
+std::shared_ptr<ff::State> ff::StateWrapper::Advance(AppGlobals *globals)
 {
 	noAssertRetVal(_state != nullptr, nullptr);
 
-	std::shared_ptr<State> newState = _state->Advance(context);
-	if (newState != nullptr && newState != _state)
-	{
-		_state->SaveState(context);
-		_state = newState;
-		_state->LoadState(context);
-
-		CheckState();
-	}
+	SetState(globals, _state->Advance(globals));
 
 	if (_state->GetStatus() == State::Status::Dead)
 	{
-		_state->SaveState(context);
+		_state->SaveState(globals);
 		_state = nullptr;
 	}
 
 	return nullptr;
 }
 
-void ff::StateWrapper::Render(AppGlobals *context, IRenderTarget *target)
+void ff::StateWrapper::Render(AppGlobals *globals, IRenderTarget *target)
 {
 	noAssertRet(_state != nullptr);
-	_state->Render(context, target);
+	_state->Render(globals, target);
 }
 
-void ff::StateWrapper::SaveState(AppGlobals *context)
+void ff::StateWrapper::SaveState(AppGlobals *globals)
 {
 	noAssertRet(_state != nullptr);
-	_state->SaveState(context);
+	_state->SaveState(globals);
 }
 
-void ff::StateWrapper::LoadState(AppGlobals *context)
+void ff::StateWrapper::LoadState(AppGlobals *globals)
 {
 	noAssertRet(_state != nullptr);
-	_state->LoadState(context);
+	_state->LoadState(globals);
+}
+
+bool ff::StateWrapper::Notify(hash_t eventId, int data1, void *data2)
+{
+	noAssertRetVal(_state != nullptr, false);
+	return _state->Notify(eventId, data1, data2);
 }
 
 ff::State::Status ff::StateWrapper::GetStatus()
 {
 	noAssertRetVal(_state != nullptr, State::Status::Dead);
 	return _state->GetStatus();
+}
+
+void ff::StateWrapper::SetState(AppGlobals *globals, const std::shared_ptr<State> &state)
+{
+	if (state != nullptr && state != _state)
+	{
+		if (globals)
+		{
+			_state->SaveState(globals);
+		}
+
+		_state = state;
+
+		if (globals)
+		{
+			_state->LoadState(globals);
+		}
+
+		CheckState();
+	}
 }
 
 void ff::StateWrapper::CheckState()

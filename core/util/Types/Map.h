@@ -25,39 +25,39 @@ namespace ff
 
 		Map<Key, Value, Hash> &operator=(const Map<Key, Value, Hash> &rhs);
 
-		size_t       Size() const;
-		BucketIter   SetKey(const Key &key, const Value &val); // doesn't allow duplicates
-		BucketIter   SetKey(Key &&key, Value &&val); // doesn't allow duplicates
-		BucketIter   Insert(const Key &key, const Value &val); // allows duplicates
-		BucketIter   Insert(Key &&key, Value &&val); // allows duplicates
-		bool         DeleteKey(const Key &key);
-		BucketIter   DeletePos(BucketIter pos); // returns item after the deleted item
-		void         Clear();
-		bool         IsEmpty() const;
+		size_t Size() const;
+		BucketIter SetKey(const Key &key, const Value &val); // doesn't allow duplicates
+		BucketIter SetKey(Key &&key, Value &&val); // doesn't allow duplicates
+		BucketIter Insert(const Key &key, const Value &val); // allows duplicates
+		BucketIter Insert(Key &&key, Value &&val); // allows duplicates
+		bool DeleteKey(const Key &key);
+		BucketIter DeletePos(BucketIter pos); // returns item after the deleted item
+		void Clear();
+		bool IsEmpty() const;
 
-		bool         Exists(const Key &key) const;
-		BucketIter   Get(const Key &key) const;
-		BucketIter   GetAt(size_t nIndex) const;
-		BucketIter   GetNext(BucketIter pos) const;
+		bool Exists(const Key &key) const;
+		BucketIter Get(const Key &key) const;
+		BucketIter GetAt(size_t nIndex) const;
+		BucketIter GetNext(BucketIter pos) const;
 
-		const Key   &KeyAt(BucketIter pos) const;
+		const Key &KeyAt(BucketIter pos) const;
 		const Value &ValueAt(BucketIter pos) const;
-		Value       &ValueAt(BucketIter pos);
-		hash_t       HashAt(BucketIter pos) const;
+		Value &ValueAt(BucketIter pos);
+		hash_t HashAt(BucketIter pos) const;
 
 		// for iteration through the hash table
-		BucketIter   StartIteration()        const;
-		BucketIter   Iterate(BucketIter pos) const;
+		BucketIter StartIteration() const;
+		BucketIter Iterate(BucketIter pos) const;
 
 		// advanced
-		void         SetBucketCount(size_t nCount, bool bAllowGrow);
-		size_t       MemUsage() const;
-		void         DebugDump() const;
+		void SetBucketCount(size_t nCount, bool bAllowGrow);
+		size_t MemUsage() const;
+		void DebugDump() const;
 
-		typename SetType::const_iterator begin() const  { return _set.begin(); }
-		typename SetType::const_iterator end() const    { return _set.end(); }
+		typename SetType::const_iterator begin() const { return _set.begin(); }
+		typename SetType::const_iterator end() const { return _set.end(); }
 		typename SetType::const_iterator cbegin() const { return _set.cbegin(); }
-		typename SetType::const_iterator cend() const   { return _set.cend(); }
+		typename SetType::const_iterator cend() const { return _set.cend(); }
 
 	private:
 		SetType _set;

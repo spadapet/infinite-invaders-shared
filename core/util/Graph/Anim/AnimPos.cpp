@@ -38,18 +38,15 @@ const ff::AnimPosKey &ff::GetIdentityAnimPosKey()
 	return *(AnimPosKey*)s_identityAnimPos;
 }
 
-
 const DirectX::XMFLOAT4 &ff::GetColorWhite()
 {
 	return *(DirectX::XMFLOAT4 *)s_colorWhite;
 }
 
-
 const DirectX::XMFLOAT4 &ff::GetColorBlack()
 {
 	return *(DirectX::XMFLOAT4 *)s_colorBlack;
 }
-
 
 const DirectX::XMFLOAT4 &ff::GetColorNone()
 {

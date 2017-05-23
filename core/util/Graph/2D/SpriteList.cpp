@@ -7,7 +7,6 @@
 #include "Graph/2D/Sprite.h"
 #include "Graph/2D/SpriteList.h"
 #include "Graph/2D/SpriteOptimizer.h"
-#include "Graph/Data/GraphCategory.h"
 #include "Graph/GraphDevice.h"
 #include "Graph/GraphTexture.h"
 #include "Module/ModuleFactory.h"
@@ -76,7 +75,7 @@ END_INTERFACES()
 static ff::ModuleStartup Register([](ff::Module &module)
 {
 	static ff::StaticString name(L"sprites");
-	module.RegisterClassT<ff::SpriteList>(name, __uuidof(ff::ISpriteList), ff::GetCategoryGraphicsObject());
+	module.RegisterClassT<ff::SpriteList>(name, __uuidof(ff::ISpriteList));
 });
 
 bool ff::CreateSpriteList(IGraphDevice *pDevice, ISpriteList **ppList)

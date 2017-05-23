@@ -40,15 +40,15 @@ ff::FpsDisplay::~FpsDisplay()
 {
 }
 
-std::shared_ptr<ff::State> ff::FpsDisplay::Advance(AppGlobals *context)
+std::shared_ptr<ff::State> ff::FpsDisplay::Advance(AppGlobals *globals)
 {
 	_apsCounter++;
 
 	if (!_input.DidInit())
 	{
-		_input.SetFilter([context](ff::ComPtr<ff::IInputMapping> &obj)
+		_input.SetFilter([globals](ff::ComPtr<ff::IInputMapping> &obj)
 		{
-			ff::IInputDevice *keys = context->GetKeys();
+			ff::IInputDevice *keys = globals->GetKeys();
 
 			ff::ComPtr<ff::IInputMapping> newObj;
 			if (obj->Clone(&keys, 1, &newObj))
@@ -64,7 +64,7 @@ std::shared_ptr<ff::State> ff::FpsDisplay::Advance(AppGlobals *context)
 
 	if (input)
 	{
-		input->Advance(context->GetGlobalTime()._secondsPerAdvance);
+		input->Advance(globals->GetGlobalTime()._secondsPerAdvance);
 
 		if (input->HasStartEvent(EVENT_TOGGLE_CHARTS))
 		{
@@ -98,8 +98,8 @@ std::shared_ptr<ff::State> ff::FpsDisplay::Advance(AppGlobals *context)
 		return nullptr;
 	}
 
-	const ff::FrameTime &ft = context->GetFrameTime();
-	const ff::GlobalTime &gt = context->GetGlobalTime();
+	const ff::FrameTime &ft = globals->GetFrameTime();
+	const ff::GlobalTime &gt = globals->GetGlobalTime();
 	bool updateFastNumbers = (gt._advanceCount % 8) == 0;
 
 	INT64 advanceTimeTotalInt = 0;
@@ -146,23 +146,23 @@ std::shared_ptr<ff::State> ff::FpsDisplay::Advance(AppGlobals *context)
 	return nullptr;
 }
 
-void ff::FpsDisplay::Render(AppGlobals *context, IRenderTarget *target)
+void ff::FpsDisplay::Render(AppGlobals *globals, IRenderTarget *target)
 {
 	_rpsCounter++;
 
 	if (_enabledNumbers || _enabledCharts)
 	{
-		RenderIntro(context, target);
+		RenderIntro(globals, target);
 	}
 
 	if (_enabledNumbers)
 	{
-		RenderNumbers(context, target);
+		RenderNumbers(globals, target);
 	}
 
 	if (_enabledCharts)
 	{
-		RenderCharts(context, target);
+		RenderCharts(globals, target);
 	}
 }
 
@@ -171,12 +171,12 @@ ff::State::Status ff::FpsDisplay::GetStatus()
 	return State::Status::Ignore;
 }
 
-void ff::FpsDisplay::RenderIntro(AppGlobals *context, IRenderTarget *target)
+void ff::FpsDisplay::RenderIntro(AppGlobals *globals, IRenderTarget *target)
 {
 	ff::ISpriteFont *font = _font.GetObject();
 	noAssertRet(font);
 
-	ff::I2dRenderer *render = context->Get2dRender();
+	ff::I2dRenderer *render = globals->Get2dRender();
 	ff::PointFloat targetSize = target->GetRotatedSize().ToFloat();
 	ff::RectFloat targetRect(targetSize);
 
@@ -186,7 +186,7 @@ void ff::FpsDisplay::RenderIntro(AppGlobals *context, IRenderTarget *target)
 		targetRect,
 		ff::PointFloat::Zeros(),
 		ff::PointDouble(target->GetDpiScale(), target->GetDpiScale()).ToFloat(),
-		context->Get2dEffect()))
+		globals->Get2dEffect()))
 	{
 		ff::StaticString buffer(L"Press <F8> to close stats.\n");
 		font->DrawText(render, buffer,
@@ -199,12 +199,12 @@ void ff::FpsDisplay::RenderIntro(AppGlobals *context, IRenderTarget *target)
 	}
 }
 
-void ff::FpsDisplay::RenderNumbers(AppGlobals *context, IRenderTarget *target)
+void ff::FpsDisplay::RenderNumbers(AppGlobals *globals, IRenderTarget *target)
 {
 	ff::ISpriteFont *font = _font.GetObject();
 	noAssertRet(font);
 
-	ff::I2dRenderer *render = context->Get2dRender();
+	ff::I2dRenderer *render = globals->Get2dRender();
 	ff::PointFloat targetSize = target->GetRotatedSize().ToFloat();
 	ff::RectFloat targetRect(targetSize);
 
@@ -214,7 +214,7 @@ void ff::FpsDisplay::RenderNumbers(AppGlobals *context, IRenderTarget *target)
 		targetRect,
 		ff::PointFloat::Zeros(),
 		ff::PointDouble(target->GetDpiScale(), target->GetDpiScale()).ToFloat(),
-		context->Get2dEffect()))
+		globals->Get2dEffect()))
 	{
 		wchar_t buffer[1024];
 		size_t bufferLen = (size_t)_sntprintf_s(
@@ -261,9 +261,9 @@ void ff::FpsDisplay::RenderNumbers(AppGlobals *context, IRenderTarget *target)
 	}
 }
 
-void ff::FpsDisplay::RenderCharts(AppGlobals *context, IRenderTarget *target)
+void ff::FpsDisplay::RenderCharts(AppGlobals *globals, IRenderTarget *target)
 {
-	ff::I2dRenderer *render = context->Get2dRender();
+	ff::I2dRenderer *render = globals->Get2dRender();
 	ff::PointFloat targetSize = target->GetRotatedSize().ToFloat();
 	ff::RectFloat targetRect(targetSize);
 
@@ -280,7 +280,7 @@ void ff::FpsDisplay::RenderCharts(AppGlobals *context, IRenderTarget *target)
 			targetRect,
 			ff::PointFloat(-viewSeconds, 1),
 			targetSize / ff::PointFloat(viewSeconds, -1),
-			context->Get2dEffect()))
+			globals->Get2dEffect()))
 	{
 		ff::PointFloat advancePoints[MAX_QUEUE_SIZE];
 		ff::PointFloat renderPoints[MAX_QUEUE_SIZE];

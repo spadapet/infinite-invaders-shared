@@ -17,7 +17,7 @@ namespace ff
 		virtual PWND GetWindow() const = 0;
 
 		virtual size_t GetCount() const = 0;
-		virtual IJoystickDevice* GetJoystick(size_t nJoy) const = 0;
+		virtual IJoystickDevice *GetJoystick(size_t nJoy) const = 0;
 	};
 
 	UTIL_API bool CreateJoystickInput(PWND hwnd, IJoystickInput **obj);

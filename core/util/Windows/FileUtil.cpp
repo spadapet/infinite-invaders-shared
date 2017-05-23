@@ -175,7 +175,7 @@ bool ff::MemMappedFile::OpenWrite(HANDLE hFile, size_t nNewSize)
 	if (!_mapping)
 	{
 		_size = 0;
-		_mem  = nullptr;
+		_mem = nullptr;
 	}
 	else
 	{
@@ -212,7 +212,7 @@ bool ff::MemMappedFile::OpenRead(HANDLE hFile)
 	if (!_mapping)
 	{
 		_size = 0;
-		_mem  = nullptr;
+		_mem = nullptr;
 	}
 	else
 	{
@@ -221,7 +221,7 @@ bool ff::MemMappedFile::OpenRead(HANDLE hFile)
 #if METRO_APP
 		_mem = (LPBYTE)::MapViewOfFileFromApp(_mapping, FILE_MAP_READ, 0, _size);
 #else
-		_mem  = (LPBYTE)::MapViewOfFile(_mapping, FILE_MAP_READ, 0, 0, _size);
+		_mem = (LPBYTE)::MapViewOfFile(_mapping, FILE_MAP_READ, 0, 0, _size);
 #endif
 		assert(_mem);
 	}
@@ -241,8 +241,8 @@ void ff::MemMappedFile::Close()
 		::CloseHandle(_mapping);
 
 		_mapping = nullptr;
-		_size    = 0;
-		_mem     = nullptr;
+		_size = 0;
+		_mem = nullptr;
 	}
 }
 
@@ -504,7 +504,7 @@ ff::String ff::CreateTempFile(StringRef base, StringRef extension)
 	static StaticString defaultBase(L"TempFile");
 	static StaticString defaultExt(L"tmp");
 
-	String szBase      = base.size() ? szBase : defaultBase;
+	String szBase = base.size() ? szBase : defaultBase;
 	String szExtension = extension.size() ? szExtension : defaultExt;
 
 	for (int nTry = 0; nTry < maxTries; nTry++, nUnique++)
@@ -624,15 +624,15 @@ bool ff::DeleteFile(StringRef path)
 bool ff::CopyFile(StringRef pathFrom, StringRef pathTo, bool bAllowOverwrite)
 {
 	String szCheckPathFrom = CanonicalizePath(pathFrom, true);
-	String szCheckPathTo   = CanonicalizePath(pathTo, true);
+	String szCheckPathTo = CanonicalizePath(pathTo, true);
 
 #if METRO_APP
 	BOOL bCancel = FALSE;
 	COPYFILE2_EXTENDED_PARAMETERS cp;
 	ZeroObject(cp);
-	cp.dwSize      = sizeof(cp);
+	cp.dwSize = sizeof(cp);
 	cp.dwCopyFlags = bAllowOverwrite ? 0 : COPY_FILE_FAIL_IF_EXISTS;
-	cp.pfCancel    = &bCancel;
+	cp.pfCancel = &bCancel;
 
 	return SUCCEEDED(::CopyFile2(szCheckPathFrom.c_str(), szCheckPathTo.c_str(), &cp)) ? true : false;
 #else
@@ -643,7 +643,7 @@ bool ff::CopyFile(StringRef pathFrom, StringRef pathTo, bool bAllowOverwrite)
 bool ff::MoveFile(StringRef pathFrom, StringRef pathTo, bool bAllowOverwrite)
 {
 	String szCheckPathFrom = CanonicalizePath(pathFrom, true);
-	String szCheckPathTo   = CanonicalizePath(pathTo, true);
+	String szCheckPathTo = CanonicalizePath(pathTo, true);
 
 	return ::MoveFileEx(
 		szCheckPathFrom.c_str(),
@@ -1003,10 +1003,10 @@ bool ff::PathInPath(StringRef parent, StringRef child, bool bCheckShortPath)
 {
 #if !METRO_APP
 	String szCheckParent = bCheckShortPath ? GetShortPath(parent) : CanonicalizePath(parent, false, true);
-	String szCheckChild  = bCheckShortPath ? GetShortPath(child)  : CanonicalizePath(child,  false, true);
+	String szCheckChild = bCheckShortPath ? GetShortPath(child) : CanonicalizePath(child, false, true);
 #else
 	String szCheckParent = CanonicalizePath(parent, false, true);
-	String szCheckChild  = CanonicalizePath(child,  false, true);
+	String szCheckChild = CanonicalizePath(child, false, true);
 #endif
 
 	if (szCheckChild.size() > szCheckParent.size() &&
@@ -1216,7 +1216,7 @@ bool ff::ReadWholeFile(StringRef path, StringOut szOut)
 		return false;
 	}
 
-	const BYTE* pMem = memFile.GetMem();
+	const BYTE *pMem = memFile.GetMem();
 
 	if (memFile.GetSize() >= 3 &&
 		pMem[0] == 0xEF &&
@@ -1266,15 +1266,15 @@ ff::String ff::CleanFileName(StringRef name)
 		}
 		else switch (ch)
 		{
-		case '<':  szNewName[i] = '(';  break;
-		case '>':  szNewName[i] = ')';  break;
-		case ':':  szNewName[i] = '-';  break;
+		case '<': szNewName[i] = '('; break;
+		case '>': szNewName[i] = ')'; break;
+		case ':': szNewName[i] = '-'; break;
 		case '\"': szNewName[i] = '\''; break;
-		case '/':  szNewName[i] = '-';  break;
-		case '\\': szNewName[i] = '-';  break;
-		case '|':  szNewName[i] = '-';  break;
-		case '?':  szNewName[i] = '-';  break;
-		case '*':  szNewName[i] = '-';  break;
+		case '/': szNewName[i] = '-'; break;
+		case '\\': szNewName[i] = '-'; break;
+		case '|': szNewName[i] = '-'; break;
+		case '?': szNewName[i] = '-'; break;
+		case '*': szNewName[i] = '-'; break;
 		}
 	}
 

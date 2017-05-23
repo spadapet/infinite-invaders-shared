@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "COM/ComAlloc.h"
 #include "Graph/Anim/AnimPos.h"
-#include "Graph/Data/GraphCategory.h"
 #include "Graph/GraphDevice.h"
 #include "Graph/GraphTexture.h"
 #include "Graph/RenderTarget/RenderTarget.h"
@@ -55,17 +54,17 @@ END_INTERFACES()
 
 static ff::ModuleStartup Register([](ff::Module &module)
 {
-	static ff::StaticString name(L"CRenderTargetTexture");
-	module.RegisterClassT<ff::RenderTargetTexture>(name, GUID_NULL, ff::GetCategoryGraphicsObject());
+	static ff::StaticString name(L"RenderTargetTexture");
+	module.RegisterClassT<ff::RenderTargetTexture>(name);
 });
 
 bool ff::CreateRenderTargetTexture(
-	IGraphDevice*   pDevice,
-	IGraphTexture*  pTexture,
-	size_t          nArrayStart,
-	size_t          nArrayCount,
-	size_t          nMipLevel,
-	IRenderTarget** ppRender)
+	IGraphDevice *pDevice,
+	IGraphTexture *pTexture,
+	size_t nArrayStart,
+	size_t nArrayCount,
+	size_t nMipLevel,
+	IRenderTarget **ppRender)
 {
 	assertRetVal(ppRender, false);
 	*ppRender = nullptr;
@@ -181,10 +180,10 @@ bool ff::RenderTargetTexture::Init(IGraphTexture *pTexture, size_t nArrayStart, 
 {
 	assertRetVal(_device && pTexture, false);
 
-	_texture    = pTexture;
+	_texture = pTexture;
 	_arrayStart = nArrayStart;
 	_arrayCount = nArrayCount;
-	_mipLevel   = nMipLevel;
+	_mipLevel = nMipLevel;
 
 	return true;
 }

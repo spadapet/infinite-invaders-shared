@@ -23,7 +23,7 @@ void ff::GraphStateCache::Reset()
 	_samplerStates.Clear();
 }
 
-ID3D11BlendState *ff::GraphStateCache::GetBlendState(const D3D11_BLEND_DESC& desc)
+ID3D11BlendState *ff::GraphStateCache::GetBlendState(const D3D11_BLEND_DESC &desc)
 {
 	BucketIter i = _blendStates.Get(desc);
 
@@ -38,7 +38,7 @@ ID3D11BlendState *ff::GraphStateCache::GetBlendState(const D3D11_BLEND_DESC& des
 	return _blendStates.ValueAt(i);
 }
 
-ID3D11DepthStencilState *ff::GraphStateCache::GetDepthStencilState(const D3D11_DEPTH_STENCIL_DESC& desc)
+ID3D11DepthStencilState *ff::GraphStateCache::GetDepthStencilState(const D3D11_DEPTH_STENCIL_DESC &desc)
 {
 	BucketIter i = _depthStates.Get(desc);
 
@@ -53,7 +53,7 @@ ID3D11DepthStencilState *ff::GraphStateCache::GetDepthStencilState(const D3D11_D
 	return _depthStates.ValueAt(i);
 }
 
-ID3D11RasterizerState *ff::GraphStateCache::GetRasterizerState(const D3D11_RASTERIZER_DESC& desc)
+ID3D11RasterizerState *ff::GraphStateCache::GetRasterizerState(const D3D11_RASTERIZER_DESC &desc)
 {
 	BucketIter i = _rasterStates.Get(desc);
 
@@ -68,7 +68,7 @@ ID3D11RasterizerState *ff::GraphStateCache::GetRasterizerState(const D3D11_RASTE
 	return _rasterStates.ValueAt(i);
 }
 
-ID3D11SamplerState *ff::GraphStateCache::GetSamplerState(const D3D11_SAMPLER_DESC& desc)
+ID3D11SamplerState *ff::GraphStateCache::GetSamplerState(const D3D11_SAMPLER_DESC &desc)
 {
 	BucketIter i = _samplerStates.Get(desc);
 
@@ -83,64 +83,64 @@ ID3D11SamplerState *ff::GraphStateCache::GetSamplerState(const D3D11_SAMPLER_DES
 	return _samplerStates.ValueAt(i);
 }
 
-void ff::GraphStateCache::GetDefault(D3D11_BLEND_DESC& desc)
+void ff::GraphStateCache::GetDefault(D3D11_BLEND_DESC &desc)
 {
 	ZeroObject(desc);
 
 	for (size_t i = 0; i < _countof(desc.RenderTarget); i++)
 	{
-		desc.RenderTarget[i].SrcBlend              = D3D11_BLEND_ONE;
-	    desc.RenderTarget[i].DestBlend             = D3D11_BLEND_ZERO;
-	    desc.RenderTarget[i].BlendOp               = D3D11_BLEND_OP_ADD;
-	    desc.RenderTarget[i].SrcBlendAlpha         = D3D11_BLEND_ONE;
-	    desc.RenderTarget[i].DestBlendAlpha        = D3D11_BLEND_ZERO;
-	    desc.RenderTarget[i].BlendOpAlpha          = D3D11_BLEND_OP_ADD;
-	    desc.RenderTarget[i].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+		desc.RenderTarget[i].SrcBlend = D3D11_BLEND_ONE;
+		desc.RenderTarget[i].DestBlend = D3D11_BLEND_ZERO;
+		desc.RenderTarget[i].BlendOp = D3D11_BLEND_OP_ADD;
+		desc.RenderTarget[i].SrcBlendAlpha = D3D11_BLEND_ONE;
+		desc.RenderTarget[i].DestBlendAlpha = D3D11_BLEND_ZERO;
+		desc.RenderTarget[i].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+		desc.RenderTarget[i].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 	}
 }
 
-void ff::GraphStateCache::GetDefault(D3D11_DEPTH_STENCIL_DESC& desc)
+void ff::GraphStateCache::GetDefault(D3D11_DEPTH_STENCIL_DESC &desc)
 {
 	ZeroObject(desc);
 
-	desc.DepthEnable                  = TRUE;
-	desc.DepthWriteMask               = D3D11_DEPTH_WRITE_MASK_ALL;
-	desc.DepthFunc                    = D3D11_COMPARISON_LESS;
-	desc.StencilEnable                = FALSE;
-	desc.StencilReadMask              = D3D11_DEFAULT_STENCIL_READ_MASK;
-	desc.StencilWriteMask             = D3D11_DEFAULT_STENCIL_WRITE_MASK;
+	desc.DepthEnable = TRUE;
+	desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+	desc.DepthFunc = D3D11_COMPARISON_LESS;
+	desc.StencilEnable = FALSE;
+	desc.StencilReadMask = D3D11_DEFAULT_STENCIL_READ_MASK;
+	desc.StencilWriteMask = D3D11_DEFAULT_STENCIL_WRITE_MASK;
 
-	desc.FrontFace.StencilFailOp      = D3D11_STENCIL_OP_KEEP;
+	desc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
 	desc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
-	desc.FrontFace.StencilPassOp      = D3D11_STENCIL_OP_KEEP;
-	desc.FrontFace.StencilFunc        = D3D11_COMPARISON_ALWAYS;
+	desc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+	desc.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
 
-	desc.BackFace.StencilFailOp       = D3D11_STENCIL_OP_KEEP;
-	desc.BackFace.StencilDepthFailOp  = D3D11_STENCIL_OP_KEEP;
-	desc.BackFace.StencilPassOp       = D3D11_STENCIL_OP_KEEP;
-	desc.BackFace.StencilFunc         = D3D11_COMPARISON_ALWAYS;
+	desc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+	desc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
+	desc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+	desc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
 }
 
-void ff::GraphStateCache::GetDefault(D3D11_RASTERIZER_DESC& desc)
+void ff::GraphStateCache::GetDefault(D3D11_RASTERIZER_DESC &desc)
 {
 	ZeroObject(desc);
 
-	desc.FillMode        = D3D11_FILL_SOLID;
-	desc.CullMode        = D3D11_CULL_BACK;
+	desc.FillMode = D3D11_FILL_SOLID;
+	desc.CullMode = D3D11_CULL_BACK;
 	desc.DepthClipEnable = TRUE;
 }
 
-void ff::GraphStateCache::GetDefault(D3D11_SAMPLER_DESC& desc)
+void ff::GraphStateCache::GetDefault(D3D11_SAMPLER_DESC &desc)
 {
 	ZeroObject(desc);
 
-	desc.Filter         = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
-	desc.AddressU       = D3D11_TEXTURE_ADDRESS_CLAMP;
-	desc.AddressV       = D3D11_TEXTURE_ADDRESS_CLAMP;
-	desc.AddressW       = D3D11_TEXTURE_ADDRESS_CLAMP;
-	desc.MinLOD         = -FLT_MAX;
-	desc.MaxLOD         = FLT_MAX;
-	desc.MaxAnisotropy  = 16;
+	desc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+	desc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
+	desc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
+	desc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
+	desc.MinLOD = -FLT_MAX;
+	desc.MaxLOD = FLT_MAX;
+	desc.MaxAnisotropy = 16;
 	desc.ComparisonFunc = D3D11_COMPARISON_NEVER;
 }
 

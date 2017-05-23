@@ -9,7 +9,6 @@
 #include "Data/Stream.h"
 #include "Dict/Dict.h"
 #include "Globals/ProcessGlobals.h"
-#include "Graph/Data/GraphCategory.h"
 #include "Module/ModuleFactory.h"
 #include "Resource/ResourcePersist.h"
 #include "Resource/ResourceValue.h"
@@ -120,10 +119,10 @@ namespace ff
 		COM_FUNC_VOID OnVoiceProcessingPassStart(UINT32 BytesRequired) override;
 		COM_FUNC_VOID OnVoiceProcessingPassEnd() override;
 		COM_FUNC_VOID OnStreamEnd() override;
-		COM_FUNC_VOID OnBufferStart(void* pBufferContext) override;
-		COM_FUNC_VOID OnBufferEnd(void* pBufferContext) override;
-		COM_FUNC_VOID OnLoopEnd(void* pBufferContext) override;
-		COM_FUNC_VOID OnVoiceError(void* pBufferContext, HRESULT error) override;
+		COM_FUNC_VOID OnBufferStart(void *pBufferContext) override;
+		COM_FUNC_VOID OnBufferEnd(void *pBufferContext) override;
+		COM_FUNC_VOID OnLoopEnd(void *pBufferContext) override;
+		COM_FUNC_VOID OnVoiceError(void *pBufferContext, HRESULT error) override;
 
 		// IMFSourceReaderCallback
 		COM_FUNC OnReadSample(HRESULT hrStatus, DWORD dwStreamIndex, DWORD dwStreamFlags, LONGLONG llTimestamp, IMFSample *pSample) override;
@@ -228,8 +227,8 @@ static ff::ModuleStartup RegisterAudioMusic([](ff::Module &module)
 	static ff::StaticString name0(L"music");
 	static ff::StaticString name1(L"music playing");
 
-	module.RegisterClassT<ff::AudioMusic>(name0, __uuidof(ff::IAudioMusic), ff::GetCategoryAudioObject());
-	module.RegisterClassT<ff::AudioMusicPlaying>(name1, __uuidof(ff::IAudioPlaying), ff::GetCategoryAudioObject());
+	module.RegisterClassT<ff::AudioMusic>(name0, __uuidof(ff::IAudioMusic));
+	module.RegisterClassT<ff::AudioMusicPlaying>(name1, __uuidof(ff::IAudioPlaying));
 });
 
 bool ff::CreateAudioMusic(IAudioDevice *device, IAudioMusic **obj)

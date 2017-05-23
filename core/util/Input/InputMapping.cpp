@@ -89,8 +89,8 @@ namespace ff
 		Map<hash_t, size_t> _valueToInfo;
 
 		typedef Vector<ComPtr<IInputEventListener>> ListenerVector;
-		typedef SharedObject<ListenerVector> SharedListenerVector;
-		SmartPtr<SharedListenerVector> _listeners;
+		typedef std::shared_ptr<ListenerVector> ListenerVectorPtr;
+		ListenerVectorPtr _listeners;
 	};
 
 	class __declspec(uuid("d3bdf49d-1e6b-43ed-95d2-99f924170bfa"))
@@ -178,7 +178,6 @@ void ff::CProxyInputEventListener::OnInputEvents(IInputMapping *pMapping, const 
 ff::InputMapping::InputMapping()
 {
 }
-
 
 ff::InputMapping::~InputMapping()
 {
@@ -296,10 +295,10 @@ void ff::InputMapping::Advance(double deltaTime)
 		SetThreadExecutionState(ES_DISPLAY_REQUIRED | ES_SYSTEM_REQUIRED);
 #endif
 		// Tell listeners about the input events
-		SmartPtr<SharedListenerVector> listeners = _listeners;
+		ListenerVectorPtr listeners = _listeners;
 		if (listeners != nullptr)
 		{
-			for (const auto &listener: *listeners.Object())
+			for (const auto &listener: *listeners.get())
 			{
 				listener->OnInputEvents(this, _currentEvents.Data(), _currentEvents.Size());
 			}
@@ -542,7 +541,7 @@ ff::String ff::InputMapping::GetStringValue(hash_t valueID) const
 void ff::InputMapping::AddListener(IInputEventListener *pListener)
 {
 	assertRet(pListener);
-	GetUnsharedObject(_listeners);
+	ff::MakeUnshared(_listeners);
 	_listeners->Push(pListener);
 }
 
@@ -558,10 +557,10 @@ bool ff::InputMapping::RemoveListener(IInputEventListener *pListener)
 {
 	assertRetVal(pListener, false);
 
-	GetUnsharedObject(_listeners);
+	ff::MakeUnshared(_listeners);
 	if (_listeners != nullptr)
 	{
-		for (const auto &listener: *_listeners.Object())
+		for (const auto &listener: *_listeners.get())
 		{
 			if (listener == pListener)
 			{
@@ -710,12 +709,12 @@ int ff::InputMapping::GetDigitalValue(const InputAction &action, int *pPressCoun
 				if (_joys[i]->IsConnected())
 				{
 					size_t nButtonCount = _joys[i]->GetButtonCount();
-					bool   bAllButtons  = (action._partIndex == INPUT_INDEX_ANY_BUTTON);
+					bool bAllButtons = (action._partIndex == INPUT_INDEX_ANY_BUTTON);
 
 					if (bAllButtons || action._partIndex < nButtonCount)
 					{
 						size_t nFirst = bAllButtons ? 0 : action._partIndex;
-						size_t nEnd   = bAllButtons ? nButtonCount : nFirst + 1;
+						size_t nEnd = bAllButtons ? nButtonCount : nFirst + 1;
 
 						for (size_t h = nFirst; h < nEnd; h++)
 						{
@@ -782,10 +781,10 @@ int ff::InputMapping::GetDigitalValue(const InputAction &action, int *pPressCoun
 
 						switch (action._partValue)
 						{
-						case INPUT_VALUE_LEFT:  *pPressCount += dirs.left;   break;
-						case INPUT_VALUE_RIGHT: *pPressCount += dirs.right;  break;
-						case INPUT_VALUE_UP:    *pPressCount += dirs.top;    break;
-						case INPUT_VALUE_DOWN:  *pPressCount += dirs.bottom; break;
+						case INPUT_VALUE_LEFT: *pPressCount += dirs.left; break;
+						case INPUT_VALUE_RIGHT: *pPressCount += dirs.right; break;
+						case INPUT_VALUE_UP: *pPressCount += dirs.top; break;
+						case INPUT_VALUE_DOWN: *pPressCount += dirs.bottom; break;
 						}
 					}
 				}
@@ -808,10 +807,10 @@ int ff::InputMapping::GetDigitalValue(const InputAction &action, int *pPressCoun
 
 						switch (action._partValue)
 						{
-						case INPUT_VALUE_LEFT:  *pPressCount += dirs.left;   break;
-						case INPUT_VALUE_RIGHT: *pPressCount += dirs.right;  break;
-						case INPUT_VALUE_UP:    *pPressCount += dirs.top;    break;
-						case INPUT_VALUE_DOWN:  *pPressCount += dirs.bottom; break;
+						case INPUT_VALUE_LEFT: *pPressCount += dirs.left; break;
+						case INPUT_VALUE_RIGHT: *pPressCount += dirs.right; break;
+						case INPUT_VALUE_UP: *pPressCount += dirs.top; break;
+						case INPUT_VALUE_DOWN: *pPressCount += dirs.bottom; break;
 						}
 					}
 				}
@@ -890,10 +889,10 @@ float ff::InputMapping::GetAnalogValue(const InputAction &action, bool bForDigit
 				{
 				case INPUT_VALUE_X_AXIS: return posXY.x;
 				case INPUT_VALUE_Y_AXIS: return posXY.y;
-				case INPUT_VALUE_LEFT:   return (posXY.x < 0) ? -posXY.x : 0.0f;
-				case INPUT_VALUE_RIGHT:  return (posXY.x > 0) ?  posXY.x : 0.0f;
-				case INPUT_VALUE_UP:     return (posXY.y < 0) ? -posXY.y : 0.0f;
-				case INPUT_VALUE_DOWN:   return (posXY.y > 0) ?  posXY.y : 0.0f;
+				case INPUT_VALUE_LEFT: return (posXY.x < 0) ? -posXY.x : 0.0f;
+				case INPUT_VALUE_RIGHT: return (posXY.x > 0) ? posXY.x : 0.0f;
+				case INPUT_VALUE_UP: return (posXY.y < 0) ? -posXY.y : 0.0f;
+				case INPUT_VALUE_DOWN: return (posXY.y > 0) ? posXY.y : 0.0f;
 				}
 			}
 		}
@@ -930,10 +929,10 @@ float ff::InputMapping::GetAnalogValue(const InputAction &action, bool bForDigit
 				{
 				case INPUT_VALUE_X_AXIS: return (float)posXY.x;
 				case INPUT_VALUE_Y_AXIS: return (float)posXY.y;
-				case INPUT_VALUE_LEFT:   return (posXY.x < 0) ? 1.0f : 0.0f;
-				case INPUT_VALUE_RIGHT:  return (posXY.x > 0) ? 1.0f : 0.0f;
-				case INPUT_VALUE_UP:     return (posXY.y < 0) ? 1.0f : 0.0f;
-				case INPUT_VALUE_DOWN:   return (posXY.y > 0) ? 1.0f : 0.0f;
+				case INPUT_VALUE_LEFT: return (posXY.x < 0) ? 1.0f : 0.0f;
+				case INPUT_VALUE_RIGHT: return (posXY.x > 0) ? 1.0f : 0.0f;
+				case INPUT_VALUE_UP: return (posXY.y < 0) ? 1.0f : 0.0f;
+				case INPUT_VALUE_DOWN: return (posXY.y > 0) ? 1.0f : 0.0f;
 				}
 			}
 		}

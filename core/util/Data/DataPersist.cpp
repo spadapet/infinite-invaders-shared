@@ -36,7 +36,7 @@ bool ff::SaveBytes(IDataWriter *pWriter, IData *pData)
 
 bool ff::LoadBytes(IDataReader *pReader, void *pMem, size_t nBytes)
 {
-	const BYTE* pData = LoadBytes(pReader, nBytes);
+	const BYTE *pData = LoadBytes(pReader, nBytes);
 	assertRetVal(pData && pMem, false);
 
 	CopyMemory(pMem, pData, nBytes);
@@ -85,7 +85,7 @@ bool ff::LoadData<ff::String>(IDataReader *pReader, StringOut data)
 	DWORD nBytes = 0;
 	assertRetVal(LoadData(pReader, nBytes), false);
 
-	const BYTE* sz = LoadBytes(pReader, (size_t)nBytes);
+	const BYTE *sz = LoadBytes(pReader, (size_t)nBytes);
 	assertRetVal(sz, false);
 	data.assign((const wchar_t *)sz, (nBytes / sizeof(wchar_t)) - 1);
 

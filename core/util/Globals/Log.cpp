@@ -26,7 +26,7 @@ void ff::Log::SetConsoleOutput(bool console)
 
 ff::IDataWriter *ff::Log::AddFile(StringRef path, bool bAppend)
 {
-	ComPtr<IDataFile>   pFile;
+	ComPtr<IDataFile> pFile;
 	ComPtr<IDataWriter> pWriter;
 
 	assertRetVal(CreateDataFile(path, false, &pFile), nullptr);
@@ -167,7 +167,6 @@ void ff::Log::GlobalTraceV(const wchar_t *szFormat, va_list args)
 	noAssertRet(globals);
 	globals->GetLog().TraceV(szFormat, args);
 }
-
 
 // static
 void ff::Log::DebugTrace(const wchar_t *szText)

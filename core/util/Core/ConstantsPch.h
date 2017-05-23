@@ -1,13 +1,13 @@
 #pragma once
 
 #if defined(UTIL_DLL)
-#  define UTIL_API __declspec(dllexport)
-#  define UTIL_IMPORT __declspec(dllimport)
-#  define UTIL_EXPORT __declspec(dllexport)
+#define UTIL_API __declspec(dllexport)
+#define UTIL_IMPORT __declspec(dllimport)
+#define UTIL_EXPORT __declspec(dllexport)
 #else
-#  define UTIL_API __declspec(dllimport)
-#  define UTIL_IMPORT __declspec(dllimport)
-#  define UTIL_EXPORT __declspec(dllexport)
+#define UTIL_API __declspec(dllimport)
+#define UTIL_IMPORT __declspec(dllimport)
+# define UTIL_EXPORT __declspec(dllexport)
 #endif
 
 namespace ff

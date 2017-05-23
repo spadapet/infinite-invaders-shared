@@ -75,10 +75,10 @@ void ff::SetDebuggerThreadName(StringRef name, DWORD nThreadID)
 
 		typedef struct tagTHREADNAME_INFO
 		{
-			ULONG_PTR dwType;     // must be 0x1000
-			const char *szName;     // pointer to name (in user addr space)
+			ULONG_PTR dwType; // must be 0x1000
+			const char *szName; // pointer to name (in user addr space)
 			ULONG_PTR dwThreadID; // thread ID (-1=caller thread)
-			ULONG_PTR dwFlags;    // reserved for future use, must be zero
+			ULONG_PTR dwFlags; // reserved for future use, must be zero
 		} THREADNAME_INFO;
 
 		THREADNAME_INFO info;

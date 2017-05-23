@@ -6,8 +6,7 @@
 #include "Data/SavedData.h"
 #include "Dict/Dict.h"
 #include "Graph/2D/Sprite.h"
-#include "Graph/Data/DataBlob.h"
-#include "Graph/Data/GraphCategory.h"
+#include "Graph/DataBlob.h"
 #include "Graph/GraphDevice.h"
 #include "Graph/GraphTexture.h"
 #include "Module/ModuleFactory.h"
@@ -78,7 +77,7 @@ END_INTERFACES()
 static ff::ModuleStartup RegisterTexture([](ff::Module &module)
 {
 	static ff::StaticString name(L"texture");
-	module.RegisterClassT<ff::GraphTexture>(name, __uuidof(ff::IGraphTexture), ff::GetCategoryGraphicsObject());
+	module.RegisterClassT<ff::GraphTexture>(name, __uuidof(ff::IGraphTexture));
 });
 
 DXGI_FORMAT ff::ParseTextureFormat(ff::StringRef szFormat)
@@ -118,10 +117,10 @@ bool ff::CreateGraphTexture(
 {
 	assertRetVal(pDevice && ppTexture, false);
 
-	DirectX::ScratchImage  scratchOrig;
-	DirectX::ScratchImage  scratchMips;
-	DirectX::ScratchImage  scratchNew;
-	DirectX::ScratchImage* pScratchFinal = &scratchOrig;
+	DirectX::ScratchImage scratchOrig;
+	DirectX::ScratchImage scratchMips;
+	DirectX::ScratchImage scratchNew;
+	DirectX::ScratchImage *pScratchFinal = &scratchOrig;
 
 	if (!_wcsicmp(GetPathExtension(path).c_str(), L"dds"))
 	{
@@ -135,7 +134,7 @@ bool ff::CreateGraphTexture(
 	if (DirectX::IsCompressed(format))
 	{
 		// Compressed images have size restrictions. Upon failure, just use RGB
-		size_t width  = scratchOrig.GetMetadata().width;
+		size_t width = scratchOrig.GetMetadata().width;
 		size_t height = scratchOrig.GetMetadata().height;
 
 		if (width % 4 || height % 4)
@@ -310,7 +309,7 @@ bool ff::CreateGraphTexture(
 
 	nMultiSamples = std::max<size_t>(1, nMultiSamples);
 	nMultiSamples = std::min<size_t>(8, nMultiSamples);
-	nArraySize    = std::max<size_t>(1, nArraySize);
+	nArraySize = std::max<size_t>(1, nArraySize);
 
 	// compressed textures must have sizes that are multiples of four
 	if (DirectX::IsCompressed(format) && (size.x % 4 || size.y % 4))
@@ -321,16 +320,16 @@ bool ff::CreateGraphTexture(
 	D3D11_TEXTURE2D_DESC desc;
 	ZeroObject(desc);
 
-	desc.Width              = size.x;
-	desc.Height             = size.y;
-	desc.Usage              = D3D11_USAGE_DEFAULT;
-	desc.BindFlags          = D3D11_BIND_SHADER_RESOURCE | (!DirectX::IsCompressed(format) ? D3D11_BIND_RENDER_TARGET : 0);
-	desc.Format             = format;
-	desc.CPUAccessFlags     = 0;
-	desc.MiscFlags          = 0;
-	desc.MipLevels          = (UINT)nMipMapLevels;
-	desc.ArraySize          = (UINT)nArraySize;
-	desc.SampleDesc.Count   = (UINT)nMultiSamples;
+	desc.Width = size.x;
+	desc.Height = size.y;
+	desc.Usage = D3D11_USAGE_DEFAULT;
+	desc.BindFlags = D3D11_BIND_SHADER_RESOURCE | (!DirectX::IsCompressed(format) ? D3D11_BIND_RENDER_TARGET : 0);
+	desc.Format = format;
+	desc.CPUAccessFlags = 0;
+	desc.MiscFlags = 0;
+	desc.MipLevels = (UINT)nMipMapLevels;
+	desc.ArraySize = (UINT)nArraySize;
+	desc.SampleDesc.Count = (UINT)nMultiSamples;
 	desc.SampleDesc.Quality = 0;
 
 	ComPtr<ID3D11Texture2D> pTexture2D;
@@ -354,16 +353,16 @@ bool ff::CreateStagingTexture(
 	D3D11_TEXTURE2D_DESC desc;
 	ZeroObject(desc);
 
-	desc.Width              = size.x;
-	desc.Height             = size.y;
-	desc.Usage              = bReadable ? D3D11_USAGE_STAGING : D3D11_USAGE_DYNAMIC;
-	desc.BindFlags          = bReadable ? 0 : D3D11_BIND_SHADER_RESOURCE;
-	desc.Format             = format;
-	desc.CPUAccessFlags     = (bWritable ? D3D11_CPU_ACCESS_WRITE : 0) | (bReadable ? D3D11_CPU_ACCESS_READ : 0);
-	desc.MiscFlags          = 0;
-	desc.MipLevels          = 1;
-	desc.ArraySize          = 1;
-	desc.SampleDesc.Count   = 1;
+	desc.Width = size.x;
+	desc.Height = size.y;
+	desc.Usage = bReadable ? D3D11_USAGE_STAGING : D3D11_USAGE_DYNAMIC;
+	desc.BindFlags = bReadable ? 0 : D3D11_BIND_SHADER_RESOURCE;
+	desc.Format = format;
+	desc.CPUAccessFlags = (bWritable ? D3D11_CPU_ACCESS_WRITE : 0) | (bReadable ? D3D11_CPU_ACCESS_READ : 0);
+	desc.MiscFlags = 0;
+	desc.MipLevels = 1;
+	desc.ArraySize = 1;
+	desc.SampleDesc.Count = 1;
 	desc.SampleDesc.Quality = 0;
 
 	ComPtr<ID3D11Texture2D> pTexture2D;
@@ -449,30 +448,30 @@ HRESULT ff::GraphTexture::_Construct(IUnknown *unkOuter)
 }
 
 bool ff::GraphTexture::Init(
-		ID3D11Texture2D* pTexture,
-		size_t           nMipMapStart,
-		size_t           nMipMapCount,
-		size_t           nArrayStart,
-		size_t           nArrayCount)
+		ID3D11Texture2D *pTexture,
+		size_t nMipMapStart,
+		size_t nMipMapCount,
+		size_t nArrayStart,
+		size_t nArrayCount)
 {
 	assertRetVal(pTexture, false);
 
 	D3D11_TEXTURE2D_DESC descTex;
 	pTexture->GetDesc(&descTex);
 
-	size_t nMipMax   = descTex.MipLevels;
+	size_t nMipMax = descTex.MipLevels;
 	size_t nArrayMax = descTex.ArraySize;
 
-	nMipMapCount = nMipMapCount ? nMipMapCount : nMipMax   - nMipMapStart;
-	nArrayCount  = nArrayCount  ? nArrayCount  : nArrayMax - nArrayStart;
+	nMipMapCount = nMipMapCount ? nMipMapCount : nMipMax - nMipMapStart;
+	nArrayCount = nArrayCount ? nArrayCount : nArrayMax - nArrayStart;
 
 	assertRetVal(nMipMax <= 0xFFFF && nArrayMax <= 0xFFFF, false);
 	assertRetVal(nMipMapStart < nMipMax && nArrayStart < nArrayMax, false);
 	assertRetVal(nMipMapStart + nMipMapCount <= nMipMax && nArrayStart + nArrayCount <= nArrayMax, false);
 
-	_texture        = pTexture;
-	_viewMipStart   = (WORD)nMipMapStart;
-	_viewMipCount   = (WORD)nMipMapCount;
+	_texture = pTexture;
+	_viewMipStart = (WORD)nMipMapStart;
+	_viewMipCount = (WORD)nMipMapCount;
 	_viewArrayStart = (WORD)nArrayStart;
 	_viewArrayCount = (WORD)nArrayCount;
 

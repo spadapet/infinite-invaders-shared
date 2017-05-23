@@ -28,9 +28,6 @@ namespace ff
 #define DECLARE_HEADER_AND_DEFAULT_TYPELIB(className) \
 	DECLARE_HEADER_AND_TYPELIB(className, 1)
 
-#define DECLARE_CATEGORY(categoryGuid) \
-	virtual REFGUID _GetCategoryID() const override { return (categoryGuid); }
-
 #define BEGIN_INTERFACES(className) \
 	HRESULT className::_QueryInterface(REFIID iid, void **ppv) { \
 		if (0) { }

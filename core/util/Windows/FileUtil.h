@@ -53,9 +53,9 @@ namespace ff
 	UTIL_API String GetKnownDirectory(REFGUID id, bool bCreate = false);
 #endif
 
-	UTIL_API String GetLocalUserDirectory  ();
+	UTIL_API String GetLocalUserDirectory();
 	UTIL_API String GetRoamingUserDirectory();
-	UTIL_API String GetCurrentDirectory  ();
+	UTIL_API String GetCurrentDirectory();
 	UTIL_API bool CreateDirectory(StringRef path);
 	UTIL_API bool DeleteDirectory(StringRef path, bool bMustBeEmpty = true);
 	UTIL_API bool DirectoryExists(StringRef path, WIN32_FIND_DATA *pFindData = nullptr);

@@ -26,18 +26,18 @@ namespace ff
 
 		// ISavedData functions
 
-		virtual IData* Load() override;
-		virtual bool   Unload() override;
-		virtual IData* SaveToMem() override;
-		virtual bool   SaveToFile() override;
+		virtual IData *Load() override;
+		virtual bool Unload() override;
+		virtual IData *SaveToMem() override;
+		virtual bool SaveToFile() override;
 
 		virtual size_t GetSavedSize() override;
 		virtual size_t GetFullSize() override;
-		virtual bool   IsCompressed() override;
-		virtual bool   CreateSavedDataReader(IDataReader **ppReader) override;
+		virtual bool IsCompressed() override;
+		virtual bool CreateSavedDataReader(IDataReader **ppReader) override;
 
-		virtual bool   Clone(ISavedData **ppSavedData) override;
-		virtual bool   Copy(ISavedData *pDataSource) override;
+		virtual bool Clone(ISavedData **ppSavedData) override;
+		virtual bool Copy(ISavedData *pDataSource) override;
 
 	private:
 		ComPtr<IData> _fullData;
@@ -182,11 +182,11 @@ bool ff::CSavedData::CreateSavedDataFromFile(
 	assertRetVal(pFile, false);
 	assertSz(!pFile->GetMem(), L"Can't use a mem mapped file in CSavedData::CreateSavedDataFromFile");
 
-	_origFile         = pFile;
-	_origFileStart    = nStart;
-	_origFileSize     = nSavedSize;
+	_origFile = pFile;
+	_origFileStart = nStart;
+	_origFileSize = nSavedSize;
 	_origFileFullSize = nFullSize;
-	_compress         = bCompressed;
+	_compress = bCompressed;
 
 	return true;
 }
@@ -206,8 +206,8 @@ ff::IData *ff::CSavedData::Load()
 	if (!_fullData)
 	{
 		size_t nSavedSize = GetSavedSize();
-		size_t nFullSize  = GetFullSize();
-		bool   bSuccess   = false;
+		size_t nFullSize = GetFullSize();
+		bool bSuccess = false;
 
 		ComPtr<IDataReader> pReader;
 		ComPtr<IDataWriter> pWriter;
@@ -314,9 +314,9 @@ ff::IData *ff::CSavedData::SaveToMem()
 			if (CreateDataVector(_origFileSize, &pDataVector) &&
 				CreateDataWriter(pDataVector, 0, &pWriter) &&
 				CreateDataReader(_origFile, _origFileStart, &pReader) &&
-				StreamCopyData  (pReader, _origFileSize, pWriter))
+				StreamCopyData(pReader, _origFileSize, pWriter))
 			{
-				_origData         = pDataVector;
+				_origData = pDataVector;
 				_origDataFullSize = _origFileFullSize;
 			}
 		}
@@ -333,7 +333,7 @@ bool ff::CSavedData::SaveToFile()
 {
 	if (!_origFile && (!_origData || !_origData->IsStatic()))
 	{
-		ComPtr<IDataFile>   pFile;
+		ComPtr<IDataFile> pFile;
 		ComPtr<IDataWriter> pWriter;
 		ComPtr<IDataReader> pReader;
 
@@ -345,11 +345,11 @@ bool ff::CSavedData::SaveToFile()
 			assertRetVal(CreateDataReader(_origData, 0, &pReader), false);
 			assertRetVal(StreamCopyData(pReader, _origData->GetSize(), pWriter), false);
 
-			_origFile         = pFile;
-			_origFileStart    = 0;
-			_origFileSize     = _origData->GetSize();
+			_origFile = pFile;
+			_origFileStart = 0;
+			_origFileSize = _origData->GetSize();
 			_origFileFullSize = _origDataFullSize;
-			_origData         = nullptr;
+			_origData = nullptr;
 		}
 		else if (_fullData)
 		{

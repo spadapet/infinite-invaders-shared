@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "COM/ComAlloc.h"
 #include "Globals/ProcessGlobals.h"
-#include "Graph/Data/GraphCategory.h"
 #include "Graph/GraphDevice.h"
 #include "Graph/GraphFactory.h"
 #include "Graph/GraphTexture.h"
@@ -107,7 +106,7 @@ END_INTERFACES()
 static ff::ModuleStartup Register([](ff::Module &module)
 {
 	static ff::StaticString name(L"RenderTargetWindow");
-	module.RegisterClassT<ff::RenderTargetWindow>(name, GUID_NULL, ff::GetCategoryGraphicsObject());
+	module.RegisterClassT<ff::RenderTargetWindow>(name);
 });
 
 // STATIC_DATA (object)
@@ -146,7 +145,7 @@ static ff::PointInt GetMonitorResolution(HWND hwnd, IDXGIAdapterX *pCard, IDXGIO
 		assertRetVal(outputs.Size(), ff::PointInt::Zeros());
 	}
 
-	HMONITOR hFoundMonitor  = nullptr;
+	HMONITOR hFoundMonitor = nullptr;
 	HMONITOR hTargetMonitor = MonitorFromWindow(hwnd, MONITOR_DEFAULTTOPRIMARY);
 	ff::ComPtr<IDXGIOutputX> pOutput;
 	ff::PointInt size(0, 0);
@@ -290,7 +289,7 @@ void ff::RenderTargetWindow::UpdateWindowStyle(bool fullScreen)
 bool ff::RenderTargetWindow::InitSwapChain(size_t nBackBuffers, bool bFullScreen)
 {
 	// Get info about the active monitor
-	ComPtr<IDXGIOutputX>  pOutput;
+	ComPtr<IDXGIOutputX> pOutput;
 	ComPtr<IDXGIAdapterX> pCard = _device->GetAdapter();
 	PointInt monitorSize = GetMonitorResolution(_hwnd, _device->IsSoftware() ? pCard : nullptr, &pOutput);
 
@@ -500,7 +499,7 @@ bool ff::RenderTargetWindow::Present(bool vsync)
 {
 	assertRetVal(_swapChain, true);
 
-	UINT nSync  = (vsync && !_occluded) ? 1 : 0;
+	UINT nSync = (vsync && !_occluded) ? 1 : 0;
 	UINT nFlags = _occluded ? DXGI_PRESENT_TEST : 0;
 
 	switch (_swapChain->Present(nSync, nFlags))
@@ -614,7 +613,6 @@ LRESULT CALLBACK ff::RenderTargetWindow::StaticDeviceTopWindowProc(HWND hwnd, UI
 	assert(false);
 	return DefWindowProc(hwnd, msg, wParam, lParam);
 }
-
 
 LRESULT CALLBACK ff::RenderTargetWindow::DeviceWindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -755,9 +753,9 @@ void ff::RenderTargetWindow::OnPrintScreen()
 	DXGI_OUTPUT_DESC desc;
 	assertRet(SUCCEEDED(pOutput->GetDesc(&desc)));
 
-	RectInt  desktopRect(desc.DesktopCoordinates);
+	RectInt desktopRect(desc.DesktopCoordinates);
 	PointInt size(desktopRect.Size());
-	int    nDestPitch = size.x * 4;
+	int nDestPitch = size.x * 4;
 
 	ComPtr<IGraphTexture> pTexture;
 	assertRet(CreateStagingTexture(_device, size, DXGI_FORMAT_B8G8R8A8_UNORM, true, true, &pTexture));
@@ -784,7 +782,7 @@ void ff::RenderTargetWindow::OnPrintScreen()
 		D3D11_MAPPED_SUBRESOURCE map;
 		assertRet(SUCCEEDED(_device->GetContext()->Map(pTexture->GetTexture(), 0, D3D11_MAP_READ, 0, &map)));
 		LPBYTE pSourceData = (LPBYTE)map.pData;
-		LPBYTE pDestData   = (LPBYTE)pInfo->bmiColors;
+		LPBYTE pDestData = (LPBYTE)pInfo->bmiColors;
 
 		for (int y = 0; y < size.y; y++)
 		{

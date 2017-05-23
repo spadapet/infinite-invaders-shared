@@ -81,7 +81,7 @@ bool ff::ProcessGlobals::Startup()
 
 	INITCOMMONCONTROLSEX cc;
 	cc.dwSize = sizeof(cc);
-	cc.dwICC  = ICC_WIN95_CLASSES;
+	cc.dwICC = ICC_WIN95_CLASSES;
 	verify(::InitCommonControlsEx(&cc));
 #endif
 

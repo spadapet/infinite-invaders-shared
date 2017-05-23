@@ -7,7 +7,6 @@
 #include "Data/DataPersist.h"
 #include "Dict/Dict.h"
 #include "Globals/ProcessGlobals.h"
-#include "Graph/Data/GraphCategory.h"
 #include "Module/ModuleFactory.h"
 #include "Resource/ResourcePersist.h"
 #include "Resource/ResourceValue.h"
@@ -96,7 +95,7 @@ END_INTERFACES()
 static ff::ModuleStartup RegisterAudioEffect([](ff::Module &module)
 {
 	static ff::StaticString name(L"effect");
-	module.RegisterClassT<AudioEffect>(name, __uuidof(ff::IAudioEffect), ff::GetCategoryAudioObject());
+	module.RegisterClassT<AudioEffect>(name, __uuidof(ff::IAudioEffect));
 });
 
 bool ff::CreateAudioEffect(IAudioDevice *pDevice, IAudioEffect **ppEffect)
@@ -146,10 +145,10 @@ public:
 	COM_FUNC_VOID OnVoiceProcessingPassStart(UINT32 BytesRequired) override;
 	COM_FUNC_VOID OnVoiceProcessingPassEnd() override;
 	COM_FUNC_VOID OnStreamEnd() override;
-	COM_FUNC_VOID OnBufferStart(void* pBufferContext) override;
-	COM_FUNC_VOID OnBufferEnd(void* pBufferContext) override;
-	COM_FUNC_VOID OnLoopEnd(void* pBufferContext) override;
-	COM_FUNC_VOID OnVoiceError(void* pBufferContext, HRESULT error) override;
+	COM_FUNC_VOID OnBufferStart(void *pBufferContext) override;
+	COM_FUNC_VOID OnBufferEnd(void *pBufferContext) override;
+	COM_FUNC_VOID OnLoopEnd(void *pBufferContext) override;
+	COM_FUNC_VOID OnVoiceError(void *pBufferContext, HRESULT error) override;
 
 private:
 	void OnBufferEnd();
@@ -182,13 +181,7 @@ static HRESULT CreateAudioEffectPlaying(IUnknown *unkOuter, REFGUID clsid, REFGU
 static ff::ModuleStartup RegisterAudioEffectPlaying([](ff::Module &module)
 {
 	static ff::StaticString name(L"Audio Effect Playing");
-
-	module.RegisterClass(
-		name,
-		__uuidof(AudioEffectPlaying),
-		CreateAudioEffectPlaying,
-		__uuidof(ff::IAudioPlaying),
-		ff::GetCategoryAudioObject());
+	module.RegisterClass(name, __uuidof(AudioEffectPlaying), CreateAudioEffectPlaying, __uuidof(ff::IAudioPlaying));
 });
 
 AudioEffect::AudioEffect()
@@ -295,15 +288,15 @@ bool AudioEffect::Play(
 		nullptr), false); // effect chain
 
 	XAUDIO2_BUFFER buffer;
-	buffer.Flags      = XAUDIO2_END_OF_STREAM;
+	buffer.Flags = XAUDIO2_END_OF_STREAM;
 	buffer.AudioBytes = (DWORD)bufferRes->GetDataSize();
 	buffer.pAudioData = bufferRes->GetData();
-	buffer.PlayBegin  = (DWORD)_start;
+	buffer.PlayBegin = (DWORD)_start;
 	buffer.PlayLength = (DWORD)_length;
-	buffer.LoopBegin  = (DWORD)_loopStart;
+	buffer.LoopBegin = (DWORD)_loopStart;
 	buffer.LoopLength = (DWORD)_loopLength;
-	buffer.LoopCount  = (_loopCount == ff::INVALID_SIZE) ? XAUDIO2_LOOP_INFINITE : (DWORD)_loopCount;
-	buffer.pContext   = nullptr;
+	buffer.LoopCount = (_loopCount == ff::INVALID_SIZE) ? XAUDIO2_LOOP_INFINITE : (DWORD)_loopCount;
+	buffer.pContext = nullptr;
 
 	assertHrRetVal(source->SubmitSourceBuffer(&buffer), false);
 	source->SetVolume(_volume * volume);
@@ -386,7 +379,6 @@ bool AudioEffect::SaveResource(ff::Dict &dict)
 
 	return true;
 }
-
 
 AudioEffectPlaying::AudioEffectPlaying()
 	: _effect(nullptr)
@@ -590,7 +582,7 @@ void AudioEffectPlaying::OnLoopEnd(void *pBufferContext)
 {
 }
 
-void AudioEffectPlaying::OnVoiceError(void* pBufferContext, HRESULT error)
+void AudioEffectPlaying::OnVoiceError(void *pBufferContext, HRESULT error)
 {
 	assertSz(false, L"XAudio2 voice error");
 }

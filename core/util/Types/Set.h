@@ -16,26 +16,26 @@ namespace ff
 
 		Set<Key, Hash> &operator=(const Set<Key, Hash> &rhs);
 
-		size_t     Size() const;
+		size_t Size() const;
 		BucketIter SetKey(const Key &key); // doesn't allow duplicates
 		BucketIter SetKey(Key &&key); // doesn't allow duplicates
 		BucketIter Insert(const Key &key); // allows duplicates
 		BucketIter Insert(Key &&key); // allows duplicates
-		bool       DeleteKey(const Key &key); // deletes all matching keys
+		bool DeleteKey(const Key &key); // deletes all matching keys
 		BucketIter DeletePos(BucketIter pos); // returns item after the deleted item
-		void       Clear();
-		bool       IsEmpty() const;
+		void Clear();
+		bool IsEmpty() const;
 
-		bool       Exists(const Key &key) const;
+		bool Exists(const Key &key) const;
 		BucketIter Get(const Key &key) const;
-		BucketIter GetAt(size_t nIndex)  const;
+		BucketIter GetAt(size_t nIndex) const;
 		BucketIter GetNext(BucketIter pos) const;
 
 		const Key &KeyAt(BucketIter pos) const;
-		hash_t     HashAt(BucketIter pos) const;
+		hash_t HashAt(BucketIter pos) const;
 
 		// for iteration through the hash table
-		BucketIter StartIteration()        const;
+		BucketIter StartIteration() const;
 		BucketIter Iterate(BucketIter pos) const;
 
 		// advanced
@@ -44,7 +44,6 @@ namespace ff
 		void DebugDump() const;
 
 	protected:
-		Key *NewKey();
 		Key *NewKey(const Key &rhs);
 		Key *NewKey(Key &&rhs);
 		BucketIter InsertAllocatedKey(Key *pKey, bool bAllowDupes);
@@ -141,10 +140,10 @@ namespace ff
 
 		typedef Iterator<Key> const_iterator;
 
-		const_iterator begin() const  { return const_iterator(this, StartIteration()); }
-		const_iterator end() const    { return const_iterator(this, nullptr); }
+		const_iterator begin() const { return const_iterator(this, StartIteration()); }
+		const_iterator end() const { return const_iterator(this, nullptr); }
 		const_iterator cbegin() const { return const_iterator(this, StartIteration()); }
-		const_iterator cend() const   { return const_iterator(this, nullptr); }
+		const_iterator cend() const { return const_iterator(this, nullptr); }
 	};
 }
 
@@ -257,10 +256,10 @@ bool ff::Set<Key, Hash>::DeleteKey(const Key &key)
 
 	if (pos != INVALID_ITER)
 	{
-		SEntry*     pEntry  = GetEntry(pos);
-		BucketType* pBucket = GetBucket(pEntry);
-		size_t      index   = GetBucketIndex(pEntry);
-		size_t      count   = 1;
+		SEntry *pEntry = GetEntry(pos);
+		BucketType *pBucket = GetBucket(pEntry);
+		size_t index = GetBucketIndex(pEntry);
+		size_t count = 1;
 
 		for (size_t next = index + count;
 			next < pBucket->Size() &&
@@ -293,9 +292,9 @@ ff::BucketIter ff::Set<Key, Hash>::DeletePos(BucketIter pos)
 
 	if (pos != INVALID_ITER)
 	{
-		SEntry*     pEntry  = GetEntry(pos);
-		size_t      index   = GetBucketIndex(pEntry);
-		BucketType* pBucket = GetBucket(pEntry);
+		SEntry *pEntry = GetEntry(pos);
+		size_t index = GetBucketIndex(pEntry);
+		BucketType *pBucket = GetBucket(pEntry);
 
 		_keyPool.Delete(pEntry->_key);
 		pBucket->Delete(index);
@@ -381,9 +380,9 @@ ff::BucketIter ff::Set<Key, Hash>::Get(const Key &key) const
 {
 	if (_size)
 	{
-		hash_t      hash    = Hash()(key);
-		size_t      bucket  = GetHashBucket(hash);
-		BucketType* pBucket = _buckets[bucket];
+		hash_t hash = Hash()(key);
+		size_t bucket = GetHashBucket(hash);
+		BucketType *pBucket = _buckets[bucket];
 
 		if (pBucket)
 		{
@@ -434,9 +433,9 @@ ff::BucketIter ff::Set<Key, Hash>::GetNext(BucketIter pos) const
 {
 	if (pos != INVALID_ITER)
 	{
-		SEntry*     pEntry  = GetEntry(pos);
-		BucketType* pBucket = GetBucket(pEntry);
-		size_t      index   = GetBucketIndex(pEntry);
+		SEntry *pEntry = GetEntry(pos);
+		BucketType *pBucket = GetBucket(pEntry);
+		size_t index = GetBucketIndex(pEntry);
 
 		if (index + 1 < pBucket->Size() &&
 			pEntry->_hash == pBucket->GetAt(index + 1)._hash &&
@@ -489,9 +488,9 @@ ff::BucketIter ff::Set<Key, Hash>::Iterate(BucketIter pos) const
 
 	if (pos != INVALID_ITER)
 	{
-		SEntry*     pEntry  = GetEntry(pos);
-		size_t      index   = GetBucketIndex(pEntry);
-		BucketType* pBucket = GetBucket(pEntry);
+		SEntry *pEntry = GetEntry(pos);
+		size_t index = GetBucketIndex(pEntry);
+		BucketType *pBucket = GetBucket(pEntry);
 
 		if (index + 1 < pBucket->Size())
 		{
@@ -622,7 +621,7 @@ void ff::Set<Key, Hash>::ResizeBuckets(size_t count)
 	}
 
 	size_t oldSize = _size;
-	_size    = 0;
+	_size = 0;
 	_minHold = 0;
 	_maxHold = INVALID_SIZE;
 
@@ -664,12 +663,6 @@ void ff::Set<Key, Hash>::ResizeBuckets(size_t count)
 }
 
 template<typename Key, typename Hash>
-Key *ff::Set<Key, Hash>::NewKey()
-{
-	return _keyPool.New();
-}
-
-template<typename Key, typename Hash>
 Key *ff::Set<Key, Hash>::NewKey(const Key &rhs)
 {
 	return _keyPool.New(rhs);
@@ -699,8 +692,8 @@ ff::BucketIter ff::Set<Key, Hash>::InsertEntry(SEntry *pEntry, bool bAllowDupes)
 		ResizeBuckets(NextBucketCount(_buckets.Size(), true));
 	}
 
-	size_t      bucket  = GetHashBucket(pEntry->_hash);
-	BucketType* pBucket = _buckets[bucket];
+	size_t bucket = GetHashBucket(pEntry->_hash);
+	BucketType *pBucket = _buckets[bucket];
 
 	if (!pBucket)
 	{

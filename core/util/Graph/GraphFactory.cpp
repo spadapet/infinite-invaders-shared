@@ -223,12 +223,16 @@ ff::Vector<ff::ComPtr<IDXGIOutputX>> GraphicFactory::GetOutputs(IDXGIAdapterX *p
 
 void GraphicFactory::AddChild(ff::IGraphDevice *child)
 {
+	ff::LockMutex crit(_mutex);
+
 	assert(child && _devices.Find(child) == ff::INVALID_SIZE);
 	_devices.Push(child);
 }
 
 void GraphicFactory::RemoveChild(ff::IGraphDevice *child)
 {
+	ff::LockMutex crit(_mutex);
+
 	verify(_devices.DeleteItem(child));
 }
 
@@ -276,7 +280,7 @@ bool GraphicFactory::GetAdapterForMonitor(HMONITOR hMonitor, IDXGIAdapterX **ppC
 	// Try the desktop first
 	{
 		ff::ComPtr<ff::IGraphDevice> pDevice;
-		if (CreateHardwareGraphDevice(&pDevice))
+		if (CreateHardwareGraphDevice(this, &pDevice))
 		{
 			if (DoesAdapterUseMonitor(pDevice->GetAdapter(), hMonitor, ppOutput))
 			{

@@ -216,19 +216,19 @@ namespace ff
 		typedef std::reverse_iterator<iterator> reverse_iterator;
 		typedef std::reverse_iterator<const_iterator> const_reverse_iterator;
 
-		iterator begin()              { return iterator(_data); }
-		iterator end()                { return iterator(_data + _size); }
-		const_iterator begin() const  { return const_iterator(_data); }
-		const_iterator end() const    { return const_iterator(_data + _size); }
+		iterator begin() { return iterator(_data); }
+		iterator end() { return iterator(_data + _size); }
+		const_iterator begin() const { return const_iterator(_data); }
+		const_iterator end() const { return const_iterator(_data + _size); }
 		const_iterator cbegin() const { return const_iterator(_data); }
-		const_iterator cend() const   { return const_iterator(_data + _size); }
+		const_iterator cend() const { return const_iterator(_data + _size); }
 
-		reverse_iterator rbegin()              { return reverse_iterator(end()); }
-		reverse_iterator rend()                { return reverse_iterator(begin()); }
-		const_reverse_iterator rbegin() const  { return const_reverse_iterator(cend()); }
-		const_reverse_iterator rend() const    { return const_reverse_iterator(cbegin()); }
+		reverse_iterator rbegin() { return reverse_iterator(end()); }
+		reverse_iterator rend() { return reverse_iterator(begin()); }
+		const_reverse_iterator rbegin() const { return const_reverse_iterator(cend()); }
+		const_reverse_iterator rend() const { return const_reverse_iterator(cbegin()); }
 		const_reverse_iterator crbegin() const { return const_reverse_iterator(cend()); }
-		const_reverse_iterator crend() const   { return const_reverse_iterator(cbegin()); }
+		const_reverse_iterator crend() const { return const_reverse_iterator(cbegin()); }
 
 	private:
 		bool IsStaticData() const;
@@ -279,9 +279,9 @@ ff::Vector<T, StackSize, Allocator>::Vector(MyType &&rhs)
 		_data = rhs._data;
 	}
 
-	rhs._data  = (T *)rhs._stack;
+	rhs._data = (T *)rhs._stack;
 	rhs._alloc = StackSize;
-	rhs._size  = 0;
+	rhs._size = 0;
 }
 
 template<typename T, size_t StackSize, typename Allocator>
@@ -446,9 +446,9 @@ void ff::Vector<T, StackSize, Allocator>::Reserve(size_t size)
 		std::memcpy(data, _data, sizeof(T) * _size);
 		ReleaseData();
 
-		_data  = data;
+		_data = data;
 		_alloc = alloc;
-		_size  = oldSize;
+		_size = oldSize;
 	}
 }
 
@@ -472,8 +472,8 @@ void ff::Vector<T, StackSize, Allocator>::Reduce()
 			size_t size = _size;
 			ReleaseData();
 
-			_data  = data;
-			_size  = size;
+			_data = data;
+			_size = size;
 			_alloc = (_data == (T *)_stack) ? StackSize : _size;
 		}
 	}
@@ -877,5 +877,5 @@ void ff::Vector<T, StackSize, Allocator>::ReleaseData()
 	}
 
 	_alloc = StackSize;
-	_size  = 0;
+	_size = 0;
 }

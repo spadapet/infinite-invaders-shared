@@ -27,7 +27,10 @@ namespace ff
 	template<typename T>
 	void CopyObject(T &dest, const T &src)
 	{
-		memcpy(&dest, &src, sizeof(T));
+		if (&dest != &src)
+		{
+			memcpy(&dest, &src, sizeof(T));
+		}
 	}
 
 	template<typename T>
@@ -59,6 +62,20 @@ namespace ff
 #endif
 
 		return num + 1;
+	}
+
+	template<typename T>
+	void MakeUnshared(std::shared_ptr<T> &obj)
+	{
+		if (obj == nullptr)
+		{
+			obj = std::make_shared<T>();
+		}
+		else if (!obj.unique())
+		{
+			std::shared_ptr<T> origObj(obj);
+			obj = std::make_shared<T>(*origObj.get());
+		}
 	}
 
 #ifdef _WIN64

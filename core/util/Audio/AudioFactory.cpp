@@ -154,11 +154,15 @@ ff::IAudioDevice *ff::AudioFactory::GetDevice(size_t nIndex) const
 
 void ff::AudioFactory::AddChild(IAudioDevice *child)
 {
+	ff::LockMutex crit(_mutex);
+
 	assert(child && _devices.Find(child) == ff::INVALID_SIZE);
 	_devices.Push(child);
 }
 
 void ff::AudioFactory::RemoveChild(IAudioDevice *child)
 {
+	ff::LockMutex crit(_mutex);
+
 	verify(_devices.DeleteItem(child));
 }

@@ -97,7 +97,7 @@ bool ff::CServiceCollection::AddService(REFGUID guidService, IUnknown *pObj)
 
 	SService ss;
 	ss._guidHash = ShortenGuid(guidService);
-	ss._service  = pObj;
+	ss._service = pObj;
 
 	_services.SortInsert(ss);
 

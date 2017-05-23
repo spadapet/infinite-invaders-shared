@@ -2,7 +2,6 @@
 #include "COM/ComAlloc.h"
 #include "Globals/ProcessGlobals.h"
 #include "Graph/BufferCache.h"
-#include "Graph/Data/GraphCategory.h"
 #include "Graph/GraphDevice.h"
 #include "Graph/GraphDeviceChild.h"
 #include "Graph/GraphFactory.h"
@@ -41,6 +40,7 @@ namespace ff
 		virtual void RemoveChild(IGraphDeviceChild *child) override;
 
 	private:
+		ff::Mutex _mutex;
 		ComPtr<IGraphicFactory> _factory;
 		ComPtr<ID3D11DeviceX> _device;
 		ComPtr<ID2D1DeviceX> _device2d;
@@ -223,12 +223,16 @@ ff::GraphStateCache &ff::GraphDevice::GetStateCache()
 
 void ff::GraphDevice::AddChild(IGraphDeviceChild *child)
 {
+	ff::LockMutex crit(_mutex);
+
 	assert(child && _children.Find(child) == ff::INVALID_SIZE);
 	_children.Push(child);
 }
 
 void ff::GraphDevice::RemoveChild(IGraphDeviceChild *child)
 {
+	ff::LockMutex crit(_mutex);
+
 	verify(_children.DeleteItem(child));
 }
 

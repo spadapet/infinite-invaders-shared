@@ -191,7 +191,7 @@ ff::PointType<T> ff::RectType<T>::Center() const
 template<typename T>
 bool ff::RectType<T>::IsEmpty() const
 {
-	return bottom == top  && right == left;
+	return bottom == top && right == left;
 }
 
 template<typename T>
@@ -383,9 +383,9 @@ void ff::RectType<T>::Deflate(const RectType<T> &rhs)
 template<typename T>
 bool ff::RectType<T>::Intersect(const RectType<T> &rhs)
 {
-	T nLeft   = std::max(left, rhs.left);
-	T nRight  = std::min(right, rhs.right);
-	T nTop    = std::max(top, rhs.top);
+	T nLeft = std::max(left, rhs.left);
+	T nRight = std::min(right, rhs.right);
+	T nTop = std::max(top, rhs.top);
 	T nBottom = std::min(bottom, rhs.bottom);
 
 	if (nLeft <= nRight && nTop <= nBottom)
@@ -597,9 +597,9 @@ void ff::RectType<T>::Interpolate(const RectType<T> &rhs1, const RectType<T> &rh
 	RectDouble dr2((double)rhs2.left, (double)rhs2.top, (double)rhs2.right, (double)rhs2.bottom);
 
 	SetRect(
-		(T)((dr2.left   - dr1.left)   * value + dr1.left  ),
-		(T)((dr2.top    - dr1.top)    * value + dr1.top   ),
-		(T)((dr2.right  - dr1.right)  * value + dr1.right ),
+		(T)((dr2.left - dr1.left) * value + dr1.left ),
+		(T)((dr2.top - dr1.top) * value + dr1.top ),
+		(T)((dr2.right - dr1.right) * value + dr1.right ),
 		(T)((dr2.bottom - dr1.bottom) * value + dr1.bottom));
 }
 

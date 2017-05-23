@@ -13,7 +13,6 @@ namespace ff
 	{
 	public:
 		virtual REFGUID GetComClassID() const = 0;
-		virtual REFGUID GetComCategoryID() const = 0;
 		virtual const Module &GetComSourceModule() const = 0;
 		virtual String GetComClassName() const = 0;
 		virtual IConnectionPointHolder *GetComConnectionPointHolder(size_t index) = 0;
@@ -75,12 +74,6 @@ namespace ff
 		virtual REFGUID GetComClassID() const override
 		{
 			return __uuidof(T);
-		}
-
-		// IComObject
-		virtual REFGUID GetComCategoryID() const override
-		{
-			return _GetCategoryID();
 		}
 
 		// IComObject

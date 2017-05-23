@@ -6,7 +6,6 @@
 namespace ff
 {
 	class Module;
-	class IDataReader;
 	class IResources;
 	class IValueTable;
 
@@ -15,23 +14,7 @@ namespace ff
 		String _name;
 		GUID _classId;
 		GUID _mainInterfaceId;
-		GUID _categoryId;
 		ClassFactoryFunc _factory;
-		const Module *_module;
-	};
-
-	struct ModuleCategoryInfo
-	{
-		String _name;
-		GUID _categoryId;
-		ParentFactoryFunc _parentObjectFactory;
-		const Module *_module;
-	};
-
-	struct ModuleInterfaceInfo
-	{
-		GUID _interfaceId;
-		GUID _categoryId;
 		const Module *_module;
 	};
 
@@ -63,19 +46,15 @@ namespace ff
 		UTIL_API String GetString(StringRef name) const;
 		UTIL_API String GetFormattedString(String name, ...) const;
 
+		UTIL_API Vector<GUID> GetClasses() const;
 		UTIL_API const ModuleClassInfo *GetClassInfo(StringRef name) const;
 		UTIL_API const ModuleClassInfo *GetClassInfo(REFGUID classId) const;
 		UTIL_API const ModuleClassInfo *GetClassInfoForInterface(REFGUID mainInterfaceId) const;
-		UTIL_API const ModuleInterfaceInfo *GetInterfaceInfo(REFGUID interfaceId) const;
-		UTIL_API const ModuleCategoryInfo *GetCategoryInfo(StringRef name) const;
-		UTIL_API const ModuleCategoryInfo *GetCategoryInfo(REFGUID categoryId) const;
-
-		UTIL_API Vector<GUID> GetClasses() const;
-		UTIL_API Vector<GUID> GetCategories() const;
 
 		UTIL_API bool GetClassFactory(REFGUID classId, IClassFactory **factory) const;
 		UTIL_API bool CreateClass(REFGUID classId, REFGUID interfaceId, void **obj) const;
 		UTIL_API bool CreateClass(IUnknown *parent, REFGUID classId, REFGUID interfaceId, void **obj) const;
+		UTIL_API void RegisterClass(StringRef name, REFGUID classId, ClassFactoryFunc factory = nullptr, REFGUID mainInterfaceId = GUID_NULL);
 
 		template<typename I>
 		bool CreateClass(REFGUID classId, I **obj)
@@ -83,30 +62,11 @@ namespace ff
 			return CreateClass(classId, __uuidof(I), static_cast<void **>(obj));
 		}
 
-		UTIL_API void RegisterClass(
-			StringRef name,
-			REFGUID classId,
-			ClassFactoryFunc factory = nullptr,
-			REFGUID mainInterfaceId = GUID_NULL,
-			REFGUID categoryId = GUID_NULL);
-
 		template<typename T>
-		void RegisterClassT(
-			StringRef name,
-			REFGUID mainInterfaceId = GUID_NULL,
-			REFGUID categoryId = GUID_NULL)
+		void RegisterClassT(StringRef name, REFGUID mainInterfaceId = GUID_NULL)
 		{
-			RegisterClass(name, __uuidof(T), ComAllocator<T>::ComClassFactory, mainInterfaceId, categoryId);
+			RegisterClass(name, __uuidof(T), ComAllocator<T>::ComClassFactory, mainInterfaceId);
 		}
-
-		UTIL_API void RegisterInterface(
-			REFGUID interfaceId,
-			REFGUID categoryId = GUID_NULL);
-
-		UTIL_API void RegisterCategory(
-			StringRef name,
-			REFGUID categoryId,
-			ParentFactoryFunc parentObjectFactory = nullptr);
 
 	private:
 		void LoadTypeLibs();
@@ -130,11 +90,6 @@ namespace ff
 		Map<String, ModuleClassInfo> _classesByName;
 		Map<GUID, ModuleClassInfo> _classesById;
 		Map<GUID, ModuleClassInfo> _classesByIid;
-		Map<GUID, ModuleClassInfo> _classesByCatId;
-		Map<GUID, ModuleInterfaceInfo> _interfacesById;
-		Map<GUID, ModuleInterfaceInfo> _interfacesByCatId;
-		Map<String, ModuleCategoryInfo> _categoriesByName;
-		Map<GUID, ModuleCategoryInfo> _categoriesById;
 	};
 
 	const Module &GetThisModule();

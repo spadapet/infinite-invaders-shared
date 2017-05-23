@@ -44,7 +44,7 @@ void ff::FloatKey::InitTangents(FloatKey *pKeys, size_t nKeys, float tension)
 	for (size_t i = 0; i < nKeys; i++)
 	{
 		const FloatKey &keyBefore = pKeys[i ? i - 1 : nKeys - 1];
-		const FloatKey &keyAfter  = pKeys[i + 1 < nKeys ? i + 1 : 0];
+		const FloatKey &keyAfter = pKeys[i + 1 < nKeys ? i + 1 : 0];
 
 		pKeys[i]._tangent = tension * (keyAfter._value - keyBefore._value);
 	}
@@ -62,9 +62,9 @@ void ff::FloatKey::Interpolate(const FloatKey &lhs, const FloatKey &rhs, float t
 
 		output =
 			(2 * time3 - 3 * time2 + 1) * lhs._value +
-			(-2 * time3 + 3 * time2)    * rhs._value +
-			(time3 - 2 * time2 + time)  * lhs._tangent +
-			(time3 - time2)             * rhs._tangent;
+			(-2 * time3 + 3 * time2) * rhs._value +
+			(time3 - 2 * time2 + time) * lhs._tangent +
+			(time3 - time2) * rhs._tangent;
 	}
 	else
 	{
@@ -110,7 +110,7 @@ void ff::VectorKey::InitTangents(VectorKey *pKeys, size_t nKeys, float tension)
 	for (size_t i = 0; i < nKeys; i++)
 	{
 		const VectorKey &keyBefore = pKeys[i ? i - 1 : nKeys - 1];
-		const VectorKey &keyAfter  = pKeys[i + 1 < nKeys ? i + 1 : 0];
+		const VectorKey &keyAfter = pKeys[i + 1 < nKeys ? i + 1 : 0];
 
 		DirectX::XMStoreFloat4(&pKeys[i]._tangent,
 			DirectX::XMVectorMultiply(
@@ -155,9 +155,9 @@ void ff::QuaternionKey::InitTangents(QuaternionKey *pKeys, size_t nKeys, float t
 {
 	for (size_t i = 0; i < nKeys; i++)
 	{
-		QuaternionKey &keyCur       = pKeys[i];
-		QuaternionKey &keyBefore    = pKeys[i ? i - 1 : nKeys - 1];
-		QuaternionKey &keyNext      = pKeys[(i + 1) % nKeys];
+		QuaternionKey &keyCur = pKeys[i];
+		QuaternionKey &keyBefore = pKeys[i ? i - 1 : nKeys - 1];
+		QuaternionKey &keyNext = pKeys[(i + 1) % nKeys];
 		QuaternionKey &keyAfterNext = pKeys[(i + 2) % nKeys];
 
 		DirectX::XMVECTOR keyCurTangent;
@@ -165,17 +165,17 @@ void ff::QuaternionKey::InitTangents(QuaternionKey *pKeys, size_t nKeys, float t
 		DirectX::XMVECTOR keyNextValue;
 
 		DirectX::XMQuaternionSquadSetup(
-			&keyCurTangent,                       // A
-			&keyNextTangent,                      // B
-			&keyNextValue,                        // C
-			DirectX::XMLoadFloat4(&keyBefore._value),     // Q0
-			DirectX::XMLoadFloat4(&keyCur._value),        // Q1
-			DirectX::XMLoadFloat4(&keyNext._value),       // Q2
+			&keyCurTangent, // A
+			&keyNextTangent, // B
+			&keyNextValue, // C
+			DirectX::XMLoadFloat4(&keyBefore._value), // Q0
+			DirectX::XMLoadFloat4(&keyCur._value), // Q1
+			DirectX::XMLoadFloat4(&keyNext._value), // Q2
 			DirectX::XMLoadFloat4(&keyAfterNext._value)); // Q3
 
-		DirectX::XMStoreFloat4(&keyCur._tangent,  keyCurTangent);
+		DirectX::XMStoreFloat4(&keyCur._tangent, keyCurTangent);
 		DirectX::XMStoreFloat4(&keyNext._tangent, keyNextTangent);
-		DirectX::XMStoreFloat4(&keyNext._value,   keyNextValue);
+		DirectX::XMStoreFloat4(&keyNext._value, keyNextValue);
 	}
 }
 

@@ -46,6 +46,7 @@ namespace ff
 		UTIL_API void SetString(StringRef name, StringRef value);
 		UTIL_API void SetGuid(StringRef name, REFGUID value);
 		UTIL_API void SetData(StringRef name, IData *value);
+		UTIL_API void SetData(StringRef name, const void *data, size_t size);
 		UTIL_API void SetSavedData(StringRef name, ISavedData *value);
 		UTIL_API void SetDict(StringRef name, const Dict &value);
 		UTIL_API void SetResource(StringRef name, const SharedResourceValue &value);

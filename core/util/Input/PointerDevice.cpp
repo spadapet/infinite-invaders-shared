@@ -253,8 +253,8 @@ LRESULT ff::PointerDevice::WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM
 void ff::PointerDevice::OnMouseMessage(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	bool bSetHoverWnd = false;
-	int  nPresses = 0;
-	int  vkButton = 0;
+	int nPresses = 0;
+	int vkButton = 0;
 
 	switch (msg)
 	{

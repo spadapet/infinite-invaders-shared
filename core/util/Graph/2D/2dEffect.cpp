@@ -4,7 +4,6 @@
 #include "Data/DataWriterReader.h"
 #include "Graph/2D/2dEffect.h"
 #include "Graph/2D/2dRenderer.h"
-#include "Graph/Data/GraphCategory.h"
 #include "Graph/GraphDevice.h"
 #include "Graph/GraphTexture.h"
 #include "Graph/Shader/GraphShader.h"
@@ -105,8 +104,8 @@ END_INTERFACES()
 
 static ff::ModuleStartup Register([](ff::Module &module)
 {
-	static ff::StaticString name(L"CDefault2dEffect");
-	module.RegisterClassT<ff::Default2dEffect>(name, GUID_NULL, ff::GetCategoryGraphicsObject());
+	static ff::StaticString name(L"Default2dEffect");
+	module.RegisterClassT<ff::Default2dEffect>(name);
 });
 
 bool ff::CreateDefault2dEffect(IGraphDevice *pDevice, I2dEffect **ppEffect)
@@ -369,7 +368,7 @@ void ff::Default2dEffect::ApplyTextures(I2dRenderer *pRender, IGraphTexture **pp
 		CreateGraphTexture(_device, PointInt(1, 1), DXGI_FORMAT_R8G8B8A8_UNORM, 1, 1, 0, &_emptyTexture);
 	}
 
-	ID3D11ShaderResourceView* resources[8] = { 0 };
+	ID3D11ShaderResourceView *resources[8] = { 0 };
 
 	for (size_t i = 0; i < nTextures; i++)
 	{
@@ -523,63 +522,63 @@ const ff::GraphState *ff::Default2dEffect::GetInfo(DrawType2d type)
 			{
 			case 0:
 			case DRAW_BLEND_ALPHA:
-				blendDesc.RenderTarget[0].BlendEnable    = TRUE;
-				blendDesc.RenderTarget[0].SrcBlend       = D3D11_BLEND_SRC_ALPHA;
-				blendDesc.RenderTarget[0].DestBlend      = D3D11_BLEND_INV_SRC_ALPHA;
-				blendDesc.RenderTarget[0].BlendOp        = D3D11_BLEND_OP_ADD;
-				blendDesc.RenderTarget[0].SrcBlendAlpha  = D3D11_BLEND_ZERO;
+				blendDesc.RenderTarget[0].BlendEnable = TRUE;
+				blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+				blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+				blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+				blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ZERO;
 				blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
-				blendDesc.RenderTarget[0].BlendOpAlpha   = D3D11_BLEND_OP_ADD;
+				blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 				break;
 
 			case DRAW_BLEND_ALPHA_MAX:
-				blendDesc.RenderTarget[0].BlendEnable    = TRUE;
-				blendDesc.RenderTarget[0].SrcBlend       = D3D11_BLEND_SRC_ALPHA;
-				blendDesc.RenderTarget[0].DestBlend      = D3D11_BLEND_INV_SRC_ALPHA;
-				blendDesc.RenderTarget[0].BlendOp        = D3D11_BLEND_OP_ADD;
-				blendDesc.RenderTarget[0].SrcBlendAlpha  = D3D11_BLEND_ONE;
+				blendDesc.RenderTarget[0].BlendEnable = TRUE;
+				blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+				blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+				blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+				blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
 				blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
-				blendDesc.RenderTarget[0].BlendOpAlpha   = D3D11_BLEND_OP_MAX;
+				blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_MAX;
 				break;
 
 			case DRAW_BLEND_ADD:
-				blendDesc.RenderTarget[0].BlendEnable    = TRUE;
-				blendDesc.RenderTarget[0].SrcBlend       = D3D11_BLEND_ONE;
-				blendDesc.RenderTarget[0].DestBlend      = D3D11_BLEND_ONE;
-				blendDesc.RenderTarget[0].BlendOp        = D3D11_BLEND_OP_ADD;
-				blendDesc.RenderTarget[0].SrcBlendAlpha  = D3D11_BLEND_ONE;
+				blendDesc.RenderTarget[0].BlendEnable = TRUE;
+				blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;
+				blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_ONE;
+				blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+				blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
 				blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
-				blendDesc.RenderTarget[0].BlendOpAlpha   = D3D11_BLEND_OP_ADD;
+				blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 				break;
 
 			case DRAW_BLEND_SUB:
-				blendDesc.RenderTarget[0].BlendEnable    = TRUE;
-				blendDesc.RenderTarget[0].SrcBlend       = D3D11_BLEND_ONE;
-				blendDesc.RenderTarget[0].DestBlend      = D3D11_BLEND_ONE;
-				blendDesc.RenderTarget[0].BlendOp        = D3D11_BLEND_OP_REV_SUBTRACT;
-				blendDesc.RenderTarget[0].SrcBlendAlpha  = D3D11_BLEND_ONE;
+				blendDesc.RenderTarget[0].BlendEnable = TRUE;
+				blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;
+				blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_ONE;
+				blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_REV_SUBTRACT;
+				blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
 				blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
-				blendDesc.RenderTarget[0].BlendOpAlpha   = D3D11_BLEND_OP_REV_SUBTRACT;
+				blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_REV_SUBTRACT;
 				break;
 
 			case DRAW_BLEND_MULTIPLY:
-				blendDesc.RenderTarget[0].BlendEnable    = TRUE;
-				blendDesc.RenderTarget[0].SrcBlend       = D3D11_BLEND_ZERO;
-				blendDesc.RenderTarget[0].DestBlend      = D3D11_BLEND_SRC_COLOR;
-				blendDesc.RenderTarget[0].BlendOp        = D3D11_BLEND_OP_ADD;
-				blendDesc.RenderTarget[0].SrcBlendAlpha  = D3D11_BLEND_ZERO;
+				blendDesc.RenderTarget[0].BlendEnable = TRUE;
+				blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_ZERO;
+				blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_SRC_COLOR;
+				blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+				blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ZERO;
 				blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_SRC_ALPHA;
-				blendDesc.RenderTarget[0].BlendOpAlpha   = D3D11_BLEND_OP_ADD;
+				blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 				break;
 
 			case DRAW_BLEND_INV_MUL:
-				blendDesc.RenderTarget[0].BlendEnable    = TRUE;
-				blendDesc.RenderTarget[0].SrcBlend       = D3D11_BLEND_ZERO;
-				blendDesc.RenderTarget[0].DestBlend      = D3D11_BLEND_INV_SRC_COLOR;
-				blendDesc.RenderTarget[0].BlendOp        = D3D11_BLEND_OP_ADD;
-				blendDesc.RenderTarget[0].SrcBlendAlpha  = D3D11_BLEND_ZERO;
+				blendDesc.RenderTarget[0].BlendEnable = TRUE;
+				blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_ZERO;
+				blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_COLOR;
+				blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+				blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ZERO;
 				blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_INV_SRC_ALPHA;
-				blendDesc.RenderTarget[0].BlendOpAlpha   = D3D11_BLEND_OP_ADD;
+				blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 				break;
 
 			case DRAW_BLEND_COPY_ALPHA:
@@ -591,13 +590,13 @@ const ff::GraphState *ff::Default2dEffect::GetInfo(DrawType2d type)
 				break;
 
 			case DRAW_BLEND_COPY_PMA:
-				blendDesc.RenderTarget[0].BlendEnable    = TRUE;
-				blendDesc.RenderTarget[0].SrcBlend       = D3D11_BLEND_SRC_ALPHA;
-				blendDesc.RenderTarget[0].DestBlend      = D3D11_BLEND_ZERO;
-				blendDesc.RenderTarget[0].BlendOp        = D3D11_BLEND_OP_ADD;
-				blendDesc.RenderTarget[0].SrcBlendAlpha  = D3D11_BLEND_ONE;
+				blendDesc.RenderTarget[0].BlendEnable = TRUE;
+				blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+				blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_ZERO;
+				blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+				blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
 				blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
-				blendDesc.RenderTarget[0].BlendOpAlpha   = D3D11_BLEND_OP_ADD;
+				blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 				break;
 
 			default:
@@ -613,12 +612,12 @@ const ff::GraphState *ff::Default2dEffect::GetInfo(DrawType2d type)
 			{
 			case 0:
 			case DRAW_DEPTH_ENABLE:
-				depthDesc.DepthEnable    = TRUE;
+				depthDesc.DepthEnable = TRUE;
 				depthDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
 				break;
 
 			case DRAW_DEPTH_DISABLE:
-				depthDesc.DepthEnable    = FALSE;
+				depthDesc.DepthEnable = FALSE;
 				depthDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ZERO;
 				break;
 
@@ -633,39 +632,39 @@ const ff::GraphState *ff::Default2dEffect::GetInfo(DrawType2d type)
 				break;
 
 			case DRAW_STENCIL_WRITE:
-				depthDesc.StencilEnable                = TRUE;
-				depthDesc.FrontFace.StencilFailOp      = D3D11_STENCIL_OP_KEEP;
+				depthDesc.StencilEnable = TRUE;
+				depthDesc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
 				depthDesc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
-				depthDesc.FrontFace.StencilPassOp      = D3D11_STENCIL_OP_REPLACE;
-				depthDesc.FrontFace.StencilFunc        = D3D11_COMPARISON_ALWAYS;
-				depthDesc.BackFace.StencilFailOp       = D3D11_STENCIL_OP_KEEP;
-				depthDesc.BackFace.StencilDepthFailOp  = D3D11_STENCIL_OP_KEEP;
-				depthDesc.BackFace.StencilPassOp       = D3D11_STENCIL_OP_REPLACE;
-				depthDesc.BackFace.StencilFunc         = D3D11_COMPARISON_ALWAYS;
+				depthDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_REPLACE;
+				depthDesc.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+				depthDesc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+				depthDesc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
+				depthDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_REPLACE;
+				depthDesc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
 				break;
 
 			case DRAW_STENCIL_IS_SET:
-				depthDesc.StencilEnable                = TRUE;
-				depthDesc.FrontFace.StencilFailOp      = D3D11_STENCIL_OP_KEEP;
+				depthDesc.StencilEnable = TRUE;
+				depthDesc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
 				depthDesc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
-				depthDesc.FrontFace.StencilPassOp      = D3D11_STENCIL_OP_KEEP;
-				depthDesc.FrontFace.StencilFunc        = D3D11_COMPARISON_EQUAL;
-				depthDesc.BackFace.StencilFailOp       = D3D11_STENCIL_OP_KEEP;
-				depthDesc.BackFace.StencilDepthFailOp  = D3D11_STENCIL_OP_KEEP;
-				depthDesc.BackFace.StencilPassOp       = D3D11_STENCIL_OP_KEEP;
-				depthDesc.BackFace.StencilFunc         = D3D11_COMPARISON_EQUAL;
+				depthDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+				depthDesc.FrontFace.StencilFunc = D3D11_COMPARISON_EQUAL;
+				depthDesc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+				depthDesc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
+				depthDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+				depthDesc.BackFace.StencilFunc = D3D11_COMPARISON_EQUAL;
 				break;
 
 			case DRAW_STENCIL_NOT_SET:
-				depthDesc.StencilEnable                = TRUE;
-				depthDesc.FrontFace.StencilFailOp      = D3D11_STENCIL_OP_KEEP;
+				depthDesc.StencilEnable = TRUE;
+				depthDesc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
 				depthDesc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
-				depthDesc.FrontFace.StencilPassOp      = D3D11_STENCIL_OP_KEEP;
-				depthDesc.FrontFace.StencilFunc        = D3D11_COMPARISON_NOT_EQUAL;
-				depthDesc.BackFace.StencilFailOp       = D3D11_STENCIL_OP_KEEP;
-				depthDesc.BackFace.StencilDepthFailOp  = D3D11_STENCIL_OP_KEEP;
-				depthDesc.BackFace.StencilPassOp       = D3D11_STENCIL_OP_KEEP;
-				depthDesc.BackFace.StencilFunc         = D3D11_COMPARISON_NOT_EQUAL;
+				depthDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+				depthDesc.FrontFace.StencilFunc = D3D11_COMPARISON_NOT_EQUAL;
+				depthDesc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+				depthDesc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
+				depthDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+				depthDesc.BackFace.StencilFunc = D3D11_COMPARISON_NOT_EQUAL;
 				break;
 
 			default:
@@ -728,7 +727,7 @@ void ff::Default2dEffect::PushDrawType(DrawType2d typeFlags)
 {
 	assert(!(typeFlags & DRAW_TYPE_BITS));
 
-	DWORD newType  = typeFlags & ~DRAW_TYPE_BITS;
+	DWORD newType = typeFlags & ~DRAW_TYPE_BITS;
 	DWORD prevType = _typeFlags.Size() ? _typeFlags.GetLast() : 0;
 
 	if (typeFlags & DRAW_STENCIL_BITS)

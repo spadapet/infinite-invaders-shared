@@ -67,7 +67,7 @@ namespace ff
 			return _handle;
 		}
 
-		T* operator&()
+		T *operator&()
 		{
 			assert(!_handle);
 			return &_handle;

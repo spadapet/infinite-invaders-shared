@@ -351,47 +351,6 @@ const ff::ModuleClassInfo *ff::Module::GetClassInfoForInterface(REFGUID mainInte
 	return nullptr;
 }
 
-const ff::ModuleInterfaceInfo *ff::Module::GetInterfaceInfo(REFGUID interfaceId) const
-{
-	BucketIter iter = _interfacesById.Get(interfaceId);
-	if (iter != INVALID_ITER)
-	{
-		return &_interfacesById.ValueAt(iter);
-	}
-
-	return nullptr;
-}
-
-const ff::ModuleCategoryInfo *ff::Module::GetCategoryInfo(StringRef name) const
-{
-	assertRetVal(name.size(), nullptr);
-
-	BucketIter iter = _categoriesByName.Get(name);
-	if (iter != INVALID_ITER)
-	{
-		return &_categoriesByName.ValueAt(iter);
-	}
-
-	GUID categoryId;
-	if (ff::StringToGuid(name, categoryId))
-	{
-		return GetCategoryInfo(categoryId);
-	}
-
-	return nullptr;
-}
-
-const ff::ModuleCategoryInfo *ff::Module::GetCategoryInfo(REFGUID categoryId) const
-{
-	BucketIter iter = _categoriesById.Get(categoryId);
-	if (iter != INVALID_ITER)
-	{
-		return &_categoriesById.ValueAt(iter);
-	}
-
-	return nullptr;
-}
-
 ff::Vector<GUID> ff::Module::GetClasses() const
 {
 	Vector<GUID> ids;
@@ -399,24 +358,6 @@ ff::Vector<GUID> ff::Module::GetClasses() const
 
 	GUID id;
 	for (const auto &i: _classesById)
-	{
-		if (i.GetKey() != id)
-		{
-			id = i.GetKey();
-			ids.Push(id);
-		}
-	}
-
-	return ids;
-}
-
-ff::Vector<GUID> ff::Module::GetCategories() const
-{
-	Vector<GUID> ids;
-	ids.Reserve(_categoriesById.Size());
-
-	GUID id;
-	for (const auto &i: _categoriesById)
 	{
 		if (i.GetKey() != id)
 		{
@@ -457,12 +398,7 @@ bool ff::Module::CreateClass(IUnknown *parent, REFGUID classId, REFGUID interfac
 	return false;
 }
 
-void ff::Module::RegisterClass(
-	StringRef name,
-	REFGUID classId,
-	ClassFactoryFunc factory,
-	REFGUID mainInterfaceId,
-	REFGUID categoryId)
+void ff::Module::RegisterClass(StringRef name, REFGUID classId, ClassFactoryFunc factory, REFGUID mainInterfaceId)
 {
 	assertRet(name.size() && classId != GUID_NULL);
 
@@ -470,7 +406,6 @@ void ff::Module::RegisterClass(
 	info._name = name;
 	info._classId = classId;
 	info._mainInterfaceId = mainInterfaceId;
-	info._categoryId = categoryId;
 	info._factory = factory;
 	info._module = this;
 
@@ -481,46 +416,6 @@ void ff::Module::RegisterClass(
 	{
 		_classesByIid.Insert(mainInterfaceId, info);
 	}
-
-	if (categoryId != GUID_NULL)
-	{
-		_classesByCatId.Insert(categoryId, info);
-	}
-}
-
-void ff::Module::RegisterInterface(
-	REFGUID interfaceId,
-	REFGUID categoryId)
-{
-	assertRet(interfaceId != GUID_NULL);
-
-	ModuleInterfaceInfo info;
-	info._interfaceId = interfaceId;
-	info._categoryId = categoryId;
-
-	_interfacesById.Insert(interfaceId, info);
-
-	if (categoryId != GUID_NULL)
-	{
-		_interfacesByCatId.Insert(categoryId, info);
-	}
-}
-
-void ff::Module::RegisterCategory(
-	StringRef name,
-	REFGUID categoryId,
-	ParentFactoryFunc parentObjectFactory)
-{
-	assertRet(name.size() && categoryId != GUID_NULL);
-
-	ModuleCategoryInfo info;
-	info._name = name;
-	info._categoryId = categoryId;
-	info._parentObjectFactory = parentObjectFactory;
-	info._module = this;
-
-	_categoriesByName.Insert(name, info);
-	_categoriesById.Insert(categoryId, info);
 }
 
 ff::IResources *ff::Module::GetResources() const

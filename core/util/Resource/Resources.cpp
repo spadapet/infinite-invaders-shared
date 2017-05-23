@@ -16,7 +16,7 @@ class __declspec(uuid("676f438b-b858-4fa7-82f8-50dae9505bce"))
 public:
 	DECLARE_HEADER(Resources);
 
-	bool Init(ff::AppGlobals *context, const ff::Dict &dict);
+	bool Init(ff::AppGlobals *globals, const ff::Dict &dict);
 
 	// IResources
 	virtual void SetResources(const ff::Dict &dict) override;
@@ -55,7 +55,7 @@ private:
 	ff::Mutex _cs;
 	ff::Dict _dict;
 	ff::Map<ff::String, ValueInfoPtr> _values;
-	ff::AppGlobals *_context;
+	ff::AppGlobals *_globals;
 	long _loadingCount;
 };
 
@@ -70,13 +70,13 @@ static ff::ModuleStartup Register([](ff::Module &module)
 	module.RegisterClassT<Resources>(RESOURCES_CLASS_NAME);
 });
 
-bool ff::CreateResources(AppGlobals *context, const Dict &dict, ff::IResources **obj)
+bool ff::CreateResources(AppGlobals *globals, const Dict &dict, ff::IResources **obj)
 {
 	assertRetVal(obj, false);
 
 	ComPtr<Resources, IResources> myObj;
 	assertHrRetVal(ff::ComAllocator<Resources>::CreateInstance(&myObj), false);
-	assertRetVal(myObj->Init(context, dict), false);
+	assertRetVal(myObj->Init(globals, dict), false);
 
 	*obj = myObj.Detach();
 	return true;
@@ -92,9 +92,9 @@ Resources::~Resources()
 	Clear();
 }
 
-bool Resources::Init(ff::AppGlobals *context, const ff::Dict &dict)
+bool Resources::Init(ff::AppGlobals *globals, const ff::Dict &dict)
 {
-	_context = context;
+	_globals = globals;
 	return LoadResource(dict);
 }
 
@@ -187,7 +187,7 @@ ff::SharedResourceValue Resources::FlushResource(ff::SharedResourceValue value)
 
 ff::AppGlobals *Resources::GetContext() const
 {
-	return _context;
+	return _globals ? _globals : ff::AppGlobals::Get();
 }
 
 bool Resources::LoadResource(const ff::Dict &dict)
@@ -359,7 +359,7 @@ ff::ValuePtr Resources::CreateObjects(ff::ValuePtr value)
 
 			if (!isNestedResources && type.size())
 			{
-				ff::ComPtr<IUnknown> obj = ff::ProcessGlobals::Get()->GetModules().CreateClass(type, _context);
+				ff::ComPtr<IUnknown> obj = ff::ProcessGlobals::Get()->GetModules().CreateClass(type, GetContext());
 				ff::ComPtr<IResourceLoad> resObj;
 				assertRetVal(resObj.QueryFrom(obj) && resObj->LoadResource(dict), value);
 

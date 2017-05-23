@@ -15,12 +15,12 @@ inline static DWORD RotateBits(DWORD val, DWORD count)
 
 inline static void HashMix(DWORD &a, DWORD &b, DWORD &c)
 {
-	a -= c; a ^= RotateBits(c, 4);  c += b;
-	b -= a; b ^= RotateBits(a, 6);  a += c;
-	c -= b; c ^= RotateBits(b, 8);  b += a;
+	a -= c; a ^= RotateBits(c, 4); c += b;
+	b -= a; b ^= RotateBits(a, 6); a += c;
+	c -= b; c ^= RotateBits(b, 8); b += a;
 	a -= c; a ^= RotateBits(c, 16); c += b;
 	b -= a; b ^= RotateBits(a, 19); a += c;
-	c -= b; c ^= RotateBits(b, 4);  b += a;
+	c -= b; c ^= RotateBits(b, 4); b += a;
 }
 
 inline static void FinalHashMix(DWORD &a, DWORD &b, DWORD &c)
@@ -34,8 +34,8 @@ inline static void FinalHashMix(DWORD &a, DWORD &b, DWORD &c)
 	c ^= b; c -= RotateBits(b, 24);
 }
 
-// By Bob Jenkins, 2006.  bob_jenkins@burtleburtle.net.  You may use this
-// code any way you wish, private, educational, or commercial.  It's free.
+// By Bob Jenkins, 2006. bob_jenkins@burtleburtle.net. You may use this
+// code any way you wish, private, educational, or commercial. It's free.
 // See http://burtleburtle.net/bob/hash/evahash.html
 // See http://burtleburtle.net/bob/c/lookup3.c
 
@@ -63,18 +63,18 @@ ff::hash_t ff::HashBytes(const void *data, size_t length)
 
 		switch(length)
 		{
-		case 12: c += keyData[2];            b += keyData[1];            a += keyData[0];            break;
-		case 11: c += keyData[2] & 0xffffff; b += keyData[1];            a += keyData[0];            break;
-		case 10: c += keyData[2] & 0xffff;   b += keyData[1];            a += keyData[0];            break;
-		case 9:  c += keyData[2] & 0xff;     b += keyData[1];            a += keyData[0];            break;
-		case 8:                              b += keyData[1];            a += keyData[0];            break;
-		case 7:                              b += keyData[1] & 0xffffff; a += keyData[0];            break;
-		case 6:                              b += keyData[1] & 0xffff;   a += keyData[0];            break;
-		case 5:                              b += keyData[1] & 0xff;     a += keyData[0];            break;
-		case 4:                                                          a += keyData[0];            break;
-		case 3:                                                          a += keyData[0] & 0xffffff; break;
-		case 2:                                                          a += keyData[0] & 0xffff;   break;
-		case 1:                                                          a += keyData[0] & 0xff;     break;
+		case 12: c += keyData[2]; b += keyData[1]; a += keyData[0]; break;
+		case 11: c += keyData[2] & 0xffffff; b += keyData[1]; a += keyData[0]; break;
+		case 10: c += keyData[2] & 0xffff; b += keyData[1]; a += keyData[0]; break;
+		case 9: c += keyData[2] & 0xff; b += keyData[1]; a += keyData[0]; break;
+		case 8: b += keyData[1]; a += keyData[0]; break;
+		case 7: b += keyData[1] & 0xffffff; a += keyData[0]; break;
+		case 6: b += keyData[1] & 0xffff; a += keyData[0]; break;
+		case 5: b += keyData[1] & 0xff; a += keyData[0]; break;
+		case 4: a += keyData[0]; break;
+		case 3: a += keyData[0] & 0xffffff; break;
+		case 2: a += keyData[0] & 0xffff; break;
+		case 1: a += keyData[0] & 0xff; break;
 		case 0: return CreateHashResult(b, c);
 		}
 	}
@@ -188,15 +188,15 @@ ff::hash_t ff::HashBytes(const void *data, size_t length)
 		case 12: c += ((DWORD)keyData[11]) << 24;
 		case 11: c += ((DWORD)keyData[10]) << 16;
 		case 10: c += ((DWORD)keyData[9]) << 8;
-		case 9:  c += keyData[8];
-		case 8:  b += ((DWORD)keyData[7]) << 24;
-		case 7:  b += ((DWORD)keyData[6]) << 16;
-		case 6:  b += ((DWORD)keyData[5]) << 8;
-		case 5:  b += keyData[4];
-		case 4:  a += ((DWORD)keyData[3]) << 24;
-		case 3:  a += ((DWORD)keyData[2]) << 16;
-		case 2:  a += ((DWORD)keyData[1]) << 8;
-		case 1:  a += keyData[0];
+		case 9: c += keyData[8];
+		case 8: b += ((DWORD)keyData[7]) << 24;
+		case 7: b += ((DWORD)keyData[6]) << 16;
+		case 6: b += ((DWORD)keyData[5]) << 8;
+		case 5: b += keyData[4];
+		case 4: a += ((DWORD)keyData[3]) << 24;
+		case 3: a += ((DWORD)keyData[2]) << 16;
+		case 2: a += ((DWORD)keyData[1]) << 8;
+		case 1: a += keyData[0];
 			break;
 
 		case 0:

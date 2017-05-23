@@ -63,7 +63,7 @@ double ff::Timer::Tick()
 	if (_tpsCurSecond > _tpsSecond)
 	{
 		_tps = _tpsCount / (_tpsCurSecond - _tpsSecond);
-		_tpsCount  = 0;
+		_tpsCount = 0;
 		_tpsSecond = _tpsCurSecond;
 	}
 

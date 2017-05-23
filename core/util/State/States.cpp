@@ -26,11 +26,11 @@ void ff::States::AddBottom(std::shared_ptr<State> state)
 	}
 }
 
-std::shared_ptr<ff::State> ff::States::Advance(AppGlobals *context)
+std::shared_ptr<ff::State> ff::States::Advance(AppGlobals *globals)
 {
 	for (auto i = _states.begin(); i != _states.end(); )
 	{
-		(*i)->Advance(context);
+		(*i)->Advance(globals);
 
 		if ((*i)->GetStatus() == State::Status::Dead)
 		{
@@ -50,28 +50,41 @@ std::shared_ptr<ff::State> ff::States::Advance(AppGlobals *context)
 	return nullptr;
 }
 
-void ff::States::Render(AppGlobals *context, IRenderTarget *target)
+void ff::States::Render(AppGlobals *globals, IRenderTarget *target)
 {
 	for (const std::shared_ptr<State> &state : _states)
 	{
-		state->Render(context, target);
+		state->Render(globals, target);
 	}
 }
 
-void ff::States::SaveState(AppGlobals *context)
+void ff::States::SaveState(AppGlobals *globals)
 {
 	for (const std::shared_ptr<State> &state : _states)
 	{
-		state->SaveState(context);
+		state->SaveState(globals);
 	}
 }
 
-void ff::States::LoadState(AppGlobals *context)
+void ff::States::LoadState(AppGlobals *globals)
 {
 	for (const std::shared_ptr<State> &state : _states)
 	{
-		state->LoadState(context);
+		state->LoadState(globals);
 	}
+}
+
+bool ff::States::Notify(hash_t eventId, int data1, void *data2)
+{
+	for (const std::shared_ptr<State> &state : _states)
+	{
+		if (state->Notify(eventId, data1, data2))
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
 ff::State::Status ff::States::GetStatus()
